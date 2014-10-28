@@ -1,0 +1,22 @@
+[
+  {
+    "node1.html": [
+      {
+        "node3.html": null
+      },
+      {
+        "node4.html": null
+      }
+    ]
+  },
+  {
+    "node2.html": [
+      {
+        "node5.html": null
+      },
+      {
+        "node6.html": null
+      }
+    ]
+  }
+]
