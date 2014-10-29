@@ -98,6 +98,7 @@ def uuid(url):
 #print all nodes with listed parents
 children_mappings = {}
 
+# iterate through urls and make list of children per url
 for url, parent in zipped:
   #print "url: " + str(url) + " parent: " + str(parent)
   children = []
@@ -110,9 +111,9 @@ for url, parent in zipped:
 
 final_mappings = {}
 
-for url, parent in zipped:
-    current_children = {}
-    for child in children_mappings[url]:
-        current_children[child] = children_mappings[child]
-    final_mappings[url] = current_children
+first_url = zipped[0][0]
+current_children = {}
+for child in children_mappings[first_url]:
+    current_children[child] = children_mappings[child]
+final_mappings[first_url] = current_children
 print json.dumps(final_mappings)
