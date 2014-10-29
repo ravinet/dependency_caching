@@ -112,8 +112,10 @@ for url, parent in zipped:
 final_mappings = {}
 
 first_url = zipped[0][0]
-current_children = {}
+children = []
 for child in children_mappings[first_url]:
-    current_children[child] = children_mappings[child]
-final_mappings[first_url] = current_children
+    current_child = {}
+    current_child[child] = children_mappings[child]
+    children.append(current_child)
+final_mappings[first_url] = children
 print json.dumps(final_mappings)
