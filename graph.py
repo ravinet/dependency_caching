@@ -109,13 +109,15 @@ for url, parent in zipped:
   children_mappings[url] = children
   #print json.dumps(new_node, cls=MyEncoder)
 
-final_mappings = {}
+root = zipped[0][0]
+def mapping_to_child_dict(mappings, current_node):
+  curr_dict = {current_node : None}
+  curr_children = mappings[current_node]
+  if len(curr_children) == 0:
+    return curr_dict
+  else:
+    curr_dict[current_node] = [mapping_to_child_dict(mappings, node) for node in curr_children]
+  return curr_dict
 
-first_url = zipped[0][0]
-children = []
-for child in children_mappings[first_url]:
-    current_child = {}
-    current_child[child] = children_mappings[child]
-    children.append(current_child)
-final_mappings[first_url] = children
-print json.dumps(final_mappings)
+child_dict = mapping_to_child_dict(children_mappings, root)
+print child_dict
