@@ -1,6 +1,9 @@
 import re, sys, urlparse
 import json
 from json import JSONEncoder
+
+import critical_path
+
 host = sys.argv[2]
 interesting_uuids = []#[176, 173, 167, 160, 143, 142, 139, 138, 136, 135, 0]
 
@@ -121,3 +124,7 @@ def mapping_to_child_dict(mappings, current_node):
 
 child_dict = mapping_to_child_dict(children_mappings, root)
 print child_dict
+
+(critical_path_nodes, slack_nodes) = critical_path.get_critical_path(child_dict)
+print critical_path_nodes
+print slack_nodes
