@@ -133,6 +133,8 @@ for node in critical_path_nodes:
   critical_path_mappings[all_urls.index(node)] = node
 
 sorted_critical_path = sorted(critical_path_mappings.values())
-
+print "Critical Path: "
 print sorted_critical_path
+print "Length of Critical Path: " + str(len(sorted_critical_path))
+print "Slack Nodes: "
 print slack_nodes
