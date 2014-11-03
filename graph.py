@@ -126,5 +126,13 @@ child_dict = mapping_to_child_dict(children_mappings, root)
 print child_dict
 
 (critical_path_nodes, slack_nodes) = critical_path.get_critical_path(child_dict)
-print critical_path_nodes
+
+# map nodes on critical path to location in tree (based on sequence number)
+critical_path_mappings = {}
+for node in critical_path_nodes:
+  critical_path_mappings[all_urls.index(node)] = node
+
+sorted_critical_path = sorted(critical_path_mappings.values())
+
+print sorted_critical_path
 print slack_nodes
