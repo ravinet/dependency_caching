@@ -1,0 +1,17 @@
+These directories are synthetic pages which have the same structure as
+"https://www.americanexpress.com":
+"amex" is the unmodified synthetic site with the exact same structure as the
+real american express site, while "amex_move_chains" is a version of the site
+where the two deepest chains are moved to the beginning of the top level html
+file.
+
+The two pdfs are the dependency graphs (only considering initiators) and they
+show how these deep chains are moved between the two cases. The two text files
+(amex_mappings.txt and amex_move_chains_mappings.txt) map nodes in the graph to
+file names.
+
+These two folders should work out of the box. Simply start an apache server (or
+any other http server) with access to this folder (synthetic_amex_site). Then,
+in the browser, navigate to either "http://hostname/synthetic_amex_site/amex."
+or "http://hostname/synthetic_amex_site/amex_move_chains/". "hostname" can be your
+ip address or your machine's hostname.
