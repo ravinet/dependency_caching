@@ -20,6 +20,7 @@ $.getJSON('sample.json', function(data) {
 function launchRequesters() {
   //launch requesters
   for(i = numRequests; i < maxNumRequests; i++) {
+    numRequests++;
     callback();
   } 
 }
@@ -40,6 +41,7 @@ function callback() {
   console.log("requesting " +  filename);
   $.get(filename, function() {
     addChildrenToQueue(children);
+    numRequests = numRequests - 1;
     launchRequesters();
   }).fail(function() {
     console.log("can't request" +  filename);
