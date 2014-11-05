@@ -4,37 +4,43 @@ of objects. If a node has no children, its value is null.
 
 var tree; // holds json tree    
 var queue = []; // holds queue of requestable nodes
-var numRequests = 1; //number of outstanding reqs
+var numRequests = 0; //number of outstanding reqs
+var maxNumRequests = 4; // max number of outstanding reqs
 
 //populate tree and queue
 $.getJSON('sample.json', function(data) {
   tree=data;
   addChildrenToQueue(tree);
+  console.log('launching test');
+  launchRequesters();
 }).fail(function() {
   console.log("json error");
 });
 
-//launch requesters
-for(i = 0; i < numRequests; i++) {
-  //timeout so json has time to process
-  setTimeout(callback, 100);
-} 
+function launchRequesters() {
+  //launch requesters
+  for(i = numRequests; i < maxNumRequests; i++) {
+    callback();
+  } 
+}
 
 function callback() {
   node = dequeue();
 
-   if(node == null) {
-    setTimeout(callback, 100);
-    console.log('queue empty');
+  if(node == null) {
+    // kill self
+    console.log('killed self');
+    numRequests = numRequests - 1;
     return;
   }
 
-   filename = Object.keys(node)[0];
-   children = node[filename];
+  var filename = Object.keys(node)[0];
+  var children = node[filename];
   
+  console.log("requesting " +  filename);
   $.get(filename, function() {
     addChildrenToQueue(children);
-    callback()
+    launchRequesters();
   }).fail(function() {
     console.log("can't request" +  filename);
   });
@@ -44,13 +50,15 @@ function addChildrenToQueue(node) {
   if(node === null) {
     return;
   }
+  console.log("adding children");
+  console.log(node[0]);
   $.each(node.reverse(), function(index, val) { // add in reverse when prepending
     if(val !== null) { //if child isn't null
       queue.unshift(val);//prepend
       test = val;
     }
   });
-  console.log(queue);
+  console.log(queue.slice());
 }
 
 function dequeue() {
