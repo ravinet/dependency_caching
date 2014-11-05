@@ -1,6 +1,9 @@
 import re, sys, urlparse
 import json
 from json import JSONEncoder
+
+import critical_path
+
 host = sys.argv[2]
 interesting_uuids = []#[176, 173, 167, 160, 143, 142, 139, 138, 136, 135, 0]
 
@@ -121,3 +124,17 @@ def mapping_to_child_dict(mappings, current_node):
 
 child_dict = mapping_to_child_dict(children_mappings, root)
 print child_dict
+
+(critical_path_nodes, slack_nodes) = critical_path.get_critical_path(child_dict)
+
+# map nodes on critical path to location in tree (based on sequence number)
+critical_path_mappings = {}
+for node in critical_path_nodes:
+  critical_path_mappings[all_urls.index(node)] = node
+
+sorted_critical_path = sorted(critical_path_mappings.values())
+print "Critical Path: "
+print sorted_critical_path
+print "Length of Critical Path: " + str(len(sorted_critical_path))
+print "Slack Nodes: "
+print slack_nodes
