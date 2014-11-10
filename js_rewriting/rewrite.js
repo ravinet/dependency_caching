@@ -6,6 +6,9 @@ var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","exp
 
 // take body from the initial source code and put into our new anonymous function
 var body = tree.body;
+// prepend previous source code with proxy declaration
+var proxy_declaration = {"type": "VariableDeclaration","declarations": [{"type": "VariableDeclarator","id": {"type": "Identifier","name": "window"},"init": {"type": "NewExpression","callee": {"type": "Identifier","name": "Proxy"},"arguments": [{"type": "Identifier","name": "_window"},{"type": "Identifier","name": "window_handler"}]}}],"kind": "var"};
+body.splice(0, 0, proxy_declaration);
 proxy_wrapper.body[0].expression.callee.body.body = body
 
 //console.log(JSON.stringify(proxy_wrapper, "", 2));
