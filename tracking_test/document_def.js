@@ -10,7 +10,7 @@ var document_handler = {
                var value = base[name];
                if(typeof(value) == "function"){
                    value = value.bind(base);
-                   if(name = "getElementById"){
+                   if(name == "getElementById"){
                        var documentProxy = function(id){
                              var retVal = value(id);
                              curr = retVal;
