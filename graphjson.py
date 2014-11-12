@@ -133,9 +133,24 @@ for node in critical_path_nodes:
   critical_path_mappings[all_urls.index(node)] = node
 '''
 sorted_critical_path = sorted(critical_path_mappings.values())
+<<<<<<< HEAD:graph.py
+
+slack_nodes_values = {}
+for k in slack_nodes.keys():
+	slack_nodes_values[k] = slack_nodes[k]["slack_difference"]
+
+print "Critical Path: "
+=======
 print "\nCritical Path: "
+>>>>>>> 91716a4ed147a1e6da799d9ac612cced6cd22785:graphjson.py
 print sorted_critical_path
 print "Length of Critical Path: " + str(len(sorted_critical_path))
 print "Slack Nodes: "
 print slack_nodes
+<<<<<<< HEAD:graph.py
+print "Slack Nodes values:"
+print slack_nodes_values
+print "Percentage Slack nodes:"
+print float(len(slack_nodes.keys()))/len(critical_path_nodes) * 100
+=======
 '''
