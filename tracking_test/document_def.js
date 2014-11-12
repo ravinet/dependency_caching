@@ -9,19 +9,26 @@ var document_handler = {
                
                var value = base[name];
 
-               // document.getElementById- log id, return value, and parents
                if(typeof(value) == "function"){
                    value = value.bind(base);
+                   // document.getElementById- log id, return value, and parents
                    if(name == "getElementById"){
                        var documentProxy = function(id){
                              var retVal = value(id);
                              curr = retVal;
                              parents = [];
-                             while ( curr.parentNode != null && curr.parentNode.id != "" ) {
+                             child_path = [];
+                             while ( curr.parentNode != null ) {
                                 parents.push(curr.parentNode.id);
+                                var children = curr.parentNode.children;
+                                for (j = 0; j < children.length; j++){
+                                    if( children[j] == curr ){
+                                        child_path.push(j);
+                                    }
+                                }
                                 curr = curr.parentNode; 
                              }
-                             console.log( "getElementById(): id=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents);
+                             console.log( "getElementById(): id=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
