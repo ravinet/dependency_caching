@@ -12,7 +12,7 @@ def get_critical_path(graph):
 		if node_earliest_value[k] == node_latest_value[k]:
 			critical_path_nodes.append(k)
 		else:
-			slack_nodes[k] = {"node_earliest_value": node_earliest_value[k], "node_latest_value": node_latest_value[k]}
+			slack_nodes[k] = {"node_earliest_value": node_earliest_value[k], "node_latest_value": node_latest_value[k], "slack_difference": node_latest_value[k]-node_earliest_value[k]}
 
 	return (critical_path_nodes, slack_nodes)
 
