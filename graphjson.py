@@ -138,12 +138,12 @@ slack_nodes_values = {}
 for k in slack_nodes.keys():
 	slack_nodes_values[k] = slack_nodes[k]["slack_difference"]
 
-print "Critical Path: "
+print "\nCritical Path: "
 print sorted_critical_path
-print "Length of Critical Path: " + str(len(sorted_critical_path))
-print "Slack Nodes: "
+print "\nLength of Critical Path: " + str(len(sorted_critical_path))
+print "\nSlack Nodes: "
 print slack_nodes
-print "Slack Nodes values:"
+print "\nSlack Nodes values:"
 print slack_nodes_values
-print "Percentage Slack nodes:"
+print "\nPercentage Slack nodes:"
 print float(len(slack_nodes.keys()))/len(critical_path_nodes) * 100
