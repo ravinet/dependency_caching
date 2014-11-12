@@ -5,5 +5,7 @@
         var contentDiv = document.getElementById("contentDiv");
         contentDiv.innerHTML = "onload handler fired!";
         var name = document.getElementsByName("testname");
+        var class_list = document.getElementsByClassName("testclass");
+        var tag_list = document.getElementsByTagName("div");
     };
 })();

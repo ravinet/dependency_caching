@@ -28,8 +28,9 @@ var document_handler = {
                        return documentProxy;
                    }
 
-                   // document.getElementsByName- log name, return value, and for each node returned list node name and its parents
-                   if(name = "getElementsByName"){
+                   // document.getElementsByName, document.getElementsByClassName, document.getElementsByTagName
+                   // log name, return value, and for each node returned list node name and its parents
+                   if((name == "getElementsByName") || (name == "getElementsByClassName") || (name == "getElementsByTagName")){
                        var documentProxy = function(id){
                              var retVal = value(id);
                              curr = retVal;
@@ -51,7 +52,15 @@ var document_handler = {
                              }
                              parent_mappings = parent_mappings.slice(0, parent_mappings.length-2);
                              nodes = nodes.slice(0, nodes.length-1);
-                             console.log( "getElementsByName(): name=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings );
+                             if( name == "getElementsByName" ){
+                                 console.log( "getElementsByName(): name=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings );
+                             }
+                             if( name == "getElementsByClassName" ){
+                                 console.log( "getElementsByClassName(): class=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings );
+                             }
+                             if( name == "getElementsByTagName" ){
+                                 console.log( "getElementsByTagName(): tag=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings );
+                             }
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;

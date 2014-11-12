@@ -131,7 +131,6 @@ print json.dumps(child_dict[root])
 critical_path_mappings = {}
 for node in critical_path_nodes:
   critical_path_mappings[all_urls.index(node)] = node
-  print node
 
 sorted_critical_path = sorted(critical_path_mappings.values())
 
@@ -142,8 +141,8 @@ for k in slack_nodes.keys():
 print "Critical Path: "
 print "\nCritical Path: "
 print sorted_critical_path
-print "Length of Critical Path: " + str(len(sorted_critical_path))
-print "Slack Nodes: "
+print "\nLength of Critical Path: " + str(len(sorted_critical_path))
+print "\nSlack Nodes: "
 print slack_nodes
 print "Slack Nodes values:"
 print slack_nodes_values
