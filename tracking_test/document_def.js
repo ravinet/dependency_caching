@@ -42,14 +42,23 @@ var document_handler = {
                              var retVal = value(id);
                              curr = retVal;
                              parents = {};
+                             child_paths = {};
                              for (i = 0; i < retVal.length; i++) {
+                                 curr_child_path = [];
                                  curr_parents = [];
                                  curr = retVal[i];
-                                 while ( curr.parentNode != null && curr.parentNode.id != "" ) {
+                                 while ( curr.parentNode != null ) {
                                      curr_parents.push(curr.parentNode.id);
+                                     var children = curr.parentNode.children;
+                                     for (j = 0; j < children.length; j++){
+                                         if( children[j] == curr ){
+                                             curr_child_path.push(j);
+                                         }
+                                     }
                                      curr = curr.parentNode;
                                  }
                                  parents[retVal[i].id] = curr_parents;
+                                 child_paths[retVal[i].id] = curr_child_path;
                              }
                              var parent_mappings = "";
                              var nodes = "";
@@ -59,14 +68,21 @@ var document_handler = {
                              }
                              parent_mappings = parent_mappings.slice(0, parent_mappings.length-2);
                              nodes = nodes.slice(0, nodes.length-1);
+
+                             var final_child_path = "";
+                             for (var key in child_paths){
+                                 final_child_path = final_child_path.concat(key + ": " + child_paths[key] + ", ");
+                             }
+                             final_child_path = final_child_path.slice(0, final_child_path.length-2);
+
                              if( name == "getElementsByName" ){
-                                 console.log( "getElementsByName(): name=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings );
+                                 console.log( "getElementsByName(): name=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
                              }
                              if( name == "getElementsByClassName" ){
-                                 console.log( "getElementsByClassName(): class=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings );
+                                 console.log( "getElementsByClassName(): class=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path  );
                              }
                              if( name == "getElementsByTagName" ){
-                                 console.log( "getElementsByTagName(): tag=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings );
+                                 console.log( "getElementsByTagName(): tag=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
                              }
                              return retVal;
                        };
