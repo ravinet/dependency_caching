@@ -106,7 +106,7 @@ for url, parent in zipped:
   #print "url: " + str(url) + " parent: " + str(parent)
   children = []
   for url1,parent1 in zipped:
-      if ( parent1 == url ):
+      if ( parent1 == url and parent1 != url1):
             children.append( url1 )
   #print new_node.url + " " + new_node.parent
   children_mappings[url] = children
@@ -123,7 +123,7 @@ def mapping_to_child_dict(mappings, current_node):
   return curr_dict
 
 child_dict = mapping_to_child_dict(children_mappings, root)
-print child_dict
+print json.dumps(child_dict[root])
 
 (critical_path_nodes, slack_nodes) = critical_path.get_critical_path(child_dict)
 
@@ -131,19 +131,26 @@ print child_dict
 critical_path_mappings = {}
 for node in critical_path_nodes:
   critical_path_mappings[all_urls.index(node)] = node
-
+'''
 sorted_critical_path = sorted(critical_path_mappings.values())
+<<<<<<< HEAD:graph.py
 
 slack_nodes_values = {}
 for k in slack_nodes.keys():
 	slack_nodes_values[k] = slack_nodes[k]["slack_difference"]
 
 print "Critical Path: "
+=======
+print "\nCritical Path: "
+>>>>>>> 91716a4ed147a1e6da799d9ac612cced6cd22785:graphjson.py
 print sorted_critical_path
 print "Length of Critical Path: " + str(len(sorted_critical_path))
 print "Slack Nodes: "
 print slack_nodes
+<<<<<<< HEAD:graph.py
 print "Slack Nodes values:"
 print slack_nodes_values
 print "Percentage Slack nodes:"
 print float(len(slack_nodes.keys()))/len(critical_path_nodes) * 100
+=======
+'''

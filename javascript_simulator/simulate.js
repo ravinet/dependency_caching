@@ -8,8 +8,9 @@ var numRequests = 0; //number of outstanding reqs
 var maxNumRequests = 4; // max number of outstanding reqs
 
 //populate tree and queue
-$.getJSON('sample.json', function(data) {
+$.getJSON('google.json', function(data) {
   tree=data;
+  console.log(tree);
   addChildrenToQueue(tree);
   console.log('launching test');
   launchRequesters();
@@ -39,6 +40,10 @@ function callback() {
   var children = node[filename];
   
   console.log("requesting " +  filename);
+  addChildrenToQueue(children);
+  numRequests = numRequests - 1;
+  launchRequesters();
+    /*
   $.get(filename, function() {
     addChildrenToQueue(children);
     numRequests = numRequests - 1;
@@ -46,6 +51,7 @@ function callback() {
   }).fail(function() {
     console.log("can't request" +  filename);
   });
+    */
 }
 
 function addChildrenToQueue(node) {
