@@ -49,9 +49,9 @@ var document_handler = {
                        return documentProxy;
                    }
 
-                   // document.getElementsByName, document.getElementsByClassName, document.getElementsByTagName
+                   // document.getElementsByName, document.getElementsByClassName, document.getElementsByTagName document.querySelectorAll
                    // log name, return value, and for each node returned list node name and its parents
-                   if((name == "getElementsByName") || (name == "getElementsByClassName") || (name == "getElementsByTagName")){
+                   if((name == "getElementsByName") || (name == "getElementsByClassName") || (name == "getElementsByTagName") || (name == "querySelectorAll")){
                        var documentProxy = function(id){
                              var retVal = value(id);
                              curr = retVal;
@@ -97,6 +97,9 @@ var document_handler = {
                              }
                              if( name == "getElementsByTagName" ){
                                  console.log( "getElementsByTagName(): tag=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
+                             }
+                             if( name == "querySelectorAll" ){
+                                 console.log( "querySelectorAll(): selectors=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
                              }
                              return retVal;
                        };

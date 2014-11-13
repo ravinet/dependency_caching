@@ -9,5 +9,6 @@
         var tag_list = document.getElementsByTagName("div");
         var ns_list = document.getElementsByTagNameNS("testns", "div");
         var query = document.querySelector("#outerdiv");
+        var query_list = document.querySelectorAll("#outerdiv,#outerdiv1");
     };
 })();
