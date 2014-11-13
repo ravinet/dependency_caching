@@ -13,5 +13,6 @@
         // querySelectorAll will return a list of matching nodes for all selectors
         var query = document.querySelector("#outerdiv");
         var query_list = document.querySelectorAll("#outerdiv,#outerdiv1");
+        var point = document.elementFromPoint(10, 10);
     };
 })();

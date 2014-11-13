@@ -49,6 +49,34 @@ var document_handler = {
                        return documentProxy;
                    }
 
+                   // document.elementFromPoint- log id, return value, and parents
+                   if(name == "elementFromPoint"){
+                       var documentProxy = function(p1, p2){
+                             var retVal = value(p1, p2);
+                             if ( retVal == null ) {
+                                 console.log( "elementFromPoint(): point=" + p1 + "," + p2 + "; return_value=" + retVal);
+                                 return retVal;
+                             }
+                             curr = retVal;
+                             parents = [];
+                             child_path = [];
+                             while ( curr.parentNode != null ) {
+                                parents.push(curr.parentNode.id);
+                                var children = curr.parentNode.children;
+                                for (j = 0; j < children.length; j++){
+                                    if( children[j] == curr ){
+                                        child_path.push(j);
+                                    }
+                                }
+                                curr = curr.parentNode;
+                             }
+                             console.log( "elementFromPoint(): point=" + p1 + "," + p2 + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
+                             return retVal;
+                       };
+                       documentBindCache[name] = documentProxy;
+                       return documentProxy;
+                   }
+
                    // document.getElementsByName, document.getElementsByClassName, document.getElementsByTagName document.querySelectorAll
                    // log name, return value, and for each node returned list node name and its parents
                    if((name == "getElementsByName") || (name == "getElementsByClassName") || (name == "getElementsByTagName") || (name == "querySelectorAll")){
