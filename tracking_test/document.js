@@ -7,7 +7,10 @@
         var name = document.getElementsByName("testname");
         var class_list = document.getElementsByClassName("testclass");
         var tag_list = document.getElementsByTagName("div");
+        // getElementsByTagNameNS not tested with non-zero return
         var ns_list = document.getElementsByTagNameNS("testns", "div");
+        // querySelector will only use the last selector and return the first matching node
+        // querySelectorAll will return a list of matching nodes for all selectors
         var query = document.querySelector("#outerdiv");
         var query_list = document.querySelectorAll("#outerdiv,#outerdiv1");
     };
