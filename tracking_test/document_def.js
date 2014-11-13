@@ -2,7 +2,6 @@ var _document = document;
 var documentBindCache = {};
 var document_handler = {
     "get": function(base, name){
-               console.log("[READ][document]: " + name);
                if(name in documentBindCache){
                    return documentBindCache[name];
                }
@@ -16,12 +15,7 @@ var document_handler = {
                        var documentProxy = function(id){
                              var retVal = value(id);
                              if ( retVal == null ) {
-                                 if( name == "getElementById" ){
-                                     console.log( "getElementById(): id=" + id + "; return_value=" + retVal);
-                                 }
-                                 if ( name == "querySelector" ){
-                                     console.log( "querySelector(): selectors=" + id + "; return_value=" + retVal);
-                                 }
+                                 console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal);
                                  return retVal;
                              }
                              curr = retVal;
@@ -37,12 +31,7 @@ var document_handler = {
                                 }
                                 curr = curr.parentNode; 
                              }
-                             if( name == "getElementById" ){
-                                 console.log( "getElementById(): id=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
-                             }
-                             if ( name == "querySelector" ){
-                                 console.log( "querySelector(): selectors=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
-                             }
+                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -54,7 +43,7 @@ var document_handler = {
                        var documentProxy = function(p1, p2){
                              var retVal = value(p1, p2);
                              if ( retVal == null ) {
-                                 console.log( "elementFromPoint(): point=" + p1 + "," + p2 + "; return_value=" + retVal);
+                                 console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal);
                                  return retVal;
                              }
                              curr = retVal;
@@ -70,7 +59,7 @@ var document_handler = {
                                 }
                                 curr = curr.parentNode;
                              }
-                             console.log( "elementFromPoint(): point=" + p1 + "," + p2 + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
+                             console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -116,19 +105,7 @@ var document_handler = {
                                  final_child_path = final_child_path.concat(key + ": " + child_paths[key] + ", ");
                              }
                              final_child_path = final_child_path.slice(0, final_child_path.length-2);
-
-                             if( name == "getElementsByName" ){
-                                 console.log( "getElementsByName(): name=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
-                             }
-                             if( name == "getElementsByClassName" ){
-                                 console.log( "getElementsByClassName(): class=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path  );
-                             }
-                             if( name == "getElementsByTagName" ){
-                                 console.log( "getElementsByTagName(): tag=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
-                             }
-                             if( name == "querySelectorAll" ){
-                                 console.log( "querySelectorAll(): selectors=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
-                             }
+                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -174,10 +151,7 @@ var document_handler = {
                                  final_child_path = final_child_path.concat(key + ": " + child_paths[key] + ", ");
                              }
                              final_child_path = final_child_path.slice(0, final_child_path.length-2);
-
-                             if( name == "getElementsByTagNameNS" ){
-                                 console.log( "getElementsByTagNameNS(): ns= " + ns + "; tag=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
-                             }
+                             console.log( "READ: document- " + name + ": arg= " + ns + "; tag=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
