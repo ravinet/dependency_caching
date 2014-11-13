@@ -11,10 +11,19 @@ var document_handler = {
 
                if(typeof(value) == "function"){
                    value = value.bind(base);
-                   // document.getElementById- log id, return value, and parents
-                   if(name == "getElementById"){
+                   // document.getElementById, document.querySelector- log id, return value, and parents
+                   if((name == "getElementById") || (name == "querySelector")){
                        var documentProxy = function(id){
                              var retVal = value(id);
+                             if ( retVal == null ) {
+                                 if( name == "getElementById" ){
+                                     console.log( "getElementById(): id=" + id + "; return_value=" + retVal);
+                                 }
+                                 if ( name == "querySelector" ){
+                                     console.log( "querySelector(): selectors=" + id + "; return_value=" + retVal);
+                                 }
+                                 return retVal;
+                             }
                              curr = retVal;
                              parents = [];
                              child_path = [];
@@ -28,7 +37,12 @@ var document_handler = {
                                 }
                                 curr = curr.parentNode; 
                              }
-                             console.log( "getElementById(): id=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
+                             if( name == "getElementById" ){
+                                 console.log( "getElementById(): id=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
+                             }
+                             if ( name == "querySelector" ){
+                                 console.log( "querySelector(): selectors=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
+                             }
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
