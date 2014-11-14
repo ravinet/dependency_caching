@@ -1,4 +1,4 @@
-var code = "l=1; e = {}; f = 2; var h = 1; function m(a, b){ e.y = 8; a=1; k = 2; function n() { l = 2}}"
+var code = "l=1; e = {}; f = 2; var h = 1; function m(a, b){ m = 2; e.y = 8; a=1; k = 2; q =function() { b = 2;l = 2}; var q = function x() {k =1; x = 2;};}"
 console.log(code);
 var ast = esprima.parse(code, {loc: true});
 var scopeChain = []; // contains identifiers 
@@ -9,6 +9,7 @@ estraverse.traverse(ast, {
   leave: leave
 });
 
+console.log(ast);
 console.log(escodegen.generate(ast));
 
 function createsNewScope(node){
@@ -20,15 +21,32 @@ function createsNewScope(node){
 function enter(node){
   if (createsNewScope(node)){
     scopeChain.push([]);
-    if (node.params !== null) {
-      var currentScope = scopeChain[scopeChain.length - 1];
-      for (var i in node.params) {
-        currentScope.push(node.params[i]);
+    var currentScope = scopeChain[scopeChain.length - 1];
+    if(node.type !== 'Program') {
+      //add function args
+      if (node.params !== null) {
+        for (var i in node.params) {
+          currentScope.push(node.params[i]);
+        }
+      }
+      //add function name
+      if (node.id !== null && node.id.name !== null) {
+        currentScope.push(node.id);
       }
     }
   }
 
   var currentScope = scopeChain[scopeChain.length - 1];
+
+  //rewrite var in global to just be assignments
+  if(scopeChain.length === 1 && node.type === 'VariableDeclaration') {
+    expressionright = node.declarations[0].init;
+    expressionleft = node.declarations[0].id;
+    node.type = 'ExpressionStatement';
+    node.expression = {"type": "AssignmentExpression",
+      "operator": "=", "left" : expressionleft, "right": expressionright};
+  }
+
   if (node.type === 'VariableDeclarator'){
     currentScope.push(node.id);
   }
