@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
-<body>
-<div id="outerdiv">
-<div id="outermostdiv" class="testclass">
-<div name="testname" id="contentDiv" class="testclass">Content div</div>
-</div>
-</div>
-<div id="outerlast">
-<div name="testname" id="innerlast"></div>
-</div>
-
-    <script src="window_def.js"></script>
-    <script src="window.js"></script>
-    <script src="document_def.js"></script>
-    <script src="document.js"></script>
-</body>
+<html id="top">
+    <head></head>
+    <body id="bod">
+        <div id="outerdiv1"></div>
+        <div id="outerdiv">
+            <div></div>
+            <div id="outermostdiv" class="testclass">
+                <div></div>
+                <div name="testname" id="contentDiv" class="testclass">Content div</div>
+            </div>
+        </div>
+        <div id="outerlast">
+            <div name="testname" id="innerlast"></div>
+        </div>
+        <script src="window_def.js"></script>
+        <script src="window.js"></script>
+        <script src="document_def.js"></script>
+        <script src="document.js"></script>
+    </body>
 </html>
