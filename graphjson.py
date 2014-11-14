@@ -125,23 +125,26 @@ def mapping_to_child_dict(mappings, current_node):
 child_dict = mapping_to_child_dict(children_mappings, root)
 print json.dumps(child_dict[root])
 
-(critical_path_nodes, slack_nodes) = critical_path.get_critical_path(child_dict)
+(critical_path_nodes, critical_path_lists, slack_nodes) = critical_path.get_critical_path(child_dict)
 
 # map nodes on critical path to location in tree (based on sequence number)
-critical_path_mappings = {}
-for node in critical_path_nodes:
-  critical_path_mappings[all_urls.index(node)] = node
+#critical_path_mappings = {}
+#for node in critical_path_nodes:
+#  critical_path_mappings[all_urls.index(node)] = node
 
-sorted_critical_path = sorted(critical_path_mappings.values())
+#sorted_critical_path = sorted(critical_path_mappings.values())
 
 slack_nodes_values = {}
 for k in slack_nodes.keys():
 	slack_nodes_values[k] = slack_nodes[k]["slack_difference"]
 
-print "Critical Path: "
-print "\nCritical Path: "
-print sorted_critical_path
-print "\nLength of Critical Path: " + str(len(sorted_critical_path))
+#print "\nCritical Path: "
+#print sorted_critical_path
+print "Critical Path List:"
+for l in critical_path_lists:
+	print l
+#print critical_path_lists
+print "\nLength of Critical Path: " + str(len(critical_path_lists[0]))
 print "\nSlack Nodes: "
 print slack_nodes
 print "Slack Nodes values:"
