@@ -1,8 +1,8 @@
-var code = "l=1; e = {}; f = 2; var h = 1; function m(a, b){ m = 2; e.y = 8; a=1; k = 2; q =function() { b = 2;l = 2}; var q = function x() {k =1; x = 2;};}"
+var code = "l=1; e = {}; f = 2; var h = 1; z = function m(a, b){ m = 2; e.x.y = 8; a=1; k = 2; q =function() { b = 2;l = 2}; var q = function x() {a = 1; k =1; x = 2;};}"
 console.log(code);
 var ast = esprima.parse(code, {loc: true});
 var scopeChain = []; // contains identifiers 
-var assignments = [];
+var assignmentChain = [];
 
 estraverse.traverse(ast, {
   enter: enter,
@@ -21,6 +21,7 @@ function createsNewScope(node){
 function enter(node){
   if (createsNewScope(node)){
     scopeChain.push([]);
+    assignmentChain.push([]);
     var currentScope = scopeChain[scopeChain.length - 1];
     if(node.type !== 'Program') {
       //add function args
@@ -37,6 +38,7 @@ function enter(node){
   }
 
   var currentScope = scopeChain[scopeChain.length - 1];
+  var currentAssignment= assignmentChain[assignmentChain.length - 1];
 
   //rewrite var in global to just be assignments
   if(scopeChain.length === 1 && node.type === 'VariableDeclaration') {
@@ -56,17 +58,17 @@ function enter(node){
     if (scopeChain.length === 1) {
       currentScope.push(memberExpToIdentifier(node.left));
     } else {
-      assignments.push(node);
+      currentAssignment.push(node);
     }
   }
 }
 
 function leave(node){
   if (createsNewScope(node)){
-    checkForGlobals(assignments, scopeChain);
-    currentScope = scopeChain.pop();
+    var currentAssignment = assignmentChain.pop();
+    checkForGlobals(currentAssignment, scopeChain);
+    var currentScope = scopeChain.pop();
     printScope(currentScope, node);
-    assignments = [];
     if (node.type === 'Program') {
       for(var i in currentScope) {
         rewriteAssignment(currentScope[i]);
@@ -91,20 +93,10 @@ function printScope(scope, node){
   }
 }
 
-function assignmentName(node) {
-  if (node.left.type === "Identifier") {
-    return node.left.name;
-  }
-  // ex: window.x = 1, this will return window
-  if (node.left.type === "MemberExpression") {
-    return node.left.object.name;
-  }
-}
-
 function checkForGlobals(assignments, scopeChain){
   for (var i = 0; i < assignments.length; i++){
     var assignment = assignments[i];
-    var varname = assignmentName(assignment);
+    var varname = memberExpToIdentifier(assignment.left).name;
     if (!isVarDefined(varname, scopeChain)){
       console.log('Global accessed', varname, 
         'on line', assignment.loc.start.line, ':',
