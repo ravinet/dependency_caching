@@ -22,6 +22,7 @@ var document_handler = {
                              parents = [];
                              child_path = [];
                              child_path_tags = [];
+                             child_path_attr = [];
                              while ( curr.parentNode != null ) {
                                 parents.push(curr.parentNode.id);
                                 var children = curr.parentNode.children;
@@ -29,11 +30,24 @@ var document_handler = {
                                     if( children[j] == curr ){
                                         child_path.push(j);
                                         child_path_tags.push(children[j].tagName);
+                                        var attr = children[j].attributes;
+                                        var attributes = [];
+                                        for( a=0; a<attr.length; a++){
+                                            attributes.push(attr[a].name + ":" + attr[a].value);
+                                        }
+                                        child_path_attr.push(attributes);
                                     }
                                 }
                                 curr = curr.parentNode; 
                              }
-                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags);
+
+                             var final_attributes = "";
+                             for (y=0; y<child_path_attr.length; y++){
+                                 final_attributes = final_attributes.concat(child_path_attr[y] + "; ");
+                             }
+                             final_attributes = final_attributes.slice(0, final_attributes.length-2);
+
+                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes=" + final_attributes);
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
