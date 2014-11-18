@@ -82,7 +82,7 @@ var document_handler = {
                                 curr = curr.parentNode; 
                              }
 
-                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes=" + print_single_attr(child_path_attr) );
+                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + retVal.id + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes=" + print_single_attr(child_path_attr) );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -120,7 +120,7 @@ var document_handler = {
                                 curr = curr.parentNode;
                              }
 
-                             console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes= " + print_single_attr(child_path_attr) );
+                             console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal + "=" + retVal.id + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes= " + print_single_attr(child_path_attr) );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -166,7 +166,7 @@ var document_handler = {
                                  child_path_attr[retVal[i].id] = curr_child_path_attr;
                              }
 
-                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; parents=" + list_properties(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags= " + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) );
+                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags= " + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -212,7 +212,7 @@ var document_handler = {
                                  child_path_attr[retVal[i].id] = curr_child_path_attr;
                              }
 
-                             console.log( "READ: document- " + name + ": arg= " + ns + "; tag=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; parents=" + list_properties(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags=" + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) );
+                             console.log( "READ: document- " + name + ": arg= " + ns + "; tag=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags=" + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
