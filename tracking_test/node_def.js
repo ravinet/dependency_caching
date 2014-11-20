@@ -54,3 +54,14 @@ Node.prototype.removeChild = function(child){
                                               child_vals[0] + "; child_path_tags=" + child_vals[1]);
                                  return retVal;
                              };
+
+var _replaceChild = Node.prototype.replaceChild;
+Node.prototype.replaceChild = function(newchild, oldchild){
+                                 var retVal = _replaceChild.call(this, newchild, oldchild);
+                                 var caller = get_caller(document.currentScript);
+                                 child_vals = get_child_path(this);
+                                 console.log( "Call to Node.prototype.replaceChild() in " + caller + "; args="+ newchild +
+                                              "," + oldchild + "=" + newchild.id + "," + oldchild.id + "; node_modified=" +
+                                              this.id + ": child_path=" + child_vals[0] + "; child_path_tags=" + child_vals[1]);
+                                 return retVal;
+                             };
