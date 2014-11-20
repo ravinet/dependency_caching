@@ -4,9 +4,6 @@
 
     window.onload = function(){
         var contentDiv = document.getElementById("contentDiv");
-        var newContent = document.createTextNode("test node");
-        newContent.id = "newnode";
-        contentDiv.appendChild(newContent);
         contentDiv.innerHTML = "onload handler fired!";
         var name = document.getElementsByName("testname");
         var class_list = document.getElementsByClassName("testclass");
@@ -19,4 +16,7 @@
         var query_list = document.querySelectorAll("#outerdiv,#outerdiv1");
         var point = document.elementFromPoint(10, 10);
     };
+    var newContent = document.createTextNode("test node");
+    newContent.id = "newnode";
+    contentDiv.appendChild(newContent);
 })();
