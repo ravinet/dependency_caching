@@ -19,4 +19,5 @@
     var newContent = document.createTextNode("test node");
     newContent.id = "newnode";
     contentDiv.appendChild(newContent);
+    contentDiv.removeChild(newContent);
 })();
