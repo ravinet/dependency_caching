@@ -1,0 +1,23 @@
+www.wikipedia.org	GET	200	text/html	Other	11.5 KB	156 ms	
+load.php?debug=false&lang=en&modules=ext.gadget.wm-portal&only=styles&skin=vector&*	GET	200	text/css	www.wikipedia.org/:12	2.3 KB	91 ms	
+Wikipedia_wordmark_1x.png	GET	200	image/png	www.wikipedia.org/:23	3.1 KB	89 ms	
+Wiktionary-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:540	2.9 KB	345 ms	
+Wikinews-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:544	3.1 KB	164 ms	
+Wikiquote-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:548	2.2 KB	162 ms	
+Wikibooks-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:552	2.4 KB	163 ms	
+Wikidata-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:556	1.1 KB	162 ms	
+wikimedia-button.png	GET	200	image/png	www.wikipedia.org/:591	2.7 KB	161 ms	
+load.php?debug=false&lang=en&modules=ext.gadget.wm-portal&only=scripts&skin=vector&*	GET	200	text/javascript	www.wikipedia.org/:595	3.0 KB	160 ms	
+Wikispecies-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:560	3.2 KB	183 ms	
+Wikisource-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:564	2.5 KB	186 ms	
+Wikiversity-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:568	1.7 KB	186 ms	
+Wikivoyage-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:572	1.5 KB	185 ms	
+Commons-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:576	2.3 KB	195 ms	
+MediaWiki-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:580	7.6 KB	99 ms	
+Meta-logo_sister_1x.png	GET	200	image/png	www.wikipedia.org/:584	2.3 KB	59 ms	
+Wikipedia-logo-v2_1x.png	GET	200	image/png	www.wikipedia.org/:595	36.3 KB	56 ms	
+Bookshelf-40x201_6.png	GET	200	image/png	www.wikipedia.org/:595	1.1 KB	120 ms	
+400 ms600 ms800 ms1.00 s1.20 s1.40 s1.60 s1.80 s2.00 s2.20 s2.40 s2.60 s2.80 s3.00 s3.20 s3.40 s3.60 s3.80 s4.00 s4.20 s4.40 s4.60 s4.80 s5.00 s5.20 s5.40 s5.60 s5.80 s6.00 s6.20 s6.40 s6.60 s
+19 requests ❘ 92.7 KB transferred ❘ 3.59 s (load: 6.79 s, DOMContentLoaded: 6.79 s)
+ConsoleSearchEmulationRendering
+

@@ -1,0 +1,90 @@
+google.com	GET	301	text/html	Other	357 B	2.07 s	
+www.google.com	GET	302	text/html	http://google.com/	301 B	107 ms	
+?gws_rd=ssl	GET	200	text/html	http://www.google.com/	36.0 KB	199 ms	
+corita-kents-96th-birthday-5704661268955136-res.png	GET	200	image/png	www.google.com/:29	(from cache)	2 ms	
+corita-kents-96th-birthday-5704661268955136.2-hp.jpg	GET	200	image/jpeg	www.google.com/:29	(from cache)	81 ms	
+data:image/png;base…	GET	(data)	image/png	www.google.com/:29	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	www.google.com/:95	(from cache)	0 ms	
+i1_71651352.png	GET	200	image/png	?gws_rd=ssl:77	(from cache)	60 ms	
+photo.jpg	GET	200	image/jpeg	?gws_rd=ssl:77	1.4 KB	455 ms	
+rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA	GET	200	text/javascript	?gws_rd=ssl:95	(from cache)	289 ms	
+rs=AItRSTPfxKsRQzaasmdf1vqDyiv6yzHr6w	GET	200	text/javascript	?gws_rd=ssl:58	(from cache)	268 ms	
+dn/	GET	200	text/html	rs=AItRSTPfxKsRQzaasmdf1vqDyiv6yzHr6w:88	(from cache)	513 ms	
+cb=gapi.loaded_0	GET	200	text/javascript	rs=AItRSTPfxKsRQzaasmdf1vqDyiv6yzHr6w:163	(from cache)	543 ms	
+cd4d672a6dd21f5e.js?bav=on.2,or.r_cp.r_qf.	GET	200	text/javascript	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1172	13.6 KB	76 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:632	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:632	(from cache)	0 ms	
+rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA	GET	200	text/javascript	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:103	49.5 KB	198 ms	
+tia.png	GET	200	image/png	www.google.com/:1	(from cache)	167 ms	
+dn.js	GET	200	text/javascript	clients5.google.com/:4	(from cache)	532 ms	
+s?output=search&sclient=psy-ab&q=&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&fp=1&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=0&gs_id=0&xhr=t&es_nrs=true&tch=1&ech=1&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	457 B	406 ms	
+nav_logo195.png	GET	200	image/png	Other	(from cache)	702 ms	
+gen_204?v=3&s=webhp&imc=4&imn=4&imp=2&ei=7-9tVOivF8i0ggT23YKwCQ&e=3300109,3300134,3300137,3300161,3310753,3312224,3312478,3700289,4010074,4011550,4011551,4011556,4011558,4011559,4013920,4016469,4016824,4017981,4019181,4020347,4020560,4021073,4022495,4023367,4023566,4023677,4023709,4024198,4024201,4024673,4024679,4024932,4024970,4024976,4025096,4025285,4025296,4025793,8500394,8500700,8500787,8500820,8500852,10200083,10200095,10200526,10200716,10200743,10200766,10200774,10200781&atyp=csi&adh=&xjs=init.674.29.spch.529.sb.126.p.8.ifl.2.m.2&action=&srt=3010&p=s&npn=1&rt=xjsls.35,prt.36,xjses.1189,xjsee.1525,xjs.1628,ol.2345,iml.442,wsrt.2994,cst.0,dnst.0,rqst.161,rspt.37,rqstt.2769,unt.2669,cstt.2669,dit.3100
+GET	204	text/html	Other	66 B	698 ms	
+gen_204?atyp=i&ct=idck&cad=&s=1&ei=7-9tVOivF8i0ggT23YKwCQ&zx=1416490995332	GET	204	text/html	Other	33 B	104 ms	
+frame?sourceid=1&hl=en&origin=https%3A%2F%2Fwww.google.com&jsh=m%3B%2F_%2Fscs%2Fabc-static%2F_%2Fjs%2Fk%3Dgapi.gapi.en.T4EayPRcrOA.O%2Fm%3D__features__%2Frt%3Dj%2Fd%3D1%2Frs%3DAItRSTOp4ORGjvVzLjTlu0PIOZx2FtcWuA	GET	200	text/html	cb=gapi.loaded_0:102	25.8 KB	317 ms	
+rs=AGLTcCP_Q3N61YXFO1avo-L_jQB4frnrQw	GET	200	text/css	frame:24	(from cache)	296 ms	
+rs=AItRSTOp4ORGjvVzLjTlu0PIOZx2FtcWuA	GET	200	text/javascript	frame:30	(from cache)	330 ms	
+spinner_32_4152eb447e3e756250b29a0b19b2bbf9.gif	GET	200	image/gif	frame:30	(from cache)	38 ms	
+gen_204?atyp=i&ct=ifl&cad=1:hungry&ei=7-9tVOivF8i0ggT23YKwCQ&ved=0CAQQnRs&zx=1416491049514	GET	204	text/html	Other	36 B	36 ms	
+s?output=search&sclient=psy-ab&q=s&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=1&gs_id=6&xhr=t&es_nrs=true&tch=1&ech=2&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	524 B	89 ms	
+gen_204?atyp=i&ct=1&cad=1&rsm=6&ei=7-9tVOivF8i0ggT23YKwCQ&zx=1416491051539	GET	204	text/html	Other	35 B	34 ms	
+s?output=search&sclient=psy-ab&q=spo&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=3&gs_id=d&xhr=t&es_nrs=true&tch=1&ech=3&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	526 B	65 ms	
+s?output=search&sclient=psy-ab&q=spor&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=4&gs_id=h&xhr=t&es_nrs=true&tch=1&ech=4&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	519 B	82 ms	
+s?output=search&sclient=psy-ab&q=sport&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=5&gs_id=m&xhr=t&es_nrs=true&tch=1&ech=5&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	522 B	61 ms	
+s?output=search&sclient=psy-ab&q=sports&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=6&gs_id=p&xhr=t&es_nrs=true&tch=1&ech=6&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	525 B	54 ms	
+s?output=search&sclient=psy-ab&q=H&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&bs=1&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=1&gs_id=z&xhr=t&es_nrs=true&tch=1&ech=7&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	526 B	73 ms	
+s?output=search&sclient=psy-ab&q=Hu&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=2&gs_id=14&xhr=t&es_nrs=true&tch=1&ech=8&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	520 B	68 ms	
+s?output=search&sclient=psy-ab&q=Hug&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=3&gs_id=18&xhr=t&es_nrs=true&tch=1&ech=9&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	522 B	70 ms	
+s?output=search&sclient=psy-ab&q=Hun&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=3&gs_id=1f&xhr=t&es_nrs=true&tch=1&ech=10&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	524 B	65 ms	
+s?output=search&sclient=psy-ab&q=Hung&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=4&gs_id=1i&xhr=t&es_nrs=true&tch=1&ech=11&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	524 B	86 ms	
+s?output=search&sclient=psy-ab&q=Hunge&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=5&gs_id=1n&xhr=t&es_nrs=true&tch=1&ech=12&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	67.4 KB	635 ms	
+s?output=search&sclient=psy-ab&q=Hunger&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=6&gs_id=1q&xhr=t&es_nrs=true&tch=1&ech=13&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	534 B	62 ms	
+s?output=search&sclient=psy-ab&q=Hunger%20&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=7&gs_id=1v&xhr=t&es_nrs=true&tch=1&ech=14&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	540 B	76 ms	
+s?output=search&sclient=psy-ab&q=Hunger%20G&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=8&gs_id=20&xhr=t&es_nrs=true&tch=1&ech=15&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	530 B	55 ms	
+s?output=search&sclient=psy-ab&q=Hunger%20Ga&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=9&gs_id=24&xhr=t&es_nrs=true&tch=1&ech=16&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	529 B	93 ms	
+s?output=search&sclient=psy-ab&q=Hunger%20Gam&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=10&gs_id=28&xhr=t&es_nrs=true&tch=1&ech=17&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	535 B	65 ms	
+s?output=search&sclient=psy-ab&q=Hunger%20Games&oq=&gs_l=&pbx=1&bav=on.2,or.r_cp.r_qf.&bvm=bv.80120444,d.eXY&fp=cd4d672a6dd21f5e&biw=1539&bih=225&dpr=0.67&pf=p&sugexp=msedrc&gs_rn=58&gs_ri=psy-ab&tok=WxhRpYOqMyxksShmUtzHXw&cp=12&gs_id=2g&xhr=t&es_nrs=true&tch=1&ech=18&psi=7-9tVOivF8i0ggT23YKwCQ.1416490992848.1	GET	200	application/json	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:248	528 B	111 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+data:image/gif;base…	GET	(data)	image/gif	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:1151	(from cache)	0 ms	
+OwAAADXzx7ZMdvmhUXzDa16rA9BdQkQJnOuGWvdDI0f8lHlmlNjNg8L2dCykV5GoC6GoLmEGEstR8SkqMJYvCv0nRgY	GET	200	text/plain	Other	371 B	114 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA	GET	200	text/javascript	rs=ACT90oEUx91fR6Zmur5h1HFgd94BFfXJsA:103	22.7 KB	53 ms	
+client_204?&atyp=i&biw=1539&bih=225&dpr=0.6660000085830688&ei=LfBtVOynIoymNqyTgqgE	GET	204	text/html	Other	68 B	36 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+gen_204?atyp=i&ct=1&cad=1&sqi=3&q=hunger%20games&oq=Hunger%20Games&gs_l=hp.10..0l4.58390.61037.0.61404.22.13.1.7.7.0.754.1780.8j4j6-1.13.0.msedrc...0...1c.1.58.psy-ab..3.19.1000.0.q9chAhNu4fI&ei=LfBtVOynIoymNqyTgqgE&zx=1416491054448	GET	204	text/html	Other	31 B	45 ms	
+gen_204?v=3&s=web&e=3300109,3300134,3300137,3300161,3310753,3312224,3312478,3700289,4010074,4011550,4011551,4011556,4011558,4011559,4013920,4016469,4016824,4017981,4019181,4020347,4020560,4021073,4022495,4023367,4023566,4023677,4023709,4024198,4024201,4024673,4024679,4024932,4024970,4024976,4025096,4025285,4025296,4025793,8500394,8500700,8500787,8500820,8500852,10200083,10200095,10200526,10200716,10200743,10200766,10200774,10200781&ei=LfBtVOynIoymNqyTgqgE&cr=c&imp=0&pf=1&pfa=n.10,ttfc.69,ttlc.0,cbt.110&pfm=n.10,ttfc.91,ttlc.0,cbt.110&pmd=max.57,avg.5,0,1,0,2,1,0,1,1,1,57,1,1,2,1,1,1,2,0,15,2&imn=15&atyp=csi&adh=&xjs=dispose.8.18.jsa.3.ifl.2.foot.1.m.1.abd.1,init.28.28.hv.13.sb.5.m.3.spch.3.foot.1&action=&p=s&npn=1&rt=prt.164,pprt.165,ol.165,jsrt.640,iml.168,kpr.2726,bpl.65571
+GET	204	text/html	Other	31 B	39 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+data:image/jpeg;bas…	GET	(data)	image/jpeg	Other	(from cache)	0 ms	
+gen_204?atyp=i&ct=idck&cad=&s=0&ei=LfBtVOynIoymNqyTgqgE&zx=1416491056397	GET	204	text/html	Other	33 B	57 ms	
+t	GET	302	text/html	Other	455 B	78 ms	
+measurement?jaid=AJHaeXIHqqsYkpd8PzGFsngNK5G7yGO4l_Nvsq9qcNMst65c6wgT&jaidet=16768	GET	200	image/gif	https://www.google.com/ads/measurement/t	482 B	54 ms	
+4.00 s6.00 s8.00 s10.00 s12.00 s14.00 s16.00 s18.00 s20.00 s22.00 s24.00 s26.00 s28.00 s30.00 s32.00 s34.00 s36.00 s38.00 s40.00 s42.00 s44.00 s46.00 s48.00 s50.00 s52.00 s54.00 s56.00 s58.00 s1.0 min1.0 min1.1 min1.1 min
+84 requests ❘ 227 KB transferred ❘ 1.1 min (load: 2.61 s, DOMContentLoaded: 442 ms)
+ConsoleSearchEmulationRendering
+

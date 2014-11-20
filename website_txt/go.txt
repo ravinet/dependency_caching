@@ -1,0 +1,93 @@
+go.com	GET	200	text/html	Other	12.6 KB	324 ms	
+head-bc9c5e48b779.js	GET	200	application/x-javascript	go.com/:18	8.5 KB	208 ms	
+application-3ee38636ef10.css	GET	200	text/css	go.com/:19	37.5 KB	324 ms	
+modules-52d4130ccba4.css	GET	200	text/css	go.com/:20	48.1 KB	325 ms	
+unique-modules-7e0de78388e8.css	GET	200	text/css	go.com/:21	29.3 KB	208 ms	
+international-modules-0c4f409b9316.css	GET	200	text/css	go.com/:22	5.3 KB	339 ms	
+responsive-b2857b093b4d.css	GET	200	text/css	go.com/:27	6.9 KB	339 ms	
+responsive-desktop-30986f7f4f0f.css	GET	200	text/css	go.com/:27	5.6 KB	339 ms	
+jquery.min.js	GET	200	text/javascript	go.com/:130	32.5 KB	341 ms	
+application-fef6ebe6314d.js	GET	200	application/x-javascript	go.com/:132	104 KB	462 ms	
+a9148faee49bb27ed7bf14b771ad4d190b728e69.jpg	GET	200	image/jpeg	go.com/:150	48.6 KB	677 ms	
+loading-72a4c28445e9.gif	GET	200	image/gif	go.com/:134	3.5 KB	53 ms	
+97bd2a91070c86adbfd731cde30494e9b1cb09ec.jpg	GET	200	image/jpeg	go.com/:151	73.2 KB	532 ms	
+?set=j&param=countryisocode&param=state&param=connection	GET	200	application/x-javascript	head-bc9c5e48b779.js:1	525 B	233 ms	
+responsive-mobile-4057a9e6598a.css	GET	200	text/css	go.com/:27	2.4 KB	146 ms	
+go.com.js	GET	200	text/javascript	(index):27	363 B	285 ms	
+responsive-b41195ae2228.js	GET	200	application/x-javascript	(index):27	5.7 KB	14 ms	
+go.com	GET	200	text/html	application-fef6ebe6314d.js:3	738 B	205 ms	
+m4-4f55e08dfcef.woff	GET	200	application/font-woff	application-fef6ebe6314d.js:4	23.8 KB	82 ms	
+data:image/png;base…	GET	(data)	image/png	application-fef6ebe6314d.js:4	(from cache)	0 ms	
+nav_logo-d2c2cf757f1e.png	GET	200	image/png	application-fef6ebe6314d.js:4	1.7 KB	29 ms	
+data:image/png;base…	GET	(data)	image/png	jquery.min.js:4	(from cache)	0 ms	
+ico_search-1c10b544b4a5.png	GET	200	image/png	jquery.min.js:4	675 B	80 ms	
+gpt.js	GET	304	text/javascript	jquery.min.js:6	197 B	211 ms	
+ico_search_white-f6eb29a3e073.png	GET	200	image/png	go.com/:1	653 B	84 ms	
+ab20438a1faae42bf2a18c87a4bbcbf148069502.jpg	GET	200	image/jpeg	jquery.min.js:5	8.3 KB	503 ms	
+679da17a41c3b2c4f361781dc11ced1d3b6c91c8.jpg	GET	200	image/jpeg	jquery.min.js:5	18.5 KB	497 ms	
+54b87b585ac633323cb096ba3e271861799bfc9d.jpg	GET	200	image/jpeg	jquery.min.js:5	22.2 KB	515 ms	
+89ddb889650551aba5340b9bdfa7fa3698f99250.jpg	GET	200	image/jpeg	jquery.min.js:5	19.8 KB	983 ms	
+0949ff4cdd6cc25caed46e451edb73a55dd30caf.jpg	GET	200	image/jpeg	jquery.min.js:5	25.3 KB	531 ms	
+eb0f97bd1c826b4a1917b658777cb1f0a739ea94.jpg	GET	200	image/jpeg	jquery.min.js:5	13.9 KB	502 ms	
+nav_logo_dark-adb0485786ff.png	GET	200	image/png	jquery.min.js:6	1.9 KB	271 ms	
+data:image/png;base…	GET	(data)	image/png	jquery.min.js:6	(from cache)	0 ms	
+dolWebAnalytics.js	GET	200	application/x-javascript	jquery.min.js:6	91.9 KB	376 ms	
+jquery.min.js	GET	200	application/javascript	go.com:5	32.5 KB	822 ms	
+DisneyID.js	GET	200	application/javascript	go.com:6	58.4 KB	948 ms	
+did-proxy-da0f4016083f.js	GET	200	application/x-javascript	go.com:7	11.8 KB	185 ms	
+data:image/gif;base…	GET	(data)	image/gif	responsive-b41195ae2228.js:1	(from cache)	0 ms	
+container.html	GET	200	text/html	gpt.js:85	(from cache)	516 ms	
+menu-5dbbfbfc8d86.js?footer[comscore]=	GET	200	text/javascript	responsive-b41195ae2228.js:1	16.0 KB	179 ms	
+?dolWAVer=4.1.20&trckTp=trackcto&pgVwId=CTO-1416490649051-2988094754982&url=http%3A//go.com/&userAgent=Mozilla/5.0%20%28Macintosh%3B%20Intel%20Mac%20OS%20X%2010_9_4%29%20AppleWebKit/537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome/38.0.2125.122%20Safari/537.36	GET	200	image/png	go.com/:1	390 B	358 ms	
+04c794d47197024d17b34bd25c4e7e4968d82c82.jpg	GET	200	image/jpeg	go.com/:1	34.8 KB	516 ms	
+ffd285570fb1383c53d71c153ef6546d2713cd17.jpg	GET	200	image/jpeg	jquery.min.js:5	24.3 KB	509 ms	
+0d25150c5f38a19d12018109af30988e1c61cf82.jpg	GET	200	image/jpeg	jquery.min.js:5	18.3 KB	509 ms	
+12f2153734d0b630f5576621dc99c4514123794f.jpg	GET	200	image/jpeg	jquery.min.js:5	41.1 KB	499 ms	
+9281882dd48c47f9737cb49ac5ce6d0a9aeeee90.jpg	GET	200	image/jpeg	jquery.min.js:5	42.0 KB	509 ms	
+poll	GET	200	text/plain	dolWebAnalytics.js:28	306 B	620 ms	
+poll	GET	200	text/plain	dolWebAnalytics.js:28	306 B	619 ms	
+poll	GET	200	text/plain	dolWebAnalytics.js:28	306 B	619 ms	
+poll	GET	200	text/plain	dolWebAnalytics.js:28	306 B	619 ms	
+poll	GET	200	text/plain	dolWebAnalytics.js:28	306 B	617 ms	
+poll	GET	200	text/plain	dolWebAnalytics.js:28	306 B	617 ms	
+poll	GET	200	text/plain	dolWebAnalytics.js:28	306 B	617 ms	
+go.com.js	GET	200	text/javascript	menu-5dbbfbfc8d86.js?footer[comscore]=:1	(from cache)	422 ms	
+DisneyID.php?page=silent-client-functions&checksum=cb147a7630d26073bc93ae4222091deda6d85304&client_id=DIENT-MATTERHORN-PROD&langPref=en-US&countryPref=&continentPref=&css-override=%2F%2Fa.dilcdn.com%2Fa%2Fdid-proxy-9a5c857d7e7a.css&scheme=https&responderPage=https%3A%2F%2Fa.dilcdn.com%2F_did%2F&successPageAfterCreate=true&sharedStoragePrefix=DIENT-MATTERHORN-PROD&onMask=960&featureMask=10&postMessageOrigin=https%3A%2F%2Fa.dilcdn.com&behavior_id=DEFAULT&env=PROD
+GET	200	text/html	jquery.min.js:5	16.0 KB	88 ms	
+?clientProtocol=https%3A&client_id=DIENT-MATTERHORN-PROD&postMessageOrigin=https%3A%2F%2Fa.dilcdn.com	GET	200	text/html	jquery.min.js:5	692 B	54 ms	
+DisneyID.css?2342	GET	200	text/css	jquery.min.js:5	1.5 KB	141 ms	
+jquery.min.js	GET	200	text/javascript	a.dilcdn.com/:5	32.3 KB	136 ms	
+jquery.cookie.js	GET	200	application/javascript	a.dilcdn.com/:6	1.3 KB	136 ms	
+DisneyID.js	GET	200	application/javascript	a.dilcdn.com/:6	(from cache)	0 ms	
+easyXDM.min.js	GET	200	application/javascript	a.dilcdn.com/:7	7.8 KB	226 ms	
+DisneyID.min.js?v1.21.9	GET	200	application/javascript	DisneyID.php:9	44.6 KB	194 ms	
+all.min.js?v1.21.9	GET	200	application/javascript	DisneyID.php:27	78.4 KB	600 ms	
+SilentClient.js?v1.21.9	GET	200	application/javascript	DisneyID.php:116	1.2 KB	255 ms	
+easyxdm.min.js?v1.21.9	GET	200	application/javascript	DisneyID.php:117	7.8 KB	397 ms	
+cachebuster.js?t=alsdjfasdfsdfsdfasdfsfsdf?v1.21.9	GET	200	application/javascript	DisneyID.php:118	1.3 KB	395 ms	
+ggcmb390.js	GET	200	application/x-javascript	dolWebAnalytics.js:28	7.9 KB	158 ms	
+?app=w88_dolwa_prod03&trckTp=trackpage&sessionId=1416490649858-1443840591236&visitorId=1416490649858-1443840591236&lSessId=1416490650078-3146107043139&lVisId=1416490650079-8304507737047&vendorLst=o&swid=1AD39FD6-845D-494D-85C9-71CBCF17F120&pgVwId=CTO-1416490649051-2988094754982&fullPgNm=dfam%3Agoc%3Ahomepage%3Ahomepage&arPgNm=dfam%3Agoc%3Ahomepage%3Ahomepage&plgId=1585789750&res=1440x900&cod=24&categoryCd=dfam&siteCd=goc&brdcrums=homepage&url=http%3A//go.com/&urlDom=go.com&urlFDom=go.com&urlFDom1=go.com&refUrl=na&prevPgNm=na&vFP=dfam%3Agoc%3Ahomepage%3Ahomepage&vFU=http%3A//go.com/&vSS=1&sFP=dfam%3Agoc%3Ahomepage%3Ahomepage&sFU=http%3A//go.com/&sHS=1&pgTtl=Go.com%20%7C%20The%20Walt%20Disney%20Company%A0&pgNm=homepage&os=Mac&t=2014/10/20%2013%3A37%3A30&omniId=%5BCS%5Dv1%7C29C5D7E9851487C7-60000174E02F6A5D%5BCE%5D&accnt=gocom%2Cmatterhorn&jsv=1.8.1&jf=true&fsv=flash_version%3A15.0.0&dolWAVer=4.1.20&cf=true&bw=1025&bh=150&lan=en-US&dc=797
+GET	200	image/png	go.com/:1	528 B	346 ms	
+s68743085311725?AQB=1&ndh=1&t=20%2F10%2F2014%208%3A37%3A30%204%20300&ns=dol&cdp=2&pageName=dfam%3Agoc%3Ahomepage%3Ahomepage&g=http%3A%2F%2Fgo.com%2F&cc=USD&c1=goc&c2=1ad39fd6-845d-494d-85c9-71cbcf17f120&v10=goc&c12=na&c14=dfam&c28=http%3A%2F%2Fgo.com%2F&c34=goc&c37=flash_version%3A15.0.0&c39=dfam%3Agoc%3Ahomepage%3Ahomepage&v40=dfam%3Agoc%3Ahomepage%3Ahomepage&c47=dfam%3Agoc%3Ahomepage%3Ahomepage&c49=cto-1416490649051-2988094754982&c61=go.com&v61=go.com&c62=go.com&v62=go.com&c63=go.com&v63=go.com&c64=homepage&v64=homepage&v65=http%3A%2F%2Fgo.com%2F&c68=na&v68=na&c69=trackpage&c70=gocom%2Cmatterhorn&c72=4.1.20&v73=1ad39fd6-845d-494d-85c9-71cbcf17f120&c74=1416490649858-1443840591236&c75=1416490649858-1443840591236&h1=homepage&s=1440x900&c=24&j=1.6&v=Y&k=Y&bw=1025&bh=150&p=Widevine%20Content%20Decryption%20Module%3BShockwave%20Flash%3BChrome%20Remote%20Desktop%20Viewer%3BNative%20Client%3BChrome%20PDF%20Viewer%3BFacebook%20Video%20Calling%20Plugin%20%3BGoogle%20Earth%20Plug-in%3BPicasa%3BDefault%20Browser%20Helper%3BDivX%20Plus%20Web%20Player%3BGarmin%20Communicator%20Plug-in%20Version%204.0.4.0%3BGoogle%20Talk%20Plugin%3BJuniper%20Networks%20Safari%20Extensions%3BGoogle%20Talk%20Plugin%20Video%20Renderer%3BDivX%20VOD%20Helper%20Plug-in%3BQuickTime%20Plug-in%207.7.3%3BSharePoint%20Browser%20Plug-in%3BSilverlight%20Plug-In%3B&AQE=1
+GET	302	text/plain	go.com/:1	789 B	614 ms	
+beacon?pr=2701&si=go.com&eid=dfam:goc:homepage:homepage&ca=&adn=3&tt=3	GET	200	image/gif	go.com/:1	361 B	156 ms	
+m?ci=us-505916h&cg=0&cc=1&si=http%3A//go.com/&rp=&ts=compact&rnd=1416490650173	GET	200	image/gif	go.com/:1	403 B	179 ms	
+checkOrRequestActivities.js	GET	200	application/javascript	all.min.js?v1.21.9:100	1.7 KB	253 ms	
+getInfo.js	GET	200	application/javascript	all.min.js?v1.21.9:100	752 B	252 ms	
+doTealium.js	GET	200	application/javascript	all.min.js?v1.21.9:100	633 B	251 ms	
+logout.js	GET	200	application/javascript	all.min.js?v1.21.9:100	830 B	251 ms	
+newProspect.js	GET	200	application/javascript	all.min.js?v1.21.9:100	1.1 KB	298 ms	
+validateToken.js	GET	200	application/javascript	all.min.js?v1.21.9:100	770 B	325 ms	
+forceTokenRefresh.js	GET	200	application/javascript	all.min.js?v1.21.9:100	1.1 KB	328 ms	
+silentLogin.js	GET	200	application/javascript	all.min.js?v1.21.9:100	6.0 KB	512 ms	
+getGuest.js	GET	200	application/javascript	all.min.js?v1.21.9:100	797 B	91 ms	
+checkInfo.js	GET	200	application/javascript	all.min.js?v1.21.9:100	737 B	233 ms	
+r?c2=6035140&d.c=gif&d.o=wdgdolfamsec&d.x=71816615&d.t=page&d.u=http%3A%2F%2Fgo.com%2F	GET	200	image/gif	http://w88.go.com/b/ss/wdgdsec,wdgdolgoc,wdgdolfamsec/1/H.25.2/s68743085311…%207.7.3%3BSharePoint%20Browser%20Plug-in%3BSilverlight%20Plug-In%3B&AQE=1	309 B	148 ms	
+log.php?name=SilentLoginFailureContext&blue_cookie=null&sso_assertion_cookie=null&swid_cookie=1AD39FD6-845D-494D-85C9-71CBCF17F120&local_storage_keys=&client_id=DIENT-MATTERHORN-PROD&context=%5BsilentLogin.js%3A343%5D%20noGuestLogout%20called%20from%20%5B_blueCookieLogin%3Aerror%3A291%5D	GET	200	image/gif	Other	645 B	127 ms	
+e404_matte-22219aa5f291.png	GET	200	image/png	Other	13.1 KB	15 ms	
+e500_matte-09657841c7d6.png	GET	200	image/png	Other	17.1 KB	58 ms	
+enet_matte-c080e9f4b159.png	GET	200	image/png	Other	8.8 KB	14 ms	
+1.00 s1.50 s2.00 s2.50 s3.00 s3.50 s4.00 s4.50 s5.00 s5.50 s6.00 s6.50 s7.00 s7.50 s8.00 s8.50 s9.00 s
+86 requests ❘ 1.2 MB transferred ❘ 9.38 s (load: 7.87 s, DOMContentLoaded: 5.33 s)
+ConsoleSearchEmulationRendering
+

@@ -1,0 +1,177 @@
+www.pandora.com
+
+Length of Critical Path: 5
+
+Number of paths with critical path length: 3
+
+Number Slack nodes: 98
+
+Percentage Slack nodes: 0.933333333333
+
+www.reddit.com
+
+Length of Critical Path: 4
+
+Number of paths with critical path length: 4
+
+Number Slack nodes: 41
+
+Percentage Slack nodes: 0.854166666667
+
+Average Slack: 1.68292682927
+
+www.groupon.com
+
+Length of Critical Path: 3
+
+Number of paths with critical path length: 11
+
+Number Slack nodes: 37
+
+Percentage Slack nodes: 0.725490196078
+
+Average Slack: 1.0
+
+www.paypal.com
+
+Length of Critical Path: 4
+
+Number of paths with critical path length: 2
+
+Number Slack nodes: 20
+
+Percentage Slack nodes: 0.8
+
+Average Slack: 1.5
+
+www.yahoo.com
+
+Length of Critical Path: 5
+
+Number of paths with critical path length: 2
+
+Number Slack nodes: 66
+
+Percentage Slack nodes: 0.88
+
+Average Slack: 1.86363636364
+
+www.go.com
+
+Length of Critical Path: 4
+
+Number of paths with critical path length: 13
+
+Number Slack nodes: 55
+
+Percentage Slack nodes: 0.743243243243
+
+Average Slack: 1.38181818182
+
+www.wikipedia.org
+
+Length of Critical Path: 2
+
+Number of paths with critical path length: 18
+
+Number Slack nodes: 0
+
+Percentage Slack nodes: 0.0
+
+Average Slack: 0
+
+en.wikipedia.org
+
+Length of Critical Path: 5
+
+Number of paths with critical path length: 6
+
+Number Slack nodes: 23
+
+Percentage Slack nodes: 0.69696969697
+
+Average Slack: 2.0
+
+en.wikipedia.org/wiki/Virupaksha_Temple
+
+Length of Critical Path: 4
+
+Number of paths with critical path length: 5
+
+Number Slack nodes: 22
+
+Percentage Slack nodes: 0.733333333333
+
+Average Slack: 2.0
+
+www.google.com
+
+Length of Critical Path: 6
+
+Number of paths with critical path length: 3
+
+Number Slack nodes: 19
+
+Percentage Slack nodes: 0.703703703704
+
+Average Slack: 2.94736842105
+
+www.google.com/?gws_rd=ssl#q=Hunger+Games
+
+Length of Critical Path: 6
+
+Number of paths with critical path length: 3
+
+Number Slack nodes: 46
+
+Percentage Slack nodes: 0.851851851852
+
+Average Slack: 2.78260869565
+
+www.ebay.com
+
+Length of Critical Path: 3
+
+Number of paths with critical path length: 10
+
+Number Slack nodes: 20
+
+Percentage Slack nodes: 0.540540540541
+
+Average Slack: 1.0
+
+www.linkedin.com
+
+Length of Critical Path: 4
+
+Number of paths with critical path length: 3
+
+Number Slack nodes: 161
+
+Percentage Slack nodes: 0.964071856287
+
+Average Slack: 1.31055900621
+
+www.craigslist.com
+
+Length of Critical Path: 3
+
+Number of paths with critical path length: 6
+
+Number Slack nodes: 3
+
+Percentage Slack nodes: 0.25
+
+Average Slack: 1.0
+
+www.blogspot.com
+
+Length of Critical Path: 4
+
+Number of paths with critical path length: 14
+
+Number Slack nodes: 18
+
+Percentage Slack nodes: 0.514285714286
+
+Average Slack: 1.11111111111

@@ -1,0 +1,14 @@
+www.craigslist.com	GET	301		Other	72 B	350 ms	
+www.craigslist.org	GET	302		http://www.craigslist.com/	174 B	162 ms	
+geo.craigslist.org	GET	302	text/html	http://www.craigslist.org/	292 B	167 ms	
+boston.craigslist.org	GET	200	text/html	http://geo.craigslist.org/	9.6 KB	263 ms	
+cl.css?v=9b103d14be2812e1857faaac35ab4fe2	GET	200	text/css	boston.craigslist.org/:11	11.9 KB	354 ms	
+jquery-ui-1.9.2.custom.css?v=86db72e37d2cf63cab3c63485c71becb	GET	200	text/css	boston.craigslist.org/:12	4.5 KB	384 ms	
+tocs-concat.min.js?v=fa712fc83f1604a755f269b3d3b0e1f9	GET	200	application/x-javascript	boston.craigslist.org/:13	9.5 KB	464 ms	
+general-concat.min.js?v=8182b2828cd9e8b3aeae6e185e28106f	GET	200	application/x-javascript	boston.craigslist.org/:750	77.4 KB	655 ms	
+homepage-concat.min.js?v=ff78c9d4bc3328ac81f547e47949ff75	GET	200	application/x-javascript	boston.craigslist.org/:757	2.1 KB	299 ms	
+localstorage.html?v=51a29e41f8e978141e4085ed4a77d170	GET	200	text/html	(index):755	838 B	188 ms	
+400 ms600 ms800 ms1.00 s1.20 s1.40 s1.60 s1.80 s2.00 s2.20 s2.40 s
+10 requests ❘ 116 KB transferred ❘ 1.44 s (load: 1.72 s, DOMContentLoaded: 1.37 s)
+ConsoleSearchEmulationRendering
+
