@@ -22,5 +22,8 @@
     var newerContent = document.createTextNode("new test node");
     newerContent.id = "newestnode";
     contentDiv.replaceChild(newerContent, newContent);
+    var finalContent = document.createTextNode("final test node");
+    finalContent.id = "finalnewnode";
+    contentDiv.insertBefore(finalContent, newerContent);
     contentDiv.removeChild(newerContent);
 })();

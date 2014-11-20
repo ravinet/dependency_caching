@@ -65,3 +65,21 @@ Node.prototype.replaceChild = function(newchild, oldchild){
                                               this.id + ": child_path=" + child_vals[0] + "; child_path_tags=" + child_vals[1]);
                                  return retVal;
                              };
+
+var _insertBefore = Node.prototype.insertBefore;
+Node.prototype.insertBefore = function(newchild, referencechild){
+                                 if (referencechild == undefined) { referencechild = null; }
+                                 var retVal = _insertBefore.call(this, newchild, referencechild);
+                                 var caller = get_caller(document.currentScript);
+                                 child_vals = get_child_path(this);
+                                 if ( referencechild == null ) {
+                                     console.log( "Call to Node.prototype.insertBefore() in " + caller + "; args="+ newchild +
+                                     "," + referencechild + "=" + newchild.id + ",null; node_modified=" +
+                                     this.id + ": child_path=" + child_vals[0] + "; child_path_tags=" + child_vals[1]);
+                                     return retVal;
+                                 }
+                                 console.log( "Call to Node.prototype.insertBefore() in " + caller + "; args="+ newchild +
+                                              "," + referencechild + "=" + newchild.id + "," + referencechild.id + "; node_modified=" +
+                                              this.id + ": child_path=" + child_vals[0] + "; child_path_tags=" + child_vals[1]);
+                                 return retVal;
+                             };
