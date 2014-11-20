@@ -1,5 +1,46 @@
 var _document = document;
 var documentBindCache = {};
+
+function list_properties(properties){
+    var props = "";
+    for (var key in properties){
+        props = props.concat(key + ":" + properties[key] + ", ");
+    }
+    props = props.slice(0, props.length-2);
+    return props;
+}
+
+function print_single_attr(child_attributes){
+    var final_attributes = "";
+    for (y=0; y<child_attributes.length; y++){
+        final_attributes = final_attributes.concat(child_attributes[y] + "; ");
+    }
+    final_attributes = final_attributes.slice(0, final_attributes.length-2);
+    return final_attributes;
+}
+
+function print_multiple_attr(child_attributes){
+    var final_attributes = "";
+    for (var key in child_attributes){
+        final_attributes = final_attributes.concat(key + "-");
+        var current_attributes = child_attributes[key];
+        for (y=0; y<current_attributes.length; y++){
+            final_attributes = final_attributes.concat(current_attributes[y] + "; ");
+        }
+    }
+    final_attributes = final_attributes.slice(0, final_attributes.length-2);
+    return final_attributes;
+}
+
+function print_nodes(parents){
+    var nodes = "";
+    for (var key in parents) {
+        nodes = nodes.concat(key +",");
+    }
+    nodes = nodes.slice(0, nodes.length-1);
+    return nodes;
+}
+
 var document_handler = {
     "get": function(base, name){
                if(name in documentBindCache){
@@ -21,17 +62,27 @@ var document_handler = {
                              curr = retVal;
                              parents = [];
                              child_path = [];
+                             child_path_tags = [];
+                             child_path_attr = [];
                              while ( curr.parentNode != null ) {
                                 parents.push(curr.parentNode.id);
                                 var children = curr.parentNode.children;
                                 for (j = 0; j < children.length; j++){
                                     if( children[j] == curr ){
                                         child_path.push(j);
+                                        child_path_tags.push(children[j].tagName);
+                                        var attr = children[j].attributes;
+                                        var attributes = [];
+                                        for( a=0; a<attr.length; a++){
+                                            attributes.push(attr[a].name + ":" + attr[a].value);
+                                        }
+                                        child_path_attr.push(attributes);
                                     }
                                 }
                                 curr = curr.parentNode; 
                              }
-                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
+
+                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + retVal.id + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes=" + print_single_attr(child_path_attr) );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -49,17 +100,27 @@ var document_handler = {
                              curr = retVal;
                              parents = [];
                              child_path = [];
+                             child_path_tags = [];
+                             child_path_attr = [];
                              while ( curr.parentNode != null ) {
                                 parents.push(curr.parentNode.id);
                                 var children = curr.parentNode.children;
                                 for (j = 0; j < children.length; j++){
                                     if( children[j] == curr ){
                                         child_path.push(j);
+                                        child_path_tags.push(children[j].tagName);
+                                        var attr = children[j].attributes;
+                                        var attributes = [];
+                                        for( a=0; a<attr.length; a++){
+                                            attributes.push(attr[a].name + ":" + attr[a].value);
+                                        }
+                                        child_path_attr.push(attributes);
                                     }
                                 }
                                 curr = curr.parentNode;
                              }
-                             console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal + "=" + retVal.id + "; parents=" + parents + "; child_path=" + child_path);
+
+                             console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal + "=" + retVal.id + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes= " + print_single_attr(child_path_attr) );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -74,9 +135,13 @@ var document_handler = {
                              curr = retVal;
                              parents = {};
                              child_paths = {};
+                             child_path_tags = {};
+                             child_path_attr = {};
                              for (i = 0; i < retVal.length; i++) {
                                  curr_child_path = [];
+                                 curr_child_path_tags = [];
                                  curr_parents = [];
+                                 curr_child_path_attr = [];
                                  curr = retVal[i];
                                  while ( curr.parentNode != null ) {
                                      curr_parents.push(curr.parentNode.id);
@@ -84,28 +149,24 @@ var document_handler = {
                                      for (j = 0; j < children.length; j++){
                                          if( children[j] == curr ){
                                              curr_child_path.push(j);
+                                             curr_child_path_tags.push(children[j].tagName);
+                                             var attr = children[j].attributes;
+                                             var attributes = [];
+                                             for( a=0; a<attr.length; a++){
+                                                 attributes.push(attr[a].name + ":" + attr[a].value);
+                                             }
+                                             curr_child_path_attr.push(attributes);
                                          }
                                      }
                                      curr = curr.parentNode;
                                  }
                                  parents[retVal[i].id] = curr_parents;
                                  child_paths[retVal[i].id] = curr_child_path;
+                                 child_path_tags[retVal[i].id] = curr_child_path_tags;
+                                 child_path_attr[retVal[i].id] = curr_child_path_attr;
                              }
-                             var parent_mappings = "";
-                             var nodes = "";
-                             for (var key in parents) {
-                                 nodes = nodes.concat(key +",");
-                                 parent_mappings = parent_mappings.concat(key + ":" + parents[key] + ", ");
-                             }
-                             parent_mappings = parent_mappings.slice(0, parent_mappings.length-2);
-                             nodes = nodes.slice(0, nodes.length-1);
 
-                             var final_child_path = "";
-                             for (var key in child_paths){
-                                 final_child_path = final_child_path.concat(key + ": " + child_paths[key] + ", ");
-                             }
-                             final_child_path = final_child_path.slice(0, final_child_path.length-2);
-                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
+                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags= " + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -120,9 +181,13 @@ var document_handler = {
                              curr = retVal;
                              parents = {};
                              child_paths = {};
+                             child_path_tags = {};
+                             child_path_attr = {};
                              for (i = 0; i < retVal.length; i++) {
                                  curr_child_path = [];
+                                 curr_child_path_tags = [];
                                  curr_parents = [];
+                                 curr_child_path_attr = [];
                                  curr = retVal[i];
                                  while ( curr.parentNode != null ) {
                                      curr_parents.push(curr.parentNode.id);
@@ -130,28 +195,24 @@ var document_handler = {
                                      for (j = 0; j < children.length; j++){
                                          if( children[j] == curr ){
                                              curr_child_path.push(j);
+                                             curr_child_path_tags.push(children[j].tagName);
+                                             var attr = children[j].attributes;
+                                             var attributes = [];
+                                             for( a=0; a<attr.length; a++){
+                                                 attributes.push(attr[a].name + ":" + attr[a].value);
+                                             }
+                                             curr_child_path_attr.push(attributes);
                                          }
                                      }
                                      curr = curr.parentNode;
                                  }
                                  parents[retVal[i].id] = curr_parents;
                                  child_paths[retVal[i].id] = curr_child_path;
+                                 child_path_tags[retVal[i].id] = curr_child_path_tags;
+                                 child_path_attr[retVal[i].id] = curr_child_path_attr;
                              }
-                             var parent_mappings = "";
-                             var nodes = "";
-                             for (var key in parents) {
-                                 nodes = nodes.concat(key +",");
-                                 parent_mappings = parent_mappings.concat(key + ":" + parents[key] + ", ");
-                             }
-                             parent_mappings = parent_mappings.slice(0, parent_mappings.length-2);
-                             nodes = nodes.slice(0, nodes.length-1);
 
-                             var final_child_path = "";
-                             for (var key in child_paths){
-                                 final_child_path = final_child_path.concat(key + ": " + child_paths[key] + ", ");
-                             }
-                             final_child_path = final_child_path.slice(0, final_child_path.length-2);
-                             console.log( "READ: document- " + name + ": arg= " + ns + "; tag=" + id + "; return_value=" + retVal + "=" + nodes + "; parents=" + parent_mappings + "; child_paths=" + final_child_path );
+                             console.log( "READ: document- " + name + ": arg= " + ns + "; tag=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags=" + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
