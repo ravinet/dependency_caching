@@ -1,0 +1,7 @@
+"WRITE window- t: 0" window_def.js:18
+"WRITE window- x: 0" window_def.js:18
+"READ: window- x" window_def.js:5
+"READ: window- x" window_def.js:5
+"WRITE window- y: 0" window_def.js:18
+"WRITE window- x: 4" window_def.js:18
+"READ: window- t" window_def.js:5
