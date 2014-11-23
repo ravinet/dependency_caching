@@ -1,0 +1,1 @@
+window.y = window.x;
