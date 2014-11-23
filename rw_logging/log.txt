@@ -1,7 +1,18 @@
-"WRITE window- t: 0" window_def.js:18
-"WRITE window- x: 0" window_def.js:18
-"READ: window- x" window_def.js:5
-"READ: window- x" window_def.js:5
-"WRITE window- y: 0" window_def.js:18
-"WRITE window- x: 4" window_def.js:18
-"READ: window- t" window_def.js:5
+This is the corresponding log:
+"WRITE window- t:2; from=test.js"
+"WRITE window- x:3; from=test.js"
+"READ: window- x; from=test1.js"
+"READ: window- x; from=test2.js"
+"WRITE window- y:3; from=test2.js"
+"WRITE window- x:4; from=test3.js"
+"READ: window- t; from=test4.js"
+"READ: window- x; from=test5.js"
+"READ: window- y; from=test5.js"
+"READ: window- t; from=test5.js"
+
+This is what the site's console output should be:
+3
+2
+"final x: 4"
+"final y: 3"
+"final t: 2"
