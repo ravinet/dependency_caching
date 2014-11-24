@@ -7,6 +7,8 @@ var queue = []; // holds queue of requestable nodes
 var numRequests = 0; //number of outstanding reqs
 var maxNumRequests = 4; // max number of outstanding reqs
 
+xmlhttp = new XMLHttpRequest();
+
 //populate tree and queue
 $.getJSON('amex.json', function(data) {
   tree=data;
@@ -46,13 +48,28 @@ function callback() {
   launchRequesters();
   */
   filename = filename.split(" ")[0];
-  $.get(filename, function() {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState==4) {
+      if(xmlHttp.status === 200) {
+        addChildrenToQueue(children);
+        numRequests = numRequests - 1;
+        launchRequesters();
+      } else {
+        console.log("can't request" +  filename);
+      }
+    }
+  };
+  xmlHttp.open("GET", filename);
+  xmlHttp.send();
+  /*$.get(filename, function() {
     addChildrenToQueue(children);
     numRequests = numRequests - 1;
     launchRequesters();
   }).fail(function() {
     console.log("can't request" +  filename);
   });
+  */
 }
 
 function addChildrenToQueue(node) {
@@ -75,7 +92,7 @@ function dequeue() {
     return null;
   }
   k = queue;
-//  queue = queue.sort(sortfunction);
+  queue = queue.sort(sortfunction).reverse();
   ret = queue.shift();  // pop(0)
   return ret;
 }

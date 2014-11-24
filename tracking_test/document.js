@@ -4,9 +4,6 @@
 
     window.onload = function(){
         var contentDiv = document.getElementById("contentDiv");
-        var newContent = document.createTextNode("test node");
-        newContent.id = "newnode";
-        contentDiv.appendChild(newContent);
         contentDiv.innerHTML = "onload handler fired!";
         var name = document.getElementsByName("testname");
         var class_list = document.getElementsByClassName("testclass");
@@ -19,4 +16,14 @@
         var query_list = document.querySelectorAll("#outerdiv,#outerdiv1");
         var point = document.elementFromPoint(10, 10);
     };
+    var newContent = document.createTextNode("test node");
+    newContent.id = "newnode";
+    contentDiv.appendChild(newContent);
+    var newerContent = document.createTextNode("new test node");
+    newerContent.id = "newestnode";
+    contentDiv.replaceChild(newerContent, newContent);
+    var finalContent = document.createTextNode("final test node");
+    finalContent.id = "finalnewnode";
+    contentDiv.insertBefore(finalContent, newerContent);
+    contentDiv.removeChild(newerContent);
 })();

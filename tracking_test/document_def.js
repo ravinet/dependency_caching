@@ -1,3 +1,22 @@
+function get_caller(caller){
+    var script_attributes = "";
+    if ( caller == null ) {
+        script_attributes = "event handler or callback";
+    } else {
+        var attr = caller.attributes;
+        if( attr.length == 0 ) {
+            script_attributes = "inline script";
+        } else {
+            for(j=0; j < attr.length; j++) {
+                if( attr[j].name == "src" ) {
+                    script_attributes = script_attributes.concat( attr[j].value );
+                }
+            }
+        }
+    }
+    return script_attributes;
+}
+
 var _document = document;
 var documentBindCache = {};
 
@@ -43,6 +62,7 @@ function print_nodes(parents){
 
 var document_handler = {
     "get": function(base, name){
+               var caller = get_caller( document.currentScript);
                if(name in documentBindCache){
                    return documentBindCache[name];
                }
@@ -56,7 +76,7 @@ var document_handler = {
                        var documentProxy = function(id){
                              var retVal = value(id);
                              if ( retVal == null ) {
-                                 console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal);
+                                 console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "; from=" + caller);
                                  return retVal;
                              }
                              curr = retVal;
@@ -82,7 +102,7 @@ var document_handler = {
                                 curr = curr.parentNode; 
                              }
 
-                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + retVal.id + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes=" + print_single_attr(child_path_attr) );
+                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + retVal.id + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes=" + print_single_attr(child_path_attr) + "; from=" + caller );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -91,10 +111,11 @@ var document_handler = {
 
                    // document.elementFromPoint- log id, return value, and parents
                    if(name == "elementFromPoint"){
+                       var caller = get_caller( document.currentScript);
                        var documentProxy = function(p1, p2){
                              var retVal = value(p1, p2);
                              if ( retVal == null ) {
-                                 console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal);
+                                 console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal + "; from=" + caller);
                                  return retVal;
                              }
                              curr = retVal;
@@ -120,7 +141,7 @@ var document_handler = {
                                 curr = curr.parentNode;
                              }
 
-                             console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal + "=" + retVal.id + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes= " + print_single_attr(child_path_attr) );
+                             console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal + "=" + retVal.id + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes= " + print_single_attr(child_path_attr) + "; from=" + caller );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -130,6 +151,7 @@ var document_handler = {
                    // document.getElementsByName, document.getElementsByClassName, document.getElementsByTagName document.querySelectorAll
                    // log name, return value, and for each node returned list node name and its parents
                    if((name == "getElementsByName") || (name == "getElementsByClassName") || (name == "getElementsByTagName") || (name == "querySelectorAll")){
+                       var caller = get_caller( document.currentScript);
                        var documentProxy = function(id){
                              var retVal = value(id);
                              curr = retVal;
@@ -166,7 +188,7 @@ var document_handler = {
                                  child_path_attr[retVal[i].id] = curr_child_path_attr;
                              }
 
-                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags= " + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) );
+                             console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags= " + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) + "; from=" + caller );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -176,6 +198,7 @@ var document_handler = {
                    // document.getElementsByTagNameNS
                    // log name, return value, and for each node returned list node name and its parents
                    if(name == "getElementsByTagNameNS"){
+                       var caller = get_caller( document.currentScript);
                        var documentProxy = function(ns, id){
                              var retVal = value(ns, id);
                              curr = retVal;
@@ -212,7 +235,7 @@ var document_handler = {
                                  child_path_attr[retVal[i].id] = curr_child_path_attr;
                              }
 
-                             console.log( "READ: document- " + name + ": arg= " + ns + "; tag=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags=" + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) );
+                             console.log( "READ: document- " + name + ": arg= " + ns + "; tag=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags=" + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) + "; from=" + caller );
                              return retVal;
                        };
                        documentBindCache[name] = documentProxy;
@@ -224,7 +247,8 @@ var document_handler = {
                return value;
            },
     "set": function(base, name, value){
-               console.log("[WRITE][document]: " + name);
+               var caller = get_caller( document.currentScript);
+               console.log("[WRITE][document]: " + name + "; from=" + caller );
                base[name] = value;
                if(name in documentBindCache){
                    delete documentBindCache[name];
