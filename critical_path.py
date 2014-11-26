@@ -8,18 +8,17 @@ def get_critical_path(graph):
 
 	critical_path_nodes = []
 	slack_nodes = {}
+	slack_value = {}
 	for k in node_earliest_value.keys():
 		if node_earliest_value[k] == node_latest_value[k]:
 			critical_path_nodes.append(k)
 		else:
 			slack_nodes[k] = {"node_earliest_value": node_earliest_value[k], "node_latest_value": node_latest_value[k], "slack_difference": node_latest_value[k]-node_earliest_value[k]}
-
-
-	# Critical path nodes looks at all nodes where the earliest value equals the latest value.  It doesn't distinguish betweeen multiple critical paths
+		slack_value[k] = node_latest_value[k] - node_earliest_value[k];
 
 	critical_path_list = get_critical_path_list(graph, node_earliest_value, node_latest_value);
 
-	return (critical_path_nodes, critical_path_list, slack_nodes)
+	return (critical_path_nodes, critical_path_list, slack_nodes, slack_value)
 
 
 def get_earliest_values(subtree, depth):
