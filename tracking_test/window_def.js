@@ -36,7 +36,7 @@ var window_handler = {
                          },
                   "set": function(base, name, value){
                              var caller = get_caller( document.currentScript);
-                             console.log("WRITE window- " + name + ":" + value + "; from=" + caller );
+                             console.log("WRITE: window- " + name + ":" + value + "; from=" + caller );
                              base[name] = value;
                              if(name in windowBindCache){
                                  delete windowBindCache[name];
