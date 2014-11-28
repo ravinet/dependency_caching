@@ -22,7 +22,8 @@ var windowBindCache = {};
 var window_handler = {
                   "get": function(base, name){
                              var caller = get_caller( document.currentScript);
-                             console.log("READ: window- " + name + "; from=" + caller);
+                             var log = {"window": "READ", "var": name, "new_value": null, "script": caller}
+                             console.log( JSON.stringify( log ) );
                              if(name in windowBindCache){
                                  return windowBindCache[name];
                              }
@@ -36,7 +37,8 @@ var window_handler = {
                          },
                   "set": function(base, name, value){
                              var caller = get_caller( document.currentScript);
-                             console.log("WRITE: window- " + name + ":" + value + "; from=" + caller );
+                             var log = {'window': 'WRITE', 'var': name, 'new_value': value, 'script': caller}
+                             console.log( JSON.stringify( log ) );
                              base[name] = value;
                              if(name in windowBindCache){
                                  delete windowBindCache[name];
