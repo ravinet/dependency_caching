@@ -21,13 +21,13 @@ This is what the site's console output should be:
 
 
 Current format proces_window_log.py takes:
-{"window":"WRITE","var":"t","new_value":2,"script":"test.js"}
-{"window":"WRITE","var":"x","new_value":3,"script":"test.js"}
-{"window":"READ","var":"x","new_value":null,"script":"test1.js"}
-{"window":"READ","var":"x","new_value":null,"script":"test2.js"}
-{"window":"WRITE","var":"y","new_value":3,"script":"test2.js"}
-{"window":"WRITE","var":"x","new_value":4,"script":"test3.js"}
-{"window":"READ","var":"t","new_value":null,"script":"test4.js"}
-{"window":"READ","var":"x","new_value":null,"script":"test5.js"}
-{"window":"READ","var":"y","new_value":null,"script":"test5.js"}
-{"window":"READ","var":"t","new_value":null,"script":"test5.js"}
+"{"window":"WRITE","var":"t","new_value":2,"script":"test.js"}"
+"{"window":"WRITE","var":"x","new_value":3,"script":"test.js"}"
+"{"window":"READ","var":"x","new_value":null,"script":"test1.js"}"
+"{"window":"READ","var":"x","new_value":null,"script":"test2.js"}"
+"{"window":"WRITE","var":"y","new_value":3,"script":"test2.js"}"
+"{"window":"WRITE","var":"x","new_value":4,"script":"test3.js"}"
+"{"window":"READ","var":"t","new_value":null,"script":"test4.js"}"
+"{"window":"READ","var":"x","new_value":null,"script":"test5.js"}"
+"{"window":"READ","var":"y","new_value":null,"script":"test5.js"}"
+"{"window":"READ","var":"t","new_value":null,"script":"test5.js"}"

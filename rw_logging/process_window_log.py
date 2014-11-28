@@ -14,7 +14,8 @@ variables = {}
 
 with open(log) as file:
     for line in file:
-        curr = json.loads(line.strip("\n"))
+        # remove double quotes wrapping dictionary and also newline
+        curr = json.loads(line[1:len(line)-2])
         logs.append(curr)
         if curr.get('var') not in variables:
             variables[curr.get('var')] = 0
