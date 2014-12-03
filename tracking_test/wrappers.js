@@ -91,6 +91,6 @@ window.alert = function(arg){
                    var log_write = {"window": "WRITE", "var": "screen", "new_value": null, "script": caller};
                    console.log( JSON.stringify( log_read ) );
                    console.log( JSON.stringify( log_write ) );
-                   var retVal = _alert(arg);
+                   var retVal = _alert.call(this, arg);
                    return retVal;
                };
