@@ -30,16 +30,28 @@ var window_handler = {
                                  case "number":
                                  case "boolean":
                                  case "string":
+                                     return value;
                                  case "object":
                                      if ( value == null ){
                                          return value;
                                      }
                                      var object_handler = {
-                                         "get": function(base1, name){
+                                         "get": function(new_base, new_name){
                                              var caller = get_caller( document.currentScript);
                                              var log = {"window": "INNER READ", "var": name, "new_value": null, "script": caller}
                                              console.log( JSON.stringify( log ) );
-                                             return value[name];
+                                             var inner_value = value[name];
+                                             switch( typeof( inner_value ) ){
+                                                 case "number":
+                                                 case "boolean":
+                                                 case "string":
+                                                     return inner_value;
+                                                 case "object":
+                                                     if ( inner_value == null ){
+                                                         return inner_value;
+                                                     }
+                                                     return (new Proxy( {}, object_handler));
+                                             }
                                          },
                                          "set": function(base, name, new_value){
                                              var caller = get_caller( document.currentScript);
@@ -59,7 +71,6 @@ var window_handler = {
                                          windowBindCache[name] = value;
                                      }
                              }
-                             return value;
                          },
                   "set": function(base, name, value){
                              var caller = get_caller( document.currentScript);
