@@ -38,9 +38,9 @@ var window_handler = {
                                      var object_handler = {
                                          "get": function(new_base, new_name){
                                              var caller = get_caller( document.currentScript);
-                                             var log = {"window": "INNER READ", "var": name, "new_value": null, "script": caller}
+                                             var log = {"window": "INNER READ", "var": new_name, "new_value": null, "script": caller}
                                              console.log( JSON.stringify( log ) );
-                                             var inner_value = value[name];
+                                             var inner_value = new_base[new_name];
                                              switch( typeof( inner_value ) ){
                                                  case "number":
                                                  case "boolean":
@@ -50,7 +50,7 @@ var window_handler = {
                                                      if ( inner_value == null ){
                                                          return inner_value;
                                                      }
-                                                     return (new Proxy( {}, object_handler));
+                                                     return (new Proxy(inner_value, object_handler));
                                              }
                                          },
                                          "set": function(base, name, new_value){
@@ -60,7 +60,7 @@ var window_handler = {
                                              value[name] = new_value;
                                          }
                                      };
-                                     return (new Proxy( {}, object_handler));
+                                     return (new Proxy(value, object_handler));
                                  case "function":
                                      if(name in windowBindCache){
                                          return windowBindCache[name];
