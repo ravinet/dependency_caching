@@ -4,6 +4,6 @@
             window.t = 42;
             console.log(window.t);
             //window.alert(window.t);
-            window.x = {y: 41};
-            console.log(window.x.y);
+            window.x = {y: {z:10}};
+            console.log(window.x.y.z);
     })();

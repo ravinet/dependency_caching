@@ -113,7 +113,14 @@ for url, parent in zipped:
   children_mappings[url] = children
   #print json.dumps(new_node, cls=MyEncoder)
 
-root = zipped[0][0]
+
+def nodePlusSlack(node):
+  if node == '/':
+    return node
+  slackval = str(slack_nodes[node]["slack_difference"]) if node in slack_nodes else "0"
+  out = node + " " + slackval
+  return out
+
 def mapping_to_child_dict(mappings, current_node):
   curr_dict = {current_node : None}
   curr_children = mappings[current_node]
@@ -123,6 +130,7 @@ def mapping_to_child_dict(mappings, current_node):
     curr_dict[current_node] = [mapping_to_child_dict(mappings, node) for node in curr_children]
   return curr_dict
 
+root = zipped[0][0]
 child_dict = mapping_to_child_dict(children_mappings, root)
 
 (critical_path_nodes, critical_path_lists, slack_nodes, slack_value) = critical_path.get_critical_path(child_dict)
@@ -142,6 +150,20 @@ add_slack(child_dict_slack)
 new_root = root + '_0'
 print json.dumps(child_dict_slack[new_root])
 
+def slackdict(mappings, current_node):
+  curr_dict = {nodePlusSlack(current_node) : None}
+  curr_children = mappings[current_node]
+  if len(curr_children) == 0:
+    return curr_dict
+  else:
+    curr_dict[nodePlusSlack(current_node)] = [slackdict(mappings, node) for node in curr_children]
+  return curr_dict
+
+root = zipped[0][0]
+slackdict = slackdict(children_mappings, root)
+print json.dumps(slackdict[root])
+
+'''
 # map nodes on critical path to location in tree (based on sequence number)
 #critical_path_mappings = {}
 #for node in critical_path_nodes:
@@ -152,7 +174,6 @@ print json.dumps(child_dict_slack[new_root])
 slack_nodes_values = {}
 for k in slack_nodes.keys():
 	slack_nodes_values[k] = slack_nodes[k]["slack_difference"]
-
 #print "\nCritical Path: "
 #print sorted_critical_path
 print "\nCritical Path List:"
@@ -166,3 +187,4 @@ print "\nSlack Nodes values:"
 print slack_nodes_values
 print "\nPercentage Slack nodes:"
 print float(len(slack_nodes.keys()))/(len(critical_path_nodes)+len(slack_nodes.keys()))
+'''
