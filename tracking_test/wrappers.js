@@ -83,3 +83,14 @@ Node.prototype.insertBefore = function(newchild, referencechild){
                                               this.id + ": child_path=" + child_vals[0] + "; child_path_tags=" + child_vals[1]);
                                  return retVal;
                              };
+
+var _alert = window.alert;
+window.alert = function(arg){
+                   var caller = get_caller( document.currentScript);
+                   var log_read = {"window": "READ", "var": "screen", "new_value": null, "script": caller};
+                   var log_write = {"window": "WRITE", "var": "screen", "new_value": null, "script": caller};
+                   console.log( JSON.stringify( log_read ) );
+                   console.log( JSON.stringify( log_write ) );
+                   var retVal = _alert.call(this, arg);
+                   return retVal;
+               };

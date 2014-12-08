@@ -1,6 +1,7 @@
 import re, sys, urlparse
 import json
 from json import JSONEncoder
+import copy
 
 import critical_path
 
@@ -132,7 +133,22 @@ def mapping_to_child_dict(mappings, current_node):
 root = zipped[0][0]
 child_dict = mapping_to_child_dict(children_mappings, root)
 
-(critical_path_nodes, critical_path_lists, slack_nodes) = critical_path.get_critical_path(child_dict)
+(critical_path_nodes, critical_path_lists, slack_nodes, slack_value) = critical_path.get_critical_path(child_dict)
+
+child_dict_slack = copy.deepcopy(child_dict)
+def add_slack(tree):
+	children = tree.values()[0]
+	old_key = tree.keys()[0]
+	new_key = old_key + '_' + str(slack_value[old_key])
+	tree[new_key] = tree[old_key]
+	del tree[old_key]
+	if children is not None:
+		for c in children:
+			add_slack(c)
+
+add_slack(child_dict_slack)
+new_root = root + '_0'
+print json.dumps(child_dict_slack[new_root])
 
 def slackdict(mappings, current_node):
   curr_dict = {nodePlusSlack(current_node) : None}
@@ -160,15 +176,15 @@ for k in slack_nodes.keys():
 	slack_nodes_values[k] = slack_nodes[k]["slack_difference"]
 #print "\nCritical Path: "
 #print sorted_critical_path
-print "Critical Path List:"
+print "\nCritical Path List:"
 for l in critical_path_lists:
 	print l
 #print critical_path_lists
 print "\nLength of Critical Path: " + str(len(critical_path_lists[0]))
-print "\nSlack Nodes: "
-print slack_nodes
-print "Slack Nodes values:"
+#print "\nSlack Nodes: "
+#print slack_nodes
+print "\nSlack Nodes values:"
 print slack_nodes_values
-print "Percentage Slack nodes:"
+print "\nPercentage Slack nodes:"
 print float(len(slack_nodes.keys()))/(len(critical_path_nodes)+len(slack_nodes.keys()))
 '''

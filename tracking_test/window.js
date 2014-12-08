@@ -1,7 +1,9 @@
 (function(){
             var window = new Proxy(_window,
                                    window_handler); // this line must be defined here (Can't be defined at top of page)
-            window.alert("Hiya!");
-            window.x = 42;
-            window.alert(window.x);
+            window.t = 42;
+            console.log(window.t);
+            //window.alert(window.t);
+            window.x = {y: {z:10}};
+            console.log(window.x.y.z);
     })();
