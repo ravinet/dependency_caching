@@ -35,6 +35,11 @@ var window_handler = {
                                      if ( value == null ){
                                          return value;
                                      }
+                                     if ( value instanceof Date || value instanceof RegExp ||
+                                          value instanceof Array || value instanceof Number ){
+                                         return value;
+                                     }
+
                                      var object_handler = {
                                          "get": function(new_base, new_name){
                                              var caller = get_caller( document.currentScript);
@@ -50,12 +55,16 @@ var window_handler = {
                                                      if ( inner_value == null ){
                                                          return inner_value;
                                                      }
+                                                     if ( inner_value instanceof Date || inner_value instanceof RegExp ||
+                                                          inner_value instanceof Array || inner_value instanceof Number ){
+                                                         return inner_value;
+                                                     }
                                                      return (new Proxy(inner_value, object_handler));
                                              }
                                          },
                                          "set": function(base, name, new_value){
                                              var caller = get_caller( document.currentScript);
-                                             var log = {'window': 'WRITE', 'var': name, 'new_value': value, 'script': caller};
+                                             var log = {'window': 'INNER WRITE', 'var': name, 'new_value': value, 'script': caller};
                                              console.log( JSON.stringify( log ) );
                                              value[name] = new_value;
                                          }
