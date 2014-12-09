@@ -60,6 +60,8 @@ var window_handler = {
                                                          return inner_value;
                                                      }
                                                      return (new Proxy(inner_value, object_handler));
+                                                 case "function":
+                                                     return inner_value;
                                              }
                                          },
                                          "set": function(base, name, new_value){
@@ -74,11 +76,9 @@ var window_handler = {
                                      if(name in windowBindCache){
                                          return windowBindCache[name];
                                      }
-
-                                     if(typeof(value) == "function"){
-                                         value = value.bind(base);
-                                         windowBindCache[name] = value;
-                                     }
+                                     value = value.bind(base);
+                                     windowBindCache[name] = value;
+                                     return value;
                              }
                          },
                   "set": function(base, name, value){
