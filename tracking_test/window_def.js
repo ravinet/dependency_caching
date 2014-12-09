@@ -36,7 +36,8 @@ var window_handler = {
                                          return value;
                                      }
                                      if ( value instanceof Date || value instanceof RegExp ||
-                                          value instanceof Array || value instanceof Number ){
+                                          value instanceof Array || value instanceof Number ||
+                                          value instanceof Node || value instanceof Element ){
                                          return value;
                                      }
 
@@ -56,7 +57,8 @@ var window_handler = {
                                                          return inner_value;
                                                      }
                                                      if ( inner_value instanceof Date || inner_value instanceof RegExp ||
-                                                          inner_value instanceof Array || inner_value instanceof Number ){
+                                                          inner_value instanceof Array || inner_value instanceof Number ||
+                                                          inner_value instanceof Node || inner_value instanceof Element ){
                                                          return inner_value;
                                                      }
                                                      return (new Proxy(inner_value, object_handler));
