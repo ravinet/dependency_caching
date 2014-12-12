@@ -19,10 +19,11 @@ function get_caller(caller){
 
 var _window = window;
 var windowBindCache = {};
+window.proxy_id_counter = 1;
 var window_handler = {
                   "get": function(base, name){
                              var caller = get_caller( document.currentScript);
-                             var log = {"window": "READ", "var": name, "new_value": null, "script": caller}
+                             var log = {"window": "READ", "var": name, "new_value": null, "script": caller, "parent": "window", "id": window.proxy_id_counter};
                              console.log( JSON.stringify( log ) );
                              var value = base[name];
 
@@ -44,7 +45,7 @@ var window_handler = {
                                      var object_handler = {
                                          "get": function(new_base, new_name){
                                              var caller = get_caller( document.currentScript);
-                                             var log = {"window": "INNER READ", "var": new_name, "new_value": null, "script": caller}
+                                             var log = {"window": "INNER READ", "var": new_name, "new_value": null, "script": caller, "parent": JSON.stringify(new_base), "id": this._id}
                                              console.log( JSON.stringify( log ) );
                                              var inner_value = new_base[new_name];
                                              switch( typeof( inner_value ) ){
@@ -66,13 +67,15 @@ var window_handler = {
                                                      return inner_value;
                                              }
                                          },
-                                         "set": function(base, name, new_value){
+                                         "set": function(new_base, new_name, new_value){
                                              var caller = get_caller( document.currentScript);
-                                             var log = {'window': 'INNER WRITE', 'var': name, 'new_value': value, 'script': caller};
+                                             var log = {'window': 'INNER WRITE', 'var': new_name, 'new_value': new_value, 'script': caller, "parent": JSON.stringify(new_base), "id": this._id};
                                              console.log( JSON.stringify( log ) );
                                              value[name] = new_value;
                                          }
                                      };
+                                     object_handler._id = window.proxy_id_counter;
+                                     window.proxy_id_counter++;
                                      return (new Proxy(value, object_handler));
                                  case "function":
                                      if(name in windowBindCache){
@@ -85,7 +88,7 @@ var window_handler = {
                          },
                   "set": function(base, name, value){
                              var caller = get_caller( document.currentScript);
-                             var log = {'window': 'WRITE', 'var': name, 'new_value': value, 'script': caller}
+                             var log = {'window': 'WRITE', 'var': name, 'new_value': value, 'script': caller, "parent": "window"}
                              console.log( JSON.stringify( log ) );
                              base[name] = value;
                              if(name in windowBindCache){
