@@ -15,9 +15,6 @@ document_proxy = {"type": "VariableDeclaration","declarations": [{"type": "Varia
 
 for script in soup.find_all('script'):
 	body = pyesprima.parse(script.string);
-	print "\n"
-	print script.string
-
 
 	prepend_doc_proxy = ''.join((str(document_proxy), str(body)))
 	prepend_window_proxy = ''.join((str(window_proxy), str(prepend_doc_proxy)))
@@ -26,8 +23,10 @@ for script in soup.find_all('script'):
 
 	output = json.dumps(proxy_wrapper)
 
-	script.string = output
+	script.string = output;
 
-#	print script.string
+file1=open("newhtml.html","w")
 
-print soup
+file1.write(str(soup))
+
+file1.close()
