@@ -1,9 +1,42 @@
 (function(){
             var window = new Proxy(_window,
                                    window_handler); // this line must be defined here (Can't be defined at top of page)
-            window.t = 42;
-            console.log(window.t);
-            //window.alert(window.t);
-            window.x = {y: {z:10}};
-            console.log(window.x.y.z);
+            // site 1
+            //script first.js
+            var obj = makeProxy({key: ""});
+            window.x = obj;
+            window.y = obj;
+
+            //script second.js
+            window.x.key = "second";
+
+            //script third.js
+            window.y.key = "third";
+
+
+            // site 2
+            //var obj = makeProxy({key: ""});
+            //window.x = obj;
+            //alert(window.x);
+            //var newObj = makeProxy({key: ""});
+            //window.x = newObj;
+
+
+            // site 3
+            //window.x = makeProxy({y:{z:23}});
+            //console.log(window.x.y.z);
+
+
+            // site 4
+            //window.x = makeProxy({y:{z:10}});
+
+            //window.p = makeProxy({d:{r:7}});
+            //console.log(window.x.y.z);
+            //console.log(window.p.d.r);
+
+            //var obj1 = window.x;
+            //var obj2 = obj1.y;
+            //console.log(obj2.z);
+            //window.x = 42;
+            //obj1.y = 5;
     })();
