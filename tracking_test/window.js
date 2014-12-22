@@ -15,22 +15,27 @@
 
 
             // site 2
+            ////script first.js
             //var obj = makeProxy({key: ""});
             //window.x = obj;
+
+            ////script second.js
             //alert(window.x);
+
+            ////script third.js
             //var newObj = makeProxy({key: ""});
             //window.x = newObj;
 
 
             // site 3
-            //window.x = makeProxy({y:{z:23}});
+            //window.x = makeProxy({y:makeProxy({z:23})});
             //console.log(window.x.y.z);
 
 
             // site 4
-            //window.x = makeProxy({y:{z:10}});
+            //window.x = makeProxy({y:makeProxy({z:10})});
 
-            //window.p = makeProxy({d:{r:7}});
+            //window.p = makeProxy({d:makeProxy({r:7})});
             //console.log(window.x.y.z);
             //console.log(window.p.d.r);
 
