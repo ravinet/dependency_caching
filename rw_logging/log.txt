@@ -1,33 +1,8 @@
-This is the corresponding log:
-"WRITE window- t:2; from=test.js"
-"WRITE window- x:3; from=test.js"
-"READ: window- x; from=test1.js"
-"READ: window- x; from=test2.js"
-"WRITE window- y:3; from=test2.js"
-"WRITE window- x:4; from=test3.js"
-"READ: window- t; from=test4.js"
-"READ: window- x; from=test5.js"
-"READ: window- y; from=test5.js"
-"READ: window- t; from=test5.js"
-
-This is what the site's console output should be:
-3
-2
-"final x: 4"
-"final y: 3"
-"final t: 2"
-
-
-
-
-Current format proces_window_log.py takes:
-"{"window":"WRITE","var":"t","new_value":2,"script":"test.js"}"
-"{"window":"WRITE","var":"x","new_value":3,"script":"test.js"}"
-"{"window":"READ","var":"x","new_value":null,"script":"test1.js"}"
-"{"window":"READ","var":"x","new_value":null,"script":"test2.js"}"
-"{"window":"WRITE","var":"y","new_value":3,"script":"test2.js"}"
-"{"window":"WRITE","var":"x","new_value":4,"script":"test3.js"}"
-"{"window":"READ","var":"t","new_value":null,"script":"test4.js"}"
-"{"window":"READ","var":"x","new_value":null,"script":"test5.js"}"
-"{"window":"READ","var":"y","new_value":null,"script":"test5.js"}"
-"{"window":"READ","var":"t","new_value":null,"script":"test5.js"}"
+"{"OpType":"WRITE","ParentId":"window","PropName":"x","NewValId":0,"OldValId":"null","script":"first.js"}"
+"{"OpType":"WRITE","ParentId":"window","PropName":"y","NewValId":0,"OldValId":"null","script":"first.js"}"
+"{"OpType":"READ","ParentId":"window","PropName":"x","NewValId":"null","OldValId":0,"script":"second.js"}"
+"{"OpType":"WRITE","ParentId":0,"PropName":"key","NewValId":"null","OldValId":"null","script":"second.js"}"
+"{"OpType":"WRITE","ParentId":"window","PropName":"b","NewValId":"null","OldValId":"null","script":"second.js"}"
+"{"OpType":"READ","ParentId":"window","PropName":"b","NewValId":"null","OldValId":"null","script":"third.js"}"
+"{"OpType":"READ","ParentId":"window","PropName":"y","NewValId":"null","OldValId":0,"script":"third.js"}"
+"{"OpType":"WRITE","ParentId":0,"PropName":"key","NewValId":"null","OldValId":"null","script":"third.js"}"

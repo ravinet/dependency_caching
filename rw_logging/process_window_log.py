@@ -23,18 +23,35 @@ with open(log) as file:
         curr = json.loads(line[1:len(line)-2])
         logs.append(curr)
         if curr.get('var') not in variables:
-            variables[curr.get('var')] = 0
+            variables[curr.get('PropName')] = 0
 
     # iterate through log and for reads, find corresponding write
     for i in range(0, len(logs)):
         log = logs[i]
-        # check if READ
-        if ( log.get('window') == "READ" ):
+        # check if READ (can be object with ids, or non-object)
+        is_object = 0
+        is_val = 0
+        if ( log.get('OpType') == "READ" ):
             set_write = 0
-            variables[log.get('var')] += 1
+            variables[log.get('PropName')] += 1
+            if ( log.get('NewValId') == "null" and log.get('OldValId') != "null"): # read on object
+                is_object = 1
+            elif ( log.get('NewValId') == "null" and log.get('OldValId') == "null"): # read on val
+                is_val = 1
+            else:
+                print >> sys.stderr, "ERROR IN READ: " + logs[n]
             # find corresponding write by going up to top of log
             for n in range(i-1,-1,-1):
-                if ( logs[n].get('window') == "WRITE" and logs[n].get('var') == log.get('var') ):
+                matching_write = 0
+                if ( logs[n].get('OpType') == "WRITE" ):
+                    if ( is_val ):
+                        if ( logs[n].get('PropName') == log.get('PropName') and logs[n].get('ParentId') == log.get('ParentId')):
+                            matching_write = 1
+                    if ( is_object ):
+                        if ( logs[n].get('NewValId') == log.get('OldValId') ):
+                            # don't need to consider parentId since each object has unique id?
+                            matching_write = 1
+                if ( matching_write ):
                     set_write = 1
                     # this is the corresponding write
                     dependency_edges.append((logs[n].get('script'), log.get('script')))
@@ -56,6 +73,8 @@ with open(log) as file:
 print >> sys.stderr, dependencies
 print >> sys.stderr, dependency_edges
 print >> sys.stderr, variables
+
+print >> sys.stderr, "\n\n\n\n"
 
 #pipe this output to dot
 print "digraph G {"
