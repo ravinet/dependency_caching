@@ -17,6 +17,9 @@ dependency_edges = []
 # dictionary with variables and number of reads per each
 variables = {}
 
+# dictionary with tuples of variable and parentID and list of scripts which write to them per each
+variables_scripts = {}
+
 with open(log) as file:
     for line in file:
         # remove double quotes wrapping dictionary and also newline
@@ -28,6 +31,16 @@ with open(log) as file:
     # iterate through log and for reads, find corresponding write
     for i in range(0, len(logs)):
         log = logs[i]
+        # check if WRITE (if so, add to list of which vars get written by which scripts)
+        if ( log.get('OpType') == "WRITE" ): # script writes to some var/obj
+            curr = (log.get('PropName'), log.get('ParentId'))
+            if ( curr in variables_scripts ): # variable already has been written
+                if ( log.get('script') in variables_scripts[curr] ): # script has written to it before!
+                    pass
+                else:
+                    variables_scripts[curr].append( log.get('script') )
+            else: # new variable
+                variables_scripts[curr] = [log.get('script')]
         # check if READ (can be object with ids, or non-object)
         is_object = 0
         is_val = 0
@@ -73,7 +86,7 @@ with open(log) as file:
 print >> sys.stderr, dependencies
 print >> sys.stderr, dependency_edges
 print >> sys.stderr, variables
-
+print >> sys.stderr, variables_scripts
 print >> sys.stderr, "\n\n\n\n"
 
 #pipe this output to dot
