@@ -35,9 +35,7 @@ with open(log) as file:
         if ( log.get('OpType') == "WRITE" ): # script writes to some var/obj
             curr = (log.get('PropName'), log.get('ParentId'))
             if ( curr in variables_scripts ): # variable already has been written
-                if ( log.get('script') in variables_scripts[curr] ): # script has written to it before!
-                    pass
-                else:
+                if ( log.get('script') not in variables_scripts[curr] ): # script has written to it before!
                     variables_scripts[curr].append( log.get('script') )
             else: # new variable
                 variables_scripts[curr] = [log.get('script')]
@@ -69,8 +67,9 @@ with open(log) as file:
                     # this is the corresponding write
                     dependency_edges.append((logs[n].get('script'), log.get('script')))
                     if ( logs[n].get('script') in dependencies ):
-                        # write is already a dependency, so add this read
-                        dependencies.get(logs[n].get('script')).append(log.get('script'))
+                        # write is already a dependency
+                        if ( log.get('script') not in dependencies[logs[n].get('script')] ): # add this read
+                            dependencies.get(logs[n].get('script')).append(log.get('script'))
                     else:
                         dependencies[logs[n].get('script')] = [log.get('script')]
                     break;
