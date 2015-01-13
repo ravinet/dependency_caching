@@ -35,6 +35,9 @@ for filename in files:
             # remove transfer-encoding chunked header from original file since we are unchunking
             os.system( "removeheader rewritten/" + filename + " Transfer-Encoding" )
         if ( "not" in out ): # html or javascript but not gzipped
+            if ( "javascript" in out ):
+                os.system('nodejs rewrite.js rewritten/tempfile rewritten/retempfile')
+                os.system('mv rewritten/retempfile rewritten/tempfile')
             # REWRITE TEMPFILE HERE
 
             if ( ("index" in out) and ("html" in out) ): # top-level html file so add the handler in-line script
@@ -55,7 +58,9 @@ for filename in files:
             os.system( "changeheader rewritten/" + filename + " Content-Length " + str(size) )
         else: # gzipped
             os.system("gzip -d -c rewritten/tempfile > rewritten/plaintext")
-
+            if ( "javascript" in out ):
+                os.system('nodejs rewrite.js rewritten/plaintext rewritten/retempfile')
+                os.system('mv rewritten/retempfile rewritten/plaintext')
             # REWRITE PLAINTEXT HERE
 
             if ( ("index" in out) and ("html" in out) ): # top-level html file so add the handler in-line script
