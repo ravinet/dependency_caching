@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import re, sys, urlparse
+import re, sys, urlparse, subprocess
 
 host = sys.argv[2]
+log_file = sys.argv[3]
 interesting_uuids = []#[176, 173, 167, 160, 143, 142, 139, 138, 136, 135, 0]
 # if (uuid(url) >= 40 and uuid(url) <= 117) or (uuid(parent) >= 40 and uuid(parent) <= 117): continue
 
@@ -106,4 +107,10 @@ for url, parent in zipped:
 for iuuid in interesting_uuids:
   print "{}[color=red,fontcolor=red];".format(iuuid)
 
+command = "python process_window_log.py " + log_file
+proc = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
+(out, err) = proc.communicate()
+return_code = proc.returncode
+#out = out.strip("\n")
+print out
 print "}"
