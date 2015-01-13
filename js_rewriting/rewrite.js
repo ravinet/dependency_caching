@@ -6,10 +6,19 @@ escodegen = require('escodegen');
 
 fs = require('fs');
 
-//var code = "l=1; e = {key: l}; f = 2; var h = 1; z = function m(a, b){ m = 2; e.x.y = 8; a=1; k = 2; q =function() { b = 2;l = 2}; var q = function x() {a = 1; k =1; x = 2;};}"
 var code = fs.readFileSync(process.argv[2]);
 var ast = esprima.parse(code, {loc: true});
 console.log(escodegen.generate(ast));
+
+var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","expression":{"type":"CallExpression","callee":{"type":"FunctionExpression","id":null,"params":[],"defaults":[],"body":{"type":"BlockStatement","body":[]},"rest":null,"generator":false,"expression":false},"arguments":[]}}]};
+
+// take body from the initial source code and put into our new anonymous function
+var body = ast.body;
+var window_proxy = {"type": "VariableDeclaration","declarations": [{"type": "VariableDeclarator","id": {"type": "Identifier","name": "window"},"init": {"type": "NewExpression","callee": {"type": "Identifier","name": "Proxy"},"arguments": [{"type": "Identifier","name": "_window"},{"type": "Identifier","name": "window_handler"}]}}],"kind": "var"};
+body.splice(0, 0, window_proxy);
+proxy_wrapper.body[0].expression.callee.body.body = body;
+
+ast = proxy_wrapper;
 
 var scopeChain = []; // contains identifiers 
 var assignmentChain = [];
