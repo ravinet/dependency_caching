@@ -19,7 +19,6 @@ estraverse.traverse(ast, {
   leave: leave
 });
 
-console.log(ast);
 console.log(escodegen.generate(ast));
 fs.writeFileSync(process.argv[3], escodegen.generate(ast));
 
@@ -73,9 +72,22 @@ function enter(node){
     }
   }
   
-  if(node.type == 'ObjectExpression') {
-
+  //add makeProxy to new expressions and object expressions
+  // the "proxied" hack is to avoid recursion
+  if(node.type === 'NewExpression' && node.proxied == null) {
+    newexpression = {"type": node.type, "callee": node.callee, "arguments":node.arguments, "proxied":true};
+    node.type = "CallExpression";
+    node.callee = {"type": "Identifier", "name": "makeProxy" };
+    node.arguments = [newexpression];
   }
+
+  if(node.type === 'ObjectExpression' && node.proxied == null) {
+    objexpression = {"type": node.type, "properties": node.properties, "proxied":true};
+    node.type = "CallExpression";
+    node.callee = {"type": "Identifier", "name": "makeProxy" };
+    node.arguments = [objexpression];
+  }
+
 }
 
 function leave(node){
