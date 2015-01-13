@@ -1,0 +1,19 @@
+window.l = 1;
+window.e = { key: l };
+window.f = 2;
+window.h = 1;
+window.z = function m(a, b) {
+    m = 2;
+    window.e.x.y = 8;
+    a = 1;
+    window.k = 2;
+    q = function () {
+        b = 2;
+        window.l = 2;
+    };
+    var q = function x() {
+        a = 1;
+        window.k = 1;
+        x = 2;
+    };
+};

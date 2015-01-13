@@ -1,4 +1,10 @@
-var code = "l=1; e = {}; f = 2; var h = 1; z = function m(a, b){ m = 2; e.x.y = 8; a=1; k = 2; q =function() { b = 2;l = 2}; var q = function x() {a = 1; k =1; x = 2;};}"
+esprima = require('esprima');
+estraverse = require('estraverse');
+escodegen = require('escodegen');
+fs = require('fs');
+
+//var code = "l=1; e = {key: l}; f = 2; var h = 1; z = function m(a, b){ m = 2; e.x.y = 8; a=1; k = 2; q =function() { b = 2;l = 2}; var q = function x() {a = 1; k =1; x = 2;};}"
+var code = fs.readFileSync(process.argv[2]);
 var ast = esprima.parse(code, {loc: true});
 console.log(escodegen.generate(ast));
 
@@ -12,6 +18,7 @@ estraverse.traverse(ast, {
 
 console.log(ast);
 console.log(escodegen.generate(ast));
+fs.writeFileSync(process.argv[3], escodegen.generate(ast));
 
 function createsNewScope(node){
   return node.type === 'FunctionDeclaration' ||
@@ -61,6 +68,10 @@ function enter(node){
     } else {
       currentAssignment.push(node);
     }
+  }
+  
+  if(node.type == 'ObjectExpression') {
+
   }
 }
 
