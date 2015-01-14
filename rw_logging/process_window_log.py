@@ -139,11 +139,11 @@ print >> sys.stderr, final_dependencies
 print >> sys.stderr, "\n\n"
 
 #pipe this output to dot
-print "digraph G {"
-print "ratio=compress;"
-print "concentrate=true;"
+#print "digraph G {"
+#print "ratio=compress;"
+#print "concentrate=true;"
 
 for (a,b) in final_dependencies:
   print "\"" + a + "\" -> \"" + b + "\";"
 
-print "}"
+#print "}"
