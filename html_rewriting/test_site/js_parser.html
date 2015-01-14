@@ -1,6 +1,6 @@
 <html>
 <head>
-<!--<script src="esprima.js"></script> -->
+<script src="~/node_modules/esprima/esprima.js"></script>
 <script src="escodegen.browser.js"></script>
 <!--<script src="estraverse.js"></script>-->
 <script>
@@ -23,7 +23,8 @@ function lit_to_exp(node, value){
   node.right = {"type" : "Literal",
                 "value" : right_value,
                 "raw" : String(right_value)};
-  //node.right = esprima.parse("(function() {return 7;}());").body[0].expression;
+  node.right = esprima.parse("(function() {return 7;}());").body[0].expression;
+  console.log('hi');
 }
 
 function lit_to_func(node, value) {

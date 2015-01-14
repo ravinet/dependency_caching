@@ -175,3 +175,27 @@ Number Slack nodes: 18
 Percentage Slack nodes: 0.514285714286
 
 Average Slack: 1.11111111111
+
+www.cnn.com
+
+Length of Critical Path: 7
+
+Number of paths with critical path length: 1
+
+Number Slack nodes: 275
+
+Percentage Slack nodes: 0.975177304965
+
+Average Slack: 4.02181818182
+
+http://www.cnn.com/2014/11/19/world/americas/honduras-beauty-queen-dead/index.html?hpt=wo_c2
+
+Length of Critical Path: 4
+
+Number of paths with critical path length: 5
+
+Number Slack nodes: 84
+
+Percentage Slack nodes: 0.865979381443
+
+Average Slack: 1.47619047619
