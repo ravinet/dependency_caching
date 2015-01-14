@@ -13,16 +13,13 @@ window_proxy = {"type": "VariableDeclaration","declarations": [{"type": "Variabl
 
 document_proxy = {"type": "VariableDeclaration","declarations": [{"type": "VariableDeclarator","id": {"type": "Identifier","name": "document"},"init": {"type": "NewExpression","callee": {"type": "Identifier","name": "Proxy"}, "arguments": [{"type": "Identifier","name": "_document"},{"type": "Identifier","name": "document_handler"}]}}],"kind": "var"}
 
-def convert_to_ascii(html_body):
-	print html_body
-
 for script in soup.find_all('script'):
 	soup_string = str(script.string)
 	body = pyesprima.parse(soup_string)['body']
 	body.insert(0,document_proxy)
 	body.insert(0, window_proxy)
 	proxy_wrapper['body'][0]['expression']['callee']['body']['body'] = body
-	proc = subprocess.Popen(['phantomjs run_parser.js '+ str(proxy_wrapper)],stdout = subprocess.PIPE, shell=True)
+	proc = subprocess.Popen(['node ../../rewrite.js '+ str(proxy_wrapper)],stdout = subprocess.PIPE, shell=True)
 	(out, err) = proc.communicate()
 	script.string = out
 
