@@ -10,6 +10,14 @@ var code = fs.readFileSync(process.argv[2]);
 var ast = esprima.parse(code, {loc: true});
 console.log(escodegen.generate(ast));
 
+var scopeChain = []; // contains identifiers 
+var assignmentChain = [];
+
+estraverse.traverse(ast, {
+  enter: enter,
+  leave: leave
+});
+
 var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","expression":{"type":"CallExpression","callee":{"type":"FunctionExpression","id":null,"params":[],"defaults":[],"body":{"type":"BlockStatement","body":[]},"rest":null,"generator":false,"expression":false},"arguments":[]}}]};
 
 // take body from the initial source code and put into our new anonymous function
@@ -19,14 +27,6 @@ body.splice(0, 0, window_proxy);
 proxy_wrapper.body[0].expression.callee.body.body = body;
 
 ast = proxy_wrapper;
-
-var scopeChain = []; // contains identifiers 
-var assignmentChain = [];
-
-estraverse.traverse(ast, {
-  enter: enter,
-  leave: leave
-});
 
 console.log(escodegen.generate(ast));
 fs.writeFileSync(process.argv[3], escodegen.generate(ast));
