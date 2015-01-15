@@ -4,8 +4,10 @@ import subprocess
 
 # recorded folder to be copied and rewritten
 recorded_folder = sys.argv[1]
+rewritten_folder = sys.argv[2]
 
-# folder to store rewritten protobufs
+# temp folder to store rewritten protobufs
+os.system("rm -rf rewritten")
 os.system( "cp -r " + recorded_folder + " rewritten" )
 
 files = os.listdir("rewritten")
@@ -88,6 +90,8 @@ for filename in files:
             os.system("rm rewritten/finalfile")
     # delete original tempfile
     os.system("rm rewritten/tempfile")
+
+os.system("mv rewritten " + rewritten_folder)
 
 if ( not wrote_top_html ): # we never wrote a top level HTML file
     print "NEVER WROTE TOP LEVEL HTML FILE WITH PROXY HANDLERS!!!"
