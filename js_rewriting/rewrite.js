@@ -77,7 +77,7 @@ function enter(node){
     if (scopeChain.length === 1) {
       currentScope.push(memberExpToIdentifier(node.left));
     } else {
-      currentAssignment.push(node);
+      currentAssignment.push(node.left);
     }
   }
   
@@ -91,6 +91,12 @@ function enter(node){
   }
 
   if(node.type === 'ObjectExpression' && node.proxied == null) {
+   for (var i = 0; i < node.properties.length; i++){
+      if (node.properties[i].value.type !== "Literal") {
+        console.log(node.properties[i].value);
+        currentAssignment.push(node.properties[i].value);
+      }
+    }
     objexpression = {"type": node.type, "properties": node.properties, "proxied":true};
     node.type = "CallExpression";
     node.callee = {"type": "Identifier", "name": "makeProxy" };
@@ -132,12 +138,14 @@ function printScope(scope, node){
 function checkForGlobals(assignments, scopeChain){
   for (var i = 0; i < assignments.length; i++){
     var assignment = assignments[i];
-    var varname = memberExpToIdentifier(assignment.left).name;
+    var varname = memberExpToIdentifier(assignment).name;
     if (!isVarDefined(varname, scopeChain)){
-      console.log('Global accessed', varname, 
+      /*
+        console.log('Global accessed', varname, 
         'on line', assignment.loc.start.line, ':',
         assignment.loc.start.column);
-      rewriteAssignment(assignment.left);
+      */
+      rewriteAssignment(assignment);
     }
   }
 }
