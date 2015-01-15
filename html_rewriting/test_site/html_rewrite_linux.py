@@ -20,7 +20,7 @@ for script in soup.find_all('script'):
 
 		temp_file2 = open(temp_file_rewrite, "w+")
 
-		proc = subprocess.call(['nodejs ../../js_rewriting/rewrite.js %s %s' % (temp_file_name, temp_file_rewrite)],stdout = subprocess.PIPE, shell=True)
+		proc = subprocess.call(['nodejs rewrite.js %s %s' % (temp_file_name, temp_file_rewrite)],stdout = subprocess.PIPE, shell=True)
 		script.string = temp_file2.read()
 		
 		os.remove(temp_file.name)
