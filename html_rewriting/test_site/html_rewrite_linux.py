@@ -4,7 +4,7 @@ import sys
 import os
 
 html_file = sys.argv[1]
-new_html_file = html_file.split('.')[0] + '_rewrite.html'
+new_html_file = sys.argv[2]
 
 temp_file_name = "temp.js"
 temp_file_rewrite = "temp_rewrite.js"
