@@ -2,11 +2,11 @@
 function get_caller(caller){
     var script_attributes = "";
     if ( caller == null ) {
-        script_attributes = "event handler or callback";
+        script_attributes = "event_handler_or_callback";
     } else {
         var attr = caller.attributes;
         if( attr.length == 0 ) {
-            script_attributes = "inline script";
+            script_attributes = "inline_script";
         } else {
             for(j=0; j < attr.length; j++) {
                 if( attr[j].name == "src" ) {
