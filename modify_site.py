@@ -40,11 +40,12 @@ for filename in files:
             if ( "javascript" in out ):
                 os.system('nodejs rewrite.js rewritten/tempfile rewritten/retempfile')
                 os.system('mv rewritten/retempfile rewritten/tempfile')
-            # REWRITE TEMPFILE HERE
 
             if ( ("index" in out) and ("html" in out) ): # top-level html file so add the handler in-line script
                if ( wrote_top_html ): # already thought we wrote top html
                    print "MULTIPLE FILES SEEM TO BE TOP LEVEL HTML (check protototext)"
+               os.system('python rewrite_html_linux.py rewritten/tempfile rewritten/htmltempfile')
+               os.system('mv rewritten/htmltempfile rewritten/tempfile')
                os.system('cp inline.html rewritten/prependtempfile')
                os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
                os.system('mv rewritten/prependtempfile rewritten/tempfile')
@@ -63,11 +64,12 @@ for filename in files:
             if ( "javascript" in out ):
                 os.system('nodejs rewrite.js rewritten/plaintext rewritten/retempfile')
                 os.system('mv rewritten/retempfile rewritten/plaintext')
-            # REWRITE PLAINTEXT HERE
 
             if ( ("index" in out) and ("html" in out) ): # top-level html file so add the handler in-line script
                 if ( wrote_top_html ): # already thought we wrote top html
                     print "MULTIPLE FILES SEEM TO BE TOP LEVEL HTML (check protototext)"
+                os.system('python rewrite_html_linux.py rewritten/plaintext rewritten/htmltempfile')
+                os.system('mv rewritten/htmltempfile rewritten/plaintext')
                 os.system('cp inline.html rewritten/prependtempfile')
                 os.system('cat rewritten/plaintext >> rewritten/prependtempfile')
                 os.system('mv rewritten/prependtempfile rewritten/plaintext')
