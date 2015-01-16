@@ -1,8 +1,11 @@
 // requires node packages listed below
 // example: 'npm install esprima'
+//
+// TODO: var declaration repeat normal assignment stuff
 esprima = require('esprima');
 estraverse = require('estraverse');
 escodegen = require('escodegen');
+util = require('util');
 
 fs = require('fs');
 
@@ -29,7 +32,8 @@ proxy_wrapper.body[0].expression.callee.body.body = body;
 ast = proxy_wrapper;
 
 console.log(escodegen.generate(ast));
-fs.writeFileSync(process.argv[3], escodegen.generate(ast));
+outname = process.argv[3] ? process.argv[3] : "out";
+fs.writeFileSync(outname, escodegen.generate(ast));
 
 function createsNewScope(node){
   return node.type === 'FunctionDeclaration' ||
@@ -39,19 +43,27 @@ function createsNewScope(node){
 
 function enter(node){
   if (createsNewScope(node)){
-    scopeChain.push([]);
+    if (scopeChain.length > 0) {
+      scopeChain.push([{name:"this"}, {name:"arguments"}]);
+    } else {
+      scopeChain.push([]);
+    }
     assignmentChain.push([]);
     var currentScope = scopeChain[scopeChain.length - 1];
     if(node.type !== 'Program') {
       //add function args
       if (node.params !== null) {
         for (var i in node.params) {
-          currentScope.push(node.params[i]);
+          if (isObj(i)) {
+            currentScope.push(node.params[i]);
+          }
         }
       }
       //add function name
       if (node.id !== null && node.id.name !== null) {
-        currentScope.push(node.id);
+        if (isObj(node.id)) {
+          currentScope.push(node.id);
+        }
       }
     }
   }
@@ -74,26 +86,61 @@ function enter(node){
 
   if (node.type === 'AssignmentExpression'){
     // if declared in global scope it's a global var
-    if (scopeChain.length === 1) {
-      currentScope.push(memberExpToIdentifier(node.left));
-    } else {
-      currentAssignment.push(node.left);
+    if (isObj(node.left)) {
+      if (scopeChain.length === 1) {
+        currentScope.push(memberExpToIdentifier(node.left));
+      } else {
+        currentAssignment.push(node.left);
+      }
+    }
+    if (isObj(node.right)){
+      currentAssignment.push(node.right);
     }
   }
-  
-  //add makeProxy to new expressions and object expressions
+
+  if (node.type === "ConditionalExpression") {
+    if (isObj(node.test)) {
+      currentAssignment.push(node.test);
+    }
+    if (isObj(node.consequent)) {
+      currentAssignment.push(node.consequent);
+    }
+    if (isObj(node.alternate)) {
+      currentAssignment.push(node.alternate);
+    }
+  }
+
+  if (node.type === "LogicalExpression") {
+    if (isObj(node.left)) {
+      currentAssignment.push(node.left);
+    }
+    if (isObj(node.right)) {
+      currentAssignment.push(node.right);
+    }
+  }
+
+  if (node.type === "CallExpression") {
+    for (var i = 0; i < node.arguments.length; i++){
+      if (isObj(node.arguments[i])) {
+        currentAssignment.push(node.arguments[i]);
+      }
+    }
+    if (isObj(node.callee)) {
+      currentAssignment.push(node.callee);
+    }
+  }
   // the "proxied" hack is to avoid recursion
-  if(node.type === 'NewExpression' && node.proxied == null) {
+  if (node.type === 'NewExpression' && node.proxied == null) {
     newexpression = {"type": node.type, "callee": node.callee, "arguments":node.arguments, "proxied":true};
     node.type = "CallExpression";
     node.callee = {"type": "Identifier", "name": "makeProxy" };
     node.arguments = [newexpression];
   }
 
-  if(node.type === 'ObjectExpression' && node.proxied == null) {
+  // the "proxied" hack is to avoid recursion
+  if (node.type === 'ObjectExpression' && node.proxied == null) {
    for (var i = 0; i < node.properties.length; i++){
-      if (node.properties[i].value.type !== "Literal") {
-        console.log(node.properties[i].value);
+      if (isObj(node.properties[i].value)) {
         currentAssignment.push(node.properties[i].value);
       }
     }
@@ -102,7 +149,23 @@ function enter(node){
     node.callee = {"type": "Identifier", "name": "makeProxy" };
     node.arguments = [objexpression];
   }
+}
 
+function isObj(node) {
+  while (node.type === "MemberExpression") {
+    node = node.object; 
+  }
+  return node.type === "Identifier";
+  /*
+  if( (node.type === "MemberExpression" && node.object.type !== "ThisExpression") && 
+    (node.type === "MemberExpression" && node.object.type !== "NewExpression") && 
+    (node.type === "MemberExpression" && node.object.type !== "CallExpression") ||
+    node.type === "Identifier") {
+    console.log("ACCESSED");
+    console.log(util.inspect(node, {depth:null}));
+    return true;
+  };
+  */
 }
 
 function leave(node){
@@ -156,7 +219,9 @@ function rewriteAssignment(assignment) {
 }
 
 function memberExpToIdentifier(node) {
+  //console.log(node);
   while(node.type !== "Identifier") {
+    //console.log(node);
     node = node.object;
   }
   return node;  
@@ -165,7 +230,7 @@ function memberExpToIdentifier(node) {
 function scopeToVarnames(scope) {
   var output = [];
   for (var i in scope) {
-    output.push(scope[i].name)
+    output.push(scope[i].name);
   }
   return output;
 }
