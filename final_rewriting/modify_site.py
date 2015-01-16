@@ -42,7 +42,7 @@ for filename in files:
                 os.system('mv rewritten/retempfile rewritten/tempfile')
 
             if ( "html" in out ): # rewrite all inline js in html files
-               os.system('python rewrite_html_linux.py rewritten/tempfile rewritten/htmltempfile')
+               os.system('python html_rewrite_linux.py rewritten/tempfile rewritten/htmltempfile')
                os.system('mv rewritten/htmltempfile rewritten/tempfile')
 
             if ( ("index" in out) and ("html" in out) ): # top-level html file so add the handler in-line script
@@ -68,7 +68,7 @@ for filename in files:
                 os.system('mv rewritten/retempfile rewritten/plaintext')
 
             if ( "html" in out ): # rewrite all inline js in html files
-                os.system('python rewrite_html_linux.py rewritten/plaintext rewritten/htmltempfile')
+                os.system('python html_rewrite_linux.py rewritten/plaintext rewritten/htmltempfile')
                 os.system('mv rewritten/htmltempfile rewritten/plaintext')
 
             if ( ("index" in out) and ("html" in out) ): # top-level html file so add the handler in-line script
