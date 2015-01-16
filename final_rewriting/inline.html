@@ -63,6 +63,7 @@ var window_handler = {
                              switch( typeof( value ) ){
                                  case "number":
                                  case "boolean":
+                                 case "function":
                                  case "string":
                                      old_id = "null";
                                  case "object":
@@ -94,16 +95,7 @@ var window_handler = {
                                  case "number":
                                  case "boolean":
                                  case "string":
-                                     return value;
                                  case "object":
-                                     if ( value == null ){
-                                         return value;
-                                     }
-                                     if ( value instanceof Date || value instanceof RegExp ||
-                                          value instanceof Array || value instanceof Number ||
-                                          value instanceof Node || value instanceof Element ){
-                                         return value;
-                                     }
                                      return value;
                                  case "function":
                                      if(name in windowBindCache){
@@ -124,6 +116,7 @@ var window_handler = {
                                  case "number":
                                  case "boolean":
                                  case "string":
+                                 case "function":
                                      new_id = "null";
                                  case "object":
                                      if ( value == null ){
