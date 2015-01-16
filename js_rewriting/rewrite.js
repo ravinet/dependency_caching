@@ -54,7 +54,7 @@ function enter(node){
       //add function args
       if (node.params !== null) {
         for (var i in node.params) {
-          if (isObj(i)) {
+          if (isObj(node.params[i])) {
             currentScope.push(node.params[i]);
           }
         }
@@ -155,7 +155,9 @@ function isObj(node) {
   while (node.type === "MemberExpression") {
     node = node.object; 
   }
-  return node.type === "Identifier";
+  if (node.type === "Identifier" && node.name !== "console") {
+    return true;
+  }
   /*
   if( (node.type === "MemberExpression" && node.object.type !== "ThisExpression") && 
     (node.type === "MemberExpression" && node.object.type !== "NewExpression") && 
