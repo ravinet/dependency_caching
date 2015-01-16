@@ -58,6 +58,7 @@ var window_handler = {
                              var parent_id;
                              var old_id;
                              var new_id = "null";
+                             var caller = get_caller(document.currentScript);
 
                              switch( typeof( value ) ){
                                  case "number":
