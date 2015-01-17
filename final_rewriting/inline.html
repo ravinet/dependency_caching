@@ -1,4 +1,16 @@
-<script "text/javascript">
+<script>
+var js_rewriting_logs = [];
+window.onload = function(){
+    xmlhttp=new XMLHttpRequest();
+    xmlhttp.open("POST","http://dallas.csail.mit.edu",true);
+    var complete_log = "BEGIN LOG:\n";
+    for (i=0; i < window.js_rewriting_logs.length; i++ ){
+        complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
+    }
+    complete_log = complete_log + "END LOG (TOTAL: " + window.js_rewriting_logs.length + ")";
+    xmlhttp.send(complete_log);
+}
+
 function get_caller(caller){
     var script_attributes = "";
     if ( caller == null ) {
@@ -40,7 +52,9 @@ window.alert = function(arg){
                    var log_read = {'OpType': 'READ', 'ParentId': 'window', 'PropName': 'screen', 'NewValId': 'null', 'OldValId': 'null', 'script': caller};
                    var log_write = {'OpType': 'WRITE', 'ParentId': 'window', 'PropName': 'screen', 'NewValId': 'null', 'OldValId': 'null', 'script': caller};
                    console.log( JSON.stringify( log_read ) );
+                   window.js_rewriting_logs.push(JSON.stringify(log_read));
                    console.log( JSON.stringify( log_write ) );
+                   window.js_rewriting_logs.push(JSON.stringify(log_write));
                    var retVal = _alert.call(this, arg);
                    return retVal;
                };
@@ -89,6 +103,7 @@ var window_handler = {
                              if ( name != "_id" ){
                                  var log = {'OpType': 'READ', 'ParentId': parent_id, 'PropName': name, 'NewValId': new_id, 'OldValId': old_id, 'script': caller};
                                  console.log( JSON.stringify( log ) );
+                                 window.js_rewriting_logs.push(JSON.stringify(log));
                              }
 
                              switch( typeof( value ) ){
@@ -156,6 +171,7 @@ var window_handler = {
                              if ( name != "_id" ){
                                  var log = {'OpType': 'WRITE', 'ParentId': parent_id, 'PropName': name, 'NewValId': new_id, 'OldValId': old_id, 'script': caller}
                                  console.log( JSON.stringify( log ) );
+                                 window.js_rewriting_logs.push(JSON.stringify(log));
                              }
                              base[name] = value;
                              if(name in windowBindCache){
