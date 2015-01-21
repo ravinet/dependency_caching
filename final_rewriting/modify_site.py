@@ -18,7 +18,6 @@ with open("inline.html") as handler:
     for line in handler:
         proxy_inline += line
 
-wrote_top_html = 0
 for filename in files:
     print filename
 
@@ -44,14 +43,9 @@ for filename in files:
             if ( "html" in out ): # rewrite all inline js in html files
                os.system('python html_rewrite_linux.py rewritten/tempfile rewritten/htmltempfile')
                os.system('mv rewritten/htmltempfile rewritten/tempfile')
-
-            if ( ("index" in out) and ("html" in out) ): # top-level html file so add the handler in-line script
-               if ( wrote_top_html ): # already thought we wrote top html
-                   print "MULTIPLE FILES SEEM TO BE TOP LEVEL HTML (check protototext)"
                os.system('cp inline.html rewritten/prependtempfile')
                os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
                os.system('mv rewritten/prependtempfile rewritten/tempfile')
-               wrote_top_html = 1
 
             # get new length of response
             size = os.path.getsize('rewritten/tempfile')
@@ -70,14 +64,9 @@ for filename in files:
             if ( "html" in out ): # rewrite all inline js in html files
                 os.system('python html_rewrite_linux.py rewritten/plaintext rewritten/htmltempfile')
                 os.system('mv rewritten/htmltempfile rewritten/plaintext')
-
-            if ( ("index" in out) and ("html" in out) ): # top-level html file so add the handler in-line script
-                if ( wrote_top_html ): # already thought we wrote top html
-                    print "MULTIPLE FILES SEEM TO BE TOP LEVEL HTML (check protototext)"
                 os.system('cp inline.html rewritten/prependtempfile')
                 os.system('cat rewritten/plaintext >> rewritten/prependtempfile')
                 os.system('mv rewritten/prependtempfile rewritten/plaintext')
-                wrote_top_html = 1
 
             # after modifying plaintext, gzip it again (gzipped file is 'finalfile')
             os.system( "gzip -c rewritten/plaintext > rewritten/finalfile" )
@@ -98,6 +87,3 @@ for filename in files:
     os.system("rm rewritten/tempfile")
 
 os.system("mv rewritten " + rewritten_folder)
-
-if ( not wrote_top_html ): # we never wrote a top level HTML file
-    print "NEVER WROTE TOP LEVEL HTML FILE WITH PROXY HANDLERS!!!"
