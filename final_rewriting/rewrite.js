@@ -44,7 +44,17 @@ function createsNewScope(node){
 function enter(node){
   if (createsNewScope(node)){
     if (scopeChain.length > 0) {
-      scopeChain.push([{name:"this"}, {name:"arguments"}]);
+      if (scopeChain.length === 1 && node.type === 'FunctionDeclaration') {
+        node.type = "ExpressionStatement";
+        var assignmentexpr = {"type":"AssignmentExpression", "operator":"=", "left":node.id, "right":node};
+        assignmentexpr.right = {"type":"FunctionExpression", "id":null, "params":node.params, "defaults":node.defaults,
+          "body":node.body, "rest":node.rest, "generator":node.generator, "expression":node.expression};
+        node.expression = assignmentexpr;
+        //console.log(util.inspect(node, {depth:null}));
+        return;
+      } else {
+        scopeChain.push([{name:"this"}, {name:"arguments"}]);
+      }
     } else {
       scopeChain.push([]);
     }
