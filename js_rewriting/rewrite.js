@@ -72,6 +72,7 @@ function enter(node){
       //add function name
       if (node.id !== null && node.id.name !== null) {
         if (isObj(node.id)) {
+          scopeChain[scopeChain.length - 2].push(node.id); // add function name to previous scope as well
           currentScope.push(node.id);
         }
       }
