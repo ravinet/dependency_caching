@@ -47,7 +47,7 @@ function enter(node){
       if (scopeChain.length === 1 && node.type === 'FunctionDeclaration') {
         node.type = "ExpressionStatement";
         var assignmentexpr = {"type":"AssignmentExpression", "operator":"=", "left":node.id, "right":node};
-        assignmentexpr.right = {"type":"FunctionExpression", "id":null, "params":node.params, "defaults":node.defaults,
+        assignmentexpr.right = {"type":"FunctionExpression", "id":null, "params":node.params, "defaults":node.defaults, 
           "body":node.body, "rest":node.rest, "generator":node.generator, "expression":node.expression};
         node.expression = assignmentexpr;
         //console.log(util.inspect(node, {depth:null}));
@@ -72,6 +72,7 @@ function enter(node){
       //add function name
       if (node.id !== null && node.id.name !== null) {
         if (isObj(node.id)) {
+          scopeChain[scopeChain.length - 2].push(node.id); // add function name to previous scope as well
           currentScope.push(node.id);
         }
       }
