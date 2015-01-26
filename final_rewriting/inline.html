@@ -1,7 +1,6 @@
 <script>
 if ( _window != undefined ) {
 } else {
-    console.log("REDEFINE WINDOW");
     var js_rewriting_logs = [];
     window.onload = function(){
         xmlhttp=new XMLHttpRequest();
@@ -58,12 +57,11 @@ if ( _window != undefined ) {
                        window.js_rewriting_logs.push(JSON.stringify(log_read));
                        console.log( JSON.stringify( log_write ) );
                        window.js_rewriting_logs.push(JSON.stringify(log_write));
-                       var retVal = _alert.call(this, arg);
+                       var retVal = _alert.call(this._base, arg);
                        return retVal;
                    };
 
     var _window = window;
-    var windowBindCache = {};
 
     // counter for proxies returned by makeProxy
     window.proxy_counter = 0;
@@ -72,8 +70,8 @@ if ( _window != undefined ) {
     var window_handler = {
                       "get": function(base, name){
                                  var value = base[name];
-                                 var parent_id;
-                                 var old_id;
+                                 var parent_id = "null";
+                                 var old_id = "null";
                                  var new_id = "null";
                                  var caller = get_caller(document.currentScript);
 
@@ -83,6 +81,7 @@ if ( _window != undefined ) {
                                      case "function":
                                      case "string":
                                          old_id = "null";
+                                         break;
                                      case "object":
                                          if ( value == null ){
                                              old_id = "null";
@@ -108,34 +107,21 @@ if ( _window != undefined ) {
                                      console.log( JSON.stringify( log ) );
                                      window.js_rewriting_logs.push(JSON.stringify(log));
                                  }
-
-                                 switch( typeof( value ) ){
-                                     case "number":
-                                     case "boolean":
-                                     case "string":
-                                     case "object":
-                                         return value;
-                                     case "function":
-                                         if(name in windowBindCache){
-                                             return windowBindCache[name];
-                                         }
-                                         value = value.bind(base);
-                                         windowBindCache[name] = value;
-                                         return value;
-                                 }
+                                 return value;
                              },
                       "set": function(base, name, value){
                                  var caller = get_caller(document.currentScript);
                                  var prev = base[name];
-                                 var parent_id;
-                                 var new_id;
-                                 var old_id;
+                                 var parent_id = "null";
+                                 var new_id = "null";
+                                 var old_id = "null";
                                  switch( typeof( value ) ){
                                      case "number":
                                      case "boolean":
                                      case "string":
                                      case "function":
                                          new_id = "null";
+                                         break;
                                      case "object":
                                          if ( value == null ){
                                              new_id = "null";
@@ -150,8 +136,10 @@ if ( _window != undefined ) {
                                  switch( typeof( prev ) ){
                                      case "number":
                                      case "boolean":
+                                     case "function":
                                      case "string":
                                          old_id = "null";
+                                         break;
                                      case "object":
                                          if ( prev == null ){
                                              old_id = "null";
@@ -177,15 +165,16 @@ if ( _window != undefined ) {
                                      window.js_rewriting_logs.push(JSON.stringify(log));
                                  }
                                  base[name] = value;
-                                 if(name in windowBindCache){
-                                     delete windowBindCache[name];
-                                 }
                              }
                      };
 
 
     function makeProxy(base){
         if ( typeof(base) == "object" ){
+            // already has id, so just return object
+            if ( base.hasOwnProperty("_id") ) {
+                return base;
+            }
             // not a user defined object, so return value
             if ( base instanceof Date || base instanceof RegExp ||
                  base instanceof Array || base instanceof Number ||
@@ -195,6 +184,7 @@ if ( _window != undefined ) {
 
             // user defined object, so return new proxy with new id
             var p = new Proxy( base, window_handler );
+            p._base = base;
             p._id = window.proxy_counter;
             window.proxy_counter++;
             return p;
