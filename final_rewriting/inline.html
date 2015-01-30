@@ -89,7 +89,10 @@ if ( _window != undefined ) {
                                          if ( value == null ){
                                              old_id = "null";
                                          } else {
-                                            old_id = value._id;
+                                             old_id = value._id;
+                                             if( typeof(old_id) == "object" ) { // quick hack---not sure how old_id can be an object!
+                                                 old_id = old_id._id;
+                                             }
                                              if ( old_id == undefined ){
                                                  old_id = "null";
                                              }
@@ -129,7 +132,10 @@ if ( _window != undefined ) {
                                          if ( value == null ){
                                              new_id = "null";
                                          } else {
-                                            new_id = value._id;
+                                             new_id = value._id;
+                                             if( typeof(new_id) == "object" ) { // quick hack---not sure how new_id can be an object!
+                                                 new_id = new_id._id;
+                                             }
                                              if ( new_id == undefined ){
                                                  new_id = "null";
                                              }
@@ -147,7 +153,10 @@ if ( _window != undefined ) {
                                          if ( prev == null ){
                                              old_id = "null";
                                          } else {
-                                            old_id = prev._id;
+                                             old_id = prev._id;
+                                             if( typeof(old_id) == "object" ) { // quick hack---not sure how old_id can be an object!
+                                                 old_id = old_id._id;
+                                             }
                                              if ( old_id == undefined ){
                                                  old_id = "null";
                                              }
@@ -158,6 +167,10 @@ if ( _window != undefined ) {
                                      parent_id = "window";
                                  } else {
                                      var parent_id = base._id;
+                                     if( typeof(parent_id) == "object" ) { // quick hack---not sure how parent_id can be an object!
+                                         parent_id = parent_id._id;
+                                      }
+
                                      if ( parent_id == undefined ){
                                          parent_id = "null";
                                      }
