@@ -71,8 +71,12 @@ if ( _window != undefined ) {
                       "get": function(base, name){
                                  var value = base[name];
                                  if (base == window && typeof(value) == "function") {
+                                     var old_proto = value.prototype;
                                      value = value.bind(_window);
+                                     // bind seems to not preserve prototype chain, so we restore it
+                                     value.prototype = old_proto;
                                  }
+
                                  var parent_id = "null";
                                  var old_id = "null";
                                  var new_id = "null";
