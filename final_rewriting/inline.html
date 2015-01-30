@@ -70,6 +70,9 @@ if ( _window != undefined ) {
     var window_handler = {
                       "get": function(base, name){
                                  var value = base[name];
+                                 if (base == window && typeof(value) == "function") {
+                                     value = value.bind(_window);
+                                 }
                                  var parent_id = "null";
                                  var old_id = "null";
                                  var new_id = "null";
