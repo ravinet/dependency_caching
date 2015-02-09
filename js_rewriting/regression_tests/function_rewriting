@@ -1,0 +1,15 @@
+function test(a) {
+    console.log(a);
+}
+var x = test();
+
+
+
+
+//(function () {
+//    var window = new Proxy(_window, window_handler);
+//    window.test = function (a) {
+//        console.log(a);
+//    };
+//    window.x = window.test();
+//}());

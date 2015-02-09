@@ -1,0 +1,18 @@
+function y() {
+    function x() {
+        c = 2;
+    }
+    var c = 4;
+}
+
+
+
+//(function () {
+//    var window = new Proxy(_window, window_handler);
+//    window.y = function () {
+//        function x() {
+//            c = 2;
+//        }
+//        var c = 4;
+//    };
+//}());
