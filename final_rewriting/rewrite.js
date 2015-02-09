@@ -166,7 +166,7 @@ function isObj(node) {
   while (node.type === "MemberExpression") {
     node = node.object; 
   }
-  if (node.type === "Identifier" && node.name !== "console") {
+  if (node.type === "Identifier" && node.name !== "console" && node.name !== "window") {
     return true;
   }
   /*
