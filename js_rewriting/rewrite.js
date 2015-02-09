@@ -15,7 +15,15 @@ console.log(escodegen.generate(ast));
 
 var scopeChain = []; // contains identifiers 
 var assignmentChain = [];
+var scopeHead = [];
+var vars = {};
+var currentChain = "Program";
 
+estraverse.traverse(ast, {
+  enter: preenter,
+  leave: preleave
+});
+/*
 estraverse.traverse(ast, {
   enter: enter,
   leave: leave
@@ -30,7 +38,7 @@ body.splice(0, 0, window_proxy);
 proxy_wrapper.body[0].expression.callee.body.body = body;
 
 ast = proxy_wrapper;
-
+*/
 console.log(escodegen.generate(ast));
 outname = process.argv[3] ? process.argv[3] : "out";
 fs.writeFileSync(outname, escodegen.generate(ast));
@@ -41,8 +49,43 @@ function createsNewScope(node){
     node.type === 'Program';
 }
 
-function enter(node){
+function preenter(node){
+  if (createsNewScope(node)) {
+    if (node.type !== "Program") {
+      if (node.id !== null && node.id.name !== null) {
+        if (isObj(node.id)) {
+          currentChain += "," + node.id.name;
+        }
+      }
+    }
+    vars[currentChain] = [];
+  }
+  var currentHead = scopeHead[scopeHead.length - 1];
+
+  if (node.type === 'VariableDeclarator'){
+    vars[currentChain].push(node.id.name);
+  }
+  console.log(vars);
+ 
+  if (node.type === "AssignmentExpression"){
+    // if declared in global scope it's a global var
+    if (isObj(node.left)) {
+      if (currentChain == "Program") {
+        vars[currentChain].push(memberExpToIdentifier(node.left).name);
+      }
+    }
+  }
+}
+function preleave(node) {
   if (createsNewScope(node)){
+    currentChain = currentChain.split(",");
+    currentChain.pop();
+    currentChain = currentChain.join();
+  }
+}
+
+function enter(node){
+  if (createsNewScope(node)) {
     if (scopeChain.length > 0) {
       if (scopeChain.length === 1 && node.type === 'FunctionDeclaration') {
         node.type = "ExpressionStatement";
@@ -50,7 +93,6 @@ function enter(node){
         assignmentexpr.right = {"type":"FunctionExpression", "id":null, "params":node.params, "defaults":node.defaults, 
           "body":node.body, "rest":node.rest, "generator":node.generator, "expression":node.expression};
         node.expression = assignmentexpr;
-        //console.log(util.inspect(node, {depth:null}));
         return;
       } else {
         scopeChain.push([{name:"this"}, {name:"arguments"}]);
