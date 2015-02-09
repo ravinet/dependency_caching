@@ -1,7 +1,6 @@
 // requires node packages listed below
 // example: 'npm install esprima'
 //
-// TODO: var declaration repeat normal assignment stuff
 esprima = require('esprima');
 estraverse = require('estraverse');
 escodegen = require('escodegen');
@@ -13,17 +12,20 @@ var code = fs.readFileSync(process.argv[2]);
 var ast = esprima.parse(code, {loc: true});
 console.log(escodegen.generate(ast));
 
-var scopeChain = []; // contains identifiers 
 var assignmentChain = [];
-var scopeHead = [];
 var vars = {};
 var currentChain = "Program";
+vars[currentChain] = [];
+var anonFuncCounter = 0;
 
 estraverse.traverse(ast, {
   enter: preenter,
   leave: preleave
 });
-/*
+
+currentChain = "Program";
+var anonFuncCounter = 0;
+
 estraverse.traverse(ast, {
   enter: enter,
   leave: leave
@@ -38,7 +40,6 @@ body.splice(0, 0, window_proxy);
 proxy_wrapper.body[0].expression.callee.body.body = body;
 
 ast = proxy_wrapper;
-*/
 console.log(escodegen.generate(ast));
 outname = process.argv[3] ? process.argv[3] : "out";
 fs.writeFileSync(outname, escodegen.generate(ast));
@@ -55,17 +56,30 @@ function preenter(node){
       if (node.id !== null && node.id.name !== null) {
         if (isObj(node.id)) {
           currentChain += "," + node.id.name;
+          vars[currentChain] = [];
+          //add function name
+          vars[previousChain(currentChain)].push(node.id.name);
+          vars[currentChain].push(node.id.name);
+        }
+      } else {
+        currentChain += "," + "anon" + anonFuncCounter++;
+        vars[currentChain] = [];
+      }
+
+      //add function args
+      if (node.params !== null) {
+        for (var i in node.params) {
+          if (isObj(node.params[i])) {
+            vars[currentChain].push(node.params[i].name);
+          }
         }
       }
     }
-    vars[currentChain] = [];
   }
-  var currentHead = scopeHead[scopeHead.length - 1];
 
   if (node.type === 'VariableDeclarator'){
     vars[currentChain].push(node.id.name);
   }
-  console.log(vars);
  
   if (node.type === "AssignmentExpression"){
     // if declared in global scope it's a global var
@@ -76,56 +90,50 @@ function preenter(node){
     }
   }
 }
+
 function preleave(node) {
   if (createsNewScope(node)){
-    currentChain = currentChain.split(",");
-    currentChain.pop();
-    currentChain = currentChain.join();
+    currentChain = previousChain(currentChain);
   }
+}
+
+function previousChain(chain) {
+  if (chain == "Program") {
+    return undefined;
+  }
+  chain = chain.split(",");
+  chain.pop();
+  return chain.join();
 }
 
 function enter(node){
   if (createsNewScope(node)) {
-    if (scopeChain.length > 0) {
-      if (scopeChain.length === 1 && node.type === 'FunctionDeclaration') {
+    if (node.type !== "Program") {
+      if (node.id !== null && node.id.name !== null) {
+        if (isObj(node.id)) {
+          currentChain += "," + node.id.name;
+        }
+      } else {
+        if (node.proxied == null) { 
+          currentChain += "," + "anon" + anonFuncCounter++;
+        }
+      }
+      if (previousChain(currentChain) == "Program" && node.type === 'FunctionDeclaration') {
         node.type = "ExpressionStatement";
         var assignmentexpr = {"type":"AssignmentExpression", "operator":"=", "left":node.id, "right":node};
-        assignmentexpr.right = {"type":"FunctionExpression", "id":null, "params":node.params, "defaults":node.defaults, 
+        assignmentexpr.right = {"type":"FunctionExpression", "proxied":true, "id":null, "params":node.params, "defaults":node.defaults, 
           "body":node.body, "rest":node.rest, "generator":node.generator, "expression":node.expression};
         node.expression = assignmentexpr;
         return;
-      } else {
-        scopeChain.push([{name:"this"}, {name:"arguments"}]);
       }
-    } else {
-      scopeChain.push([]);
     }
     assignmentChain.push([]);
-    var currentScope = scopeChain[scopeChain.length - 1];
-    if(node.type !== 'Program') {
-      //add function args
-      if (node.params !== null) {
-        for (var i in node.params) {
-          if (isObj(node.params[i])) {
-            currentScope.push(node.params[i]);
-          }
-        }
-      }
-      //add function name
-      if (node.id !== null && node.id.name !== null) {
-        if (isObj(node.id)) {
-          scopeChain[scopeChain.length - 2].push(node.id); // add function name to previous scope as well
-          currentScope.push(node.id);
-        }
-      }
-    }
   }
 
-  var currentScope = scopeChain[scopeChain.length - 1];
-  var currentAssignment= assignmentChain[assignmentChain.length - 1];
+  var currentAssignment = assignmentChain[assignmentChain.length - 1];
 
   //rewrite var in global to just be assignments
-  if(scopeChain.length === 1 && node.type === 'VariableDeclaration') {
+  if(currentChain == "Program" && node.type === 'VariableDeclaration') {
     expressionright = node.declarations[0].init;
     expressionleft = node.declarations[0].id;
     node.type = 'ExpressionStatement';
@@ -133,18 +141,9 @@ function enter(node){
       "operator": "=", "left" : expressionleft, "right": expressionright};
   }
 
-  if (node.type === 'VariableDeclarator'){
-    currentScope.push(node.id);
-  }
-
   if (node.type === 'AssignmentExpression'){
-    // if declared in global scope it's a global var
     if (isObj(node.left)) {
-      if (scopeChain.length === 1) {
-        currentScope.push(memberExpToIdentifier(node.left));
-      } else {
-        currentAssignment.push(node.left);
-      }
+      currentAssignment.push(node.left);
     }
     if (isObj(node.right)){
       currentAssignment.push(node.right);
@@ -208,61 +207,41 @@ function isObj(node) {
   while (node.type === "MemberExpression") {
     node = node.object; 
   }
-  if (node.type === "Identifier" && node.name !== "console" && node.name !== "window") {
+  if (node.type === "Identifier" && node.name !== "console" && node.name !== "window" && node.name !== "arguments") {
     return true;
   }
-  /*
-  if( (node.type === "MemberExpression" && node.object.type !== "ThisExpression") && 
-    (node.type === "MemberExpression" && node.object.type !== "NewExpression") && 
-    (node.type === "MemberExpression" && node.object.type !== "CallExpression") ||
-    node.type === "Identifier") {
-    console.log("ACCESSED");
-    console.log(util.inspect(node, {depth:null}));
-    return true;
-  };
-  */
 }
 
 function leave(node){
   if (createsNewScope(node)){
     var currentAssignment = assignmentChain.pop();
-    checkForGlobals(currentAssignment, scopeChain);
-    var currentScope = scopeChain.pop();
-    printScope(currentScope, node);
-    if (node.type === 'Program') {
-      for(var i in currentScope) {
-        rewriteAssignment(currentScope[i]);
-      }
-    }
+    checkForGlobals(currentAssignment, currentChain);
+    printScope(node, currentChain);
+    currentChain = previousChain(currentChain);
   }
 }
 
-function printScope(scope, node){
-  var varsDisplay = scopeToVarnames(scope).join(', ');
+function printScope(node, currentChain){
+  var varsDisplay = vars[currentChain].join(', ');
   if (node.type === 'Program'){
     console.log('Variables declared in the global scope:', 
       varsDisplay);
-  }else{
+  } else{
     if (node.id && node.id.name){
       console.log('Variables declared in the function ' + node.id.name + '():',
         varsDisplay);
-    }else{
+    } else{
       console.log('Variables declared in anonymous function:',
         varsDisplay);
     }
   }
 }
 
-function checkForGlobals(assignments, scopeChain){
+function checkForGlobals(assignments, currentChain){
   for (var i = 0; i < assignments.length; i++){
     var assignment = assignments[i];
     var varname = memberExpToIdentifier(assignment).name;
-    if (!isVarDefined(varname, scopeChain)){
-      /*
-        console.log('Global accessed', varname, 
-        'on line', assignment.loc.start.line, ':',
-        assignment.loc.start.column);
-      */
+    if (currentChain == "Program" || !isVarDefined(varname, currentChain)){
       rewriteAssignment(assignment);
     }
   }
@@ -274,29 +253,19 @@ function rewriteAssignment(assignment) {
 }
 
 function memberExpToIdentifier(node) {
-  //console.log(node);
   while(node.type !== "Identifier") {
-    //console.log(node);
     node = node.object;
   }
   return node;  
 }
 
-function scopeToVarnames(scope) {
-  var output = [];
-  for (var i in scope) {
-    output.push(scope[i].name);
-  }
-  return output;
-}
-
-function isVarDefined(varname, scopeChain){
-  // start at 1 so we skip vars defined in global scope
-  for (var i = 1; i < scopeChain.length; i++){
-    var scope = scopeToVarnames(scopeChain[i]);
-    if (scope.indexOf(varname) !== -1){
+function isVarDefined(varname, currentChain){
+  // skip vars defined in global scope
+  while(previousChain(currentChain)) {
+    if (vars[currentChain].indexOf(varname) !== -1){
       return true;
     }
+    currentChain = previousChain(currentChain);
   }
   return false;
 }
