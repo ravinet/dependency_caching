@@ -136,7 +136,9 @@ function enter(node){
   if(currentChain == "Program" && node.type === 'VariableDeclaration') {
     expressionright = node.declarations[0].init;
     expressionleft = node.declarations[0].id;
-    node.type = 'ExpressionStatement';
+    if (expressionright != null) {
+      node.type = 'ExpressionStatement';
+    }
     node.expression = {"type": "AssignmentExpression",
       "operator": "=", "left" : expressionleft, "right": expressionright};
   }
