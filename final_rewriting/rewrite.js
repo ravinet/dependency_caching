@@ -10,7 +10,7 @@ fs = require('fs');
 
 var code = fs.readFileSync(process.argv[2]);
 var ast = esprima.parse(code, {loc: true});
-console.log(escodegen.generate(ast));
+//console.log(escodegen.generate(ast));
 
 var assignmentChain = [];
 var vars = {};
@@ -40,7 +40,7 @@ body.splice(0, 0, window_proxy);
 proxy_wrapper.body[0].expression.callee.body.body = body;
 
 ast = proxy_wrapper;
-console.log(escodegen.generate(ast));
+//console.log(escodegen.generate(ast));
 outname = process.argv[3] ? process.argv[3] : "out";
 fs.writeFileSync(outname, escodegen.generate(ast));
 
@@ -204,6 +204,9 @@ function enter(node){
 }
 
 function isObj(node) {
+  if (node == null) {
+    return false;
+  }
   while (node.type === "MemberExpression") {
     node = node.object; 
   }
@@ -224,15 +227,12 @@ function leave(node){
 function printScope(node, currentChain){
   var varsDisplay = vars[currentChain].join(', ');
   if (node.type === 'Program'){
-    console.log('Variables declared in the global scope:', 
-      varsDisplay);
+    //console.log('Variables declared in the global scope:', varsDisplay);
   } else{
     if (node.id && node.id.name){
-      console.log('Variables declared in the function ' + node.id.name + '():',
-        varsDisplay);
+      //console.log('Variables declared in the function ' + node.id.name + '():', varsDisplay);
     } else{
-      console.log('Variables declared in anonymous function:',
-        varsDisplay);
+      //console.log('Variables declared in anonymous function:', varsDisplay);
     }
   }
 }
