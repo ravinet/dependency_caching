@@ -87,21 +87,28 @@ if ( _window != undefined ) {
                                  var value = base[name];
                                  var native_func = false;
                                  if ( typeof(value) == "function" ) {
-                                     console.log( "base: " + base + " name: " + name );
                                      native_func = isNativeCodeFunc(value);
                                  }
                                  if (base == window && native_func) {
-                                     var props = Object.getOwnPropertyNames(value);
-                                     var bound_value = value.bind(_window);
+                                     /*var props = Object.getOwnPropertyNames(value);
                                      // bind seems to not preserve prototype chain, so we restore it
-                                     bound_value.prototype = value.prototype;
-                                     for ( prop in props ) {
-                                         bound_value[props[prop]] = value[props[prop]]
-                                     }
-                                     if ( name == "jQuery" ){
-                                        console.log("jquery");
-                                     }
-                                     value = bound_value;
+                                     //bound_value.prototype = value.prototype;
+                                     //for ( prop in props ) {
+                                     //    bound_value[props[prop]] = value[props[prop]]
+                                     //}
+                                     //if ( name == "jQuery" ){
+                                     //   console.log("jquery");
+                                     }*/
+                                     var curr_value = value;
+                                     new_value = new Proxy(bound_value, {
+                                         get: function(base1, name1){
+                                             return curr_value[name1];
+                                         },
+                                         set: function(base1, name1, value1){
+                                             curr_value[name1] = value1;
+                                         }
+                                     });
+                                     value = new_value;
                                  }
 
                                  var parent_id = "null";
