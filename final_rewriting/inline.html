@@ -90,11 +90,11 @@ if ( _window != undefined ) {
                                      native_func = isNativeCodeFunc(value);
                                  }
                                  var bound_value;
-                                 if (native_func && (base == window || (base.toString().indexOf("XMLHttpRequest") != -1))) {
+                                 if (native_func && (base == window || base instanceof XMLHttpRequest)) {
                                      if( base == window ) {
                                          bound_value = value.bind(_window);
                                      }
-                                     if( base.toString().indexOf("XMLHttpRequest") != -1 ) {
+                                     if( base instanceof XMLHttpRequest ) {
                                          bound_value = value.bind(base._base);
                                      }
                                      /*var props = Object.getOwnPropertyNames(value);
