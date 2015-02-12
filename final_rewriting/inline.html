@@ -53,13 +53,28 @@ if ( _window != undefined ) {
                        var caller = get_caller( document.currentScript);
                        var log_read = {'OpType': 'READ', 'ParentId': 'window', 'PropName': 'screen', 'NewValId': 'null', 'OldValId': 'null', 'script': caller};
                        var log_write = {'OpType': 'WRITE', 'ParentId': 'window', 'PropName': 'screen', 'NewValId': 'null', 'OldValId': 'null', 'script': caller};
-                       console.log( JSON.stringify( log_read ) );
+                       //console.log( JSON.stringify( log_read ) );
                        window.js_rewriting_logs.push(JSON.stringify(log_read));
-                       console.log( JSON.stringify( log_write ) );
+                       //console.log( JSON.stringify( log_write ) );
                        window.js_rewriting_logs.push(JSON.stringify(log_write));
                        var retVal = _alert.call(this._base, arg);
                        return retVal;
                    };
+
+    function isNativeCodeFunc(f){
+        var srcCode = f.toString();
+        if ( srcCode.indexOf("[native code]") != -1 ) {
+            return true;
+        } else {
+            return false;
+        }
+        //!!!This test should actually be fancier,
+        //and use a regular expression to ensure
+        //that the string "[native code]" appears
+        //in the declaration of the function signature,
+        //not as, e.g., a string literal that's assigned
+        //to a local function variable.
+    };
 
     var _window = window;
 
@@ -70,11 +85,31 @@ if ( _window != undefined ) {
     var window_handler = {
                       "get": function(base, name){
                                  var value = base[name];
-                                 if (base == window && typeof(value) == "function") {
-                                     var old_proto = value.prototype;
-                                     value = value.bind(_window);
+                                 var native_func = false;
+                                 if ( typeof(value) == "function" ) {
+                                     native_func = isNativeCodeFunc(value);
+                                 }
+                                 if (base == window && native_func) {
+                                     var bound_value = value.bind(_window);
+                                     /*var props = Object.getOwnPropertyNames(value);
                                      // bind seems to not preserve prototype chain, so we restore it
-                                     value.prototype = old_proto;
+                                     bound_value.prototype = value.prototype;
+                                     for ( prop in props ) {
+                                         bound_value[props[prop]] = value[props[prop]]
+                                     }
+                                     if ( name == "jQuery" ){
+                                        console.log("jquery");
+                                     }*/
+                                     var curr_value = value;
+                                     new_value = new Proxy(bound_value, {
+                                         get: function(base1, name1){
+                                             return curr_value[name1];
+                                         },
+                                         set: function(base1, name1, value1){
+                                             curr_value[name1] = value1;
+                                         }
+                                     });
+                                     value = new_value;
                                  }
 
                                  var parent_id = "null";
@@ -114,7 +149,7 @@ if ( _window != undefined ) {
                                  var new_id = "null";
                                  if ( name != "_id" ){
                                      var log = {'OpType': 'READ', 'ParentId': parent_id, 'PropName': name, 'NewValId': new_id, 'OldValId': old_id, 'script': caller};
-                                     console.log( JSON.stringify( log ) );
+                                     //console.log( JSON.stringify( log ) );
                                      window.js_rewriting_logs.push(JSON.stringify(log));
                                  }
                                  return value;
@@ -181,7 +216,7 @@ if ( _window != undefined ) {
                                  }
                                  if ( name != "_id" ){
                                      var log = {'OpType': 'WRITE', 'ParentId': parent_id, 'PropName': name, 'NewValId': new_id, 'OldValId': old_id, 'script': caller}
-                                     console.log( JSON.stringify( log ) );
+                                     //console.log( JSON.stringify( log ) );
                                      window.js_rewriting_logs.push(JSON.stringify(log));
                                  }
                                  base[name] = value;
