@@ -239,8 +239,18 @@ if ( _window != undefined ) {
 
             // user defined object, so return new proxy with new id
             var p = new Proxy( base, window_handler );
-            p._base = base;
-            p._id = window.proxy_counter;
+            Object.defineProperty(p, '_base', {
+                enumerable: false,
+                configurable: false,
+                writable: false,
+                value: base
+            });
+            Object.defineProperty(p, '_id', {
+                enumerable: false,
+                configurable: false,
+                writable: false,
+                value: window.proxy_counter
+            });
             window.proxy_counter++;
             return p;
         } else {
