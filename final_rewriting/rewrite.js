@@ -30,7 +30,7 @@ estraverse.traverse(ast, {
   enter: enter,
   leave: leave
 });
-
+//console.log(util.inspect(ast, {depth:null}));
 var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","expression":{"type":"CallExpression","callee":{"type":"FunctionExpression","id":null,"params":[],"defaults":[],"body":{"type":"BlockStatement","body":[]},"rest":null,"generator":false,"expression":false},"arguments":[]}}]};
 
 // take body from the initial source code and put into our new anonymous function
@@ -106,7 +106,7 @@ function previousChain(chain) {
   return chain.join();
 }
 
-function enter(node){
+function enter(node, p){
   if (createsNewScope(node)) {
     if (node.type !== "Program") {
       if (node.id !== null && node.id.name !== null) {
@@ -134,13 +134,24 @@ function enter(node){
 
   //rewrite var in global to just be assignments
   if(currentChain == "Program" && node.type === 'VariableDeclaration') {
-    expressionright = node.declarations[0].init;
-    expressionleft = node.declarations[0].id;
-    if (expressionright != null) {
-      node.type = 'ExpressionStatement';
+    var expressions = [];
+    var leaveAsVars = [];
+    for (var i = 0; i < node.declarations.length; i++) {
+      var assignment = {"type":"AssignmentExpression", "operator": "="};
+      assignment.left = node.declarations[i].id;
+      assignment.right = node.declarations[i].init;
+      if (assignment.right != null) {
+        expressions.push(assignment);
+      } else {
+        leaveAsVars.push(node.declarations[i]);
+      }
     }
-    node.expression = {"type": "AssignmentExpression",
-      "operator": "=", "left" : expressionleft, "right": expressionright};
+    delete node.declarations;
+    node.type = "ExpressionStatement";
+    node.expression = {"type":"SequenceExpression","expressions":expressions};
+    if (leaveAsVars.length > 0) {
+      p.body.push({"type":"VariableDeclaration", "declarations":leaveAsVars, "kind":"var"});
+    }
   }
 
   if (node.type === 'AssignmentExpression'){
@@ -173,6 +184,14 @@ function enter(node){
     }
   }
 
+  if (node.type === "ArrayExpression") {
+    for (var i = 0; i < node.elements.length; i++) {
+      if (isObj(node.elements[i])) {
+        currentAssignment.push(node.elements[i]);
+      }
+    }
+  }
+
   if (node.type === "CallExpression") {
     for (var i = 0; i < node.arguments.length; i++){
       if (isObj(node.arguments[i])) {
@@ -181,6 +200,12 @@ function enter(node){
     }
     if (isObj(node.callee)) {
       currentAssignment.push(node.callee);
+    }
+  }
+
+  if (node.type === "VariableDeclarator") {
+    if (isObj(node.init)) {
+      currentAssignment.push(node.init);
     }
   }
   // the "proxied" hack is to avoid recursion
