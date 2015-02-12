@@ -184,6 +184,14 @@ function enter(node, p){
     }
   }
 
+  if (node.type === "ArrayExpression") {
+    for (var i = 0; i < node.elements.length; i++) {
+      if (isObj(node.elements[i])) {
+        currentAssignment.push(node.elements[i]);
+      }
+    }
+  }
+
   if (node.type === "CallExpression") {
     for (var i = 0; i < node.arguments.length; i++){
       if (isObj(node.arguments[i])) {
