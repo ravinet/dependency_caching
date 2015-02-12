@@ -89,8 +89,14 @@ if ( _window != undefined ) {
                                  if ( typeof(value) == "function" ) {
                                      native_func = isNativeCodeFunc(value);
                                  }
-                                 if (base == window && native_func) {
-                                     var bound_value = value.bind(_window);
+                                 var bound_value;
+                                 if (native_func && (base == window || (base.toString().indexOf("XMLHttpRequest") != -1))) {
+                                     if( base == window ) {
+                                         bound_value = value.bind(_window);
+                                     }
+                                     if( base.toString().indexOf("XMLHttpRequest") != -1 ) {
+                                         bound_value = value.bind(base._base);
+                                     }
                                      /*var props = Object.getOwnPropertyNames(value);
                                      // bind seems to not preserve prototype chain, so we restore it
                                      bound_value.prototype = value.prototype;
