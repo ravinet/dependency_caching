@@ -154,12 +154,18 @@ function enter(node, p){
     }
   }
 
-  if (node.type === 'AssignmentExpression'){
+  if (node.type === 'AssignmentExpression' || node.type === "BinaryExpression") {
     if (isObj(node.left)) {
       currentAssignment.push(node.left);
     }
     if (isObj(node.right)){
       currentAssignment.push(node.right);
+    }
+  }
+
+  if (node.type === "UnaryExpression") {
+    if (isObj(node.argument)) {
+      currentAssignment.push(node.argument);
     }
   }
 
