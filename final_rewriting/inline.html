@@ -239,7 +239,8 @@ if ( _window != undefined ) {
             // not a user defined object, so return value
             if ( base instanceof Date || base instanceof RegExp ||
                  base instanceof Array || base instanceof Number ||
-                 base instanceof Node || base instanceof Element ){
+                 base instanceof Node || base instanceof Element ||
+                 base instanceof Error ){
                 return base;
             }
 
