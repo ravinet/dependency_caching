@@ -40,9 +40,10 @@ body.splice(0, 0, window_proxy);
 proxy_wrapper.body[0].expression.callee.body.body = body;
 
 ast = proxy_wrapper;
-//console.log(escodegen.generate(ast));
+output = escodegen.generate(ast).replace(/<\/script>/g, "<\\/script>");
+//console.log(output);
 outname = process.argv[3] ? process.argv[3] : "out";
-fs.writeFileSync(outname, escodegen.generate(ast));
+fs.writeFileSync(outname, output);
 
 function createsNewScope(node){
   return node.type === 'FunctionDeclaration' ||
