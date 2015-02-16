@@ -40,7 +40,7 @@ body.splice(0, 0, window_proxy);
 proxy_wrapper.body[0].expression.callee.body.body = body;
 
 ast = proxy_wrapper;
-output = escodegen.generate(ast).replace("</script>", "<\\/script>");
+output = escodegen.generate(ast).replace(/<\/script>/g, "<\\/script>");
 //console.log(output);
 outname = process.argv[3] ? process.argv[3] : "out";
 fs.writeFileSync(outname, output);
