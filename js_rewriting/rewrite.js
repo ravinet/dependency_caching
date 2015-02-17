@@ -149,7 +149,7 @@ function enter(node, p){
     }
     if (expressions.length != 0) {
       delete node.declarations;
-      if (expressions.length > 1) {
+      if (expressions.length > 1 || p.type != "ForStatement") {
         node.type = "ExpressionStatement";
         node.expression = {"type":"SequenceExpression","expressions":expressions};
       } else {
