@@ -30,7 +30,6 @@ estraverse.traverse(ast, {
   enter: enter,
   leave: leave
 });
-//console.log(util.inspect(ast, {depth:null}));
 var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","expression":{"type":"CallExpression","callee":{"type":"FunctionExpression","id":null,"params":[],"defaults":[],"body":{"type":"BlockStatement","body":[]},"rest":null,"generator":false,"expression":false},"arguments":[]}}]};
 
 // take body from the initial source code and put into our new anonymous function
@@ -147,11 +146,20 @@ function enter(node, p){
         leaveAsVars.push(node.declarations[i]);
       }
     }
-    delete node.declarations;
-    node.type = "ExpressionStatement";
-    node.expression = {"type":"SequenceExpression","expressions":expressions};
-    if (leaveAsVars.length > 0) {
-      p.body.push({"type":"VariableDeclaration", "declarations":leaveAsVars, "kind":"var"});
+    if (expressions.length != 0) {
+      delete node.declarations;
+      node.type = "ExpressionStatement";
+      node.expression = {"type":"SequenceExpression","expressions":expressions};
+      if (leaveAsVars.length > 0) {
+        varDeclaration = {"type":"VariableDeclaration", "declarations":leaveAsVars, "kind":"var"};
+        if (p.body) {
+          p.body.unshift(varDeclaration);
+        }
+        if (p.consequent) {
+          p.consequent.type = "BlockStatement";
+          p.consequent.body = [varDeclaration];
+        }
+      }
     }
   }
 
