@@ -30,6 +30,7 @@ estraverse.traverse(ast, {
   enter: enter,
   leave: leave
 });
+//console.log(util.inspect(ast, {depth:null}));
 var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","expression":{"type":"CallExpression","callee":{"type":"FunctionExpression","id":null,"params":[],"defaults":[],"body":{"type":"BlockStatement","body":[]},"rest":null,"generator":false,"expression":false},"arguments":[]}}]};
 
 // take body from the initial source code and put into our new anonymous function
@@ -148,8 +149,15 @@ function enter(node, p){
     }
     if (expressions.length != 0) {
       delete node.declarations;
-      node.type = "ExpressionStatement";
-      node.expression = {"type":"SequenceExpression","expressions":expressions};
+      if (expressions.length > 1) {
+        node.type = "ExpressionStatement";
+        node.expression = {"type":"SequenceExpression","expressions":expressions};
+      } else {
+        node.type = "AssignmentExpression";
+        node.operator = "=";
+        node.left = expressions[0].left;
+        node.right = expressions[0].right;
+      } 
       if (leaveAsVars.length > 0) {
         varDeclaration = {"type":"VariableDeclaration", "declarations":leaveAsVars, "kind":"var"};
         if (p.body) {
