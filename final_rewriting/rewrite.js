@@ -147,11 +147,27 @@ function enter(node, p){
         leaveAsVars.push(node.declarations[i]);
       }
     }
-    delete node.declarations;
-    node.type = "ExpressionStatement";
-    node.expression = {"type":"SequenceExpression","expressions":expressions};
-    if (leaveAsVars.length > 0) {
-      p.body.push({"type":"VariableDeclaration", "declarations":leaveAsVars, "kind":"var"});
+    if (expressions.length != 0) {
+      delete node.declarations;
+      if (expressions.length > 1 || p.type != "ForStatement") {
+        node.type = "ExpressionStatement";
+        node.expression = {"type":"SequenceExpression","expressions":expressions};
+      } else {
+        node.type = "AssignmentExpression";
+        node.operator = "=";
+        node.left = expressions[0].left;
+        node.right = expressions[0].right;
+      }
+      if (leaveAsVars.length > 0) {
+        varDeclaration = {"type":"VariableDeclaration", "declarations":leaveAsVars, "kind":"var"};
+        if (p.body) {
+          p.body.unshift(varDeclaration);
+        }
+        if (p.consequent) {
+          p.consequent.type = "BlockStatement";
+          p.consequent.body = [varDeclaration];
+        }
+      }
     }
   }
 
