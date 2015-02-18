@@ -30,6 +30,12 @@ estraverse.traverse(ast, {
   enter: enter,
   leave: leave
 });
+
+estraverse.traverse(ast, {
+  enter: hoistEnter,
+  leave: hoistLeave
+});
+
 //console.log(util.inspect(ast, {depth:null}));
 var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","expression":{"type":"CallExpression","callee":{"type":"FunctionExpression","id":null,"params":[],"defaults":[],"body":{"type":"BlockStatement","body":[]},"rest":null,"generator":false,"expression":false},"arguments":[]}}]};
 
@@ -272,6 +278,21 @@ function leave(node){
     printScope(node, currentChain);
     currentChain = previousChain(currentChain);
   }
+}
+
+function hoistEnter(node, p) {
+
+  if (node.type == "ExpressionStatement" &&
+      node.expression.type == "AssignmentExpression" &&
+      node.expression.right.type == "FunctionExpression") {
+    p.body.unshift(node);
+  }
+  if (node.type != "Program") {
+    this.skip();
+  }
+}
+
+function hoistLeave(node) {
 }
 
 function printScope(node, currentChain){
