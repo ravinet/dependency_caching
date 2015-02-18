@@ -30,6 +30,14 @@ estraverse.traverse(ast, {
   enter: enter,
   leave: leave
 });
+
+var hoistIndex = 0;
+
+estraverse.traverse(ast, {
+  enter: hoistEnter,
+  leave: hoistLeave
+});
+
 //console.log(util.inspect(ast, {depth:null}));
 var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","expression":{"type":"CallExpression","callee":{"type":"FunctionExpression","id":null,"params":[],"defaults":[],"body":{"type":"BlockStatement","body":[]},"rest":null,"generator":false,"expression":false},"arguments":[]}}]};
 
@@ -157,7 +165,7 @@ function enter(node, p){
         node.operator = "=";
         node.left = expressions[0].left;
         node.right = expressions[0].right;
-      }
+      } 
       if (leaveAsVars.length > 0) {
         varDeclaration = {"type":"VariableDeclaration", "declarations":leaveAsVars, "kind":"var"};
         if (p.body) {
@@ -272,6 +280,22 @@ function leave(node){
     printScope(node, currentChain);
     currentChain = previousChain(currentChain);
   }
+}
+
+function hoistEnter(node, p) {
+
+  if (node.type == "ExpressionStatement" &&
+      node.expression.type == "AssignmentExpression" &&
+      node.expression.right.type == "FunctionExpression") {
+    p.body.splice(hoistIndex, 0, node);
+    hoistIndex++;
+  }
+  if (node.type != "Program") {
+    this.skip();
+  }
+}
+
+function hoistLeave(node) {
 }
 
 function printScope(node, currentChain){
