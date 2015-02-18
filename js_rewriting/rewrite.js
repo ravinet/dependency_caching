@@ -31,6 +31,8 @@ estraverse.traverse(ast, {
   leave: leave
 });
 
+var hoistIndex = 0;
+
 estraverse.traverse(ast, {
   enter: hoistEnter,
   leave: hoistLeave
@@ -285,7 +287,8 @@ function hoistEnter(node, p) {
   if (node.type == "ExpressionStatement" &&
       node.expression.type == "AssignmentExpression" &&
       node.expression.right.type == "FunctionExpression") {
-    p.body.unshift(node);
+    p.body.splice(hoistIndex, 0, node);
+    hoistIndex++;
   }
   if (node.type != "Program") {
     this.skip();
