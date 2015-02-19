@@ -319,12 +319,15 @@ function hoistEnter(node, p) {
             }
         };
 
+  p.body.splice(hoistIndex++, 0, newLine);
+  /*
     for (var i = 0; i < p.body.length; i++) {
       if (node == p.body[i]) {
         p.body.splice(i+1, 0, newLine);
         break;
       }
     }
+  */
   }
   if (node.type != "Program") {
     this.skip();
