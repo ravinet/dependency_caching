@@ -39,6 +39,9 @@ for filename in files:
             if ( "javascript" in out ):
                 os.system('nodejs rewrite.js rewritten/tempfile rewritten/retempfile')
                 os.system('mv rewritten/retempfile rewritten/tempfile')
+                os.system('cp inline.js rewritten/prependtempfile')
+                os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
+                os.system('mv rewritten/prependtempfile rewritten/tempfile')
 
             if ( "html" in out ): # rewrite all inline js in html files
                os.system('python html_rewrite_linux.py rewritten/tempfile rewritten/htmltempfile')
@@ -60,6 +63,10 @@ for filename in files:
             if ( "javascript" in out ):
                 os.system('nodejs rewrite.js rewritten/plaintext rewritten/retempfile')
                 os.system('mv rewritten/retempfile rewritten/plaintext')
+                os.system('cp inline.js rewritten/prependtempfile')
+                os.system('cat rewritten/plaintext >> rewritten/prependtempfile')
+                os.system('mv rewritten/prependtempfile rewritten/plaintext')
+
 
             if ( "html" in out ): # rewrite all inline js in html files
                 os.system('python html_rewrite_linux.py rewritten/plaintext rewritten/htmltempfile')
