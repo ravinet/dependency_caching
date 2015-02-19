@@ -127,6 +127,7 @@ function enter(node, p){
           currentChain += "," + "anon" + anonFuncCounter++;
         }
       }
+      /*
       if (previousChain(currentChain) == "Program" && node.type === 'FunctionDeclaration') {
         node.type = "ExpressionStatement";
         var assignmentexpr = {"type":"AssignmentExpression", "operator":"=", "left":node.id, "right":node};
@@ -135,6 +136,7 @@ function enter(node, p){
         node.expression = assignmentexpr;
         return;
       }
+      */
     }
     assignmentChain.push([]);
   }
@@ -284,11 +286,48 @@ function leave(node){
 
 function hoistEnter(node, p) {
 
+  /*
   if (node.type == "ExpressionStatement" &&
       node.expression.type == "AssignmentExpression" &&
       node.expression.right.type == "FunctionExpression") {
     p.body.splice(hoistIndex, 0, node);
     hoistIndex++;
+  }
+  */
+  if (node.type == "FunctionDeclaration") {
+    newLine = {
+            "type": "ExpressionStatement",
+            "expression": {
+                "type": "AssignmentExpression",
+                "operator": "=",
+                "left": {
+                    "type": "MemberExpression",
+                    "computed": false,
+                    "object": {
+                        "type": "Identifier",
+                        "name": "window"
+                    },
+                    "property": {
+                        "type": "Identifier",
+                        "name": node.id.name
+                    }
+                },
+                "right": {
+                    "type": "Identifier",
+                    "name": node.id.name
+                }
+            }
+        };
+
+  p.body.splice(hoistIndex++, 0, newLine);
+  /*
+    for (var i = 0; i < p.body.length; i++) {
+      if (node == p.body[i]) {
+        p.body.splice(i+1, 0, newLine);
+        break;
+      }
+    }
+  */
   }
   if (node.type != "Program") {
     this.skip();
