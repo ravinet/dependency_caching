@@ -118,6 +118,7 @@ if ( _window != undefined ) {
                                      value = new_value;
                                  }
 
+                             try {
                                  var parent_id = "null";
                                  var old_id = "null";
                                  var new_id = "null";
@@ -159,6 +160,10 @@ if ( _window != undefined ) {
                                      window.js_rewriting_logs.push(JSON.stringify(log));
                                  }
                                  return value;
+                             } catch( err ) {
+                                 console.log("Cross-origin access from proxy handler caused exception");
+                                 return value;
+                             }
                              },
                       "set": function(base, name, value){
                                  var caller = get_caller(document.currentScript);
