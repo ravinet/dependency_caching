@@ -46,7 +46,14 @@ for filename in files:
             if ( "html" in out ): # rewrite all inline js in html files
                os.system('python html_rewrite_linux.py rewritten/tempfile rewritten/htmltempfile')
                os.system('mv rewritten/htmltempfile rewritten/tempfile')
-               os.system('cp inline.html rewritten/prependtempfile')
+               body = open("rewritten/tempfile", 'r')
+               first_line = body.readline()
+               if ( "<!doctype html>" in first_line.lower() ):
+                   new_file = open("rewritten/prependtempfile", 'a')
+                   new_file.write("<!doctype html>\n")
+                   new_file.close()
+               body.close()
+               os.system('cat inline.html >> rewritten/prependtempfile')
                os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
                os.system('mv rewritten/prependtempfile rewritten/tempfile')
 
@@ -71,7 +78,14 @@ for filename in files:
             if ( "html" in out ): # rewrite all inline js in html files
                 os.system('python html_rewrite_linux.py rewritten/plaintext rewritten/htmltempfile')
                 os.system('mv rewritten/htmltempfile rewritten/plaintext')
-                os.system('cp inline.html rewritten/prependtempfile')
+                body = open("rewritten/plaintext", 'r')
+                first_line = body.readline()
+                if ( "<!doctype html>" in first_line.lower() ):
+                    new_file = open("rewritten/prependtempfile", 'a')
+                    new_file.write("<!doctype html>\n")
+                    new_file.close()
+                body.close()
+                os.system('cat inline.html >> rewritten/prependtempfile')
                 os.system('cat rewritten/plaintext >> rewritten/prependtempfile')
                 os.system('mv rewritten/prependtempfile rewritten/plaintext')
 
