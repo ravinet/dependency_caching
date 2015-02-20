@@ -56,13 +56,17 @@ fs.writeFileSync(outname, output);
 function createsNewScope(node){
   return node.type === 'FunctionDeclaration' ||
     node.type === 'FunctionExpression' ||
-    node.type === 'Program';
+    node.type === 'Program' ||
+    node.type === 'CatchClause';
 }
 
 function preenter(node){
   if (createsNewScope(node)) {
     if (node.type !== "Program") {
-      if (node.id !== null && node.id.name !== null) {
+      if (node.type === "CatchClause") {
+        currentChain += ",catch";
+        vars[currentChain] = [];
+      } else if (node.id !== null && node.id.name !== null) {
         if (isObj(node.id)) {
           currentChain += "," + node.id.name;
           vars[currentChain] = [];
@@ -85,6 +89,11 @@ function preenter(node){
       }
     }
   }
+  
+  if (node.type === "CatchClause") {
+    vars[currentChain].push(node.param.name);
+  }
+
 
   if (node.type === 'VariableDeclarator'){
     vars[currentChain].push(node.id.name);
@@ -118,7 +127,9 @@ function previousChain(chain) {
 function enter(node, p){
   if (createsNewScope(node)) {
     if (node.type !== "Program") {
-      if (node.id !== null && node.id.name !== null) {
+      if (node.type === "CatchClause") {
+        currentChain += ",catch";
+      } else if (node.id !== null && node.id.name !== null) {
         if (isObj(node.id)) {
           currentChain += "," + node.id.name;
         }
@@ -127,16 +138,6 @@ function enter(node, p){
           currentChain += "," + "anon" + anonFuncCounter++;
         }
       }
-      /*
-      if (previousChain(currentChain) == "Program" && node.type === 'FunctionDeclaration') {
-        node.type = "ExpressionStatement";
-        var assignmentexpr = {"type":"AssignmentExpression", "operator":"=", "left":node.id, "right":node};
-        assignmentexpr.right = {"type":"FunctionExpression", "proxied":true, "id":null, "params":node.params, "defaults":node.defaults, 
-          "body":node.body, "rest":node.rest, "generator":node.generator, "expression":node.expression};
-        node.expression = assignmentexpr;
-        return;
-      }
-      */
     }
     assignmentChain.push([]);
   }
