@@ -1,25 +1,71 @@
+var hiddeni = document.createElement("iframe");
+hiddeni.setAttribute('name', "hidden");
+hiddeni.setAttribute('style', "display:none");
+
+
+var logform = document.createElement("form");
+logform.setAttribute('method',"post");
+logform.setAttribute('action',"http://localhost:8090");
+logform.setAttribute('id', "log");
+logform.setAttribute('target', "hidden");
+logform.setAttribute('style', "display:none");
+
+var loginput = document.createElement("input"); //input element, text
+loginput.setAttribute('type',"text");
+loginput.setAttribute('id',"POST-name");
+loginput.setAttribute('name',"name");
+
+var logsubmit = document.createElement("input"); //input element, Submit button
+logsubmit.setAttribute('type',"submit");
+
+logform.appendChild(loginput);
+logform.appendChild(logsubmit);
+
+document.getElementsByTagName('body')[0].appendChild(hiddeni);
+document.getElementsByTagName('body')[0].appendChild(logform);
+
 if ( _window != undefined ) {
 } else {
     var js_rewriting_logs = [];
     window.onload = function(){
-        xmlhttp=new XMLHttpRequest();
-        xmlhttp.open("POST","http://dallas.csail.mit.edu",true);
+        //xmlhttp=new XMLHttpRequest();
+        //xmlhttp.open("POST","http://dallas.csail.mit.edu",true);
         var complete_log = "BEGIN LOG:\n";
         for (i=0; i < window.js_rewriting_logs.length; i++ ){
             complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
         }
         complete_log = complete_log + "END LOG (TOTAL: " + window.js_rewriting_logs.length + ")";
-        xmlhttp.send(complete_log);
+        //xmlhttp.send(complete_log);
+        console.log("POSTING: " + window.btoa(complete_log).length + " bytes");
+        document.getElementById("POST-name").value = window.btoa(complete_log);
+        document.getElementById("log").submit();
     }
+
 
     function get_caller(caller){
         var script_attributes = "";
         if ( caller == null ) {
-            script_attributes = "event_handler_or_callback";
+            longname = window.location.pathname;
+            if ( longname == "/" ) {
+                script_attributes = "/";
+            } else {
+                script_attributes = longname.split('/').pop();
+            }
+            if ( script_attributes == "" ) {
+                script_attributes = "event_handler_or_callback";
+            }
         } else {
             var attr = caller.attributes;
             if( attr.length == 0 ) {
-                script_attributes = "inline_script";
+                longname = window.location.pathname;
+                if ( longname == "/" ) {
+                    script_attributes = "/";
+                } else {
+                    script_attributes = longname.split('/').pop();
+                }
+                if ( script_attributes == "" ) {
+                    script_attributes = "inline_script";
+                }
             } else {
                 for(j=0; j < attr.length; j++) {
                     if( attr[j].name == "src" ) {
