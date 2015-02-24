@@ -2,6 +2,7 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
 import base64
+import urllib
 import sys
 
 class Request_Handler(BaseHTTPRequestHandler):
@@ -10,8 +11,8 @@ class Request_Handler(BaseHTTPRequestHandler):
         #content_length += 5
         print content_length
         post_data = self.rfile.read(content_length)
-        #print post_data
-        #print base64.b64decode(post_data)
+        print post_data
+        print base64.b64decode(urllib.unquote(post_data)[5:])
         print >> sys.stderr, 'DONE'
         
 
