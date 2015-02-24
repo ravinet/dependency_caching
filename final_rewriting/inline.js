@@ -30,11 +30,10 @@ if ( _window != undefined ) {
     window.onload = function(){
         //xmlhttp=new XMLHttpRequest();
         //xmlhttp.open("POST","http://dallas.csail.mit.edu",true);
-        var complete_log = "BEGIN LOG:\n";
+        var complete_log = "";
         for (i=0; i < window.js_rewriting_logs.length; i++ ){
             complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
         }
-        complete_log = complete_log + "END LOG (TOTAL: " + window.js_rewriting_logs.length + ")";
         //xmlhttp.send(complete_log);
         console.log("POSTING: " + window.btoa(complete_log).length + " bytes");
         document.getElementById("POST-name").value = window.btoa(complete_log);
