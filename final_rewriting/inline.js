@@ -1,45 +1,13 @@
-var hiddeni = document.createElement("iframe");
-hiddeni.setAttribute('name', "hidden");
-hiddeni.setAttribute('style', "display:none");
-
-
-var logform = document.createElement("form");
-logform.setAttribute('method',"post");
-logform.setAttribute('action',"http://localhost:8090");
-logform.setAttribute('id', "log");
-logform.setAttribute('target', "hidden");
-logform.setAttribute('style', "display:none");
-
-var loginput = document.createElement("input"); //input element, text
-loginput.setAttribute('type',"text");
-loginput.setAttribute('id',"POST-name");
-loginput.setAttribute('name',"name");
-
-var logsubmit = document.createElement("input"); //input element, Submit button
-logsubmit.setAttribute('type',"submit");
-
-logform.appendChild(loginput);
-logform.appendChild(logsubmit);
-
-document.getElementsByTagName('body')[0].appendChild(hiddeni);
-document.getElementsByTagName('body')[0].appendChild(logform);
-
 if ( _window != undefined ) {
 } else {
     var js_rewriting_logs = [];
-    window.onload = function(){
-        //xmlhttp=new XMLHttpRequest();
-        //xmlhttp.open("POST","http://dallas.csail.mit.edu",true);
+    window.addEventListener("load", function(){
         var complete_log = "";
         for (i=0; i < window.js_rewriting_logs.length; i++ ){
             complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
         }
-        //xmlhttp.send(complete_log);
-        console.log("POSTING: " + window.btoa(complete_log).length + " bytes");
-        document.getElementById("POST-name").value = window.btoa(complete_log);
-        document.getElementById("log").submit();
-    }
-
+        window.top.postMessage(window.btoa(complete_log), "*");
+    });
 
     function get_caller(caller){
         var script_attributes = "";
@@ -69,6 +37,9 @@ if ( _window != undefined ) {
                 for(j=0; j < attr.length; j++) {
                     if( attr[j].name == "src" ) {
                         script_attributes = script_attributes.concat( attr[j].value );
+                    }
+                    if ( script_attributes == "" ) {
+                        script_attributes = window.location.pathname;
                     }
                 }
             }

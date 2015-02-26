@@ -7,17 +7,20 @@
 if ( _window != undefined ) {
 } else {
     var js_rewriting_logs = [];
-    window.onload = function(){
-        //xmlhttp=new XMLHttpRequest();
-        //xmlhttp.open("POST","http://dallas.csail.mit.edu",true);
+    window.addEventListener("message", function(event){
+        if( window.self == window.top ) {
+            document.getElementById("POST-name").value = event.data;
+            document.getElementById("log").submit();
+        }
+    }, false);
+    window.addEventListener("load", function(){
         var complete_log = "";
         for (i=0; i < window.js_rewriting_logs.length; i++ ){
             complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
         }
-        //xmlhttp.send(complete_log);
         document.getElementById("POST-name").value = window.btoa(complete_log);
         document.getElementById("log").submit();
-    }
+    });
 
     function get_caller(caller){
         var script_attributes = "";
@@ -47,6 +50,9 @@ if ( _window != undefined ) {
                 for(j=0; j < attr.length; j++) {
                     if( attr[j].name == "src" ) {
                         script_attributes = script_attributes.concat( attr[j].value );
+                    }
+                    if ( script_attributes == "" ) {
+                        script_attributes = window.location.pathname;
                     }
                 }
             }
