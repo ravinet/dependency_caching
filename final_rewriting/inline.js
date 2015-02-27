@@ -96,6 +96,9 @@ if ( _window != undefined ) {
     // counter for proxies returned by makeProxy
     window.proxy_counter = 0;
 
+    // WeakMap for objects which are frozen
+    var idMap = new WeakMap();
+
     // object handler for proxies
     var window_handler = {
                       "get": function(base, name){
@@ -156,6 +159,10 @@ if ( _window != undefined ) {
                                              }
                                              if ( old_id == undefined ){
                                                  old_id = "null";
+                                                 // check if object was frozen (check WeakMap for id)
+                                                 if ( idMap.has( value ) ) { // object is in WeakMap!
+                                                     old_id = idMap.get( value );
+                                                 }
                                              }
                                          }
                                  }
@@ -166,6 +173,10 @@ if ( _window != undefined ) {
                                      parent_id = base._id;
                                      if ( parent_id == undefined ){
                                          parent_id = "null";
+                                         // check if object was frozen (check WeakMap for id)
+                                         if ( idMap.has( base ) ) { // object is in WeakMap!
+                                             parent_id = idMap.get( base );
+                                         }
                                      }
                                  }
                                  var new_id = "null";
@@ -203,6 +214,10 @@ if ( _window != undefined ) {
                                              }
                                              if ( new_id == undefined ){
                                                  new_id = "null";
+                                                 // check if object was frozen (check WeakMap for id)
+                                                 if ( idMap.has( value ) ) { // object is in WeakMap!
+                                                     new_id = idMap.get( value );
+                                                 }
                                              }
                                          }
                                  }
@@ -224,6 +239,12 @@ if ( _window != undefined ) {
                                              }
                                              if ( old_id == undefined ){
                                                  old_id = "null";
+                                                 // check if object was frozen (check WeakMap for id)
+                                                 // should this check (and the ones above) just check if obj is frozen
+                                                 // rather than checking if it is in the WeakMap?
+                                                 if ( idMap.has( prev ) ) { // object is in WeakMap!
+                                                     old_id = idMap.get( prev );
+                                                 }
                                              }
                                          }
                                  }
@@ -238,6 +259,14 @@ if ( _window != undefined ) {
 
                                      if ( parent_id == undefined ){
                                          parent_id = "null";
+                                         // check if object was frozen (check WeakMap for id)
+                                         if ( idMap.has( base ) ) { // object is in WeakMap!
+                                             parent_id = idMap.get( base );
+                                         }
+                                         // check if object was frozen (check WeakMap for id)
+                                         if ( idMap.has( base ) ) { // object is in WeakMap!
+                                             parent_id = idMap.get( base );
+                                         }
                                      }
                                  }
                                  if ( name != "_id" ){
@@ -248,7 +277,6 @@ if ( _window != undefined ) {
                                  base[name] = value;
                              }
                      };
-
 
     function makeProxy(base){
         if ( typeof(base) == "object" ){
@@ -264,22 +292,28 @@ if ( _window != undefined ) {
                 return base;
             }
 
-            // user defined object, so return new proxy with new id
-            var p = new Proxy( base, window_handler );
-            Object.defineProperty(p, '_base', {
-                enumerable: false,
-                configurable: false,
-                writable: false,
-                value: base
-            });
-            Object.defineProperty(p, '_id', {
-                enumerable: false,
-                configurable: false,
-                writable: false,
-                value: window.proxy_counter
-            });
-            window.proxy_counter++;
-            return p;
+            // user defined object, so add logging and return either proxy or base
+            if ( !Object.isFrozen(base) ) { // object not frozen, add logging props
+                var p = new Proxy( base, window_handler );
+                Object.defineProperty(p, '_base', {
+                    enumerable: false,
+                    configurable: false,
+                    writable: false,
+                    value: base
+                });
+                Object.defineProperty(p, '_id', {
+                    enumerable: false,
+                    configurable: false,
+                    writable: false,
+                    value: window.proxy_counter
+                });
+                window.proxy_counter++;
+                return p;
+            } else { // object frozen, add to weak map for logging
+                idMap.set( base, window.proxy_counter );
+                window.proxy_counter++;
+                return base;
+            }
         } else {
             // not an object, so return value
             return base;
