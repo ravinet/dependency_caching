@@ -3,6 +3,7 @@ import sys
 import json
 
 log = sys.argv[1]
+original_log = sys.argv[2]
 
 logs = []
 
@@ -27,6 +28,13 @@ scripts = {}
 
 # final dependencies (with read/write and write/write deps)
 final_dependencies = []
+
+# list of original dependencies on page (avoid having duplicates between new and old)
+original = []
+
+with open(original_log) as file1:
+    for line1 in file1:
+        original.append(line1[0:len(line1)-1])
 
 with open(log) as file:
     for line in file:
@@ -127,7 +135,7 @@ for script in scripts:
                         if ( (other_parent in scripts[script]) and (other_parent != parent) ):
                             write_write_deps.append((other_parent, parent))
             except:
-                print "KEY ERROR"
+                print >> sys.stderr, "KEY ERROR"
                 pass
 
 # add read/write and write/write deps to final_dependencies
@@ -160,7 +168,15 @@ for (a,b) in final_dependencies:
         parent_name = a
     if ( b == "/" ):
         child_name = b
-    #print "\"" + a.split("/")[-1] + "\" -> \"" + b.split("/")[-1] + "\";"
-    print "\"" + parent_name + "\" -> \"" + child_name + "\"[color=red];"
+    if ( "?" in parent_name ):
+        temp = parent_name
+        parent_name = temp.split("?")[0]
+    if ( "?" in child_name ):
+        temp = child_name
+        child_name = temp.split("?")[0]
+    new_line = "\"" + parent_name + "\" -> \"" + child_name + "\";"
+    if ( new_line not in original ):
+        #print "\"" + a.split("/")[-1] + "\" -> \"" + b.split("/")[-1] + "\";"
+        print "\"" + parent_name + "\" -> \"" + child_name + "\"[color=red];"
 
 #print "}"
