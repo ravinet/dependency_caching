@@ -1,0 +1,5 @@
+Files which should not be written (eg. mime-type in response header is wrong so we rewrite in wrong way)
+
+bleacher
+- save.TdEi9W
+- save.8pWjs4
