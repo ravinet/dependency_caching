@@ -3,14 +3,15 @@ import subprocess
 import sys
 import os
 
+# pip install beautifulsoup4 and html5lib
+
 html_file = sys.argv[1]
 new_html_file = sys.argv[2]
 
 temp_file_name = "temp.js"
 temp_file_rewrite = "temp_rewrite.js"
 
-soup = BeautifulSoup(open(html_file))
-
+soup = BeautifulSoup(open(html_file), "html5lib")
 for script in soup.find_all('script'):
 	soup_string = ""
 	if ( script.string != None ):

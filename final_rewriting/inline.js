@@ -1,29 +1,45 @@
 if ( _window != undefined ) {
 } else {
     var js_rewriting_logs = [];
-    window.onload = function(){
-        xmlhttp=new XMLHttpRequest();
-        xmlhttp.open("POST","http://dallas.csail.mit.edu",true);
-        var complete_log = "BEGIN LOG:\n";
+    window.addEventListener("load", function(){
+        var complete_log = "";
         for (i=0; i < window.js_rewriting_logs.length; i++ ){
             complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
         }
-        complete_log = complete_log + "END LOG (TOTAL: " + window.js_rewriting_logs.length + ")";
-        xmlhttp.send(complete_log);
-    }
+        window.top.postMessage(window.btoa(complete_log), "*");
+    });
 
     function get_caller(caller){
         var script_attributes = "";
         if ( caller == null ) {
-            script_attributes = "event_handler_or_callback";
+            longname = window.location.pathname;
+            if ( longname == "/" ) {
+                script_attributes = "/";
+            } else {
+                script_attributes = longname.split('/').pop();
+            }
+            if ( script_attributes == "" ) {
+                script_attributes = "event_handler_or_callback";
+            }
         } else {
             var attr = caller.attributes;
             if( attr.length == 0 ) {
-                script_attributes = "inline_script";
+                longname = window.location.pathname;
+                if ( longname == "/" ) {
+                    script_attributes = "/";
+                } else {
+                    script_attributes = longname.split('/').pop();
+                }
+                if ( script_attributes == "" ) {
+                    script_attributes = "inline_script";
+                }
             } else {
                 for(j=0; j < attr.length; j++) {
                     if( attr[j].name == "src" ) {
                         script_attributes = script_attributes.concat( attr[j].value );
+                    }
+                    if ( script_attributes == "" ) {
+                        script_attributes = window.location.pathname;
                     }
                 }
             }
@@ -61,7 +77,12 @@ if ( _window != undefined ) {
                    };
 
     function isNativeCodeFunc(f){
-        var srcCode = f.toString();
+        try { // wrap in try because some functions produce errors with toString?
+            var srcCode = f.toString();
+        } catch(err) {
+            console.log( "Error using toString() to check if function is native function" );
+            return false;
+        }
         if ( srcCode.indexOf("[native code]") != -1 ) {
             return true;
         } else {
@@ -79,6 +100,9 @@ if ( _window != undefined ) {
 
     // counter for proxies returned by makeProxy
     window.proxy_counter = 0;
+
+    // WeakMap for objects which are frozen
+    var idMap = new WeakMap();
 
     // object handler for proxies
     var window_handler = {
@@ -140,6 +164,10 @@ if ( _window != undefined ) {
                                              }
                                              if ( old_id == undefined ){
                                                  old_id = "null";
+                                                 // check if object was frozen (check WeakMap for id)
+                                                 if ( idMap.has( value ) ) { // object is in WeakMap!
+                                                     old_id = idMap.get( value );
+                                                 }
                                              }
                                          }
                                  }
@@ -150,6 +178,10 @@ if ( _window != undefined ) {
                                      parent_id = base._id;
                                      if ( parent_id == undefined ){
                                          parent_id = "null";
+                                         // check if object was frozen (check WeakMap for id)
+                                         if ( idMap.has( base ) ) { // object is in WeakMap!
+                                             parent_id = idMap.get( base );
+                                         }
                                      }
                                  }
                                  var new_id = "null";
@@ -187,6 +219,10 @@ if ( _window != undefined ) {
                                              }
                                              if ( new_id == undefined ){
                                                  new_id = "null";
+                                                 // check if object was frozen (check WeakMap for id)
+                                                 if ( idMap.has( value ) ) { // object is in WeakMap!
+                                                     new_id = idMap.get( value );
+                                                 }
                                              }
                                          }
                                  }
@@ -208,6 +244,12 @@ if ( _window != undefined ) {
                                              }
                                              if ( old_id == undefined ){
                                                  old_id = "null";
+                                                 // check if object was frozen (check WeakMap for id)
+                                                 // should this check (and the ones above) just check if obj is frozen
+                                                 // rather than checking if it is in the WeakMap?
+                                                 if ( idMap.has( prev ) ) { // object is in WeakMap!
+                                                     old_id = idMap.get( prev );
+                                                 }
                                              }
                                          }
                                  }
@@ -222,6 +264,14 @@ if ( _window != undefined ) {
 
                                      if ( parent_id == undefined ){
                                          parent_id = "null";
+                                         // check if object was frozen (check WeakMap for id)
+                                         if ( idMap.has( base ) ) { // object is in WeakMap!
+                                             parent_id = idMap.get( base );
+                                         }
+                                         // check if object was frozen (check WeakMap for id)
+                                         if ( idMap.has( base ) ) { // object is in WeakMap!
+                                             parent_id = idMap.get( base );
+                                         }
                                      }
                                  }
                                  if ( name != "_id" ){
@@ -232,7 +282,6 @@ if ( _window != undefined ) {
                                  base[name] = value;
                              }
                      };
-
 
     function makeProxy(base){
         if ( typeof(base) == "object" ){
@@ -248,22 +297,28 @@ if ( _window != undefined ) {
                 return base;
             }
 
-            // user defined object, so return new proxy with new id
-            var p = new Proxy( base, window_handler );
-            Object.defineProperty(p, '_base', {
-                enumerable: false,
-                configurable: false,
-                writable: false,
-                value: base
-            });
-            Object.defineProperty(p, '_id', {
-                enumerable: false,
-                configurable: false,
-                writable: false,
-                value: window.proxy_counter
-            });
-            window.proxy_counter++;
-            return p;
+            // user defined object, so add logging and return either proxy or base
+            if ( !Object.isFrozen(base) ) { // object not frozen, add logging props
+                var p = new Proxy( base, window_handler );
+                Object.defineProperty(p, '_base', {
+                    enumerable: false,
+                    configurable: false,
+                    writable: false,
+                    value: base
+                });
+                Object.defineProperty(p, '_id', {
+                    enumerable: false,
+                    configurable: false,
+                    writable: false,
+                    value: window.proxy_counter
+                });
+                window.proxy_counter++;
+                return p;
+            } else { // object frozen, add to weak map for logging
+                idMap.set( base, window.proxy_counter );
+                window.proxy_counter++;
+                return base;
+            }
         } else {
             // not an object, so return value
             return base;

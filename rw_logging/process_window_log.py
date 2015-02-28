@@ -3,6 +3,7 @@ import sys
 import json
 
 log = sys.argv[1]
+original_log = sys.argv[2]
 
 logs = []
 
@@ -28,10 +29,17 @@ scripts = {}
 # final dependencies (with read/write and write/write deps)
 final_dependencies = []
 
+# list of original dependencies on page (avoid having duplicates between new and old)
+original = []
+
+with open(original_log) as file1:
+    for line1 in file1:
+        original.append(line1[0:len(line1)-1])
+
 with open(log) as file:
     for line in file:
         # remove double quotes wrapping dictionary and also newline
-        curr = json.loads(line[1:len(line)-2])
+        curr = json.loads(line[0:len(line)-1])
         logs.append(curr)
         if curr.get('var') not in variables:
             variables[curr.get('PropName')] = 0
@@ -76,13 +84,15 @@ with open(log) as file:
                 if ( matching_write ):
                     set_write = 1
                     # this is the corresponding write
-                    dependency_edges.append((logs[n].get('script'), log.get('script')))
+                    #dependency_edges.append((logs[n].get('script'), log.get('script')))
                     if ( logs[n].get('script') in dependencies ):
                         # write is already a dependency
                         if ( log.get('script') not in dependencies[logs[n].get('script')] ): # add this read
                             dependencies.get(logs[n].get('script')).append(log.get('script'))
+                            dependency_edges.append((logs[n].get('script'), log.get('script')))
                     else:
                         dependencies[logs[n].get('script')] = [log.get('script')]
+                        dependency_edges.append((logs[n].get('script'), log.get('script')))
                     # add detailed dependency to detailed_deps with var causing dep
                     parent_child = (logs[n].get('script'), log.get('script'))
                     dep_var = (log.get('PropName'), log.get('ParentId'))
@@ -94,7 +104,8 @@ with open(log) as file:
                     break;
             if ( not set_write ):
                 # no corresponding write (dependency because it cannot be moved after a write!)
-                dependency_edges.append(("No_Write", log.get('script')))
+                if ( ("No_Write", log.get('script')) not in dependency_edges ):
+                    dependency_edges.append(("No_Write", log.get('script')))
                 if ( "No_Write" in dependencies ):
                         dependencies.get("No_Write").append(log.get('script'))
                 else:
@@ -115,19 +126,25 @@ for script in scripts:
         for parent in scripts[script]:
             curr_dep = (parent, script)
             # list all variables causing dependency- list of name, parentid tuples
-            var_deps = detailed_deps[curr_dep]
-            for dep in var_deps:
-                # for each dependency, see if any other parent writes to that and if so, add dep
-                for other_parent in variables_scripts[dep]:
-                    # check if other parent is also parent above, and if so, add dep
-                    if ( (other_parent in scripts[script]) and (other_parent != parent) ):
-                        write_write_deps.append((other_parent, parent))
+            try:
+                var_deps = detailed_deps[curr_dep]
+                for dep in var_deps:
+                    # for each dependency, see if any other parent writes to that and if so, add dep
+                    for other_parent in variables_scripts[dep]:
+                        # check if other parent is also parent above, and if so, add dep
+                        if ( (other_parent in scripts[script]) and (other_parent != parent) ):
+                            write_write_deps.append((other_parent, parent))
+            except:
+                print >> sys.stderr, "KEY ERROR"
+                pass
 
 # add read/write and write/write deps to final_dependencies
 for rw_dep in dependency_edges:
-    final_dependencies.append( rw_dep )
+    if ( rw_dep not in final_dependencies ):
+        final_dependencies.append( rw_dep )
 for ww_dep in write_write_deps:
-    final_dependencies.append( ww_dep)
+    if ( ww_dep not in final_dependencies ):
+        final_dependencies.append( ww_dep)
 
 #print these to stderr so that you can pipe output for the graph (below) easily
 print >> sys.stderr, "List of read/write deps:"
@@ -144,6 +161,22 @@ print >> sys.stderr, "\n\n"
 #print "concentrate=true;"
 
 for (a,b) in final_dependencies:
-  print "\"" + a + "\" -> \"" + b + "\";"
+  if ( a != b ):
+    parent_name = a.split("/")[-1]
+    child_name = b.split("/")[-1]
+    if ( a == "/" ):
+        parent_name = a
+    if ( b == "/" ):
+        child_name = b
+    if ( "?" in parent_name ):
+        temp = parent_name
+        parent_name = temp.split("?")[0]
+    if ( "?" in child_name ):
+        temp = child_name
+        child_name = temp.split("?")[0]
+    new_line = "\"" + parent_name + "\" -> \"" + child_name + "\";"
+    if ( new_line not in original ):
+        #print "\"" + a.split("/")[-1] + "\" -> \"" + b.split("/")[-1] + "\";"
+        print "\"" + parent_name + "\" -> \"" + child_name + "\"[color=red];"
 
 #print "}"

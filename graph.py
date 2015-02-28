@@ -105,7 +105,11 @@ for url, parent in zip(urls, parents):
     zipped.append( (url, parent) )
 
 def uuid(url):
-  return all_urls.index(url)
+  #return all_urls.index(url)
+  ret = url
+  if ( "?" in url ):
+    ret = url.split("?")[0]
+  return "\"" + ret + "\""
 
 for url, parent in zipped:
   print "{} -> {}{};".format(uuid(parent), uuid(url), "[color=red]" if uuid(url) in interesting_uuids else "")
