@@ -311,7 +311,16 @@ function hoistEnter(node, p) {
                 }
             }
         };
-    p.body.splice(hoistIndex++, 0, newLine);
+    if (p.type == "BlockStatement") {
+      p.body.splice(p.body.indexOf(node)+1, 0, newLine);
+    } else if (p.type == "IfStatement") {
+      if (node == p.consequent) 
+        p.consequent = {"type":"BlockStatement", "body": [node, newLine]}; 
+      else if (node == p.alternate) 
+        p.alternate = {"type":"BlockStatement", "body": [node, newLine]}; 
+    } else {
+      p.body.splice(hoistIndex++, 0, newLine);
+    }
   }
   //skip everything that makes new scope aside from program
   if (node.type != "Program" && createsNewScope(node)) {
