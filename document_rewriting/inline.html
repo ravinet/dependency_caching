@@ -1,0 +1,413 @@
+<iframe name="hidden" style="display:none"></iframe>
+<form action="http://localhost:8090" method="post" id="log_us" target="hidden" style="display:none">
+  <input id="POST-name" type="text" name="name">
+  <input type="submit">
+</form>
+<script>
+if ( _document != undefined ) {
+} else {
+    var js_rewriting_logs = [];
+    window.addEventListener("message", function(event){
+        if( window.self == window.top ) {
+            document.getElementById("POST-name").value = event.data;
+            document.getElementById("log_us").submit();
+        }
+    }, false);
+    window.addEventListener("load", function(){
+        var complete_log = "";
+        for (i=0; i < window.js_rewriting_logs.length; i++ ){
+            complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
+        }
+        document.getElementById("POST-name").value = window.btoa(complete_log);
+        document.getElementById("log_us").submit();
+    });
+
+    function get_caller(caller){
+        var script_attributes = "";
+        if ( caller == null ) {
+            longname = window.location.pathname;
+            if ( longname == "/" ) {
+                script_attributes = "/";
+            } else {
+                script_attributes = longname.split('/').pop();
+            }
+            if ( script_attributes == "" ) {
+                script_attributes = "event_handler_or_callback";
+            }
+        } else {
+            var attr = caller.attributes;
+            if( attr.length == 0 ) {
+                longname = window.location.pathname;
+                if ( longname == "/" ) {
+                    script_attributes = "/";
+                } else {
+                    script_attributes = longname.split('/').pop();
+                }
+                if ( script_attributes == "" ) {
+                    script_attributes = "inline_script";
+                }
+            } else {
+                for(j=0; j < attr.length; j++) {
+                    if( attr[j].name == "src" ) {
+                        script_attributes = script_attributes.concat( attr[j].value );
+                    }
+                    if ( script_attributes == "" ) {
+                        script_attributes = window.location.pathname;
+                    }
+                }
+            }
+        }
+        return script_attributes;
+    }
+
+    function get_child_path(curr){
+        child_path = [];
+        child_path_tags = [];
+        while ( curr.parentNode != null ) {
+           var children = curr.parentNode.children;
+           for (j = 0; j < children.length; j++){
+               if( children[j] == curr ){
+                   child_path.push(j);
+                   child_path_tags.push(children[j].tagName);
+               }
+           }
+           curr = curr.parentNode;
+        }
+        return [child_path, child_path_tags];
+    }
+
+
+    var _appendChild = Node.prototype.appendChild;
+    Node.prototype.appendChild = function(child){
+                                     var retVal = _appendChild.call(this, child);
+                                     var caller = get_caller(document.currentScript);
+                                     child_vals = get_child_path(this);
+                                     console.log( "Call to Node.prototype.appendChild() in " + caller + "; arg=" + child +
+                                                  "=" + child.id + "; node_modified=" + this.id + ": child_path=" +
+                                                  child_vals[0] + "; child_path_tags=" + child_vals[1]);
+                                     return retVal;
+                                 };
+    
+    var _removeChild = Node.prototype.removeChild;
+    Node.prototype.removeChild = function(child){
+                                     var retVal = _removeChild.call(this, child);
+                                     var caller = get_caller(document.currentScript);
+                                     child_vals = get_child_path(this);
+                                     console.log( "Call to Node.prototype.removeChild() in " + caller + "; arg="+ child +
+                                                  "=" + child.id + "; node_modified=" + this.id + ": child_path=" +
+                                                  child_vals[0] + "; child_path_tags=" + child_vals[1]);
+                                     return retVal;
+                                 };
+    
+    var _replaceChild = Node.prototype.replaceChild;
+    Node.prototype.replaceChild = function(newchild, oldchild){
+                                     var retVal = _replaceChild.call(this, newchild, oldchild);
+                                     var caller = get_caller(document.currentScript);
+                                     child_vals = get_child_path(this);
+                                     console.log( "Call to Node.prototype.replaceChild() in " + caller + "; args="+ newchild +
+                                                  "," + oldchild + "=" + newchild.id + "," + oldchild.id + "; node_modified=" +
+                                                  this.id + ": child_path=" + child_vals[0] + "; child_path_tags=" + child_vals[1]);
+                                     return retVal;
+                                 };
+    
+    var _insertBefore = Node.prototype.insertBefore;
+    Node.prototype.insertBefore = function(newchild, referencechild){
+                                     if (referencechild == undefined) { referencechild = null; }
+                                     var retVal = _insertBefore.call(this, newchild, referencechild);
+                                     var caller = get_caller(document.currentScript);
+                                     child_vals = get_child_path(this);
+                                     if ( referencechild == null ) {
+                                         console.log( "Call to Node.prototype.insertBefore() in " + caller + "; args="+ newchild +
+                                         "," + referencechild + "=" + newchild.id + ",null; node_modified=" +
+                                         this.id + ": child_path=" + child_vals[0] + "; child_path_tags=" + child_vals[1]);
+                                         return retVal;
+                                     }
+                                     console.log( "Call to Node.prototype.insertBefore() in " + caller + "; args="+ newchild +
+                                                  "," + referencechild + "=" + newchild.id + "," + referencechild.id + "; node_modified=" +
+                                                  this.id + ": child_path=" + child_vals[0] + "; child_path_tags=" + child_vals[1]);
+                                     return retVal;
+                                 };
+    
+    var _document = document;
+    var documentBindCache = {};
+    
+    function list_properties(properties){
+        var props = "";
+        for (var key in properties){
+            props = props.concat(key + ":" + properties[key] + ", ");
+        }
+        props = props.slice(0, props.length-2);
+        return props;
+    }
+    
+    function print_single_attr(child_attributes){
+        var final_attributes = "";
+        for (y=0; y<child_attributes.length; y++){
+            final_attributes = final_attributes.concat(child_attributes[y] + "; ");
+        }
+        final_attributes = final_attributes.slice(0, final_attributes.length-2);
+        return final_attributes;
+    }
+    
+    function print_multiple_attr(child_attributes){
+        var final_attributes = "";
+        for (var key in child_attributes){
+            final_attributes = final_attributes.concat(key + "-");
+            var current_attributes = child_attributes[key];
+            for (y=0; y<current_attributes.length; y++){
+                final_attributes = final_attributes.concat(current_attributes[y] + "; ");
+            }
+        }
+        final_attributes = final_attributes.slice(0, final_attributes.length-2);
+        return final_attributes;
+    }
+    
+    function print_nodes(parents){
+        var nodes = "";
+        for (var key in parents) {
+            nodes = nodes.concat(key +",");
+        }
+        nodes = nodes.slice(0, nodes.length-1);
+        return nodes;
+    }
+    
+    var document_handler = {
+        "get": function(base, name){
+                   var caller = get_caller( document.currentScript);
+                   if(name in documentBindCache){
+                       return documentBindCache[name];
+                   }
+                   
+                   var value = base[name];
+    
+                   if(typeof(value) == "function"){
+                       value = value.bind(base);
+                       // document.getElementById, document.querySelector- log id, return value, and parents
+                       if((name == "getElementById") || (name == "querySelector")){
+                           var documentProxy = function(id){
+                                 var retVal = value(id);
+                                 if ( retVal == null ) {
+                                     console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "; from=" + caller);
+                                     return retVal;
+                                 }
+                                 curr = retVal;
+                                 parents = [];
+                                 child_path = [];
+                                 child_path_tags = [];
+                                 child_path_attr = [];
+                                 while ( curr.parentNode != null ) {
+                                    parents.push(curr.parentNode.id);
+                                    var children = curr.parentNode.children;
+                                    for (j = 0; j < children.length; j++){
+                                        if( children[j] == curr ){
+                                            child_path.push(j);
+                                            child_path_tags.push(children[j].tagName);
+                                            var attr = children[j].attributes;
+                                            var attributes = [];
+                                            for( a=0; a<attr.length; a++){
+                                                attributes.push(attr[a].name + ":" + attr[a].value);
+                                            }
+                                            child_path_attr.push(attributes);
+                                        }
+                                    }
+                                    curr = curr.parentNode; 
+                                 }
+    
+                                 console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + retVal.id + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes=" + print_single_attr(child_path_attr) + "; from=" + caller );
+                                 return retVal;
+                           };
+                           documentBindCache[name] = documentProxy;
+                           return documentProxy;
+                       }
+    
+                       // document.elementFromPoint- log id, return value, and parents
+                       if(name == "elementFromPoint"){
+                           var caller = get_caller( document.currentScript);
+                           var documentProxy = function(p1, p2){
+                                 var retVal = value(p1, p2);
+                                 if ( retVal == null ) {
+                                     console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal + "; from=" + caller);
+                                     return retVal;
+                                 }
+                                 curr = retVal;
+                                 parents = [];
+                                 child_path = [];
+                                 child_path_tags = [];
+                                 child_path_attr = [];
+                                 while ( curr.parentNode != null ) {
+                                    parents.push(curr.parentNode.id);
+                                    var children = curr.parentNode.children;
+                                    for (j = 0; j < children.length; j++){
+                                        if( children[j] == curr ){
+                                            child_path.push(j);
+                                            child_path_tags.push(children[j].tagName);
+                                            var attr = children[j].attributes;
+                                            var attributes = [];
+                                            for( a=0; a<attr.length; a++){
+                                                attributes.push(attr[a].name + ":" + attr[a].value);
+                                            }
+                                            child_path_attr.push(attributes);
+                                        }
+                                    }
+                                    curr = curr.parentNode;
+                                 }
+    
+                                 console.log( "READ: document- " + name + ": arg=" + p1 + "," + p2 + "; return_value=" + retVal + "=" + retVal.id + "; child_path=" + child_path + "; child_path_tags=" + child_path_tags + "; child_path_attributes= " + print_single_attr(child_path_attr) + "; from=" + caller );
+                                 return retVal;
+                           };
+                           documentBindCache[name] = documentProxy;
+                           return documentProxy;
+                       }
+    
+                       // document.getElementsByName, document.getElementsByClassName, document.getElementsByTagName document.querySelectorAll
+                       // log name, return value, and for each node returned list node name and its parents
+                       if((name == "getElementsByName") || (name == "getElementsByClassName") || (name == "getElementsByTagName") || (name == "querySelectorAll")){
+                           var caller = get_caller( document.currentScript);
+                           var documentProxy = function(id){
+                                 var retVal = value(id);
+                                 curr = retVal;
+                                 parents = {};
+                                 child_paths = {};
+                                 child_path_tags = {};
+                                 child_path_attr = {};
+                                 for (i = 0; i < retVal.length; i++) {
+                                     curr_child_path = [];
+                                     curr_child_path_tags = [];
+                                     curr_parents = [];
+                                     curr_child_path_attr = [];
+                                     curr = retVal[i];
+                                     while ( curr.parentNode != null ) {
+                                         curr_parents.push(curr.parentNode.id);
+                                         var children = curr.parentNode.children;
+                                         for (j = 0; j < children.length; j++){
+                                             if( children[j] == curr ){
+                                                 curr_child_path.push(j);
+                                                 curr_child_path_tags.push(children[j].tagName);
+                                                 var attr = children[j].attributes;
+                                                 var attributes = [];
+                                                 for( a=0; a<attr.length; a++){
+                                                     attributes.push(attr[a].name + ":" + attr[a].value);
+                                                 }
+                                                 curr_child_path_attr.push(attributes);
+                                             }
+                                         }
+                                         curr = curr.parentNode;
+                                     }
+                                     parents[retVal[i].id] = curr_parents;
+                                     child_paths[retVal[i].id] = curr_child_path;
+                                     child_path_tags[retVal[i].id] = curr_child_path_tags;
+                                     child_path_attr[retVal[i].id] = curr_child_path_attr;
+                                 }
+    
+                                 console.log( "READ: document- " + name + ": arg=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags= " + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) + "; from=" + caller );
+                                 return retVal;
+                           };
+                           documentBindCache[name] = documentProxy;
+                           return documentProxy;
+                       }
+    
+                       // document.getElementsByTagNameNS
+                       // log name, return value, and for each node returned list node name and its parents
+                       if(name == "getElementsByTagNameNS"){
+                           var caller = get_caller( document.currentScript);
+                           var documentProxy = function(ns, id){
+                                 var retVal = value(ns, id);
+                                 curr = retVal;
+                                 parents = {};
+                                 child_paths = {};
+                                 child_path_tags = {};
+                                 child_path_attr = {};
+                                 for (i = 0; i < retVal.length; i++) {
+                                     curr_child_path = [];
+                                     curr_child_path_tags = [];
+                                     curr_parents = [];
+                                     curr_child_path_attr = [];
+                                     curr = retVal[i];
+                                     while ( curr.parentNode != null ) {
+                                         curr_parents.push(curr.parentNode.id);
+                                         var children = curr.parentNode.children;
+                                         for (j = 0; j < children.length; j++){
+                                             if( children[j] == curr ){
+                                                 curr_child_path.push(j);
+                                                 curr_child_path_tags.push(children[j].tagName);
+                                                 var attr = children[j].attributes;
+                                                 var attributes = [];
+                                                 for( a=0; a<attr.length; a++){
+                                                     attributes.push(attr[a].name + ":" + attr[a].value);
+                                                 }
+                                                 curr_child_path_attr.push(attributes);
+                                             }
+                                         }
+                                         curr = curr.parentNode;
+                                     }
+                                     parents[retVal[i].id] = curr_parents;
+                                     child_paths[retVal[i].id] = curr_child_path;
+                                     child_path_tags[retVal[i].id] = curr_child_path_tags;
+                                     child_path_attr[retVal[i].id] = curr_child_path_attr;
+                                 }
+    
+                                 console.log( "READ: document- " + name + ": arg= " + ns + "; tag=" + id + "; return_value=" + retVal + "=" + print_nodes(parents) + "; child_paths=" + list_properties(child_paths) + "; child_path_tags=" + list_properties(child_path_tags) + "; child_path_attributes=" + print_multiple_attr(child_path_attr) + "; from=" + caller );
+                                 return retVal;
+                           };
+                           documentBindCache[name] = documentProxy;
+                           return documentProxy;
+                       }
+    
+                       documentBindCache[name] = value;
+                   }
+                   return value;
+               },
+        "set": function(base, name, value){
+                   var caller = get_caller( document.currentScript);
+                   console.log("[WRITE][document]: " + name + "; from=" + caller );
+                   base[name] = value;
+                   if(name in documentBindCache){
+                       delete documentBindCache[name];
+                   }
+               }
+    };
+}
+
+    function makeProxy(base){
+        if ( typeof(base) == "object" ){
+            // already has id, so just return object
+            if ( base.hasOwnProperty("_id") ) {
+                return base;
+            }
+            // not a user defined object, so return value
+            if ( base instanceof Date || base instanceof RegExp ||
+                 base instanceof Array || base instanceof Number ||
+                 base instanceof Node || base instanceof Element ||
+                 base instanceof Error ){
+                return base;
+            }
+
+            // user defined object, so add logging and return either proxy or base
+            if ( !Object.isFrozen(base) ) { // object not frozen, add logging props
+                var p = new Proxy( base, window_handler );
+                Object.defineProperty(p, '_base', {
+                    enumerable: false,
+                    configurable: false,
+                    writable: false,
+                    value: base
+                });
+                Object.defineProperty(p, '_id', {
+                    enumerable: false,
+                    configurable: false,
+                    writable: false,
+                    value: window.proxy_counter
+                });
+                window.proxy_counter++;
+                return p;
+            } else { // object frozen, add to weak map for logging
+                idMap.set( base, window.proxy_counter );
+                window.proxy_counter++;
+                return base;
+            }
+        } else {
+            // not an object, so return value
+            return base;
+        }
+    }
+}
+<script>
