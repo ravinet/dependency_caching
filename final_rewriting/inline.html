@@ -90,7 +90,12 @@ if ( _window != undefined ) {
                    };
 
     function isNativeCodeFunc(f){
-        var srcCode = f.toString();
+        try { // wrap in try because some functions produce errors with toString?
+            var srcCode = f.toString();
+        } catch(err) {
+            console.log( "Error using toString() to check if function is native function" );
+            return false;
+        }
         if ( srcCode.indexOf("[native code]") != -1 ) {
             return true;
         } else {
