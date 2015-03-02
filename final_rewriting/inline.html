@@ -1,16 +1,12 @@
-<iframe name="hidden" style="display:none"></iframe>
-<form action="http://localhost:8090" method="post" id="log" target="hidden" style="display:none">
-  <input id="POST-name" type="text" name="name">
-  <input type="submit">
-</form>
 <script>
 if ( _window != undefined ) {
 } else {
     var js_rewriting_logs = [];
     window.addEventListener("message", function(event){
         if( window.self == window.top ) {
-            document.getElementById("POST-name").value = event.data;
-            document.getElementById("log").submit();
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "http://127.0.0.1:8090", true);
+            xmlhttp.send(event.data);
         }
     }, false);
     window.addEventListener("load", function(){
@@ -18,8 +14,10 @@ if ( _window != undefined ) {
         for (i=0; i < window.js_rewriting_logs.length; i++ ){
             complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
         }
-        document.getElementById("POST-name").value = window.btoa(complete_log);
-        document.getElementById("log").submit();
+        complete_log = complete_log + "END OF LOG";
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "http://127.0.0.1:8090", true);
+        xmlhttp.send(complete_log);
     });
 
     function get_caller(caller){

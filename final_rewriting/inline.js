@@ -6,7 +6,8 @@ if ( _window != undefined ) {
         for (i=0; i < window.js_rewriting_logs.length; i++ ){
             complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
         }
-        window.top.postMessage(window.btoa(complete_log), "*");
+        complete_log = complete_log + "END OF LOG";
+        window.top.postMessage(complete_log, "*");
     });
 
     function get_caller(caller){
