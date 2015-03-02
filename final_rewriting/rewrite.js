@@ -287,14 +287,6 @@ function leave(node){
 
 function hoistEnter(node, p) {
 
-  /*
-  if (node.type == "ExpressionStatement" &&
-      node.expression.type == "AssignmentExpression" &&
-      node.expression.right.type == "FunctionExpression") {
-    p.body.splice(hoistIndex, 0, node);
-    hoistIndex++;
-  }
-  */
   if (node.type == "FunctionDeclaration") {
     newLine = {
             "type": "ExpressionStatement",
@@ -319,18 +311,19 @@ function hoistEnter(node, p) {
                 }
             }
         };
-
-  p.body.splice(hoistIndex++, 0, newLine);
-  /*
-    for (var i = 0; i < p.body.length; i++) {
-      if (node == p.body[i]) {
-        p.body.splice(i+1, 0, newLine);
-        break;
-      }
+    if (p.type == "BlockStatement") {
+      p.body.splice(p.body.indexOf(node)+1, 0, newLine);
+    } else if (p.type == "IfStatement") {
+      if (node == p.consequent) 
+        p.consequent = {"type":"BlockStatement", "body": [node, newLine]}; 
+      else if (node == p.alternate) 
+        p.alternate = {"type":"BlockStatement", "body": [node, newLine]}; 
+    } else {
+      p.body.splice(hoistIndex++, 0, newLine);
     }
-  */
   }
-  if (node.type != "Program") {
+  //skip everything that makes new scope aside from program
+  if (node.type != "Program" && createsNewScope(node)) {
     this.skip();
   }
 }
