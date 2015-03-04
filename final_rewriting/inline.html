@@ -110,15 +110,24 @@ if ( _window != undefined ) {
         // check if thisArg is proxy (need better test for this!)
         var isProxy = false;
         if ( thisArg != null ) {
-            if ( typeof(thisArg.hasOwnProperty) != "function" ) {
-                // some objects passed as thisArg seem to have set hasOwnProperty to 'false' --> use 'in'
-                if ( ("_base" in thisArg) && ("_id" in thisArg) ) {
-                    isProxy = true;
+            try {
+                if ( typeof(thisArg.hasOwnProperty) != "function" ) {
+                    // some objects passed as thisArg seem to have set hasOwnProperty to 'false' --> use 'in'
+                    if ( ("_base" in thisArg) && ("_id" in thisArg) ) {
+                        isProxy = true;
+                    }
+                } else {
+                    if ( (thisArg.hasOwnProperty("_base")) && (thisArg.hasOwnProperty("_id")) ) {
+                        isProxy = true;
+                    }
                 }
-            } else {
-                if ( (thisArg.hasOwnProperty("_base")) && (thisArg.hasOwnProperty("_id")) ) {
-                    isProxy = true;
-                }
+            } catch(err) {
+                // likely an object from a different scope--> can't check _base!
+                // this means that the object would not have been modified with makeProxy
+                // since it would use makeProxy below which is also out of scope!
+                // so it can be a proxy but has no _base/_id property (must check weakmap)
+                isProxy = false;
+                console.log("Error checking whether object is proxy in apply wrapper");
             }
         }
 
