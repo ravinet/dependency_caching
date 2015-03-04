@@ -395,9 +395,10 @@ if ( _window != undefined ) {
                 window.proxy_counter++;
                 return p;
             } else { // object frozen, add to weak map for logging
-                idMap.set( base, window.proxy_counter );
+                var p = new Proxy( base, window_handler );
+                idMap.set( p, window.proxy_counter );
                 window.proxy_counter++;
-                return base;
+                return p;
             }
         } else {
             // not an object, so return value
