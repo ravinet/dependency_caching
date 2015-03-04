@@ -109,8 +109,17 @@ if ( _window != undefined ) {
 
         // check if thisArg is proxy (need better test for this!)
         var isProxy = false;
-        if ( (thisArg != null ) && (thisArg.hasOwnProperty("_base")) && (thisArg.hasOwnProperty("_id")) ) {
-            isProxy = true;
+        if ( thisArg != null ) {
+            if ( typeof(thisArg.hasOwnProperty) != "function" ) {
+                // some objects passed as thisArg seem to have set hasOwnProperty to 'false' --> use 'in'
+                if ( ("_base" in thisArg) && ("_id" in thisArg) ) {
+                    isProxy = true;
+                }
+            } else {
+                if ( (thisArg.hasOwnProperty("_base")) && (thisArg.hasOwnProperty("_id")) ) {
+                    isProxy = true;
+                }
+            }
         }
 
         var retVal;
