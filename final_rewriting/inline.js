@@ -230,7 +230,7 @@ if ( _window != undefined ) {
                                                  old_id = "null";
                                                  // check if object was frozen (check WeakMap for id)
                                                  if ( idMap.has( value ) ) { // object is in WeakMap!
-                                                     old_id = idMap.get( value );
+                                                     old_id = idMap.get( value )[0];
                                                  }
                                              }
                                          }
@@ -244,7 +244,7 @@ if ( _window != undefined ) {
                                          parent_id = "null";
                                          // check if object was frozen (check WeakMap for id)
                                          if ( idMap.has( base ) ) { // object is in WeakMap!
-                                             parent_id = idMap.get( base );
+                                             parent_id = idMap.get( base )[0];
                                          }
                                      }
                                  }
@@ -285,7 +285,7 @@ if ( _window != undefined ) {
                                                  new_id = "null";
                                                  // check if object was frozen (check WeakMap for id)
                                                  if ( idMap.has( value ) ) { // object is in WeakMap!
-                                                     new_id = idMap.get( value );
+                                                     new_id = idMap.get( value )[0];
                                                  }
                                              }
                                          }
@@ -312,7 +312,7 @@ if ( _window != undefined ) {
                                                  // should this check (and the ones above) just check if obj is frozen
                                                  // rather than checking if it is in the WeakMap?
                                                  if ( idMap.has( prev ) ) { // object is in WeakMap!
-                                                     old_id = idMap.get( prev );
+                                                     old_id = idMap.get( prev )[0];
                                                  }
                                              }
                                          }
@@ -330,11 +330,7 @@ if ( _window != undefined ) {
                                          parent_id = "null";
                                          // check if object was frozen (check WeakMap for id)
                                          if ( idMap.has( base ) ) { // object is in WeakMap!
-                                             parent_id = idMap.get( base );
-                                         }
-                                         // check if object was frozen (check WeakMap for id)
-                                         if ( idMap.has( base ) ) { // object is in WeakMap!
-                                             parent_id = idMap.get( base );
+                                             parent_id = idMap.get( base )[0];
                                          }
                                      }
                                  }
@@ -379,9 +375,11 @@ if ( _window != undefined ) {
                 window.proxy_counter++;
                 return p;
             } else { // object frozen, add to weak map for logging
-                idMap.set( base, window.proxy_counter );
+                var p = new Proxy( base, window_handler );
+                var map_val = [window.proxy_counter, base];
+                idMap.set( p, map_val );
                 window.proxy_counter++;
-                return base;
+                return p;
             }
         } else {
             // not an object, so return value
