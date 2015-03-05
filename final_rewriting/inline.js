@@ -64,6 +64,33 @@ if ( _window != undefined ) {
         return [child_path, child_path_tags];
     }
 
+    function check_if_proxy(val){
+        var isProxy = false;
+        var usemap = false;
+        try {
+            if ( typeof(val.hasOwnProperty) != "function" ) {
+                // some objects passed as thisArg seem to have set hasOwnProperty to 'false' --> use 'in'
+                if ( ("_base" in val) && ("_id" in val) ) {
+                    isProxy = true;
+                }
+            } else {
+                if ( (val.hasOwnProperty("_base")) && (val.hasOwnProperty("_id")) ) {
+                    isProxy = true;
+                }
+            }
+        } catch(err) {
+            // likely an object from a different scope--> can't check _base!
+            // this means that the object would not have been modified with makeProxy
+            // since it would use makeProxy below which is also out of scope!
+            // so it can be a proxy but has no _base/_id property (must check weakmap)
+            if ( baseMap.has(val) ) { // this is a proxy and we must get base from weakmap!
+                isProxy = true;
+                usemap = true;
+            }
+        }
+        return [isProxy, usemap];
+    }
+
     var _alert = window.alert;
     window.alert = function(arg){
                        var caller = get_caller( document.currentScript);
@@ -100,29 +127,9 @@ if ( _window != undefined ) {
         // check if thisArg is proxy (need better test for this!)
         var isProxy = false;
         var usemap = false;
+        var isProxy;
         if ( thisArg != null ) {
-            try {
-                if ( typeof(thisArg.hasOwnProperty) != "function" ) {
-                    // some objects passed as thisArg seem to have set hasOwnProperty to 'false' --> use 'in'
-                    if ( ("_base" in thisArg) && ("_id" in thisArg) ) {
-                        isProxy = true;
-                    }
-                } else {
-                    if ( (thisArg.hasOwnProperty("_base")) && (thisArg.hasOwnProperty("_id")) ) {
-                        isProxy = true;
-                    }
-                }
-            } catch(err) {
-                // likely an object from a different scope--> can't check _base!
-                // this means that the object would not have been modified with makeProxy
-                // since it would use makeProxy below which is also out of scope!
-                // so it can be a proxy but has no _base/_id property (must check weakmap)
-                if ( baseMap.has(thisArg) ) { // this is a proxy and we must get base from weakmap!
-                    isProxy = true;
-                    usemap = true;
-                }
-                console.log("Error checking whether object is proxy in apply wrapper");
-            }
+            isProxy = check_if_proxy(thisArg);
         }
 
         var retVal;
@@ -132,8 +139,8 @@ if ( _window != undefined ) {
         //Remember that "this" is a function object!
         this._apply = _apply;
 
-        if(isProxy){
-            if ( usemap ) { // can't call _base to get underlying base object
+        if(isProxy[0]){
+            if ( isProxy[1] ) { // can't call _base to get underlying base object
                 retVal = this._apply(baseMap.get(thisArg), argArray);
             } else {
                 retVal = this._apply(thisArg._base, argArray);
@@ -196,13 +203,8 @@ if ( _window != undefined ) {
                                      native_func = isNativeCodeFunc(value);
                                  }
                                  var bound_value;
-                                 if (native_func && (base == window || base instanceof XMLHttpRequest || base instanceof MutationObserver)) {
-                                     if( base == window ) {
-                                         bound_value = value.bind(_window);
-                                     }
-                                     if( base instanceof XMLHttpRequest || base instanceof MutationObserver) {
-                                         bound_value = value.bind(base._base);
-                                     }
+                                 if (native_func && (base == window)) {
+                                     bound_value = value.bind(_window);
                                      /*var props = Object.getOwnPropertyNames(value);
                                      // bind seems to not preserve prototype chain, so we restore it
                                      bound_value.prototype = value.prototype;
