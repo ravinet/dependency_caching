@@ -101,6 +101,64 @@ if ( _window != undefined ) {
         return [isProxy, usemap];
     }
 
+    var _mutationobserve = MutationObserver.prototype.observe;
+    MutationObserver.prototype.observe = function(target, options) {
+        // check whether this is proxy...if so, use _base or get base from weakmap
+        var isProxy = check_if_proxy(this);
+        var retVal;
+        if ( isProxy[0] ) { // this is a proxy
+            if ( isProxy[1] ) { // frozen object
+                retVal = _mutationobserve.call(baseMap.get(this), target, options);
+            } else {
+                retVal = _mutationobserve.call(this._base, target, options);
+            }
+        }
+        return retVal;
+    };
+
+    var _eventtargetadd = EventTarget.prototype.addEventListener;
+    EventTarget.prototype.addEventListener = function(type, listener, capture, untrusted) {
+        var untrusted_use = untrusted;
+        if ( untrusted == undefined ) {
+            // mdn page unclear about what defualt value is!
+            untrusted_use = true;
+        }
+        var capture_use = capture;
+        if ( capture == undefined ) {
+            capture_use = false;
+        }
+        // check whether this is proxy...if so, use _base or get base from weakmap
+        var isProxy = check_if_proxy(this);
+        var retVal;
+        if ( isProxy[0] ) { // this is a proxy
+            if ( isProxy[1] ) { // frozen object
+                retVal = _eventtargetadd.call(baseMap.get(this), type, listener, capture_use, untrusted_use);
+            } else {
+                retVal = _eventtargetadd.call(this._base, type, listener, capture_use, untrusted_use);
+            }
+        }
+        return retVal;
+    };
+
+    var _eventtargetremove = EventTarget.prototype.removeEventListener;
+    EventTarget.prototype.removeEventListener = function(type, listener, capture) {
+        var capture_use = capture;
+        if ( capture == undefined ) {
+            capture_use = false;
+        }
+        // check whether this is proxy...if so, use _base or get base from weakmap
+        var isProxy = check_if_proxy(this);
+        var retVal;
+        if ( isProxy[0] ) { // this is a proxy
+            if ( isProxy[1] ) { // frozen object
+                retVal = _eventtargetremove.call(baseMap.get(this), type, listener, capture_use);
+            } else {
+                retVal = _eventtargetremove.call(this._base, type, listener, capture_use);
+            }
+        }
+        return retVal;
+    };
+
     var _alert = window.alert;
     window.alert = function(arg){
                        var caller = get_caller( document.currentScript);
