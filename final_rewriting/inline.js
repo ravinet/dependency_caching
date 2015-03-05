@@ -99,16 +99,29 @@ if ( _window != undefined ) {
 
         // check if thisArg is proxy (need better test for this!)
         var isProxy = false;
+        var usemap = false;
         if ( thisArg != null ) {
-            if ( typeof(thisArg.hasOwnProperty) != "function" ) {
-                // some objects passed as thisArg seem to have set hasOwnProperty to 'false' --> use 'in'
-                if ( ("_base" in thisArg) && ("_id" in thisArg) ) {
-                    isProxy = true;
+            try {
+                if ( typeof(thisArg.hasOwnProperty) != "function" ) {
+                    // some objects passed as thisArg seem to have set hasOwnProperty to 'false' --> use 'in'
+                    if ( ("_base" in thisArg) && ("_id" in thisArg) ) {
+                        isProxy = true;
+                    }
+                } else {
+                    if ( (thisArg.hasOwnProperty("_base")) && (thisArg.hasOwnProperty("_id")) ) {
+                        isProxy = true;
+                    }
                 }
-            } else {
-                if ( (thisArg.hasOwnProperty("_base")) && (thisArg.hasOwnProperty("_id")) ) {
+            } catch(err) {
+                // likely an object from a different scope--> can't check _base!
+                // this means that the object would not have been modified with makeProxy
+                // since it would use makeProxy below which is also out of scope!
+                // so it can be a proxy but has no _base/_id property (must check weakmap)
+                if ( baseMap.has(thisArg) ) { // this is a proxy and we must get base from weakmap!
                     isProxy = true;
+                    usemap = true;
                 }
+                console.log("Error checking whether object is proxy in apply wrapper");
             }
         }
 
@@ -120,7 +133,11 @@ if ( _window != undefined ) {
         this._apply = _apply;
 
         if(isProxy){
-            retVal = this._apply(thisArg._base, argArray);
+            if ( usemap ) { // can't call _base to get underlying base object
+                retVal = this._apply(baseMap.get(thisArg), argArray);
+            } else {
+                retVal = this._apply(thisArg._base, argArray);
+            }
         } else{
             retVal = this._apply(thisArg, argArray);
         }
@@ -167,6 +184,8 @@ if ( _window != undefined ) {
 
     // WeakMap for objects which are frozen
     var idMap = new WeakMap();
+    // WeakMap to associate proxies with their frozen object bases (for wrappers)
+    var baseMap = new WeakMap();
 
     // object handler for proxies
     var window_handler = {
@@ -377,7 +396,8 @@ if ( _window != undefined ) {
             } else { // object frozen, add to weak map for logging
                 var p = new Proxy( base, window_handler );
                 var map_val = [window.proxy_counter, base];
-                idMap.set( p, map_val );
+                idMap.set( base, map_val );
+                baseMap.set( p, base );
                 window.proxy_counter++;
                 return p;
             }
