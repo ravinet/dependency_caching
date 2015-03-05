@@ -134,6 +134,21 @@ if ( _window != undefined ) {
         return retVal;
     };
 
+    var _xhrgetresponseheader = XMLHttpRequest.prototype.getResponseHeader;
+    XMLHttpRequest.prototype.getResponseHeader = function(header) {
+        // check whether this is proxy...if so, use _base or get base from weakmap
+        var isProxy = check_if_proxy(this);
+        var retVal;
+        if ( isProxy[0] ) { // this is a proxy
+            if ( isProxy[1] ) { // frozen object
+                retVal = _xhrgetresponseheader.call(baseMap.get(this), header);
+            } else {
+                retVal = _xhrgetresponseheader.call(this._base, header);
+            }
+        }
+        return retVal;
+    };
+
     var _xhrsend = XMLHttpRequest.prototype.send;
     XMLHttpRequest.prototype.send = function() {
         // check whether this is proxy...if so, use _base or get base from weakmap
