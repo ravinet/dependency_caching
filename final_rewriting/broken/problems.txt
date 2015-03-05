@@ -1,0 +1,17 @@
+Note that I am using Mozilla Firefox 35.0.1 (if you are using an older version, upgrade!)
+1) walmart
+- there should be no issues (with js, security, and logging enabled in the console)
+- problem is that the bottom of the walmart page (where it has a bunch of little links like Apply Now, Corporate, Our Story, etc.)
+does not show up on the rewritten page---why?
+
+2) go
+- there should be no issues (with js, security, and logging enabled in the console)
+- problem is that majority of the middle of the page is blank (eg. Disney Interactive Media)
+
+3) amazon
+- there are logging issues which are not present on the original page (the same issue
+is repeated many times---"too much recursion" in many different places)
+
+4) imgur
+- the only issue to worry about is the JS issue: "a is not a function" from burritos file
+- there are other errors/logs printed with logging but these are there on the original
