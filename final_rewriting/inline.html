@@ -159,6 +159,64 @@ if ( _window != undefined ) {
         return retVal;
     };
 
+    var _xhropen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+        var async_use = async;
+        if ( async == undefined ) {
+            async_use = true;
+        }
+        var user_use = user;
+        if ( user == undefined ) {
+            user_use = "";
+        }
+        var password_use = password;
+        if ( password == undefined ) {
+            password_use = "";
+        }
+
+        // check whether this is proxy...if so, use _base or get base from weakmap
+        var isProxy = check_if_proxy(this);
+        var retVal;
+        if ( isProxy[0] ) { // this is a proxy
+            if ( isProxy[1] ) { // frozen object
+                retVal = _xhropen.call(baseMap.get(this), method, url, async_use, user_use, password_use);
+            } else {
+                retVal = _xhropen.call(this._base, method, url, async_use, user_use, password_use);
+            }
+        }
+        return retVal;
+    };
+
+    var _xhrsetheader = XMLHttpRequest.prototype.setRequestHeader;
+    XMLHttpRequest.prototype.setRequestHeader = function(header, value) {
+        // check whether this is proxy...if so, use _base or get base from weakmap
+        var isProxy = check_if_proxy(this);
+        var retVal;
+        if ( isProxy[0] ) { // this is a proxy
+            if ( isProxy[1] ) { // frozen object
+                retVal = _xhrsetheader.call(baseMap.get(this), header, value);
+            } else {
+                retVal = _xhrsetheader.call(this._base, header, value);
+            }
+        }
+        return retVal;
+    };
+
+    var _xhrsend = XMLHttpRequest.prototype.send;
+    XMLHttpRequest.prototype.send = function() {
+        // check whether this is proxy...if so, use _base or get base from weakmap
+        var isProxy = check_if_proxy(this);
+        var retVal;
+        if ( isProxy[0] ) { // this is a proxy
+            if ( isProxy[1] ) { // frozen object
+                retVal = _xhrsend.call(baseMap.get(this));
+            } else {
+                retVal = _xhrsend.call(this._base);
+            }
+        }
+        return retVal;
+    };
+
     var _alert = window.alert;
     window.alert = function(arg){
                        var caller = get_caller( document.currentScript);
