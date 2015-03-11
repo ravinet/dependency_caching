@@ -621,14 +621,8 @@ if ( _document != undefined ) {
     var _getElementById = document.getElementById;
     document.getElementById = function(requested_id){
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _getElementById.call(this_val, requested_id);
+                                  var retVal = _getElementById.call(document, requested_id);
                                   child_vals = get_child_path(retVal);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.getElementById() in " + caller + "; args="+ requested_id  +
@@ -641,14 +635,8 @@ if ( _document != undefined ) {
     var _querySelector = document.querySelector;
     document.querySelector = function(requested_selectors){
                                   // log the method name, argument (selector name), returned list of children (path for each)
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _querySelector.call(this_val, requested_selectors);
+                                  var retVal = _querySelector.call(document, requested_selectors);
                                   child_vals = get_child_path(retVal);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.querySelector() in " + caller + "; args="+ requested_selectors  +
@@ -660,14 +648,8 @@ if ( _document != undefined ) {
     var _getElementsByName = document.getElementsByName;
     document.getElementsByName = function(requested_name){
                                   // log the method name, argument (name), returned list of children (path for each)
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _getElementsByName.call(this_val, requested_name);
+                                  var retVal = _getElementsByName.call(document, requested_name);
                                   var ret = get_multi_child_path(retVal);
                                   // wrap nodelist in proxy to log queries and wrap returned nodes
                                   var p = new Proxy( retVal, nodelist_handler );
@@ -686,14 +668,8 @@ if ( _document != undefined ) {
     var _getElementsByClassName = document.getElementsByClassName;
     document.getElementsByClassName = function(requested_class){
                                   // log the method name, argument (name), returned list of children (path for each)
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _getElementsByClassName.call(this_val, requested_class);
+                                  var retVal = _getElementsByClassName.call(document, requested_class);
                                   var ret = get_multi_child_path(retVal);
                                   // wrap nodelist in proxy to log queries and wrap returned nodes
                                   var p = new Proxy( retVal, nodelist_handler );
@@ -713,14 +689,8 @@ if ( _document != undefined ) {
     var _getElementsByTagName = document.getElementsByTagName;
     document.getElementsByTagName = function(requested_tag){
                                   // log the method name, argument (name), returned list of children (path for each)
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _getElementsByTagName.call(this_val, requested_tag);
+                                  var retVal = _getElementsByTagName.call(document, requested_tag);
                                   var ret = get_multi_child_path(retVal);
                                   // wrap nodelist in proxy to log queries and wrap returned nodes
                                   var p = new Proxy( retVal, nodelist_handler );
@@ -740,14 +710,8 @@ if ( _document != undefined ) {
     document.querySelectorAll = function(requested_selector){
                                   // log the method name, argument (selector name), returned list of children (path for each)
                                   // returns the nodes in top-to-bottom order (any match)---not in order of selectors
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _querySelectorAll.call(this_val, requested_selector);
+                                  var retVal = _querySelectorAll.call(document, requested_selector);
                                   var ret = get_multi_child_path(retVal);
                                   // wrap nodelist in proxy to log queries and wrap returned nodes
                                   var p = new Proxy( retVal, nodelist_handler );
@@ -766,14 +730,8 @@ if ( _document != undefined ) {
     var _getElementsByTagNameNS = document.getElementsByTagNameNS;
     document.getElementsByTagNameNS = function(namespace, requested_tag){
                                   // log the method name, argument (name), returned list of children (path for each)
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _getElementsByTagNameNS.call(this_val, namespace, requested_tag);
+                                  var retVal = _getElementsByTagNameNS.call(document, namespace, requested_tag);
                                   var ret = get_multi_child_path(retVal);
                                   // wrap nodelist in proxy to log queries and wrap returned nodes
                                   var p = new Proxy( retVal, nodelist_handler );
@@ -794,19 +752,13 @@ if ( _document != undefined ) {
                                   // tests whether comparenode and this node are equal (return bool)
                                   var arg1_val = newnode;
                                   var arg1_id = "null";
-                                  var this_id = "null";
-                                  var this_val = this;
                                   if ( newnode.hasOwnProperty("_id") ) {
                                       arg1_id = newnode._id;
                                       arg1_val = newnode._base;
                                   }
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
                                   var child_vals = get_child_path(arg1_val);
-                                  var retVal = _adoptNode.call(this_val, arg1_val);
+                                  var retVal = _adoptNode.call(document, arg1_val);
                                   console.log( "Call to document.adoptNode() in " + caller + "; arg_ids="+
                                                arg1_id + "; arg_node_child_path=" + child_vals[0] +
                                                "; child_path_tags=" + child_vals[1]);
@@ -817,14 +769,8 @@ if ( _document != undefined ) {
     var _caretPositionFromPoint = document.caretPositionFromPoint;
     document.caretPositionFromPoint = function(x, y){
                                   // log the method name, argument (name), returned list of children (path for each)
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _caretPositionFromPoint.call(this_val, x, y);
+                                  var retVal = _caretPositionFromPoint.call(document, x, y);
                                   // wrap caretPosition in proxy to log offsetNode call and wrap returned nodes
                                   var p = new Proxy( retVal, caret_handler );
                                   console.log( "Call to document.caretPositionFromPoint() in " + caller + "; args=" + x + "," + y);
@@ -834,56 +780,32 @@ if ( _document != undefined ) {
     var _open = document.open;
     document.open = function(){
                                   // clears document if it exists---write on document, or handle with document proxy?
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _open.call(this_val);
+                                  var retVal = _open.call(document);
                                   console.log( "Call to document.open() in " + caller);
                               };
 
     var _close = document.close;
     document.close = function(){
                                   // closes document---write on document, or handle with document proxy?
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _close.call(this_val);
+                                  var retVal = _close.call(document);
                                   console.log( "Call to document.close() in " + caller);
                               };
 
     var _clear = document.clear;
     document.clear = function(){
                                   // clears document---write on document, or handle with document proxy?
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _clear.call(this_val);
+                                  var retVal = _clear.call(document);
                                   console.log( "Call to document.clear() in " + caller);
                               };
 
     var _createAttribute = document.createAttribute;
     document.createAttribute = function(name){
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _createAttribute.call(this_val, name);
+                                  var retVal = _createAttribute.call(document, name);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.createAttribute() in " + caller + "; args="+ name +
                                   "; ret_id = " + p[1]);
@@ -894,14 +816,8 @@ if ( _document != undefined ) {
     document.createCDATASection = function(data){
                                   // only works with XML (HTML does not support CDATA sections)
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _createCDATASection.call(this_val, data);
+                                  var retVal = _createCDATASection.call(document, data);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.createCDATASection() in " + caller + "; args="+ data +
                                   "; ret_id = " + p[1]);
@@ -911,14 +827,8 @@ if ( _document != undefined ) {
     var _createComment = document.createComment;
     document.createComment = function(data){
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _createComment.call(this_val, data);
+                                  var retVal = _createComment.call(document, data);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.createComment() in " + caller + "; args="+ data +
                                   "; ret_id = " + p[1]);
@@ -928,14 +838,8 @@ if ( _document != undefined ) {
     var _createDocumentFragment = document.createDocumentFragment;
     document.createDocumentFragment = function(){
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _createDocumentFragment.call(this_val);
+                                  var retVal = _createDocumentFragment.call(document);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.createDocumentFragment() in " + caller + "; ret_id = " + p[1]);
                                   return p[0];
@@ -944,14 +848,8 @@ if ( _document != undefined ) {
     var _createElement = document.createElement;
     document.createElement = function(tagname){
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _createElement.call(this_val, tagname);
+                                  var retVal = _createElement.call(document, tagname);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.createElement() in " + caller + "; args=" + tagname
                                                + "; ret_id = " + p[1]);
@@ -961,14 +859,8 @@ if ( _document != undefined ) {
     var _createElementNS = document.createElementNS;
     document.createElementNS = function(namespaceURI, qualName){
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _createElementNS.call(this_val, namespaceURI, qualName);
+                                  var retVal = _createElementNS.call(document, namespaceURI, qualName);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.createElementNS() in " + caller + "; args=" + namespaceURI
                                                + "," + qualName + "; ret_id = " + p[1]);
@@ -978,31 +870,19 @@ if ( _document != undefined ) {
     var _createTextNode = document.createTextNode;
     document.createTextNode = function(data){
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _createTextNode.call(this_val, data);
+                                  var retVal = _createTextNode.call(document, data);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.createTextNode() in " + caller + "; args=" + data
                                                + "; ret_id = " + p[1]);
                                   return p[0];
                               };
 
-    var _createProcessingInstruction = document.createElementNS;
+    var _createProcessingInstruction = document.caretProcessingInstruction;
     document.createProcessingInstruction = function(target, data){
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _createProcessingInstruction.call(this_val, target, data);
+                                  var retVal = _createProcessingInstruction.call(document, target, data);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.createProcessingInstruction() in " + caller + "; args=" + target
                                                + "," + data + "; ret_id = " + p[1]);
@@ -1012,14 +892,8 @@ if ( _document != undefined ) {
     var _elementFromPoint = document.elementFromPoint;
     document.elementFromPoint = function(x, y){
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
-                                  var retVal = _elementFromPoint.call(this_val, x, y);
+                                  var retVal = _elementFromPoint.call(document, x, y);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.elementFromPoint() in " + caller + "; args=" + x
                                                + "," + y + "; ret_id = " + p[1]);
@@ -1029,14 +903,8 @@ if ( _document != undefined ) {
     var _createNodeIterator = document.createNodeIterator;
     document.createNodeIterator = function(root, whatToShow, filter){
                                   // log the method name, argument (id name), returned node child path
-                                  var this_id = "null";
-                                  var this_val = this;
                                   var arg1_id = "null";
                                   var arg1_val = root;
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   if ( root.hasOwnProperty("_id") ) {
                                       arg1_id = root._id;
                                       arg1_val = root._base;
@@ -1044,13 +912,13 @@ if ( _document != undefined ) {
                                   var caller = get_caller(document.currentScript);
                                   var retVal;
                                   if ( (whatToShow == undefined) && (filter == undefined) ) {
-                                      retVal = _createNodeIterator.call(this_val, arg1_val);
+                                      retVal = _createNodeIterator.call(document, arg1_val);
                                   } else if ( whatToShow == undefined ) {
-                                      var retVal = _createNodeIterator.call(this_val, arg1_val, filter);
+                                      var retVal = _createNodeIterator.call(document, arg1_val, filter);
                                   } else if ( filter == undefined ) {
-                                      var retVal = _createNodeIterator.call(this_val, arg1_val, whatToShow);
+                                      var retVal = _createNodeIterator.call(document, arg1_val, whatToShow);
                                   } else {
-                                      var retVal = _createNodeIterator.call(this_val, arg1_val, whatToShow, filter);
+                                      var retVal = _createNodeIterator.call(document, arg1_val, whatToShow, filter);
                                   }
                                   var p = new Proxy( retVal, nodeiterator_handler );
                                   Object.defineProperty(p, '_base', {
@@ -1068,19 +936,13 @@ if ( _document != undefined ) {
     document.createNSResolver = function(node){
                                   var arg1_val = node;
                                   var arg1_id = "null";
-                                  var this_id = "null";
-                                  var this_val = this;
                                   if ( node.hasOwnProperty("_id") ) {
                                       arg1_id = node._id;
                                       arg1_val = node._base;
                                   }
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
                                   var child_vals = get_child_path(arg1_val);
-                                  var retVal = _createNSResolver.call(this_val, arg1_val);
+                                  var retVal = _createNSResolver.call(document, arg1_val);
                                   console.log( "Call to document.createNSResolver() in " + caller + "; arg_ids="+
                                                arg1_id + "; arg_node_child_path=" + child_vals[0] +
                                                "; child_path_tags=" + child_vals[1]);
@@ -1093,19 +955,13 @@ if ( _document != undefined ) {
                                   // tests whether comparenode and this node are equal (return bool)
                                   var arg1_val = node;
                                   var arg1_id = "null";
-                                  var this_id = "null";
-                                  var this_val = this;
                                   if ( node.hasOwnProperty("_id") ) {
                                       arg1_id = node._id;
                                       arg1_val = node._base;
                                   }
-                                  if ( this.hasOwnProperty("_id") ) {
-                                      this_id = this._id;
-                                      this_val = this._base;
-                                  }
                                   var caller = get_caller(document.currentScript);
                                   var child_vals = get_child_path(arg1_val);
-                                  var retVal = _importNode.call(this_val, arg1_val, deep);
+                                  var retVal = _importNode.call(document, arg1_val, deep);
                                   var p = wrap_node_in_proxy(retVal);
                                   console.log( "Call to document.importNode() in " + caller + "; arg_ids="+
                                                arg1_id + "; arg_node_child_path=" + child_vals[0] +
@@ -1115,10 +971,21 @@ if ( _document != undefined ) {
 
 
     var _document = document;
+    var documentBindCache = {};
+    // document methods we have shims for---don't need document proxy to log
+    document_shims = ["getElementById", "querySelector", "getElementsByName", "getElementsByClassName", "getElementsByTagName",
+                      "querySelectorAll", "getElementsByTagNameNS", "adoptNode", "caretPositionFromPoint", "createAttribute",
+                      "createCDATASection", "createComment", "createDocumentFragment", "createElement", "createElementNS",
+                      "createTextNode", "createCaretProcessingInstruction", "elementFromPoint", "createNodeIterator",
+                      "createNSResolver", "importNode"]
     var document_handler = {
         "get": function(base, name){
                    var caller = get_caller( document.currentScript);
                    var value = base[name];
+                   if ( (name == "hasOwnProperty") || (name == "_id" ) ||
+                        (name == "_base") || (document_shims.indexOf(name) != -1)) {
+                       return value;
+                   }
                    var log = {'OpType': 'READ', 'PropName': name, 'script': caller}
                    console.log(JSON.stringify( log  ) );
                    return value;
