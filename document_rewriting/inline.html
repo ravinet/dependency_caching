@@ -63,6 +63,9 @@ if ( _document != undefined ) {
     }
 
     function print_single_attr(child_attributes){
+        if ( child_attributes == null ) {
+            return "";
+        }
         var final_attributes = "";
         for (y=0; y<child_attributes.length; y++){
             final_attributes = final_attributes.concat(child_attributes[y] + "; ");
@@ -72,6 +75,9 @@ if ( _document != undefined ) {
     }
 
     function print_multiple_attr(child_attributes){
+        if ( child_attributes == null ) {
+            return "";
+        }
         var final_attributes = "";
         for (var key in child_attributes){
             final_attributes = final_attributes.concat(key + "-");
@@ -94,6 +100,9 @@ if ( _document != undefined ) {
     }
 
     function get_child_path(curr){
+        if ( curr == null ) {
+            return [null, null];
+        }
         child_path = [];
         child_path_tags = [];
         while ( curr.parentNode != null ) {
@@ -110,6 +119,9 @@ if ( _document != undefined ) {
     }
 
     function get_multi_child_path(retVal){
+        if ( retVal == null ) {
+            return [null, null];
+        }
         curr = retVal;
         parents = {};
         child_paths = {};
@@ -267,6 +279,9 @@ if ( _document != undefined ) {
     function wrap_node_in_proxy(domnode) {
         // maybe check if it is an element?
         // if it has id, return
+        if ( domnode == null ) {
+            return [domnode, "null"];
+        }
         if ( domnode.hasOwnProperty("_id") ) {
             var retnode = new Proxy( domnode, node_handler );
             return [retnode, domnode._id];
