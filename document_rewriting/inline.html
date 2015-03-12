@@ -792,30 +792,6 @@ if ( _document != undefined ) {
                                   return p;
                               };
 
-    var _open = document.open;
-    document.open = function(){
-                                  // clears document if it exists---write on document, or handle with document proxy?
-                                  var caller = get_caller(document.currentScript);
-                                  var retVal = _open.call(document);
-                                  console.log( "Call to document.open() in " + caller);
-                              };
-
-    var _close = document.close;
-    document.close = function(){
-                                  // closes document---write on document, or handle with document proxy?
-                                  var caller = get_caller(document.currentScript);
-                                  var retVal = _close.call(document);
-                                  console.log( "Call to document.close() in " + caller);
-                              };
-
-    var _clear = document.clear;
-    document.clear = function(){
-                                  // clears document---write on document, or handle with document proxy?
-                                  var caller = get_caller(document.currentScript);
-                                  var retVal = _clear.call(document);
-                                  console.log( "Call to document.clear() in " + caller);
-                              };
-
     var _createAttribute = document.createAttribute;
     document.createAttribute = function(name){
                                   // log the method name, argument (id name), returned node child path
@@ -993,12 +969,54 @@ if ( _document != undefined ) {
                       "createCDATASection", "createComment", "createDocumentFragment", "createElement", "createElementNS",
                       "createTextNode", "createCaretProcessingInstruction", "elementFromPoint", "createNodeIterator",
                       "createNSResolver", "importNode"]
+
+    function isNativeCodeFunc(f){
+        try { // wrap in try because some functions produce errors with toString?
+            var srcCode = f.toString();
+        } catch(err) {
+            console.log( "Error using toString() to check if function is native function" );
+            return false;
+        }
+        if ( srcCode.indexOf("[native code]") != -1 ) {
+            return true;
+        } else {
+            return false;
+        }
+        //!!!This test should actually be fancier,
+        //and use a regular expression to ensure
+        //that the string "[native code]" appears
+        //in the declaration of the function signature,
+        //not as, e.g., a string literal that's assigned
+        //to a local function variable.
+    };
+
     var document_handler = {
         "get": function(base, name){
+                   // may need to handle pages that dynamically update themselves (eg. document.write())
                    var caller = get_caller( document.currentScript);
                    var value = base[name];
+
+                   var native_func = false;
+                   if ( typeof(value) == "function" ) {
+                       native_func = isNativeCodeFunc(value);
+                   }
+                   var bound_value;
+                   if (native_func && (base == document)) {
+                       bound_value = value.bind(_document);
+                       var curr_value = value;
+                       new_value = new Proxy(bound_value, {
+                       get: function(base1, name1){
+                           return curr_value[name1];
+                       },
+                       set: function(base1, name1, value1){
+                           curr_value[name1] = value1;
+                       }
+                       });
+                       value = new_value;
+                   }
                    if ( (name == "hasOwnProperty") || (name == "_id" ) ||
                         (name == "_base") || (document_shims.indexOf(name) != -1)) {
+                       // don't log since we will log in our shims!
                        return value;
                    }
                    var log = {'OpType': 'READ', 'PropName': name, 'script': caller}
