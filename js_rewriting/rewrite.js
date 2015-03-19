@@ -5,16 +5,15 @@ esprima = require('esprima');
 estraverse = require('estraverse');
 escodegen = require('escodegen');
 util = require('util');
-
 fs = require('fs');
 
 var code = fs.readFileSync(process.argv[2]);
 var ast = esprima.parse(code, {loc: true});
 //console.log(escodegen.generate(ast));
+//console.log("\n\n");
 
-var assignmentChain = [];
-var vars = {};
 var currentChain = "Program";
+var vars = {};
 vars[currentChain] = [];
 var anonFuncCounter = 0;
 
@@ -24,6 +23,7 @@ estraverse.traverse(ast, {
 });
 
 currentChain = "Program";
+var assignmentChain = [];
 var anonFuncCounter = 0;
 
 estraverse.traverse(ast, {
@@ -38,7 +38,6 @@ estraverse.traverse(ast, {
   leave: hoistLeave
 });
 
-//console.log(util.inspect(ast, {depth:null}));
 var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","expression":{"type":"CallExpression","callee":{"type":"FunctionExpression","id":null,"params":[],"defaults":[],"body":{"type":"BlockStatement","body":[]},"rest":null,"generator":false,"expression":false},"arguments":[]}}]};
 
 // take body from the initial source code and put into our new anonymous function
@@ -46,12 +45,12 @@ var body = ast.body;
 var window_proxy = {"type": "VariableDeclaration","declarations": [{"type": "VariableDeclarator","id": {"type": "Identifier","name": "window"},"init": {"type": "NewExpression","callee": {"type": "Identifier","name": "Proxy"},"arguments": [{"type": "Identifier","name": "_window"},{"type": "Identifier","name": "window_handler"}]}}],"kind": "var"};
 body.splice(0, 0, window_proxy);
 proxy_wrapper.body[0].expression.callee.body.body = body;
-
 ast = proxy_wrapper;
+
 output = escodegen.generate(ast).replace(/<\/script>/g, "<\\/script>");
-//console.log(output);
 outname = process.argv[3] ? process.argv[3] : "out";
 fs.writeFileSync(outname, output);
+//console.log(output);
 
 function createsNewScope(node){
   return node.type === 'FunctionDeclaration' ||
@@ -94,7 +93,6 @@ function preenter(node){
     vars[currentChain].push(node.param.name);
   }
 
-
   if (node.type === 'VariableDeclarator'){
     vars[currentChain].push(node.id.name);
   }
@@ -113,15 +111,6 @@ function preleave(node) {
   if (createsNewScope(node)){
     currentChain = previousChain(currentChain);
   }
-}
-
-function previousChain(chain) {
-  if (chain == "Program") {
-    return undefined;
-  }
-  chain = chain.split(",");
-  chain.pop();
-  return chain.join();
 }
 
 function enter(node, p){
@@ -264,29 +253,16 @@ function enter(node, p){
   }
 }
 
-function isObj(node) {
-  if (node == null) {
-    return false;
-  }
-  while (node.type === "MemberExpression") {
-    node = node.object; 
-  }
-  if (node.type === "Identifier" && node.name !== "console" && node.name !== "window" && node.name !== "arguments") {
-    return true;
-  }
-}
-
 function leave(node){
   if (createsNewScope(node)){
     var currentAssignment = assignmentChain.pop();
     checkForGlobals(currentAssignment, currentChain);
-    printScope(node, currentChain);
+    //printScope(node, currentChain);
     currentChain = previousChain(currentChain);
   }
 }
 
 function hoistEnter(node, p) {
-
   if (node.type == "FunctionDeclaration") {
     newLine = {
             "type": "ExpressionStatement",
@@ -331,15 +307,36 @@ function hoistEnter(node, p) {
 function hoistLeave(node) {
 }
 
+function previousChain(chain) {
+  if (chain == "Program") {
+    return undefined;
+  }
+  chain = chain.split(",");
+  chain.pop();
+  return chain.join();
+}
+
+function isObj(node) {
+  if (node == null) {
+    return false;
+  }
+  while (node.type === "MemberExpression") {
+    node = node.object; 
+  }
+  if (node.type === "Identifier" && node.name !== "console" && node.name !== "window" && node.name !== "arguments") {
+    return true;
+  }
+}
+
 function printScope(node, currentChain){
   var varsDisplay = vars[currentChain].join(', ');
   if (node.type === 'Program'){
-    //console.log('Variables declared in the global scope:', varsDisplay);
+    console.log('Variables declared in the global scope:', varsDisplay);
   } else{
     if (node.id && node.id.name){
-      //console.log('Variables declared in the function ' + node.id.name + '():', varsDisplay);
+      console.log('Variables declared in the function ' + node.id.name + '():', varsDisplay);
     } else{
-      //console.log('Variables declared in anonymous function:', varsDisplay);
+      console.log('Variables declared in anonymous function:', varsDisplay);
     }
   }
 }
