@@ -11,7 +11,7 @@ def func(head, parent_path=[]):
   for child in head.children:
     if isinstance(child, element.Tag):
       if child.name == "script":
-        child['log'] = ', '.join(log) 
+        child['log'] = '\n'.join(log) 
         del log[:]
       child_path = [index] + parent_path
       prop_name = "$$dom." + ".".join([str(num) for num in child_path])
