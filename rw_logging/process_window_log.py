@@ -69,7 +69,7 @@ with open(log) as file:
             elif ( log.get('NewValId') == "null" and log.get('OldValId') == "null"): # read on val
                 is_val = 1
             else:
-                print >> sys.stderr, "ERROR IN READ: " + logs[n]
+                print >> sys.stderr, "ERROR IN READ: " + str(logs[i])
             # find corresponding write by going up to top of log
             for n in range(i-1,-1,-1):
                 matching_write = 0
