@@ -2752,6 +2752,29 @@ if ( _document != undefined ) {
         return retVal;
     };
 
+    var _mozMatchesSelector = Element.prototype.mozMatchesSelector;
+    Element.prototype.mozMatchesSelector = function(selectors){
+        var this_id = "null";
+        var this_val = this;
+        if ( this.hasOwnProperty("_id") ) {
+            this_id = this._id;
+            this_val = this._base;
+        } else {
+            console.log( "Calling matches() on DOM node which is not proxy" );
+        }
+        var this_child_vals = get_child_path(this_val);
+        var this_child_path = print_nodes(this_child_vals[0]);
+        var caller = get_caller(document.currentScript);
+        var child_vals = get_child_path(this_val);
+        var retVal = _mozMatchesSelector.call(this_val, selectors);
+
+        // read on 'this' node's 'attributes' property
+        var log1 = {'OpType': 'READ', 'method': "mozMatchesSelector", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
+        console.log(JSON.stringify(log1));
+
+        return retVal;
+    };
+
     var __querySelector = Element.prototype.querySelector;
     Element.prototype.querySelector = function(selectors){
         var this_id = "null";
@@ -3010,6 +3033,67 @@ if ( _document != undefined ) {
 
         return retVal;
     };
+
+
+    // shims for other methods which use DOM nodes
+
+    var _getComputedStyle = window.getComputedStyle;
+    window.getComputedStyle = function(arg, pseudoElt){
+        var arg1_id = "null";
+        var arg1_val = arg;
+        if ( arg.hasOwnProperty("_id") ) {
+            arg1_id = arg._id;
+            arg1_val = arg._base;
+        }
+
+        var arg1_child_vals = get_child_path(arg1_val);
+        var arg1_child_path = print_nodes(arg1_child_vals[0]);
+        var retVal = "";
+        var caller = get_caller( document.currentScript);
+        if ( pseudoElt == undefined ) {
+            retVal = _getComputedStyle.call(window, arg1_val);
+        } else {
+            retVal = _getComputedStyle.call(window, arg1_val, pseudoElt);
+        }
+        var log1 = {'OpType': 'READ', 'method': "getComputedStyle", 'PropName': dom_var_name(arg1_child_path), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_child_path, 'script': caller}
+        console.log(JSON.stringify(log1));
+        return retVal;
+    };
+
+    var _addEventListener = EventTarget.prototype.addEventListener;
+    EventTarget.prototype.addEventListener = function(type, listener, useCapture, wantsUntrusted){
+        var arg1_val = type;
+        var arg2_val = listener;
+        var arg3_val = useCapture;
+        var arg4_val = wantsUntrusted;
+        if ( useCapture == undefined ) {
+            arg3_val = false;
+        }
+        if ( wantsUntrusted == undefined ) {
+            arg4_val = true;
+        }
+        var retVal = "";
+        if ( this instanceof HTMLDocument ) {
+            retVal = _addEventListener.call(document, arg1_val, arg2_val, arg3_val, arg4_val);
+        } else {
+            var this_val = this;
+            var this_id = "null";
+            if ( this.hasOwnProperty("_id") ) {
+                this_val = this._base;
+                this_id = this._id;
+            }
+            var this_child_vals = get_child_path(this_val);
+            var this_child_path = print_nodes(this_child_vals[0]);
+            var caller = get_caller( document.currentScript);
+            retVal = _addEventListener.call(this_val, arg1_val, arg2_val, arg3_val, arg4_val);
+            if ( this_id != "null" ) {
+                var log1 = {'OpType': 'WRITE', 'method': "addEventListener", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
+                console.log(JSON.stringify(log1));
+            }
+        }
+        return retVal;
+    }
+
 
     var _document = document;
     var documentBindCache = {};
