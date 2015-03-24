@@ -6,8 +6,6 @@ must also check to make sure that the NodeProp fields match (both can be null)
 if they don't match, then it is not a dependency because the properties changed/read are not same
 '''
 
-
-
 import os
 import sys
 import json
@@ -19,7 +17,7 @@ logs = []
 
 # dictionary with key as write and value as array of reads which depend on it
 dependencies = {}
-# same info as dependencies---key is (parent,child) tuple and value is tuple of variable and parentid
+# same info as dependencies---key is (parent,child) tuple and value is tuple of variable and id
 detailed_deps = {}
 
 # same info as dependencies, but only stores edges as tuple pairs
@@ -30,7 +28,7 @@ dependency_edges = []
 # dictionary with variables and number of reads per each
 variables = {}
 
-# dictionary with tuples of variable and parentID and list of scripts which write to them per each
+# dictionary with tuples of variable and id and list of scripts which write to them per each
 variables_scripts = {}
 
 # list of scripts and there parents (values added after processing entire log)
@@ -62,39 +60,29 @@ with open(log) as file:
             scripts[log.get('script')] = []
         # check if WRITE (if so, add to list of which vars get written by which scripts)
         if ( log.get('OpType') == "WRITE" ): # script writes to some var/obj
-            curr = (log.get('PropName'), log.get('ParentId'))
+            curr = (log.get('PropName'), log.get('id'))
             if ( curr in variables_scripts ): # variable already has been written
                 if ( log.get('script') not in variables_scripts[curr] ): # script has written to it before!
                     variables_scripts[curr].append( log.get('script') )
             else: # new variable
                 variables_scripts[curr] = [log.get('script')]
-        # check if READ (can be object with ids, or non-object)
-        is_object = 0
-        is_val = 0
+        # check if READ
         if ( log.get('OpType') == "READ" ):
             set_write = 0
             variables[log.get('PropName')] += 1
-            if ( log.get('NewValId') == "null" and log.get('OldValId') != "null"): # read on object
-                is_object = 1
-            elif ( log.get('NewValId') == "null" and log.get('OldValId') == "null"): # read on val
-                is_val = 1
-            else:
-                print >> sys.stderr, "ERROR IN READ: " + str(logs[i])
             # find corresponding write by going up to top of log
             for n in range(i-1,-1,-1):
                 matching_write = 0
                 if ( logs[n].get('OpType') == "WRITE" ):
-                    if ( is_val ):
-                        if ( logs[n].get('PropName') == log.get('PropName') and logs[n].get('ParentId') == log.get('ParentId')):
-                            matching_write = 1
-                    if ( is_object ):
-                        if ( logs[n].get('NewValId') == log.get('OldValId') ):
-                            # don't need to consider parentId since each object has unique id?
+                    # matching write can be from id or childpath (or both)
+                    # may be worth checking to make sure both match if both are present (if present, should match)
+                    if ( (logs[n].get('PropName') == log.get('PropName')) or (logs[n].get('id') == log.get('id'))):
+                        # only a dependency if the property written matches the property read (or if either read or write are of entire node)
+                        if ( (logs[n].get('NodeProp') == log.get('NodeProp')) or (logs[n].get('NodeProp') == "null" ) or (log.get('NodeProp') == "null") ):
                             matching_write = 1
                 if ( matching_write ):
                     set_write = 1
                     # this is the corresponding write
-                    #dependency_edges.append((logs[n].get('script'), log.get('script')))
                     if ( logs[n].get('script') in dependencies ):
                         # write is already a dependency
                         if ( log.get('script') not in dependencies[logs[n].get('script')] ): # add this read
@@ -105,7 +93,7 @@ with open(log) as file:
                         dependency_edges.append((logs[n].get('script'), log.get('script')))
                     # add detailed dependency to detailed_deps with var causing dep
                     parent_child = (logs[n].get('script'), log.get('script'))
-                    dep_var = (log.get('PropName'), log.get('ParentId'))
+                    dep_var = (log.get('PropName'), log.get('id'))
                     if ( parent_child in detailed_deps ):
                         if ( dep_var not in detailed_deps[parent_child]):
                             detailed_deps[parent_child].append( dep_var )
