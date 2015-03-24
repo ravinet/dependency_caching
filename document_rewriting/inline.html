@@ -170,22 +170,35 @@ if ( _document != undefined ) {
     var wrapped_functions = ["appendChild", "replaceChild", "removeChild", "insertBefore", "hasOwnProperty",
                              "compareDocumentPosition", "cloneNode", "contains", "hasChildNodes",
                              "isDefaultNamespace", "isEqualNode", "lookupNamespaceURI", "normalize",
-                             "getElementsByClassName"];
+                             "getElementsByClassName", "getAttribute", "getAttributeNS", "getAttributeNode",
+                             "getAttributeNodeNS", "getBoundingClientRect", "getClientRects", "getElementsByClassName",
+                             "getElementsByTagName", "getElementsByTagNameNS", "hasAttribute", "hasAttributeNS", "hasAttributes",
+                             "insertAdjacentHTML", "querySelector", "querySelectorAll", "matches", "removeAttribute",
+                             "removeAttributeNS", "removeAttributeNode", "setAttribute", "setAttributeNS",
+                             "setAttributeNode", "setAttributeNodeNS", "lookupPrefix"];
 
     // proxy to track recursive reads/writes for DOM nodes
     node_handler = {
         "get": function(base, name){
                     var value = base[name];
                     var caller = get_caller(document.currentScript);
+                    var base_child_vals = get_child_path(base);
+                    var base_child_path = print_nodes(base_child_vals[0]);
                     if ( (name != "_base") && (name != "_id")  && (wrapped_functions.indexOf(name) == -1) ) {
-                        console.log("READ on DOM node with ID: " + base._id + " from: " + caller);
+                        var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(base_child_path), 'NodeProp': name, 'id': base._id, 'child_path': base_child_path, 'script': caller}
+                        console.log(JSON.stringify(log3));
                     }
                     return value;
         },
         "set": function(base, name, value){
                     base[name] = value;
                     var caller = get_caller(document.currentScript);
-                    console.log("WRITE to DOM node with ID: " + base._id + " from: " + caller);
+                    var base_child_vals = get_child_path(base);
+                    var base_child_path = print_nodes(base_child_vals[0]);
+                    if ( (name != "_base") && (name != "_id") ) {
+                        var log3 = {'OpType': 'WRITE', 'method': "null", 'PropName': dom_var_name(base_child_path), 'NodeProp': name, 'id': base._id, 'child_path': base_child_path, 'script': caller}
+                        console.log(JSON.stringify(log3));
+                    }
         }
     };
 
@@ -193,11 +206,15 @@ if ( _document != undefined ) {
     caret_handler = {
         "get": function(base, name){
                     var value = base[name];
-                    var caller = get_caller(document.currentScript);
                     if ( name == "offsetNode" ) {
                         var p = wrap_node_in_proxy(value);
-                        console.log("READ on DOM node from caretPosition: ret_id=" + p[1] + " from: " + caller);
-                        return p[0];
+                        var caller = get_caller(document.currentScript);
+                        if ( value != null ) {
+                            var ret_child_vals = get_child_path(value);
+                            var ret_child_path = print_nodes(ret_child_vals[0]);
+                            var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
+                            console.log(JSON.stringify(log3));
+                        }
                     }
                     return value;
         }
@@ -223,7 +240,10 @@ if ( _document != undefined ) {
                                 return retVal;
                             } else {
                                 var p = wrap_node_in_proxy(retVal);
-                                console.log( "Call to NodeList.item() in " + caller + "arg=" + i + "; ret_id = " + p[1]);
+                                var ret_child_vals = get_child_path(retVal);
+                                var ret_child_path = print_nodes(ret_child_vals[0]);
+                                var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
+                                console.log(JSON.stringify(log3));
                                 return p[0];
                             }
                        };
@@ -231,7 +251,12 @@ if ( _document != undefined ) {
                     } else {
                         if ( (index != "_base") && (index != "_id")  && (wrapped_functions.indexOf(index) == -1) && (typeof(value) == "object")) {
                             var p = wrap_node_in_proxy(value);
-                            console.log("Read from NodeList: index=" + index + " from: " + caller + "; ret_id: " + p[1]);
+                            if ( value != null ) {
+                                var ret_child_vals = get_child_path(p[0]._base);
+                                var ret_child_path = print_nodes(ret_child_vals[0]);
+                                var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
+                                console.log(JSON.stringify(log3));
+                            }
                             return p[0];
                         }
                         return value;
@@ -260,7 +285,10 @@ if ( _document != undefined ) {
                                 return retVal;
                             } else {
                                 var p = wrap_node_in_proxy(retVal);
-                                console.log( "Call to NodeIterator method in " + caller + "; ret_id = " + p[1]);
+                                var ret_child_vals = get_child_path(retVal);
+                                var ret_child_path = print_nodes(ret_child_vals[0]);
+                                var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
+                                console.log(JSON.stringify(log3));
                                 return p[0];
                             }
                        };
@@ -268,7 +296,12 @@ if ( _document != undefined ) {
                     } else {
                         if ( (iterator_nodeprops.indexOf(name) != -1 ) && (typeof(value) == "object")) {
                             var p = wrap_node_in_proxy(value);
-                            console.log("READ on DOM node from node iterator: ret_id=" + p[1] + " from: " + caller);
+                            if ( value != null ) {
+                                var ret_child_vals = get_child_path(p[0]._base);
+                                var ret_child_path = print_nodes(ret_child_vals[0]);
+                                var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
+                                console.log(JSON.stringify(log3));
+                            }
                             return p[0];
                         }
                         return value;
@@ -387,7 +420,12 @@ if ( _document != undefined ) {
     function get_subtree_nodes(argnode) {
         // returns a list of nodes and list of ids which are in subtree of argument node
         // wraps nodes in proxies (and assigns ids) if not previously wrapped (ids are preserved outside of this function)
-        var walker = document.createTreeWalker(argnode);
+        arg_val = argnode;
+        if ( argnode.hasOwnProperty("_id") ) {
+            arg_val = argnode._base;
+        }
+
+        var walker = document.createTreeWalker(arg_val);
 
         var node;
         var subtree_ids = [];
@@ -417,7 +455,12 @@ if ( _document != undefined ) {
     function get_subtree_textnodes(argnode) {
         // returns a list of nodes and ids for textnodes in subtree of argument node
         // wraps nodes in proxies (and assigns ids) if not previously wrapped (ids are preserved outside of this function)
-        var walker = document.createTreeWalker(argnode);
+        arg_val = argnode;
+        if ( argnode.hasOwnProperty("_id") ) {
+            arg_val = argnode._base;
+        }
+
+        var walker = document.createTreeWalker(arg_val);
 
         var node;
         var subtree_ids = [];
@@ -549,12 +592,14 @@ if ( _document != undefined ) {
             }
             nextsiblings = get_next_siblings(arg1_val);
             var t = arg1_val.parentNode;
-            if ( t.hasOwnProperty("_id") ) {
-                arg_prevparent_id = t._id;
-                arg_prevparent_childpath = print_nodes(get_child_path(t._base)[0]);
-            } else {
-                arg_prevparent_id = "null";
-                arg_prevparent_childpath = print_nodes(get_child_path(t)[0]);
+            if ( t != null ) {
+                if ( t.hasOwnProperty("_id") ) {
+                    arg_prevparent_id = t._id;
+                    arg_prevparent_childpath = print_nodes(get_child_path(t._base)[0]);
+                } else {
+                    arg_prevparent_id = "null";
+                    arg_prevparent_childpath = print_nodes(get_child_path(t)[0]);
+                }
             }
             var f = t.firstChild; var l = t.lastChild;
             var f_val = f; var l_val = l;
@@ -715,12 +760,14 @@ if ( _document != undefined ) {
         }
         nextsiblings = get_next_siblings(arg1_val);
         var t = arg1_val.parentNode;
-        if ( t.hasOwnProperty("_id") ) {
-            arg_prevparent_id = t._id;
-            arg_prevparent_childpath = print_nodes(get_child_path(t._base)[0]);
-        } else {
-            arg_prevparent_id = "null";
-            arg_prevparent_childpath = print_nodes(get_child_path(t)[0]);
+        if ( t != null ) {
+            if ( t.hasOwnProperty("_id") ) {
+                arg_prevparent_id = t._id;
+                arg_prevparent_childpath = print_nodes(get_child_path(t._base)[0]);
+            } else {
+                arg_prevparent_id = "null";
+                arg_prevparent_childpath = print_nodes(get_child_path(t)[0]);
+            }
         }
 
         var prevchild_id = get_prev_child_id(arg1_val);
@@ -2482,7 +2529,7 @@ if ( _document != undefined ) {
         }
         var this_child_vals = get_child_path(this_val);
         var this_child_path = print_nodes(this_child_vals[0]);
-        var thisparent = this_val.parentNode();
+        var thisparent = this_val.parentNode;
         var thisparent_val = thisparent;
         var thisparent_id = "null";
         var thisparent_child_path = "";
@@ -2528,7 +2575,7 @@ if ( _document != undefined ) {
             log_this_last_child = true;
         }
 
-        nextsiblings = get_next_siblings(arg1_val);
+        nextsiblings = get_next_siblings(this_val);
 
         // log writes to 'this' nodes and nextSiblings and their subtrees before the call
         // write on 'this' node
