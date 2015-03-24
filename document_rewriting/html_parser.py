@@ -22,4 +22,5 @@ def func(head, parent_path=[]):
 
 func(soup)
 
-print soup.prettify()
+print soup.prettify().encode('utf-8')
+

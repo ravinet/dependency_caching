@@ -18,25 +18,25 @@ var currentChain = "Program";
 vars[currentChain] = [];
 var anonFuncCounter = 0;
 
-estraverse.traverse(ast, {
-  enter: preenter,
-  leave: preleave
-});
+//estraverse.traverse(ast, {
+//  enter: preenter,
+//  leave: preleave
+//});
 
 currentChain = "Program";
 var anonFuncCounter = 0;
 
-estraverse.traverse(ast, {
-  enter: enter,
-  leave: leave
-});
+//estraverse.traverse(ast, {
+//  enter: enter,
+//  leave: leave
+//});
 
 var hoistIndex = 0;
 
-estraverse.traverse(ast, {
-  enter: hoistEnter,
-  leave: hoistLeave
-});
+//estraverse.traverse(ast, {
+//  enter: hoistEnter,
+//  leave: hoistLeave
+//});
 
 //console.log(util.inspect(ast, {depth:null}));
 var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","expression":{"type":"CallExpression","callee":{"type":"FunctionExpression","id":null,"params":[],"defaults":[],"body":{"type":"BlockStatement","body":[]},"rest":null,"generator":false,"expression":false},"arguments":[]}}]};
@@ -242,26 +242,26 @@ function enter(node, p){
       currentAssignment.push(node.init);
     }
   }
-  // the "proxied" hack is to avoid recursion
-  if (node.type === 'NewExpression' && node.proxied == null) {
-    newexpression = {"type": node.type, "callee": node.callee, "arguments":node.arguments, "proxied":true};
-    node.type = "CallExpression";
-    node.callee = {"type": "Identifier", "name": "makeProxy" };
-    node.arguments = [newexpression];
-  }
-
-  // the "proxied" hack is to avoid recursion
-  if (node.type === 'ObjectExpression' && node.proxied == null) {
-   for (var i = 0; i < node.properties.length; i++){
-      if (isObj(node.properties[i].value)) {
-        currentAssignment.push(node.properties[i].value);
-      }
-    }
-    objexpression = {"type": node.type, "properties": node.properties, "proxied":true};
-    node.type = "CallExpression";
-    node.callee = {"type": "Identifier", "name": "makeProxy" };
-    node.arguments = [objexpression];
-  }
+//  // the "proxied" hack is to avoid recursion
+//  if (node.type === 'NewExpression' && node.proxied == null) {
+//    newexpression = {"type": node.type, "callee": node.callee, "arguments":node.arguments, "proxied":true};
+//    node.type = "CallExpression";
+//    node.callee = {"type": "Identifier", "name": "makeProxy" };
+//    node.arguments = [newexpression];
+//  }
+//
+//  // the "proxied" hack is to avoid recursion
+//  if (node.type === 'ObjectExpression' && node.proxied == null) {
+//   for (var i = 0; i < node.properties.length; i++){
+//      if (isObj(node.properties[i].value)) {
+//        currentAssignment.push(node.properties[i].value);
+//      }
+//    }
+//    objexpression = {"type": node.type, "properties": node.properties, "proxied":true};
+//    node.type = "CallExpression";
+//    node.callee = {"type": "Identifier", "name": "makeProxy" };
+//    node.arguments = [objexpression];
+//  }
 }
 
 function isObj(node) {
