@@ -2792,7 +2792,6 @@ if ( _document != undefined ) {
         var retVal = __querySelector.call(this_val, selectors);
         var ret = get_multi_child_path(retVal);
         // wrap nodelist in proxy to log queries and wrap returned nodes
-        var p = null;
         // log reads on 'this' node and its subtree
         var log6 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
         console.log(JSON.stringify(log6));
@@ -2800,30 +2799,17 @@ if ( _document != undefined ) {
             var log6 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
             console.log(JSON.stringify(log6));
         }
-        if ( retVal != null ) {
-            var p = new Proxy( retVal, nodelist_handler );
-            Object.defineProperty(p, '_base', {
-                enumerable: false,
-                configurable: false,
-                writable: false,
-                value: retVal
-            });
-
-            // read on every returned node
-            for ( i = 0; i < retVal.length; i++ ) {
-                var curr_id = "null";
-                var curr_val = retVal[i];
-                if ( retVal[i].hasOwnProperty("_id") ) {
-                    curr_id = retVal[i]._id;
-                    curr_val = retVal[i]._base;
-                }
-                var child_vals = get_child_path(curr_val);
-                var child_path = print_nodes(child_vals[0]);
-                var log4 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': curr_id, 'child_path': child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
-            }
+        var p = wrap_node_in_proxy(retVal);
+        // read on returned node
+        var ret_val = p[0];
+        if ( p[0].hasOwnProperty("_id") ) {
+            ret_val = p[0]._base;
         }
-        return p;
+        var child_vals = get_child_path(ret_val);
+        var child_path = print_nodes(child_vals[0]);
+        var log4 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': p[1], 'child_path': child_path, 'script': caller}
+        console.log(JSON.stringify(log4));
+        return p[0];
     };
 
     var __querySelectorAll = Element.prototype.querySelectorAll;
@@ -3130,7 +3116,7 @@ if ( _document != undefined ) {
         if ( this_id != "null" ) {
             var this_child_vals = get_child_path(this_val);
             var this_child_path = print_nodes(this_child_vals[0]);
-            var caller = get_caller( document.currentScript);
+            var caller = get_caller(document.currentScript);
             var log1 = {'OpType': 'WRITE', 'method': "reset", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
             console.log(JSON.stringify(log1));
         }
@@ -3158,7 +3144,69 @@ if ( _document != undefined ) {
 
         var retVal = _observe.call(this, arg1_val, options);
         return retVal;
+
     }
+
+    var ___querySelector = DocumentFragment.prototype.querySelector;
+    DocumentFragment.prototype.querySelector = function(selectors){
+        var this_id = "null";
+        var this_val = this;
+        if ( this.hasOwnProperty("_id") ) {
+            this_id = this._id;
+            this_val = this._base;
+        }
+        var this_child_vals = get_child_path(this_val);
+        var this_child_path = print_nodes(this_child_vals[0]);
+        var prior_subtree = get_subtree_nodes(this_val);
+        var caller = get_caller(document.currentScript);
+        var retVal = ___querySelector.call(this_val, selectors);
+        var ret = get_multi_child_path(retVal);
+        // wrap nodelist in proxy to log queries and wrap returned nodes
+        // log reads on 'this' node and its subtree
+        var log6 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
+        console.log(JSON.stringify(log6));
+        for ( i = 0; i < prior_subtree[1].length; i++ ) {
+            var log6 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
+            console.log(JSON.stringify(log6));
+        }
+        var p = wrap_node_in_proxy(retVal);
+        return p[0];
+    };
+
+    var ___querySelectorAll = DocumentFragment.prototype.querySelectorAll;
+    DocumentFragment.prototype.querySelectorAll = function(selectors){
+        var this_id = "null";
+        var this_val = this;
+        if ( this.hasOwnProperty("_id") ) {
+            this_id = this._id;
+            this_val = this._base;
+        }
+        var this_child_vals = get_child_path(this_val);
+        var this_child_path = print_nodes(this_child_vals[0]);
+        var prior_subtree = get_subtree_nodes(this_val);
+        var caller = get_caller(document.currentScript);
+        var retVal = ___querySelectorAll.call(this_val, selectors);
+        var ret = get_multi_child_path(retVal);
+        // wrap nodelist in proxy to log queries and wrap returned nodes
+        var p = null;
+        // log reads on 'this' node and its subtree
+        var log6 = {'OpType': 'READ', 'method': "querySelectorAll", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
+        console.log(JSON.stringify(log6));
+        for ( i = 0; i < prior_subtree[1].length; i++ ) {
+            var log6 = {'OpType': 'READ', 'method': "querySelectorAll", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
+            console.log(JSON.stringify(log6));
+        }
+        if ( retVal != null ) {
+            var p = new Proxy( retVal, nodelist_handler );
+            Object.defineProperty(p, '_base', {
+                enumerable: false,
+                configurable: false,
+                writable: false,
+                value: retVal
+            });
+        }
+        return p;
+    };
 
 
     var _document = document;
