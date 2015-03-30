@@ -1,6 +1,6 @@
 if ( _document != undefined ) {
 } else {
-    var js_rewriting_logs = [];
+    //var js_rewriting_logs = [];
     //window.addEventListener("load", function(){
     //    var complete_log = "";
     //    for (i=0; i < window.js_rewriting_logs.length; i++ ){
@@ -9,6 +9,7 @@ if ( _document != undefined ) {
     //    complete_log = complete_log + "END OF LOG";
     //    window.top.postMessage(complete_log, "*");
     //});
+
     function get_caller(caller){
         var script_attributes = "";
         if ( caller == null ) {
@@ -136,12 +137,10 @@ if ( _document != undefined ) {
         child_paths_no_id = [];
         child_path_tags_no_id = [];
         child_path_tags = {};
-        child_path_attr = {};
         for (i = 0; i < retVal.length; i++) {
             curr_child_path = [];
             curr_child_path_tags = [];
             curr_parents = [];
-            curr_child_path_attr = [];
             curr = retVal[i];
             while ( curr.parentNode != null ) {
                 curr_parents.push(curr.parentNode.id);
@@ -150,12 +149,6 @@ if ( _document != undefined ) {
                     if( children[j] == curr ){
                         curr_child_path.push(j);
                         curr_child_path_tags.push(children[j].tagName);
-                        var attr = children[j].attributes;
-                        var attributes = [];
-                        for( a=0; a<attr.length; a++){
-                            attributes.push(attr[a].name + ":" + attr[a].value);
-                        }
-                        curr_child_path_attr.push(attributes);
                     }
                 }
                 curr = curr.parentNode;
@@ -165,7 +158,6 @@ if ( _document != undefined ) {
             child_paths_no_id.push(curr_child_path);
             child_path_tags[retVal[i].id] = curr_child_path_tags;
             child_path_tags_no_id.push(curr_child_path_tags);
-            child_path_attr[retVal[i].id] = curr_child_path_attr;
         }
         ret = [child_paths_no_id, child_path_tags_no_id];
         return ret;
@@ -189,10 +181,10 @@ if ( _document != undefined ) {
     node_handler = {
         "get": function(base, name){
                     var value = base[name];
-                    var caller = get_caller(document.currentScript);
-                    var base_child_vals = get_child_path(base);
-                    var base_child_path = print_nodes(base_child_vals[0]);
                     if ( (name != "_base") && (name != "_id")  && (wrapped_functions.indexOf(name) == -1) ) {
+                        var caller = get_caller(document.currentScript);
+                        var base_child_vals = get_child_path(base);
+                        var base_child_path = print_nodes(base_child_vals[0]);
                         var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(base_child_path), 'NodeProp': name, 'id': base._id, 'child_path': base_child_path, 'script': caller}
                         window.js_rewriting_logs.push(JSON.stringify(log3));
                     }
@@ -200,10 +192,10 @@ if ( _document != undefined ) {
         },
         "set": function(base, name, value){
                     base[name] = value;
-                    var caller = get_caller(document.currentScript);
-                    var base_child_vals = get_child_path(base);
-                    var base_child_path = print_nodes(base_child_vals[0]);
                     if ( (name != "_base") && (name != "_id") ) {
+                        var caller = get_caller(document.currentScript);
+                        var base_child_vals = get_child_path(base);
+                        var base_child_path = print_nodes(base_child_vals[0]);
                         var log3 = {'OpType': 'WRITE', 'method': "null", 'PropName': dom_var_name(base_child_path), 'NodeProp': name, 'id': base._id, 'child_path': base_child_path, 'script': caller}
                         window.js_rewriting_logs.push(JSON.stringify(log3));
                     }
@@ -216,8 +208,8 @@ if ( _document != undefined ) {
                     var value = base[name];
                     if ( name == "offsetNode" ) {
                         var p = wrap_node_in_proxy(value);
-                        var caller = get_caller(document.currentScript);
                         if ( value != null ) {
+                            var caller = get_caller(document.currentScript);
                             var ret_child_vals = get_child_path(value);
                             var ret_child_path = print_nodes(ret_child_vals[0]);
                             var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
@@ -3070,6 +3062,36 @@ if ( _document != undefined ) {
         return retVal;
     }
 
+    var _removeEventListener = EventTarget.prototype.removeEventListener;
+    EventTarget.prototype.removeEventListener = function(type, listener, useCapture){
+        var arg1_val = type;
+        var arg2_val = listener;
+        var arg3_val = useCapture;
+        if ( useCapture == undefined ) {
+            arg3_val = false;
+        }
+        var retVal = "";
+        if ( this instanceof HTMLDocument ) {
+            retVal = _addEventListener.call(document, arg1_val, arg2_val, arg3_val);
+        } else {
+            var this_val = this;
+            var this_id = "null";
+            if ( this.hasOwnProperty("_id") ) {
+                this_val = this._base;
+                this_id = this._id;
+            }
+            var this_child_vals = get_child_path(this_val);
+            var this_child_path = print_nodes(this_child_vals[0]);
+            var caller = get_caller( document.currentScript);
+            retVal = _removeEventListener.call(this_val, arg1_val, arg2_val, arg3_val);
+            if ( this_id != "null" ) {
+                var log1 = {'OpType': 'WRITE', 'method': "removeEventListener", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
+                console.log(JSON.stringify(log1));
+            }
+        }
+        return retVal;
+    }
+
     var _focus = HTMLElement.prototype.focus;
     HTMLElement.prototype.focus = function() {
         var this_val = this;
@@ -3197,6 +3219,72 @@ if ( _document != undefined ) {
         }
         return p;
     };
+
+    var _blur = HTMLElement.prototype.blur;
+    HTMLElement.prototype.blur = function() {
+        var this_val = this;
+        var this_id = "null";
+
+        if ( this.hasOwnProperty("_id") ) {
+            this_id = this._id;
+            this_val = this._base;
+        }
+
+        if ( this_id != "null" ) {
+            var this_child_vals = get_child_path(this_val);
+            var this_child_path = print_nodes(this_child_vals[0]);
+            var caller = get_caller(document.currentScript);
+            var log1 = {'OpType': 'WRITE', 'method': "blur", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
+            console.log(JSON.stringify(log1));
+        }
+
+        var retVal = _blur.call(this_val);
+        return retVal;
+    }
+
+    var _getContext = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function(contextType, contextAttributes) {
+        var this_val = this;
+        var this_id = "null";
+
+        if ( this.hasOwnProperty("_id") ) {
+            this_id = this._id;
+            this_val = this._base;
+        }
+
+        if ( this_id != "null" ) {
+            var this_child_vals = get_child_path(this_val);
+            var this_child_path = print_nodes(this_child_vals[0]);
+            var caller = get_caller(document.currentScript);
+            var log1 = {'OpType': 'READ', 'method': "getContext", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
+            console.log(JSON.stringify(log1));
+        }
+
+        var retVal = _getContext.call(this_val, contextType, contextAttributes);
+        return retVal;
+    }
+
+    var _checkValidity = HTMLInputElement.prototype.checkValidity;
+    HTMLInputElement.prototype.checkValidity = function() {
+        var this_val = this;
+        var this_id = "null";
+
+        if ( this.hasOwnProperty("_id") ) {
+            this_id = this._id;
+            this_val = this._base;
+        }
+
+        if ( this_id != "null" ) {
+            var this_child_vals = get_child_path(this_val);
+            var this_child_path = print_nodes(this_child_vals[0]);
+            var caller = get_caller(document.currentScript);
+            var log1 = {'OpType': 'READ', 'method': "checkValidity", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
+            console.log(JSON.stringify(log1));
+        }
+
+        var retVal = _checkValidity.call(this_val);
+        return retVal;
+    }
 
 
     var _document = document;
