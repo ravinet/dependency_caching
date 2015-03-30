@@ -2789,7 +2789,7 @@ if ( _document != undefined ) {
         var this_child_path = print_nodes(this_child_vals[0]);
         var prior_subtree = get_subtree_nodes(this_val);
         var caller = get_caller(document.currentScript);
-        var retVal = __querySelectors.call(this_val, selectors);
+        var retVal = __querySelector.call(this_val, selectors);
         var ret = get_multi_child_path(retVal);
         // wrap nodelist in proxy to log queries and wrap returned nodes
         var p = null;
@@ -3091,6 +3091,72 @@ if ( _document != undefined ) {
                 console.log(JSON.stringify(log1));
             }
         }
+        return retVal;
+    }
+
+    var _focus = HTMLElement.prototype.focus;
+    HTMLElement.prototype.focus = function() {
+        var this_val = this;
+        var this_id = "null";
+
+        if ( this.hasOwnProperty("_id") ) {
+            this_id = this._id;
+            this_val = this._base;
+        }
+
+        if ( this_id != "null" ) {
+            var this_child_vals = get_child_path(this_val);
+            var this_child_path = print_nodes(this_child_vals[0]);
+            var caller = get_caller( document.currentScript);
+            var log1 = {'OpType': 'WRITE', 'method': "focus", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
+            console.log(JSON.stringify(log1));
+        }
+
+        var retVal = _focus.call(this_val);
+        return retVal;
+
+    }
+
+    var _reset = HTMLFormElement.prototype.reset;
+    HTMLFormElement.prototype.reset = function() {
+        var this_val = this;
+        var this_id = "null";
+
+        if ( this.hasOwnProperty("_id") ) {
+            this_id = this._id;
+            this_val = this._base;
+        }
+
+        if ( this_id != "null" ) {
+            var this_child_vals = get_child_path(this_val);
+            var this_child_path = print_nodes(this_child_vals[0]);
+            var caller = get_caller( document.currentScript);
+            var log1 = {'OpType': 'WRITE', 'method': "reset", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
+            console.log(JSON.stringify(log1));
+        }
+
+        var retVal = _reset.call(this_val);
+        return retVal;
+
+    }
+
+    var _observe = MutationObserver.prototype.observe;
+    MutationObserver.prototype.observe = function(target, options) {
+        var arg1_val = target;
+        var arg1_id = "null";
+
+        if ( target.hasOwnProperty("_id") ) {
+            arg1_id = target._id;
+            arg1_val = target._base;
+        }
+
+        var arg1_child_vals = get_child_path(arg1_val);
+        var arg1_child_path = print_nodes(arg1_child_vals[0]);
+        var caller = get_caller(document.currentScript);
+        var log1 = {'OpType': 'READ', 'method': "observe", 'PropName': dom_var_name(arg1_child_path), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_child_path, 'script': caller}
+        console.log(JSON.stringify(log1));
+
+        var retVal = _observe.call(this, arg1_val, options);
         return retVal;
     }
 
