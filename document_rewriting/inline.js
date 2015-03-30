@@ -1,6 +1,6 @@
 if ( _document != undefined ) {
 } else {
-    //var js_rewriting_logs = [];
+    var js_rewriting_logs = [];
     //window.addEventListener("load", function(){
     //    var complete_log = "";
     //    for (i=0; i < window.js_rewriting_logs.length; i++ ){
@@ -194,7 +194,7 @@ if ( _document != undefined ) {
                     var base_child_path = print_nodes(base_child_vals[0]);
                     if ( (name != "_base") && (name != "_id")  && (wrapped_functions.indexOf(name) == -1) ) {
                         var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(base_child_path), 'NodeProp': name, 'id': base._id, 'child_path': base_child_path, 'script': caller}
-                        console.log(JSON.stringify(log3));
+                        window.js_rewriting_logs.push(JSON.stringify(log3));
                     }
                     return value;
         },
@@ -205,7 +205,7 @@ if ( _document != undefined ) {
                     var base_child_path = print_nodes(base_child_vals[0]);
                     if ( (name != "_base") && (name != "_id") ) {
                         var log3 = {'OpType': 'WRITE', 'method': "null", 'PropName': dom_var_name(base_child_path), 'NodeProp': name, 'id': base._id, 'child_path': base_child_path, 'script': caller}
-                        console.log(JSON.stringify(log3));
+                        window.js_rewriting_logs.push(JSON.stringify(log3));
                     }
         }
     };
@@ -221,7 +221,7 @@ if ( _document != undefined ) {
                             var ret_child_vals = get_child_path(value);
                             var ret_child_path = print_nodes(ret_child_vals[0]);
                             var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
-                            console.log(JSON.stringify(log3));
+                            window.js_rewriting_logs.push(JSON.stringify(log3));
                         }
                     }
                     return value;
@@ -251,7 +251,7 @@ if ( _document != undefined ) {
                                 var ret_child_vals = get_child_path(retVal);
                                 var ret_child_path = print_nodes(ret_child_vals[0]);
                                 var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
-                                console.log(JSON.stringify(log3));
+                                window.js_rewriting_logs.push(JSON.stringify(log3));
                                 return p[0];
                             }
                        };
@@ -263,7 +263,7 @@ if ( _document != undefined ) {
                                 var ret_child_vals = get_child_path(p[0]._base);
                                 var ret_child_path = print_nodes(ret_child_vals[0]);
                                 var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
-                                console.log(JSON.stringify(log3));
+                                window.js_rewriting_logs.push(JSON.stringify(log3));
                             }
                             return p[0];
                         }
@@ -296,7 +296,7 @@ if ( _document != undefined ) {
                                 var ret_child_vals = get_child_path(retVal);
                                 var ret_child_path = print_nodes(ret_child_vals[0]);
                                 var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
-                                console.log(JSON.stringify(log3));
+                                window.js_rewriting_logs.push(JSON.stringify(log3));
                                 return p[0];
                             }
                        };
@@ -308,7 +308,7 @@ if ( _document != undefined ) {
                                 var ret_child_vals = get_child_path(p[0]._base);
                                 var ret_child_path = print_nodes(ret_child_vals[0]);
                                 var log3 = {'OpType': 'READ', 'method': "null", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
-                                console.log(JSON.stringify(log3));
+                                window.js_rewriting_logs.push(JSON.stringify(log3));
                             }
                             return p[0];
                         }
@@ -630,67 +630,67 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "appendChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
         // write on childNodes property of 'this' node
         var log2 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "childNodes", 'id': p[1], 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log2));
+        window.js_rewriting_logs.push(JSON.stringify(log2));
         // write on lastChild property of 'this' node
         var log3 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "lastChild", 'id': p[1], 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log3));
+        window.js_rewriting_logs.push(JSON.stringify(log3));
         // maybe a write on the nextSibling property of 'this' node's previous lastChild
         if ( log_nextsibl_this_last_child ) {
             var log4 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(nextsibl_this_last_child_path), 'NodeProp': "nextSibling", 'id': nextsibl_this_last_child_id, 'child_path': nextsibl_this_last_child_path, 'script': caller}
-            console.log(JSON.stringify(log4));
+            window.js_rewriting_logs.push(JSON.stringify(log4));
         }
         // maybe a write on firstChild property of 'this' node
         if ( log_this_first_child ) {
             var log5 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "firstChild", 'id': p[1], 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log5));
+            window.js_rewriting_logs.push(JSON.stringify(log5));
         }
         // only if node existed prior to this method call
         if ( exists ) {
             // if argnode previously exists in DOM, log writes to argnode and subtree
             var log6 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(arg1_childpath), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_childpath, 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
             for ( i = 0; i < prior_subtree[1].length; i++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
             // if argnode previously exists in DOM, log writes to prev and next sibl of argnode
             if ( arg_prevsibl_childpath != "" ) {
                 var log7 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(arg_prevsibl_childpath), 'NodeProp': "nextSibling", 'id': arg_prevsibl_id, 'child_path': arg_prevsibl_childpath, 'script': caller}
-                console.log(JSON.stringify(log7));
+                window.js_rewriting_logs.push(JSON.stringify(log7));
             }
             if ( arg_nextsibl_childpath != "" ) {
                 var log7 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(arg_nextsibl_childpath), 'NodeProp': "previousSibling", 'id': arg_nextsibl_id, 'child_path': arg_nextsibl_childpath, 'script': caller}
-                console.log(JSON.stringify(log7));
+                window.js_rewriting_logs.push(JSON.stringify(log7));
             }
             // if argnode previously exists in DOM, log writes to nextsiblings of 'this' until null (with subtrees)
             for ( i = 0; i < nextsiblings[0].length; i++ ) {
                 var log8 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(nextsiblings[1][i]), 'NodeProp': "null", 'id': nextsiblings[0][i], 'child_path': nextsiblings[1][i], 'script': caller}
-                console.log(JSON.stringify(log8));
+                window.js_rewriting_logs.push(JSON.stringify(log8));
                 var curr_subtree = get_subtree_nodes(nextsiblings[2][i]);
                 for ( j = 0; j < curr_subtree[1].length; j++ ) {
                     var log6 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(curr_subtree[2][j]), 'NodeProp': "null", 'id': curr_subtree[0][j], 'child_path': curr_subtree[2][j], 'script': caller};
-                    console.log(JSON.stringify(log6));
+                    window.js_rewriting_logs.push(JSON.stringify(log6));
                 }
             }
             // if argnode previously exists in DOM, maybe log writes to first and lastChild of argnode's parent, definitely childNodes
             var log9 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "childNodes", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-            console.log(JSON.stringify(log9));
+            window.js_rewriting_logs.push(JSON.stringify(log9));
             if ( log_prevparent_firstchild ) {
                 var log10 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "firstChild", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-                console.log(JSON.stringify(log10));
+                window.js_rewriting_logs.push(JSON.stringify(log10));
             }
             if ( log_prevparent_lastchild ) {
                 var log10 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "lastChild", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-                console.log(JSON.stringify(log10));
+                window.js_rewriting_logs.push(JSON.stringify(log10));
             }
         }
         // log writes for argnode and subtree after call
         for ( i = 0; i < post_subtree[1].length; i++ ) {
             var log10 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(post_subtree[2][i]), 'NodeProp': "null", 'id': post_subtree[0][i], 'child_path': post_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log10));
+            window.js_rewriting_logs.push(JSON.stringify(log10));
         }
         return p[0];
     };
@@ -785,45 +785,45 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "removeChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
         // write on childNodes property of 'this' node
         var log2 = {'OpType': 'WRITE', 'method': "removeChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "childNodes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log2));
+        window.js_rewriting_logs.push(JSON.stringify(log2));
         // maybe write on lastChild property of 'this' node
         if ( log_this_last_child ) {
             var log3 = {'OpType': 'WRITE', 'method': "removeChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "lastChild", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log3));
+            window.js_rewriting_logs.push(JSON.stringify(log3));
         }
         // maybe a write on firstChild property of 'this' node
         if ( log_this_first_child ) {
             var log5 = {'OpType': 'WRITE', 'method': "removeChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "firstChild", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log5));
+            window.js_rewriting_logs.push(JSON.stringify(log5));
         }
         // log writes to prev and next sibl of argnode
         if ( arg_prevsibl_childpath != "" ) {
             var log7 = {'OpType': 'WRITE', 'method': "removeChild", 'PropName': dom_var_name(arg_prevsibl_childpath), 'NodeProp': "nextSibling", 'id': arg_prevsibl_id, 'child_path': arg_prevsibl_childpath, 'script': caller}
-            console.log(JSON.stringify(log7));
+            window.js_rewriting_logs.push(JSON.stringify(log7));
         }
         if ( arg_nextsibl_childpath != "" ) {
             var log7 = {'OpType': 'WRITE', 'method': "removeChild", 'PropName': dom_var_name(arg_nextsibl_childpath), 'NodeProp': "previousSibling", 'id': arg_nextsibl_id, 'child_path': arg_nextsibl_childpath, 'script': caller}
-            console.log(JSON.stringify(log7));
+            window.js_rewriting_logs.push(JSON.stringify(log7));
         }
         // log writes to nextsiblings of 'this' until null (and subtrees)
         for ( i = 0; i < nextsiblings[0].length; i++ ) {
             var log8 = {'OpType': 'WRITE', 'method': "removeChild", 'PropName': dom_var_name(nextsiblings[1][i]), 'NodeProp': "null", 'id': nextsiblings[0][i], 'child_path': nextsiblings[1][i], 'script': caller}
-            console.log(JSON.stringify(log8));
+            window.js_rewriting_logs.push(JSON.stringify(log8));
             var curr_subtree = get_subtree_nodes(nextsiblings[2][i]);
             for ( j = 0; j < curr_subtree[1].length; j++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "removeChild", 'PropName': dom_var_name(curr_subtree[2][j]), 'NodeProp': "null", 'id': curr_subtree[0][j], 'child_path': curr_subtree[2][j], 'script': caller};
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
         }
         // log writes to argnode and subtree
         var log6 = {'OpType': 'WRITE', 'method': "removeChild", 'PropName': dom_var_name(arg1_childpath), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_childpath, 'script': caller}
-        console.log(JSON.stringify(log6));
+        window.js_rewriting_logs.push(JSON.stringify(log6));
         for ( i = 0; i < prior_subtree[1].length; i++ ) {
             var log6 = {'OpType': 'WRITE', 'method': "removeChild", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
         }
         return p[0];
     };
@@ -958,80 +958,80 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "replaceChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
         // write on childNodes property of 'this' node
         var log2 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "childNodes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log2));
+        window.js_rewriting_logs.push(JSON.stringify(log2));
         // maybe write on lastChild property of 'this' node
         if ( log_this_last_child ) {
             var log3 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "lastChild", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log3));
+            window.js_rewriting_logs.push(JSON.stringify(log3));
         }
         // maybe a write on firstChild property of 'this' node
         if ( log_this_first_child ) {
             var log5 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(this_child_path), 'NodeProp': "firstChild", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log5));
+            window.js_rewriting_logs.push(JSON.stringify(log5));
         }
         // log writes to oldnode and subtree
         var log6 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(arg2_childpath), 'NodeProp': "null", 'id': arg2_id, 'child_path': arg2_childpath, 'script': caller}
-        console.log(JSON.stringify(log6));
+        window.js_rewriting_logs.push(JSON.stringify(log6));
         for ( i = 0; i < prior_oldarg_subtree[1].length; i++ ) {
             var log6 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(prior_oldarg_subtree[2][i]), 'NodeProp': "null", 'id': prior_oldarg_subtree[0][i], 'child_path': prior_oldarg_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
         }
         // log writes to prev and next sibl of oldnode
         if ( arg_prevsibl_childpath != "" ) {
             var log7 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(arg_oldprevsibl_childpath), 'NodeProp': "nextSibling", 'id': arg_oldprevsibl_id, 'child_path': arg_oldprevsibl_childpath, 'script': caller}
-            console.log(JSON.stringify(log7));
+            window.js_rewriting_logs.push(JSON.stringify(log7));
         }
         if ( arg_nextsibl_childpath != "" ) {
             var log7 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(arg_oldnextsibl_childpath), 'NodeProp': "previousSibling", 'id': arg_oldnextsibl_id, 'child_path': arg_oldnextsibl_childpath, 'script': caller}
-            console.log(JSON.stringify(log7));
+            window.js_rewriting_logs.push(JSON.stringify(log7));
         }
         if ( exists ) {
             // if argnode previously exists in DOM, log writes to argnode and subtree
             var log6 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(arg1_childpath), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_childpath, 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
             for ( i = 0; i < prior_subtree[1].length; i++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
             // if argnode previously exists in DOM, log writes to prev and next sibl of argnode
             if ( arg_prevsibl_childpath != "" ) {
                 var log7 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(arg_prevsibl_childpath), 'NodeProp': "nextSibling", 'id': arg_prevsibl_id, 'child_path': arg_prevsibl_childpath, 'script': caller}
-                console.log(JSON.stringify(log7));
+                window.js_rewriting_logs.push(JSON.stringify(log7));
             }
             if ( arg_nextsibl_childpath != "" ) {
                 var log7 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(arg_nextsibl_childpath), 'NodeProp': "previousSibling", 'id': arg_nextsibl_id, 'child_path': arg_nextsibl_childpath, 'script': caller}
-                console.log(JSON.stringify(log7));
+                window.js_rewriting_logs.push(JSON.stringify(log7));
             }
             // if argnode previously exists in DOM, log writes to nextsiblings of 'this' until null (and subtrees)
             for ( i = 0; i < nextsiblings[0].length; i++ ) {
                 var log8 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(nextsiblings[1][i]), 'NodeProp': "null", 'id': nextsiblings[0][i], 'child_path': nextsiblings[1][i], 'script': caller}
-                console.log(JSON.stringify(log8));
+                window.js_rewriting_logs.push(JSON.stringify(log8));
                 var curr_subtree = get_subtree_nodes(nextsiblings[2][i]);
                 for ( j = 0; j < curr_subtree[1].length; j++ ) {
                     var log6 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(curr_subtree[2][j]), 'NodeProp': "null", 'id': curr_subtree[0][j], 'child_path': curr_subtree[2][j], 'script': caller};
-                    console.log(JSON.stringify(log6));
+                    window.js_rewriting_logs.push(JSON.stringify(log6));
                 }
 
             }
             // if argnode previously exists in DOM, maybe log writes to first and lastChild of argnode's parent, definitely childNodes
             var log9 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "childNodes", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-            console.log(JSON.stringify(log9));
+            window.js_rewriting_logs.push(JSON.stringify(log9));
             if ( log_prevparent_firstchild ) {
                 var log10 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "firstChild", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-                console.log(JSON.stringify(log10));
+                window.js_rewriting_logs.push(JSON.stringify(log10));
             }
             if ( log_prevparent_lastchild ) {
                 var log10 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "lastChild", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-                console.log(JSON.stringify(log10));
+                window.js_rewriting_logs.push(JSON.stringify(log10));
             }
         }
         // log writes for argnode and subtree after call
         for ( i = 0; i < post_subtree[1].length; i++ ) {
             var log10 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(post_subtree[2][i]), 'NodeProp': "null", 'id': post_subtree[0][i], 'child_path': post_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log10));
+            window.js_rewriting_logs.push(JSON.stringify(log10));
         }
         return p[0];
     };
@@ -1154,89 +1154,89 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "insertBefore", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
         // write on childNodes property of 'this' node
         var log2 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(this_child_path), 'NodeProp': "childNodes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log2));
+        window.js_rewriting_logs.push(JSON.stringify(log2));
         // maybe a write on firstChild property of 'this' node
         if ( log_this_first_child ) {
             var log5 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(this_child_path), 'NodeProp': "firstChild", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log5));
+            window.js_rewriting_logs.push(JSON.stringify(log5));
         }
         if ( exists ) {
             // if newnode previously exists in DOM, log writes to newnode and subtree
             var log6 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(arg1_childpath), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_childpath, 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
             for ( i = 0; i < prior_subtree[1].length; i++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
             // if newnode previously exists in DOM, log writes to prev and next sibl of newnode
             if ( arg_prevsibl_childpath != "" ) {
                 var log7 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(arg_prevsibl_childpath), 'NodeProp': "nextSibling", 'id': arg_prevsibl_id, 'child_path': arg_prevsibl_childpath, 'script': caller}
-                console.log(JSON.stringify(log7));
+                window.js_rewriting_logs.push(JSON.stringify(log7));
             }
             if ( arg_nextsibl_childpath != "" ) {
                 var log7 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(arg_nextsibl_childpath), 'NodeProp': "previousSibling", 'id': arg_nextsibl_id, 'child_path': arg_nextsibl_childpath, 'script': caller}
-                console.log(JSON.stringify(log7));
+                window.js_rewriting_logs.push(JSON.stringify(log7));
             }
             // if argnode previously exists in DOM, log writes to nextsiblings of 'this' until null (and subtrees)
             for ( i = 0; i < nextsiblings[0].length; i++ ) {
                 var log8 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(nextsiblings[1][i]), 'NodeProp': "null", 'id': nextsiblings[0][i], 'child_path': nextsiblings[1][i], 'script': caller}
-                console.log(JSON.stringify(log8));
+                window.js_rewriting_logs.push(JSON.stringify(log8));
                 var curr_subtree = get_subtree_nodes(nextsiblings[2][i]);
                 for ( j = 0; j < curr_subtree[1].length; j++ ) {
                     var log6 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(curr_subtree[2][j]), 'NodeProp': "null", 'id': curr_subtree[0][j], 'child_path': curr_subtree[2][j], 'script': caller};
-                    console.log(JSON.stringify(log6));
+                    window.js_rewriting_logs.push(JSON.stringify(log6));
                 }
             }
             // if newnode previously exists in DOM, maybe log writes to first and lastChild of newnode's parent, definitely childNodes
             var log9 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "childNodes", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-            console.log(JSON.stringify(log9));
+            window.js_rewriting_logs.push(JSON.stringify(log9));
             if ( log_prevparent_firstchild ) {
                 var log10 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "firstChild", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-                console.log(JSON.stringify(log10));
+                window.js_rewriting_logs.push(JSON.stringify(log10));
             }
             if ( log_prevparent_lastchild ) {
                 var log10 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "lastChild", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-                console.log(JSON.stringify(log10));
+                window.js_rewriting_logs.push(JSON.stringify(log10));
             }
         }
         // log writes for newnode and subtree after call
         for ( i = 0; i < post_subtree[1].length; i++ ) {
             var log10 = {'OpType': 'WRITE', 'method': "replaceChild", 'PropName': dom_var_name(post_subtree[2][i]), 'NodeProp': "null", 'id': post_subtree[0][i], 'child_path': post_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log10));
+            window.js_rewriting_logs.push(JSON.stringify(log10));
         }
         // log writes to refnode and subtree
         var log6 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(arg2_childpath), 'NodeProp': "null", 'id': arg2_id, 'child_path': arg2_childpath, 'script': caller}
-        console.log(JSON.stringify(log6));
+        window.js_rewriting_logs.push(JSON.stringify(log6));
         for ( i = 0; i < prior_refsubtree[1].length; i++ ) {
             var log6 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(prior_refsubtree[2][i]), 'NodeProp': "null", 'id': prior_refsubtree[0][i], 'child_path': prior_refsubtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
         }
         // log writes to prev and next sibl of refnode
         if ( arg_refprevsibl_childpath != "" ) {
             var log7 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(arg_refprevsibl_childpath), 'NodeProp': "nextSibling", 'id': arg_refprevsibl_id, 'child_path': arg_refprevsibl_childpath, 'script': caller}
-            console.log(JSON.stringify(log7));
+            window.js_rewriting_logs.push(JSON.stringify(log7));
         }
         if ( arg_refnextsibl_childpath != "" ) {
             var log7 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(arg_refnextsibl_childpath), 'NodeProp': "previousSibling", 'id': arg_refnextsibl_id, 'child_path': arg_refnextsibl_childpath, 'script': caller}
-            console.log(JSON.stringify(log7));
+            window.js_rewriting_logs.push(JSON.stringify(log7));
         }
         // log writes to nextsiblings of refnode until null (and subtrees)
         for ( i = 0; i < refnextsiblings[0].length; i++ ) {
             var log8 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(refnextsiblings[1][i]), 'NodeProp': "null", 'id': refnextsiblings[0][i], 'child_path': refnextsiblings[1][i], 'script': caller}
-            console.log(JSON.stringify(log8));
+            window.js_rewriting_logs.push(JSON.stringify(log8));
             var curr_subtree = get_subtree_nodes(refnextsiblings[2][i]);
             for ( j = 0; j < curr_subtree[1].length; j++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(curr_subtree[2][j]), 'NodeProp': "null", 'id': curr_subtree[0][j], 'child_path': curr_subtree[2][j], 'script': caller};
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
         }
         // log writes for refnode and subtree after call
         for ( i = 0; i < post_refsubtree[1].length; i++ ) {
             var log10 = {'OpType': 'WRITE', 'method': "insertBefore", 'PropName': dom_var_name(post_refsubtree[2][i]), 'NodeProp': "null", 'id': post_refsubtree[0][i], 'child_path': post_refsubtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log10));
+            window.js_rewriting_logs.push(JSON.stringify(log10));
         }
         return p[0];
     };
@@ -1267,11 +1267,11 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "compareDocumentPosition", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         // read on argument (comparenode)
         var log2 = {'OpType': 'READ', 'method': "compareDocumentPosition", 'PropName': dom_var_name(arg1_childpath), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_childpath, 'script': caller}
-        console.log(JSON.stringify(log2));
+        window.js_rewriting_logs.push(JSON.stringify(log2));
         return retVal;
     };
 
@@ -1303,22 +1303,22 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "cloneNode", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
         // if 'deep' is true, read on 'this' node's subtree
         if ( arg1_val ) {
             for ( i = 0; i < prior_subtree[1].length; i++ ) {
                 var log2 = {'OpType': 'READ', 'method': "cloneNode", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-                console.log(JSON.stringify(log2));
+                window.js_rewriting_logs.push(JSON.stringify(log2));
             }
         }
         // write on returned node
         var log3 = {'OpType': 'WRITE', 'method': "cloneNode", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
-        console.log(JSON.stringify(log3));
+        window.js_rewriting_logs.push(JSON.stringify(log3));
         // if 'deep' is true, write on each node in returned node's subtree
         if ( arg1_val ) {
             for ( i = 0; i < post_subtree[1].length; i++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "cloneNode", 'PropName': dom_var_name(post_subtree[2][i]), 'NodeProp': "null", 'id': post_subtree[0][i], 'child_path': post_subtree[2][i], 'script': caller}
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
         }
         return p[0];
@@ -1352,17 +1352,17 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "contains", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         // read on 'this' node's subtree
         for ( i = 0; i < prior_subtree[1].length; i++ ) {
             var log2 = {'OpType': 'READ', 'method': "contains", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log2));
+            window.js_rewriting_logs.push(JSON.stringify(log2));
         }
 
         // read on othernode (argument)
         var log3 = {'OpType': 'READ', 'method': "contains", 'PropName': dom_var_name(arg1_child_path), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_child_path, 'script': caller}
-        console.log(JSON.stringify(log3));
+        window.js_rewriting_logs.push(JSON.stringify(log3));
 
         return retVal;
     };
@@ -1386,7 +1386,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's childNodes property
         var log1 = {'OpType': 'READ', 'method': "hasChildNodes", 'PropName': dom_var_name(this_child_path), 'NodeProp': "childNodes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -1410,7 +1410,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's namespaceURI property
         var log1 = {'OpType': 'READ', 'method': "isDefaultNamespace", 'PropName': dom_var_name(this_child_path), 'NodeProp': "namespaceURI", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -1442,11 +1442,11 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "isEqualNode", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         // read on comparenode (argument)
         var log2 = {'OpType': 'READ', 'method': "isEqualNode", 'PropName': dom_var_name(arg1_child_path), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_child_path, 'script': caller}
-        console.log(JSON.stringify(log2));
+        window.js_rewriting_logs.push(JSON.stringify(log2));
 
         return retVal;
     };
@@ -1470,7 +1470,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's namespaceURI property
         var log1 = {'OpType': 'READ', 'method': "lookupNamespaceURI", 'PropName': dom_var_name(this_child_path), 'NodeProp': "namespaceURI", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -1494,7 +1494,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's prefix property
         var log1 = {'OpType': 'READ', 'method': "lookupPrefix", 'PropName': dom_var_name(this_child_path), 'NodeProp': "prefix", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -1508,7 +1508,7 @@ if ( _document != undefined ) {
             this_id = this._id;
             this_val = this._base;
         } else {
-            console.log( "Calling normalize on DOM node which is not proxy" );
+            window.js_rewriting_logs.push( "Calling normalize on DOM node which is not proxy" );
         }
         this_prevchildnodes = this_val.childNodes;
         var x = this_val.firstChild;
@@ -1556,34 +1556,34 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "normalize", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         // maybe write to 'this' childNodes, firstChild, lastChild
         if ( this_postchildnodes != this_prevchildnodes ) {
             var log2 = {'OpType': 'READ', 'method': "normalize", 'PropName': dom_var_name(this_child_path), 'NodeProp': "childNodes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log2));
+            window.js_rewriting_logs.push(JSON.stringify(log2));
         }
         if ( this_postfirstchild != this_prevfirstchild ) {
             var log3 = {'OpType': 'READ', 'method': "normalize", 'PropName': dom_var_name(this_child_path), 'NodeProp': "firstChild", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log3));
+            window.js_rewriting_logs.push(JSON.stringify(log3));
         }
         if ( this_postlastchild != this_prevlastchild ) {
             var log4 = {'OpType': 'READ', 'method': "normalize", 'PropName': dom_var_name(this_child_path), 'NodeProp': "lastChild", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log4));
+            window.js_rewriting_logs.push(JSON.stringify(log4));
         }
 
         // read/write on every text node in 'this' node's subtree before call
         for ( i = 0; i < prior_subtree[1].length; i++ ) {
             var log6 = {'OpType': 'READ', 'method': "normalize", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
             var log7 = {'OpType': 'WRITE', 'method': "normalize", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log7));
+            window.js_rewriting_logs.push(JSON.stringify(log7));
         }
 
         // write on every new text node created by method call
         for ( i = 0; i < new_nodes[1].length; i++ ) {
             var log5 = {'OpType': 'WRITE', 'method': "normalize", 'PropName': dom_var_name(new_nodes[2][i]), 'NodeProp': "null", 'id': new_nodes[0][i], 'child_path': new_nodes[2][i], 'script': caller}
-            console.log(JSON.stringify(log5));
+            window.js_rewriting_logs.push(JSON.stringify(log5));
         }
     };
 
@@ -1607,7 +1607,7 @@ if ( _document != undefined ) {
         // read on ret node (unless null)
         if ( p[0] != null ) {
             var log4 = {'OpType': 'READ', 'method': "getElementById", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
-            console.log(JSON.stringify(log4));
+            window.js_rewriting_logs.push(JSON.stringify(log4));
         }
 
         return p[0];
@@ -1631,7 +1631,7 @@ if ( _document != undefined ) {
         // read on ret node (unless null)
         if ( p[0] != null ) {
             var log4 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(ret_child_path), 'NodeProp': "null", 'id': p[1], 'child_path': ret_child_path, 'script': caller}
-            console.log(JSON.stringify(log4));
+            window.js_rewriting_logs.push(JSON.stringify(log4));
         }
 
 
@@ -1666,7 +1666,7 @@ if ( _document != undefined ) {
                 var child_vals = get_child_path(curr_val);
                 var child_path = print_nodes(child_vals[0]);
                 var log4 = {'OpType': 'READ', 'method': "getElementsByName", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': curr_id, 'child_path': child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
         }
         return p;
@@ -1700,7 +1700,7 @@ if ( _document != undefined ) {
                 var child_vals = get_child_path(curr_val);
                 var child_path = print_nodes(child_vals[0]);
                 var log4 = {'OpType': 'READ', 'method': "getElementsByClassName", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': curr_id, 'child_path': child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
         }
         return p;
@@ -1735,7 +1735,7 @@ if ( _document != undefined ) {
                 var child_vals = get_child_path(curr_val);
                 var child_path = print_nodes(child_vals[0]);
                 var log4 = {'OpType': 'READ', 'method': "getElementsByTagName", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': curr_id, 'child_path': child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
         }
 
@@ -1771,7 +1771,7 @@ if ( _document != undefined ) {
                 var child_vals = get_child_path(curr_val);
                 var child_path = print_nodes(child_vals[0]);
                 var log4 = {'OpType': 'READ', 'method': "querySelectorAll", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': curr_id, 'child_path': child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
         }
         return p;
@@ -1804,7 +1804,7 @@ if ( _document != undefined ) {
                 var child_vals = get_child_path(curr_val);
                 var child_path = print_nodes(child_vals[0]);
                 var log4 = {'OpType': 'READ', 'method': "getElementsByTagNameNS", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': curr_id, 'child_path': child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
         }
         return p;
@@ -1885,46 +1885,46 @@ if ( _document != undefined ) {
         if ( exists ) {
             // if argnode previously exists in DOM, log writes to argnode and subtree
             var log6 = {'OpType': 'WRITE', 'method': "adoptNode", 'PropName': dom_var_name(arg1_childpath), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_childpath, 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
             for ( i = 0; i < prior_subtree[1].length; i++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "adoptNode", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
             // if argnode previously exists in DOM, log writes to prev and next sibl of argnode
             if ( arg_prevsibl_childpath != "" ) {
                 var log7 = {'OpType': 'WRITE', 'method': "adoptNode", 'PropName': dom_var_name(arg_prevsibl_childpath), 'NodeProp': "nextSibling", 'id': arg_prevsibl_id, 'child_path': arg_prevsibl_childpath, 'script': caller}
-                console.log(JSON.stringify(log7));
+                window.js_rewriting_logs.push(JSON.stringify(log7));
             }
             if ( arg_nextsibl_childpath != "" ) {
                 var log7 = {'OpType': 'WRITE', 'method': "adoptNode", 'PropName': dom_var_name(arg_nextsibl_childpath), 'NodeProp': "previousSibling", 'id': arg_nextsibl_id, 'child_path': arg_nextsibl_childpath, 'script': caller}
-                console.log(JSON.stringify(log7));
+                window.js_rewriting_logs.push(JSON.stringify(log7));
             }
             // if argnode previously exists in DOM, log writes to nextsiblings of 'this' until null
             for ( i = 0; i < nextsiblings[0].length; i++ ) {
                 var log8 = {'OpType': 'WRITE', 'method': "adoptNode", 'PropName': dom_var_name(nextsiblings[1][i]), 'NodeProp': "null", 'id': nextsiblings[0][i], 'child_path': nextsiblings[1][i], 'script': caller}
-                console.log(JSON.stringify(log8));
+                window.js_rewriting_logs.push(JSON.stringify(log8));
                 var curr_subtree = get_subtree_nodes(nextsiblings[2][i]);
                 for ( j = 0; j < curr_subtree[1].length; j++ ) {
                     var log6 = {'OpType': 'WRITE', 'method': "adoptNode", 'PropName': dom_var_name(curr_subtree[2][j]), 'NodeProp': "null", 'id': curr_subtree[0][j], 'child_path': curr_subtree[2][j], 'script': caller};
-                    console.log(JSON.stringify(log6));
+                    window.js_rewriting_logs.push(JSON.stringify(log6));
                 }
             }
             // if argnode previously exists in DOM, maybe log writes to first and lastChild of argnode's parent, definitely childNodes
             var log9 = {'OpType': 'WRITE', 'method': "adoptNode", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "childNodes", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-            console.log(JSON.stringify(log9));
+            window.js_rewriting_logs.push(JSON.stringify(log9));
             if ( log_prevparent_firstchild ) {
                 var log10 = {'OpType': 'WRITE', 'method': "adoptNode", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "firstChild", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-                console.log(JSON.stringify(log10));
+                window.js_rewriting_logs.push(JSON.stringify(log10));
             }
             if ( log_prevparent_lastchild ) {
                 var log10 = {'OpType': 'WRITE', 'method': "adoptNode", 'PropName': dom_var_name(arg_prevparent_childpath), 'NodeProp': "lastChild", 'id': arg_prevparent_id, 'child_path': arg_prevparent_childpath, 'script': caller}
-                console.log(JSON.stringify(log10));
+                window.js_rewriting_logs.push(JSON.stringify(log10));
             }
         }
 
         // write to the returned node
         var log7 = {'OpType': 'WRITE', 'method': "adoptNode", 'PropName': dom_var_name(""), 'NodeProp': "null", 'id': p[1], 'child_path': "", 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         return p[0];
     };
@@ -1953,7 +1953,7 @@ if ( _document != undefined ) {
 
         // write to the returned node
         var log7 = {'OpType': 'WRITE', 'method': "createAttribute", 'PropName': dom_var_name(""), 'NodeProp': "null", 'id': p[1], 'child_path': "", 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         return p[0];
    };
@@ -1968,7 +1968,7 @@ if ( _document != undefined ) {
 
         // write to the returned node
         var log7 = {'OpType': 'WRITE', 'method': "createCDATASection", 'PropName': dom_var_name(""), 'NodeProp': "null", 'id': p[1], 'child_path': "", 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         return p[0];
     };
@@ -1981,7 +1981,7 @@ if ( _document != undefined ) {
 
         // write to the returned node
         var log7 = {'OpType': 'WRITE', 'method': "createComment", 'PropName': dom_var_name(""), 'NodeProp': "null", 'id': p[1], 'child_path': "", 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         return p[0];
     };
@@ -2005,7 +2005,7 @@ if ( _document != undefined ) {
 
         // write to the returned node
         var log7 = {'OpType': 'WRITE', 'method': "createElement", 'PropName': dom_var_name(""), 'NodeProp': "null", 'id': p[1], 'child_path': "", 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         return p[0];
     };
@@ -2019,7 +2019,7 @@ if ( _document != undefined ) {
 
         // write to the returned node
         var log7 = {'OpType': 'WRITE', 'method': "createElementNS", 'PropName': dom_var_name(""), 'NodeProp': "null", 'id': p[1], 'child_path': "", 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         return p[0];
     };
@@ -2033,7 +2033,7 @@ if ( _document != undefined ) {
 
         // write to the returned node
         var log7 = {'OpType': 'WRITE', 'method': "createTextNode", 'PropName': dom_var_name(""), 'NodeProp': "null", 'id': p[1], 'child_path': "", 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         return p[0];
     };
@@ -2047,7 +2047,7 @@ if ( _document != undefined ) {
 
         // write to the returned node
         var log7 = {'OpType': 'WRITE', 'method': "createProcessingInstruction", 'PropName': dom_var_name(""), 'NodeProp': "null", 'id': p[1], 'child_path': "", 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         return p[0];
     };
@@ -2097,7 +2097,7 @@ if ( _document != undefined ) {
 
         // read on root node (argument)
         var log7 = {'OpType': 'READ', 'method': "createNodeIterator", 'PropName': dom_var_name(arg1_childpath), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_childpath, 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         return p;
     };
@@ -2119,7 +2119,7 @@ if ( _document != undefined ) {
 
         // read on argnode
         var log7 = {'OpType': 'READ', 'method': "createNSResolver", 'PropName': dom_var_name(arg1_childpath), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_childpath, 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         return retVal;
     };
@@ -2143,26 +2143,26 @@ if ( _document != undefined ) {
         post_subtree = get_subtree_nodes(p[0]._base);
         // read on argnode
         var log7 = {'OpType': 'READ', 'method': "importNode", 'PropName': dom_var_name(arg1_childpath), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_childpath, 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         // if deep is true, then log reads on argnode's subtree
         if ( deep ) {
             for ( i = 0; i < prior_subtree[1].length; i++ ) {
                 var log6 = {'OpType': 'READ', 'method': "importNode", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
         }
 
         // write on returned node
         var log7 = {'OpType': 'WRITE', 'method': "importNode", 'PropName': dom_var_name(""), 'NodeProp': "null", 'id': p[1], 'child_path': "", 'script': caller}
-        console.log(JSON.stringify(log7));
+        window.js_rewriting_logs.push(JSON.stringify(log7));
 
         // write on returned node and subtree (if deep is true)
         if ( deep ) {
             // write on returned node's subtree
             for ( i = 0; i < post_subtree[1].length; i++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "importNode", 'PropName': dom_var_name(post_subtree[2][i]), 'NodeProp': "null", 'id': post_subtree[0][i], 'child_path': post_subtree[2][i], 'script': caller}
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
         }
 
@@ -2187,7 +2187,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's 'attributes' property
         var log1 = {'OpType': 'READ', 'method': "getAttribute", 'PropName': dom_var_name(this_child_path), 'NodeProp': "attributes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2210,7 +2210,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's 'attributes' property
         var log1 = {'OpType': 'READ', 'method': "getAttributeNS", 'PropName': dom_var_name(this_child_path), 'NodeProp': "attributes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2275,7 +2275,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "getBoundingClientRect", 'PropName': dom_var_name(this_child_path), 'NodeProp': "", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2298,7 +2298,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "getClientRects", 'PropName': dom_var_name(this_child_path), 'NodeProp': "", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2323,10 +2323,10 @@ if ( _document != undefined ) {
         var p = null;
         // log reads on 'this' node and its subtree
         var log6 = {'OpType': 'READ', 'method': "getElementsByClassName", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log6));
+        window.js_rewriting_logs.push(JSON.stringify(log6));
         for ( i = 0; i < prior_subtree[1].length; i++ ) {
             var log6 = {'OpType': 'READ', 'method': "getElementsByClassName", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
         }
         if ( retVal != null ) {
             var p = new Proxy( retVal, nodelist_handler );
@@ -2348,7 +2348,7 @@ if ( _document != undefined ) {
                 var child_vals = get_child_path(curr_val);
                 var child_path = print_nodes(child_vals[0]);
                 var log4 = {'OpType': 'READ', 'method': "getElementsByClassName", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': curr_id, 'child_path': child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
         }
         return p;
@@ -2374,10 +2374,10 @@ if ( _document != undefined ) {
         var p = null;
         // log reads on 'this' node and its subtree
         var log6 = {'OpType': 'READ', 'method': "getElementsByTagName", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log6));
+        window.js_rewriting_logs.push(JSON.stringify(log6));
         for ( i = 0; i < prior_subtree[1].length; i++ ) {
             var log6 = {'OpType': 'READ', 'method': "getElementsByTagName", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
         }
         if ( retVal != null ) {
             var p = new Proxy( retVal, nodelist_handler );
@@ -2399,7 +2399,7 @@ if ( _document != undefined ) {
                 var child_vals = get_child_path(curr_val);
                 var child_path = print_nodes(child_vals[0]);
                 var log4 = {'OpType': 'READ', 'method': "getElementsByTagName", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': curr_id, 'child_path': child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
         }
         return p;
@@ -2425,10 +2425,10 @@ if ( _document != undefined ) {
         var p = null;
         // log reads on 'this' node and its subtree
         var log6 = {'OpType': 'READ', 'method': "getElementsByTagNameNS", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log6));
+        window.js_rewriting_logs.push(JSON.stringify(log6));
         for ( i = 0; i < prior_subtree[1].length; i++ ) {
             var log6 = {'OpType': 'READ', 'method': "getElementsByTagNameNS", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
         }
         if ( retVal != null ) {
             var p = new Proxy( retVal, nodelist_handler );
@@ -2450,7 +2450,7 @@ if ( _document != undefined ) {
                 var child_vals = get_child_path(curr_val);
                 var child_path = print_nodes(child_vals[0]);
                 var log4 = {'OpType': 'READ', 'method': "getElementsByTagNameNS", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': curr_id, 'child_path': child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
         }
         return p;
@@ -2474,7 +2474,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's 'attributes' property
         var log1 = {'OpType': 'READ', 'method': "hasAttribute", 'PropName': dom_var_name(this_child_path), 'NodeProp': "attributes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2497,7 +2497,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's 'attributes' property
         var log1 = {'OpType': 'READ', 'method': "hasAttributeNS", 'PropName': dom_var_name(this_child_path), 'NodeProp': "attributes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2520,7 +2520,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's 'attributes' property
         var log1 = {'OpType': 'READ', 'method': "hasAttributes", 'PropName': dom_var_name(this_child_path), 'NodeProp': "attributes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2588,22 +2588,22 @@ if ( _document != undefined ) {
         // log writes to 'this' nodes and nextSiblings and their subtrees before the call
         // write on 'this' node
         var log1 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         if ( position == 'beforebegin' || position == 'afterbegin' ) {
             // write on 'this' node's subtree
             for ( i = 0; i < this_prior_subtree[1].length; i++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "insertAdjacent", 'PropName': dom_var_name(this_prior_subtree[2][i]), 'NodeProp': "null", 'id': this_prior_subtree[0][i], 'child_path': this_prior_subtree[2][i], 'script': caller};
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
             // write to 'this' node's nextSiblings and their subtrees until null
             for ( i = 0; i < nextsiblings[0].length; i++ ) {
                 var log8 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(nextsiblings[1][i]), 'NodeProp': "null", 'id': nextsiblings[0][i], 'child_path': nextsiblings[1][i], 'script': caller}
                 var curr_subtree = get_subtree_nodes(nextsiblings[2][i]);
-                console.log(JSON.stringify(log8));
+                window.js_rewriting_logs.push(JSON.stringify(log8));
                 for ( j = 0; j < curr_subtree[1].length; j++ ) {
                     var log6 = {'OpType': 'WRITE', 'method': "insertAdjacent", 'PropName': dom_var_name(curr_subtree[2][j]), 'NodeProp': "null", 'id': curr_subtree[0][j], 'child_path': curr_subtree[2][j], 'script': caller};
-                    console.log(JSON.stringify(log6));
+                    window.js_rewriting_logs.push(JSON.stringify(log6));
                 }
 
             }
@@ -2614,34 +2614,34 @@ if ( _document != undefined ) {
 
         // read on 'this' node
         var log1 = {'OpType': 'READ', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         if ( position == 'beforebegin' ) {
             // write on childNodes property of 'this.parentNode' node
             var log2 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(thisparent_child_path), 'NodeProp': "childNodes", 'id': thisparent_id, 'child_path': thisparent_child_path, 'script': caller}
-            console.log(JSON.stringify(log2));
+            window.js_rewriting_logs.push(JSON.stringify(log2));
             // maybe a write on the  property of 'this.parentNode' node's previous firstChild
             if ( log_this_parent_firstchild ) {
                 var log4 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(thisparent_child_path), 'NodeProp': "firstChild", 'id': thisparent_id, 'child_path': thisparent_child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
             // write on 'this' node
             var log1 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log1));
+            window.js_rewriting_logs.push(JSON.stringify(log1));
 
             // write on 'this' node's subtree
             for ( i = 0; i < this_prior_subtree[1].length; i++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "insertAdjacent", 'PropName': dom_var_name(this_prior_subtree[2][i]), 'NodeProp': "null", 'id': this_prior_subtree[0][i], 'child_path': this_prior_subtree[2][i], 'script': caller};
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
             // write to 'this' node's nextSiblings and their subtrees until null
             for ( i = 0; i < nextsiblings[0].length; i++ ) {
                 var log8 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(nextsiblings[1][i]), 'NodeProp': "null", 'id': nextsiblings[0][i], 'child_path': nextsiblings[1][i], 'script': caller}
-                console.log(JSON.stringify(log8));
+                window.js_rewriting_logs.push(JSON.stringify(log8));
                 var curr_subtree = get_subtree_nodes(nextsiblings[2][i]);
                 for ( j = 0; j < curr_subtree[1].length; j++ ) {
                     var log6 = {'OpType': 'WRITE', 'method': "insertAdjacent", 'PropName': dom_var_name(curr_subtree[2][j]), 'NodeProp': "null", 'id': curr_subtree[0][j], 'child_path': curr_subtree[2][j], 'script': caller};
-                    console.log(JSON.stringify(log6));
+                    window.js_rewriting_logs.push(JSON.stringify(log6));
                 }
             }
         }
@@ -2649,34 +2649,34 @@ if ( _document != undefined ) {
         if ( position == 'afterbegin' ) {
             // write on childNodes property of 'this' node
             var log2 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(this_child_path), 'NodeProp': "childNodes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log2));
+            window.js_rewriting_logs.push(JSON.stringify(log2));
 
             // write on firstChild property of 'this' node
             var log2 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(this_child_path), 'NodeProp': "firstChild", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log2));
+            window.js_rewriting_logs.push(JSON.stringify(log2));
 
             // maybe a write on the  property of 'this' node's previous lastChild
             if ( log_this_last_child ) {
                 var log4 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(this_child_path), 'NodeProp': "lastChild", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
             // write on 'this' node
             var log1 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log1));
+            window.js_rewriting_logs.push(JSON.stringify(log1));
 
             // write on 'this' node's subtree
             for ( i = 0; i < this_prior_subtree[1].length; i++ ) {
                 var log6 = {'OpType': 'WRITE', 'method': "insertAdjacent", 'PropName': dom_var_name(this_prior_subtree[2][i]), 'NodeProp': "null", 'id': this_prior_subtree[0][i], 'child_path': this_prior_subtree[2][i], 'script': caller};
-                console.log(JSON.stringify(log6));
+                window.js_rewriting_logs.push(JSON.stringify(log6));
             }
             // write to 'this' node's nextSiblings and their subtrees until null
             for ( i = 0; i < nextsiblings[0].length; i++ ) {
                 var log8 = {'OpType': 'WRITE', 'method': "appendChild", 'PropName': dom_var_name(nextsiblings[1][i]), 'NodeProp': "null", 'id': nextsiblings[0][i], 'child_path': nextsiblings[1][i], 'script': caller}
-                console.log(JSON.stringify(log8));
+                window.js_rewriting_logs.push(JSON.stringify(log8));
                 var curr_subtree = get_subtree_nodes(nextsiblings[2][i]);
                 for ( j = 0; j < curr_subtree[1].length; j++ ) {
                     var log6 = {'OpType': 'WRITE', 'method': "insertAdjacent", 'PropName': dom_var_name(curr_subtree[2][j]), 'NodeProp': "null", 'id': curr_subtree[0][j], 'child_path': curr_subtree[2][j], 'script': caller};
-                    console.log(JSON.stringify(log6));
+                    window.js_rewriting_logs.push(JSON.stringify(log6));
                 }
             }
         }
@@ -2684,18 +2684,18 @@ if ( _document != undefined ) {
         if ( position == 'beforeend' ) {
             // write on childNodes property of 'this' node
             var log2 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(this_child_path), 'NodeProp': "childNodes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log2));
+            window.js_rewriting_logs.push(JSON.stringify(log2));
 
             // write on lastChild property of 'this' node
             var log2 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(this_child_path), 'NodeProp': "lastChild", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log2));
+            window.js_rewriting_logs.push(JSON.stringify(log2));
 
             // maybe a write on the  property of 'this' node's previous firstChild
             if ( log_prev_last ) {
                 var prev_last_child_vals = get_child_path(prev_last_val);
                 var prev_last_child_path = print_nodes(prev_last_child_vals[0]);
                 var log4 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(prev_last_child_path), 'NodeProp': "firstChild", 'id': prev_last_id, 'child_path': prev_last_child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
         }
 
@@ -2703,16 +2703,16 @@ if ( _document != undefined ) {
         if ( position == 'afterend' ) {
             // write on childNodes property of 'this.parentNode' node
             var log2 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(thisparent_child_path), 'NodeProp': "childNodes", 'id': thisparent_id, 'child_path': thisparent_child_path, 'script': caller}
-            console.log(JSON.stringify(log2));
+            window.js_rewriting_logs.push(JSON.stringify(log2));
             // maybe a write on the  property of 'this.parentNode' node's previous firstChild
             if ( log_this_parent_firstchild1 ) {
                 var log4 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(thisparent_child_path), 'NodeProp': "firstChild", 'id': thisparent_id, 'child_path': thisparent_child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
 
             // write on 'this' node's nextSibling property
             var log1 = {'OpType': 'WRITE', 'method': "insertAdjacentHTML", 'PropName': dom_var_name(this_child_path), 'NodeProp': "nextSibling", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log1));
+            window.js_rewriting_logs.push(JSON.stringify(log1));
         }
 
 
@@ -2737,7 +2737,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's 'attributes' property
         var log1 = {'OpType': 'READ', 'method': "matches", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2760,7 +2760,7 @@ if ( _document != undefined ) {
 
         // read on 'this' node's 'attributes' property
         var log1 = {'OpType': 'READ', 'method': "mozMatchesSelector", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2784,10 +2784,10 @@ if ( _document != undefined ) {
         // wrap nodelist in proxy to log queries and wrap returned nodes
         // log reads on 'this' node and its subtree
         var log6 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log6));
+        window.js_rewriting_logs.push(JSON.stringify(log6));
         for ( i = 0; i < prior_subtree[1].length; i++ ) {
             var log6 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
         }
         var p = wrap_node_in_proxy(retVal);
         // read on returned node
@@ -2798,7 +2798,7 @@ if ( _document != undefined ) {
         var child_vals = get_child_path(ret_val);
         var child_path = print_nodes(child_vals[0]);
         var log4 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': p[1], 'child_path': child_path, 'script': caller}
-        console.log(JSON.stringify(log4));
+        window.js_rewriting_logs.push(JSON.stringify(log4));
         return p[0];
     };
 
@@ -2822,10 +2822,10 @@ if ( _document != undefined ) {
         var p = null;
         // log reads on 'this' node and its subtree
         var log6 = {'OpType': 'READ', 'method': "querySelectorAll", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log6));
+        window.js_rewriting_logs.push(JSON.stringify(log6));
         for ( i = 0; i < prior_subtree[1].length; i++ ) {
             var log6 = {'OpType': 'READ', 'method': "querySelectorAll", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
         }
         if ( retVal != null ) {
             var p = new Proxy( retVal, nodelist_handler );
@@ -2847,7 +2847,7 @@ if ( _document != undefined ) {
                 var child_vals = get_child_path(curr_val);
                 var child_path = print_nodes(child_vals[0]);
                 var log4 = {'OpType': 'READ', 'method': "querySelectorAll", 'PropName': dom_var_name(child_path), 'NodeProp': "null", 'id': curr_id, 'child_path': child_path, 'script': caller}
-                console.log(JSON.stringify(log4));
+                window.js_rewriting_logs.push(JSON.stringify(log4));
             }
         }
         return p;
@@ -2871,7 +2871,7 @@ if ( _document != undefined ) {
 
         // write on 'this' node's 'attributes' property
         var log1 = {'OpType': 'WRITE', 'method': "removeAttribute", 'PropName': dom_var_name(this_child_path), 'NodeProp': "attributes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2894,7 +2894,7 @@ if ( _document != undefined ) {
 
         // write on 'this' node's 'attributes' property
         var log1 = {'OpType': 'WRITE', 'method': "removeAttributeNS", 'PropName': dom_var_name(this_child_path), 'NodeProp': "attributes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2940,7 +2940,7 @@ if ( _document != undefined ) {
 
         // write on 'this' node's 'attributes' property
         var log1 = {'OpType': 'WRITE', 'method': "setAttribute", 'PropName': dom_var_name(this_child_path), 'NodeProp': "attributes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -2963,7 +2963,7 @@ if ( _document != undefined ) {
 
         // write on 'this' node's 'attributes' property
         var log1 = {'OpType': 'WRITE', 'method': "setAttributeNS", 'PropName': dom_var_name(this_child_path), 'NodeProp': "attributes", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         return retVal;
     };
@@ -3032,7 +3032,7 @@ if ( _document != undefined ) {
             retVal = _getComputedStyle.call(window, arg1_val, pseudoElt);
         }
         var log1 = {'OpType': 'READ', 'method': "getComputedStyle", 'PropName': dom_var_name(arg1_child_path), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
         return retVal;
     };
 
@@ -3064,7 +3064,7 @@ if ( _document != undefined ) {
             retVal = _addEventListener.call(this_val, arg1_val, arg2_val, arg3_val, arg4_val);
             if ( this_id != "null" ) {
                 var log1 = {'OpType': 'WRITE', 'method': "addEventListener", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-                console.log(JSON.stringify(log1));
+                window.js_rewriting_logs.push(JSON.stringify(log1));
             }
         }
         return retVal;
@@ -3085,7 +3085,7 @@ if ( _document != undefined ) {
             var this_child_path = print_nodes(this_child_vals[0]);
             var caller = get_caller( document.currentScript);
             var log1 = {'OpType': 'WRITE', 'method': "focus", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log1));
+            window.js_rewriting_logs.push(JSON.stringify(log1));
         }
 
         var retVal = _focus.call(this_val);
@@ -3108,7 +3108,7 @@ if ( _document != undefined ) {
             var this_child_path = print_nodes(this_child_vals[0]);
             var caller = get_caller(document.currentScript);
             var log1 = {'OpType': 'WRITE', 'method': "reset", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log1));
+            window.js_rewriting_logs.push(JSON.stringify(log1));
         }
 
         var retVal = _reset.call(this_val);
@@ -3130,7 +3130,7 @@ if ( _document != undefined ) {
         var arg1_child_path = print_nodes(arg1_child_vals[0]);
         var caller = get_caller(document.currentScript);
         var log1 = {'OpType': 'READ', 'method': "observe", 'PropName': dom_var_name(arg1_child_path), 'NodeProp': "null", 'id': arg1_id, 'child_path': arg1_child_path, 'script': caller}
-        console.log(JSON.stringify(log1));
+        window.js_rewriting_logs.push(JSON.stringify(log1));
 
         var retVal = _observe.call(this, arg1_val, options);
         return retVal;
@@ -3154,10 +3154,10 @@ if ( _document != undefined ) {
         // wrap nodelist in proxy to log queries and wrap returned nodes
         // log reads on 'this' node and its subtree
         var log6 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log6));
+        window.js_rewriting_logs.push(JSON.stringify(log6));
         for ( i = 0; i < prior_subtree[1].length; i++ ) {
             var log6 = {'OpType': 'READ', 'method': "querySelector", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
         }
         var p = wrap_node_in_proxy(retVal);
         return p[0];
@@ -3181,10 +3181,10 @@ if ( _document != undefined ) {
         var p = null;
         // log reads on 'this' node and its subtree
         var log6 = {'OpType': 'READ', 'method': "querySelectorAll", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-        console.log(JSON.stringify(log6));
+        window.js_rewriting_logs.push(JSON.stringify(log6));
         for ( i = 0; i < prior_subtree[1].length; i++ ) {
             var log6 = {'OpType': 'READ', 'method': "querySelectorAll", 'PropName': dom_var_name(prior_subtree[2][i]), 'NodeProp': "null", 'id': prior_subtree[0][i], 'child_path': prior_subtree[2][i], 'script': caller}
-            console.log(JSON.stringify(log6));
+            window.js_rewriting_logs.push(JSON.stringify(log6));
         }
         if ( retVal != null ) {
             var p = new Proxy( retVal, nodelist_handler );
@@ -3258,13 +3258,13 @@ if ( _document != undefined ) {
                        return value;
                    }
                    var log = {'OpType': 'READ', 'PropName': name, 'script': caller}
-                   console.log(JSON.stringify( log  ) );
+                   window.js_rewriting_logs.push(JSON.stringify( log  ) );
                    return value;
                },
         "set": function(base, name, value){
                    var caller = get_caller( document.currentScript);
                    var log = {'OpType': 'WRITE', 'PropName': name, 'script': caller}
-                   console.log(JSON.stringify( log  ) );
+                   window.js_rewriting_logs.push(JSON.stringify( log  ) );
                    base[name] = value;
                }
     };
