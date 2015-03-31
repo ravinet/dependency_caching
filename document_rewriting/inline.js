@@ -1,14 +1,14 @@
 if ( _document != undefined ) {
 } else {
-    //var js_rewriting_logs = [];
-    //window.addEventListener("load", function(){
-    //    var complete_log = "";
-    //    for (i=0; i < window.js_rewriting_logs.length; i++ ){
-    //        complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
-    //    }
-    //    complete_log = complete_log + "END OF LOG";
-    //    window.top.postMessage(complete_log, "*");
-    //});
+    var js_rewriting_logs = [];
+    window.addEventListener("load", function(){
+        var complete_log = "";
+        for (i=0; i < window.js_rewriting_logs.length; i++ ){
+            complete_log = complete_log + window.js_rewriting_logs[i] + "\n"
+        }
+        complete_log = complete_log + "END OF LOG";
+        window.top.postMessage(complete_log, "*");
+    });
 
     function get_caller(caller){
         var script_attributes = "";
@@ -3086,7 +3086,7 @@ if ( _document != undefined ) {
             retVal = _removeEventListener.call(this_val, arg1_val, arg2_val, arg3_val);
             if ( this_id != "null" ) {
                 var log1 = {'OpType': 'WRITE', 'method': "removeEventListener", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-                console.log(JSON.stringify(log1));
+                window.js_rewriting_logs.push(JSON.stringify(log1));
             }
         }
         return retVal;
@@ -3235,7 +3235,7 @@ if ( _document != undefined ) {
             var this_child_path = print_nodes(this_child_vals[0]);
             var caller = get_caller(document.currentScript);
             var log1 = {'OpType': 'WRITE', 'method': "blur", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log1));
+            window.js_rewriting_logs.push(JSON.stringify(log1));
         }
 
         var retVal = _blur.call(this_val);
@@ -3257,7 +3257,7 @@ if ( _document != undefined ) {
             var this_child_path = print_nodes(this_child_vals[0]);
             var caller = get_caller(document.currentScript);
             var log1 = {'OpType': 'READ', 'method': "getContext", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log1));
+            window.js_rewriting_logs.push(JSON.stringify(log1));
         }
 
         var retVal = _getContext.call(this_val, contextType, contextAttributes);
@@ -3279,7 +3279,7 @@ if ( _document != undefined ) {
             var this_child_path = print_nodes(this_child_vals[0]);
             var caller = get_caller(document.currentScript);
             var log1 = {'OpType': 'READ', 'method': "checkValidity", 'PropName': dom_var_name(this_child_path), 'NodeProp': "null", 'id': this_id, 'child_path': this_child_path, 'script': caller}
-            console.log(JSON.stringify(log1));
+            window.js_rewriting_logs.push(JSON.stringify(log1));
         }
 
         var retVal = _checkValidity.call(this_val);
