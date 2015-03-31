@@ -183,7 +183,10 @@ if ( _window != undefined ) {
             } else {
                 retVal = _xhropen.call(this._base, method, url, async_use, user_use, password_use);
             }
+        } else {
+            retVal = _xhropen.call(this, method, url, async_use, user_use, password_use);
         }
+
         return retVal;
     };
 
@@ -198,6 +201,8 @@ if ( _window != undefined ) {
             } else {
                 retVal = _xhrsetheader.call(this._base, header, value);
             }
+        } else {
+            retVal = _xhrsetheader.call(this, header, value);
         }
         return retVal;
     };
@@ -213,20 +218,36 @@ if ( _window != undefined ) {
             } else {
                 retVal = _xhrgetresponseheader.call(this._base, header);
             }
+        } else {
+            retVal = _xhrgetresponseheader.call(this, base, header);
         }
         return retVal;
     };
 
     var _xhrsend = XMLHttpRequest.prototype.send;
-    XMLHttpRequest.prototype.send = function() {
+    XMLHttpRequest.prototype.send = function(data) {
         // check whether this is proxy...if so, use _base or get base from weakmap
         var isProxy = check_if_proxy(this);
         var retVal;
         if ( isProxy[0] ) { // this is a proxy
             if ( isProxy[1] ) { // frozen object
-                retVal = _xhrsend.call(baseMap.get(this));
+                if ( data == undefined ) {
+                    retVal = _xhrsend.call(baseMap.get(this));
+                } else {
+                    retVal = _xhrsend.call(baseMap.get(this), data);
+                }
             } else {
-                retVal = _xhrsend.call(this._base);
+                if ( data == undefined ) {
+                    retVal = _xhrsend.call(this._base);
+                } else {
+                    retVal = _xhrsend.call(this._base, data);
+                }
+            }
+        } else {
+            if ( data == undefined ) {
+                retVal = _xhrsend.call(this);
+            } else {
+                retVal = _xhrsend.call(this, data);
             }
         }
         return retVal;
