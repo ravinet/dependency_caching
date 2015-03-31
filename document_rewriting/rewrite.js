@@ -18,25 +18,25 @@ var currentChain = "Program";
 vars[currentChain] = [];
 var anonFuncCounter = 0;
 
-//estraverse.traverse(ast, {
-//  enter: preenter,
-//  leave: preleave
-//});
+estraverse.traverse(ast, {
+  enter: preenter,
+  leave: preleave
+});
 
 currentChain = "Program";
 var anonFuncCounter = 0;
 
-//estraverse.traverse(ast, {
-//  enter: enter,
-//  leave: leave
-//});
+estraverse.traverse(ast, {
+  enter: enter,
+  leave: leave
+});
 
 var hoistIndex = 0;
 
-//estraverse.traverse(ast, {
-//  enter: hoistEnter,
-//  leave: hoistLeave
-//});
+estraverse.traverse(ast, {
+  enter: hoistEnter,
+  leave: hoistLeave
+});
 
 //console.log(util.inspect(ast, {depth:null}));
 var proxy_wrapper = {"type":"Program","body":[{"type":"ExpressionStatement","expression":{"type":"CallExpression","callee":{"type":"FunctionExpression","id":null,"params":[],"defaults":[],"body":{"type":"BlockStatement","body":[]},"rest":null,"generator":false,"expression":false},"arguments":[]}}]};
