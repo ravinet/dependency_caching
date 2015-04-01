@@ -1,0 +1,11 @@
+http://mi.nba.com/
+- esprima issue with save.ohm3lp
+
+http://espn.go.com/?src=mobile
+- window rewriting issue---window.score is undefined
+
+http://m.imdb.com/
+- no errors but page looks terrible---almost everything missing
+
+http://mobile.nytimes.com/
+e.once is not a function
