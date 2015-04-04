@@ -19,25 +19,29 @@ with open(dot) as f:
             print curr
             parent = curr.split(" ")[0]
             child = curr.split("> ")[1].strip(";").strip("[color=red]")
-            if child != parent:
-                if (parent not in child_deps):
-                    child_deps[parent] = [child]
-                else:
-                    child_deps[parent].append(child)
+            if (parent not in child_deps):
+                child_deps[parent] = [child]
+            else:
+                child_deps[parent].append(child)
             if ( child not in child_deps):
                 child_deps[child] = []
 
 root = '"/"'
 children_mappings = child_deps
 print children_mappings
+seen = set()
 def mapping_to_child_dict(mappings, current_node):
-  curr_dict = {current_node : None}
-  curr_children = mappings[current_node]
-  if len(curr_children) == 0:
+  if current_node not in seen:
+    seen.add(current_node)
+    curr_dict = {current_node : None}
+    curr_children = mappings[current_node]
+    if len(curr_children) == 0:
+      return curr_dict
+    else:
+      curr_dict[current_node] = filter(None, [mapping_to_child_dict(mappings, node) for node in curr_children])
     return curr_dict
   else:
-    curr_dict[current_node] = [mapping_to_child_dict(mappings, node) for node in curr_children]
-  return curr_dict
+      return None
 
 child_dict = mapping_to_child_dict(children_mappings, root)
 print json.dumps(child_dict[root])
