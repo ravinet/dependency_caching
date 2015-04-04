@@ -15,7 +15,7 @@ child_deps = {}
 with open(dot) as f:
     for line in f:
         curr = line.strip("\n")
-        if ( curr != "digraph G {" and curr != "ratio=compress;" and curr != "concentrate=true;" and curr != "}"):
+        if ( "digraph G {" not in curr and curr != "ratio=compress;" and curr != "concentrate=true;" and curr != "}"):
             print curr
             parent = curr.split(" ")[0]
             child = curr.split("> ")[1].strip(";").strip("[color=red]")
@@ -29,6 +29,7 @@ with open(dot) as f:
 root = '"/"'
 children_mappings = child_deps
 print children_mappings
+print
 seen = set()
 def mapping_to_child_dict(mappings, current_node):
   if current_node not in seen:
@@ -39,12 +40,15 @@ def mapping_to_child_dict(mappings, current_node):
       return curr_dict
     else:
       curr_dict[current_node] = filter(None, [mapping_to_child_dict(mappings, node) for node in curr_children])
+      if len(curr_dict[current_node]) == 0:
+          curr_dict[current_node] = None
     return curr_dict
   else:
       return None
 
 child_dict = mapping_to_child_dict(children_mappings, root)
 print json.dumps(child_dict[root])
+print
 
 (critical_path_nodes, critical_path_lists, slack_nodes) = critical_path.get_critical_path(child_dict)
 
