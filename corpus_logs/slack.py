@@ -19,10 +19,11 @@ with open(dot) as f:
             print curr
             parent = curr.split(" ")[0]
             child = curr.split("> ")[1].strip(";").strip("[color=red]")
-            if (parent not in child_deps):
-                child_deps[parent] = [child]
-            else:
-                child_deps[parent].append(child)
+            if child != parent:
+                if (parent not in child_deps):
+                    child_deps[parent] = [child]
+                else:
+                    child_deps[parent].append(child)
             if ( child not in child_deps):
                 child_deps[child] = []
 
