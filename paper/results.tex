@@ -1,1 +1,106 @@
 \section{Results}
+
+% tables that summarize the graphs before and after our new dependencies
+\begin{table*}[tb]
+\centering
+\small
+\begin{tabular}{|c|c|c|}
+\hline
+ & original & with new dependencies \\
+\hline
+length of critical path & 4 & 8 \\
+number of critical paths & 14 & 5 \\
+\% of slack nodes & 79\% & 82\% \\
+number of nodes & 82 & 82 \\
+number of edges & & \\
+\hline
+\end{tabular}
+\caption{Comparison of weather.com dependency graphs with and without our window and document dependencies.}
+\label{t:weathergraph}
+\end{table*}
+
+\begin{table*}[tb]
+\centering
+\small
+\begin{tabular}{|c|c|c|}
+\hline
+ & original & with new dependencies \\
+\hline
+length of critical path & 2 & 5 \\
+number of critical paths & 27 & 1 \\
+\% of slack nodes & 0\% & 82\% \\
+number of nodes & 28 & 28 \\
+number of edges & & \\
+\hline
+\end{tabular}
+\caption{Comparison of apple.com dependency graphs with and without our window and document dependencies.}
+\label{t:applegraph}
+\end{table*}
+
+\begin{table*}[tb]
+\centering
+\small
+\begin{tabular}{|c|c|c|}
+\hline
+ & original & with new dependencies \\
+\hline
+length of critical path & 5 & 7 \\
+number of critical paths & 2 & 1 \\
+\% of slack nodes & 95\% & 94\% \\
+number of nodes & 117 & 117 \\
+number of edges & & \\
+\hline
+\end{tabular}\caption{Comparison of espn.go.com dependency graphs with and without our window and document dependencies.}
+\label{t:espngraph}
+\end{table*}
+
+\begin{table*}[tb]
+\centering
+\small
+\begin{tabular}{|c|c|c|}
+\hline
+ & original & with new dependencies \\
+\hline
+length of critical path & 4 & 5 \\
+number of critical paths & 2 & 1 \\
+\% of slack nodes & 81\% & 86\% \\
+number of nodes & 37 & 37 \\
+number of edges & & \\
+\hline
+\end{tabular}\caption{Comparison of stackoverflow.com dependency graphs with and without our window and document dependencies.}
+\label{t:stackoverflowgraph}
+\end{table*}
+
+\begin{table*}[tb]
+\centering
+\small
+\begin{tabular}{|c|c|c|}
+\hline
+ & original & with new dependencies \\
+\hline
+length of critical path & 4 & 7 \\
+number of critical paths & 5 & 3 \\
+\% of slack nodes & 88\% & 91\% \\
+number of nodes & 102 & 102 \\
+number of edges & & \\
+\hline
+\end{tabular}\caption{Comparison of imgur.com dependency graphs with and without our window and document dependencies.}
+\label{t:imgurgraph}
+\end{table*}
+
+\begin{table*}[tb]
+\centering
+\small
+\begin{tabular}{|c|c|c|}
+\hline
+ & original & with new dependencies \\
+\hline
+length of critical path & 4 & 4 \\
+number of critical paths & 1 & 1 \\
+\% of slack nodes & 91\% & 91\% \\
+number of nodes & 46 & 46 \\
+number of edges & & \\
+\hline
+\end{tabular}\caption{Comparison of ebay.com dependency graphs with and without our window and document dependencies.}
+\label{t:ebaygraph}
+\end{table*}
