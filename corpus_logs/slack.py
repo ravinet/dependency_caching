@@ -11,13 +11,18 @@ import critical_path
 dot = sys.argv[1]
 
 child_deps = {}
-
+unique_edges = []
+# must figure out what to do with two edges connecting the nodes (for now, include them in count)
 with open(dot) as f:
     for line in f:
         curr = line.strip("\n")
         if ( "digraph G {" not in curr and curr != "ratio=compress;" and curr != "concentrate=true;" and curr != "}"):
             parent = curr.split(" ")[0]
             child = curr.split("> ")[1].strip(";").strip("[color=red]")
+            if ( parent != child ):
+                curr_edge = curr.strip(";").strip("[color=red]")
+                if ( curr_edge not in unique_edges ):
+                    unique_edges.append(curr_edge)
             if (parent not in child_deps):
                 child_deps[parent] = [child]
             else:
@@ -31,6 +36,8 @@ children_mappings = child_deps
 #print
 print "total nodes: "
 print len(child_deps.keys())
+print "\ntotal edges: "
+print len(unique_edges)
 seen = set()
 def mapping_to_child_dict(mappings, current_node):
   if current_node not in seen:
@@ -87,4 +94,6 @@ print float(len(slack_nodes.keys()))/(len(critical_path_nodes)+len(slack_nodes.k
 print "\n"
 print "Real Percentage of Slack nodes:"
 print float(float(len(slack_nodes.keys()))/len(child_deps.keys()))
-print "\n"
+#print "\n"
+#for edge in unique_edges:
+#    print edge
