@@ -237,6 +237,15 @@ if ( _window != undefined ) {
         return retVal;
     };
 
+    var _getRandomValues = window.crypto.getRandomValues;
+    window.crypto.getRandomValues = function(c) {
+        var c_use = c;
+        if ( c.hasOwnProperty("_id") ) {
+            c_use = c._base;
+        }
+        return _getRandomValues.call(this, c_use);
+    };
+
     var _eventtargetremove = EventTarget.prototype.removeEventListener;
     EventTarget.prototype.removeEventListener = function(type, listener, capture) {
         var capture_use = capture;
