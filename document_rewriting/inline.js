@@ -420,6 +420,9 @@ if ( _document != undefined ) {
     function get_subtree_nodes(argnode) {
         // returns a list of nodes and list of ids which are in subtree of argument node
         // wraps nodes in proxies (and assigns ids) if not previously wrapped (ids are preserved outside of this function)
+        if ( argnode == null ) {
+            return [[],[],[]];
+        }
         arg_val = argnode;
         if ( argnode.hasOwnProperty("_id") ) {
             arg_val = argnode._base;
@@ -496,6 +499,9 @@ if ( _document != undefined ) {
         var ids = [];
         var childpaths = [];
         var nodes = [];
+        if ( argnode == null ) {
+            return [[],[],[]];
+        }
         var next = argnode.nextSibling;
         while ( next != null ) {
             var x = argnode.nextSibling;
@@ -1121,7 +1127,10 @@ if ( _document != undefined ) {
         var arg_refnextsibl_id = "null";
         var arg_refnextsibl_childpath = "";
         prior_refsubtree = get_subtree_nodes(arg2_val);
-        var y = arg2_val.previousSibling;
+        var y = null;
+        if ( arg2_val != null ) {
+            y = arg2_val.previousSibling;
+        }
         if ( y == null ) {
         } else if ( y.hasOwnProperty("_id") ) {
             arg_refprevsibl_id = y._id;
@@ -1129,7 +1138,10 @@ if ( _document != undefined ) {
         } else {
             arg_refprevsibl_childpath = print_nodes(get_child_path(y)[0]);
         }
-        var z = arg2_val.nextSibling;
+        var z = null;
+        if ( arg2_val != null ) {
+            z = arg2_val.nextSibling;
+        }
         if ( z == null ) {
         } else if ( z.hasOwnProperty("_id") ) {
             arg_refnextsibl_id = z._id;
