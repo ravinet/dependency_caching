@@ -1,5 +1,0 @@
-"{"OpType":"WRITE","ParentId":"window","PropName":"x","NewValId":"null","OldValId":"null","script":"js1.js"}"
-"{"OpType":"WRITE","ParentId":"window","PropName":"y","NewValId":"null","OldValId":"null","script":"js1.js"}"
-"{"OpType":"WRITE","ParentId":"window","PropName":"y","NewValId":"null","OldValId":"null","script":"js2.js"}"
-"{"OpType":"READ","ParentId":"window","PropName":"x","NewValId":"null","OldValId":"null","script":"js3.js"}"
-"{"OpType":"READ","ParentId":"window","PropName":"y","NewValId":"null","OldValId":"null","script":"js3.js"}"

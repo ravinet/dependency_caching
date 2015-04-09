@@ -1,5 +1,0 @@
-{"OpType": "WRITE", "method": "createTextNode", "PropName": "$$dom.", "NodeProp": "null", "id": 0, "child_path": "", "script": "test1", "line": "line_num"}
-{"OpType": "WRITE", "method": "html", "PropName": "$$dom.1.2", "NodeProp": "null", "id": "null", "child_path": "1, 2", "script": "test1", "line": "line_num"}
-{"OpType": "WRITE", "method": "innerHTML", "PropName": "$$dom.0.1", "NodeProp": "innerHTML", "id": 0, "child_path": "0, 1", "script": "test2", "line": "line_num"}
-{"OpType": "READ", "method": "getElementById", "PropName": "$$dom.1.2", "NodeProp": "null", "id": 1, "child_path": "1, 2", "script": "test2", "line": "line_num"}
-{"OpType": "READ", "method": "hasChildNodes", "PropName": "$$dom.0.1", "NodeProp": "childNodes", "id": 0, "child_path": "0, 1", "script": "test3", "line": "line_num"}

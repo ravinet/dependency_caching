@@ -1,8 +1,0 @@
-"{"OpType":"WRITE","ParentId":"window","PropName":"x","NewValId":0,"OldValId":"null","script":"first.js"}"
-"{"OpType":"WRITE","ParentId":"window","PropName":"y","NewValId":0,"OldValId":"null","script":"first.js"}"
-"{"OpType":"READ","ParentId":"window","PropName":"x","NewValId":"null","OldValId":0,"script":"second.js"}"
-"{"OpType":"WRITE","ParentId":0,"PropName":"key","NewValId":"null","OldValId":"null","script":"second.js"}"
-"{"OpType":"WRITE","ParentId":"window","PropName":"b","NewValId":"null","OldValId":"null","script":"second.js"}"
-"{"OpType":"READ","ParentId":"window","PropName":"b","NewValId":"null","OldValId":"null","script":"third.js"}"
-"{"OpType":"READ","ParentId":"window","PropName":"y","NewValId":"null","OldValId":0,"script":"third.js"}"
-"{"OpType":"WRITE","ParentId":0,"PropName":"key","NewValId":"null","OldValId":"null","script":"third.js"}"
