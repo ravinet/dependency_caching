@@ -1,40 +1,0 @@
-
-157.166.239.60P"¥
-POST /api/hello HTTP/1.1
-Hostaspen.turner.com
-
-Connection
-keep-alive
-Content-Length854!
-Originhttp://z.cdn.turner.com-
-X-Requested-WithShockwaveFlash/16.0.0.305w
-
-User-AgentiMozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.111 Safari/537.361
-Content-Type!application/x-www-form-urlencoded
-Accept*/*’
-Referer†http://z.cdn.turner.com/xslo/cvp/core/base/0/CVPBase.swf?containerVersion=Container%20v2.0.4.0&autostart=true&domId=cvp_cnnvideo_2a964210&isEmbedContainer=false&profile=expansion&site=cnn&cvpSessionToken=7Z4h5nCqIehTLiN3ZZ4myFyla&cachebust=false&context=tve_prev 
-Accept-Encodinggzip, deflate!
-Accept-Languageen-US,en;q=0.8ÖaspenJson=%257B%2522deviceVersion%2522%253A%2522desktop%2522%252C%2522debug%2522%253A%2522false%2522%252C%2522protocol%2522%253A%25221%2E0%2522%252C%2522applicationName%2522%253A%2522CVP%2522%252C%2522context%2522%253A%2522tve%5Fprev%2522%252C%2522pageUrl%2522%253A%2522http%253A%2F%2Fwww%2Ecnn%2Ecom%2F%2522%252C%2522clientThrottled%2522%253Afalse%252C%2522profile%2522%253A%2522expansion%2522%252C%2522applicationVersion%2522%253A%25222%2E4%2E3%2E0%2522%252C%2522site%2522%253A%2522cnn%2522%252C%2522sessionToken%2522%253A%25227Z4h5nCqIehTLiN3ZZ4myFyla%2522%252C%2522platformName%2522%253A%2522flash%2522%252C%2522deviceType%2522%253A%2522desktop%2522%252C%2522aspenUUIDToken%2522%253A%2522392aspenUID392%2522%252C%2522clientThrottle%2522%253A0%252C%2522deviceModel%2522%253A%2522desktop%2522%252C%2522propertyName%2522%253A%2522cnn%5Fpreview%2522%257D*Ý
-HTTP/1.1 200 OK%
-DateSun, 22 Feb 2015 21:34:41 GMT
-ServerApacheÀ
-
-Set-Cookie±aspen_uuid_392aspenUID392=06f818afac85648fc2b0a080b7af29dea7bdb5a6|yes|0|0|1|1120b2c3b3; Domain=aspen.turner.com; expires=Sat, 13-Feb-2016 21:34:41 GMT; Max-Age=30758400; Path=/ 
-Access-Control-Allow-Origin*0
-Access-Control-Allow-MethodsGET,POST,OPTIONS
-
-Connectionclose
-Transfer-Encodingchunked 
-Content-Typeapplication/json¤118
-{ 
-    "throttled" : "yes",
-    "servername" : "aspen.turner.com",
-    "sessionId" : "fadc1e12a961b3e6ce3e4a26d357e996b153f3a0~CVP~flash~cnn_preview~1",
-    "shortId" : "K6P2KU",
-    "aspenUUID" : "06f818afac85648fc2b0a080b7af29dea7bdb5a6",
-    
-    "timestamp" : 1424640881759
-}
-
-0
-

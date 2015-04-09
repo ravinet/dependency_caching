@@ -3,3 +3,16 @@ Files which should not be written (eg. mime-type in response header is wrong so 
 bleacher
 - save.TdEi9W
 - save.8pWjs4
+
+
+espn.go.com
+- save.9w0xcG
+- save.OhdBfv
+- save.qRhjSI
+
+www.wikia.com/Wikia
+- save.4ITBxJ (don't rewrite because it is JSON, not javascript---esprima will error out---changed source content type header to json)
+
+
+www.aol.com
+- save.mn... needs to have content type text/html  (not javascript)---changed source
