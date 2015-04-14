@@ -23,7 +23,13 @@ def getLineNumber(child_path):
       matches(self.indices)
 
     def handle_endtag(self, tag):
+      if self.depth+1 in self.indices:
+        del self.indices[self.depth+1]
       self.depth -= 1
+
+    def handle_startendtag(self, tag, attrs):
+      self.handle_starttag(tag,attrs)
+      self.handle_endtag(tag)
 
   def matches(indices):
     #just to make it easier to think about, reverse the childpath
@@ -48,29 +54,30 @@ def func(head, parent_path=[]):
       child_path = [index] + parent_path
 
       #current node
-      log.append(logString(child_path, "null", html_doc))
+      log.append(logString(child_path, "null", html_doc, child.name))
 
       #parent node
       if len(child_path) > 1:
-        log.append(logString(child_path[1:], "childNodes", html_doc))
-        log.append(logString(child_path[1:], "lastChild", html_doc))
+        log.append(logString(child_path[1:], "childNodes", html_doc, child.name))
+        log.append(logString(child_path[1:], "lastChild", html_doc, child.name))
         if child_path[0] == 0:
-          log.append(logString(child_path[1:], "firstChild", html_doc))
+          log.append(logString(child_path[1:], "firstChild", html_doc, child.name))
 
       #previousSibling
       if child_path[0] > 0:
           previous_sibling = child_path[:]
           previous_sibling[0] -= 1
-          log.append(logString(previous_sibling, "nextSibling", html_doc))
+          log.append(logString(previous_sibling, "nextSibling", html_doc, child.name))
 
       func(child, child_path)
       index += 1
 
-def logString(child_path, node_prop, script):
+def logString(child_path, node_prop, script, name):
   prop_name = "$$dom." + ".".join([str(num) for num in child_path])
   string_path = ", ".join([str(num) for num in child_path])
-  return str({'OpType': 'WRITE', 'method': "null", 'PropName': prop_name, 'NodeProp': node_prop, 
+  output = str({'name': name, 'OpType': 'WRITE', 'method': "null", 'PropName': prop_name, 'NodeProp': node_prop, 
     'id': "null", 'child_path': child_path, 'script': script, 'line': getLineNumber(child_path)})
+  return output
 
 func(soup)
 
