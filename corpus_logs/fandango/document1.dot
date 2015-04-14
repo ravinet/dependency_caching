@@ -1,0 +1,11 @@
+"No_Write" -> "container.html"[color=red];
+"container.html" -> "/"[color=red];
+"No_Write" -> "/"[color=red];
+"No_Write" -> "jquery.min.js"[color=red];
+"jquery.min.js" -> "/"[color=red];
+"jquery.min.js" -> "s_code.js"[color=red];
+"/" -> "pubads_impl_58.js"[color=red];
+"jquery.min.js" -> "gpt.js"[color=red];
+"No_Write" -> "gpt.js"[color=red];
+"gpt.js" -> "/"[color=red];
+"No_Write" -> "pubads_impl_58.js"[color=red];

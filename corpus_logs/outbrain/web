@@ -1,0 +1,126 @@
+www.outbrain.com    GET 200 text/html   Other   5.9 KB  5 ms    
+j.php?a=65230&u=http%3A%2F%2Fwww.outbrain.com%2F&r=0.9238900926429778   GET 200 application/x-javascript    (index):34  1.7 KB  27 ms   
+jquery.js?ver=1.11.1    GET 200 application/x-javascript    www.outbrain.com/:45    32.8 KB 37 ms   
+header-scripts.js?ver=1421251169    GET 200 application/x-javascript    www.outbrain.com/:48    1.1 KB  36 ms   
+jquery-migrate.min.js?ver=1.2.1 GET 200 application/x-javascript    www.outbrain.com/:46    3.3 KB  25 ms   
+main.css?ver=1421654250 GET 200 text/css    www.outbrain.com/:43    5.5 KB  22 ms   
+Uri.js?ver=1.0.0    GET 302     www.outbrain.com/:51    236 B   26 ms   
+xsa6cds.js?ver=1.0.0    GET 200 text/javascript www.outbrain.com/:47    9.0 KB  15 ms   
+frontpage.css?ver=1420115269    GET 200 text/css    www.outbrain.com/:42    2.3 KB  15 ms   
+responsive.css?ver=1421654243   GET 200 text/css    www.outbrain.com/:44    7.4 KB  30 ms   
+underscore-min.js?ver=1.0.0 GET 302     www.outbrain.com/:49    252 B   22 ms   
+referrersAttribution.js?ver=1.0.0   GET 302     www.outbrain.com/:52    263 B   25 ms   
+cookie.js?ver=1.0.0 GET 302     www.outbrain.com/:50    243 B   30 ms   
+core.min.js?ver=1.11.2  GET 200 application/x-javascript    www.outbrain.com/:461   2.1 KB  62 ms   
+customerAttribution.js?ver=1.0.0    GET 302     www.outbrain.com/:53    262 B   21 ms   
+mouse.min.js?ver=1.11.2 GET 200 application/x-javascript    www.outbrain.com/:463   1.3 KB  34 ms   
+jssor.slider.min.js?ver=1418638397  GET 200 application/x-javascript    www.outbrain.com/:466   20.2 KB 44 ms   
+frontpage.js?ver=1420624097 GET 200 application/x-javascript    www.outbrain.com/:467   1.6 KB  44 ms   
+jssor.min.js?ver=1418638397 GET 200 application/x-javascript    www.outbrain.com/:465   9.7 KB  39 ms   
+header.js?ver=1420114965    GET 200 application/x-javascript    www.outbrain.com/:468   1.2 KB  45 ms   
+sortable.min.js?ver=1.11.2  GET 200 application/x-javascript    www.outbrain.com/:464   6.7 KB  39 ms   
+displayname.js?ver=1418658700   GET 200 application/x-javascript    www.outbrain.com/:471   631 B   92 ms   
+select.js?ver=1420114965    GET 200 application/x-javascript    www.outbrain.com/:472   564 B   51 ms   
+footer-scripts.js?ver=1425394220    GET 200 application/x-javascript    www.outbrain.com/:470   1.2 KB  97 ms   
+widget.min.js?ver=1.11.2    GET 200 application/x-javascript    www.outbrain.com/:462   2.9 KB  100 ms  
+oct.js?ver=1.0.0    GET 200 application/javascript  www.outbrain.com/:469   971 B   22 ms   
+customerAttribution.js?ver=1.0.0    GET (failed)        http://u.outbrain.com/js/customerAttribution/customerAttribution.js?ver=1.0.0   0 B 9 ms    
+underscore-min.js?ver=1.0.0 GET (failed)        http://u.outbrain.com/js/lib/underscore/underscore-min.js?ver=1.0.0 0 B 9 ms    
+referrersAttribution.js?ver=1.0.0   GET (failed)        http://u.outbrain.com/js/customerAttribution/referrersAttribution.js?ver=1.0.0  0 B 6 ms    
+Uri.js?ver=1.0.0    GET (failed)        http://u.outbrain.com/js/lib/jsUri/Uri.js?ver=1.0.0 0 B 6 ms    
+va-1e55d0163e952951fb848ed6eaf6eb89.js  GET 200 text/javascript (index):34  33.9 KB 9 ms    
+cookie.js?ver=1.0.0 GET (failed)        http://u.outbrain.com/js/lib/cookie.js/cookie.js?ver=1.0.0  0 B 57 ms   
+logo.png    GET 200 image/png   www.outbrain.com/:67    9.5 KB  17 ms   
+hamburger.png   GET 200 image/png   www.outbrain.com/:125   421 B   56 ms   
+d?3bb2a6e53c9684ffdc9a99f51d5b2a62179aa97c0a635ed0f5ea36ad9319853f02e562e02946228cee7755240fb8f8700dec9d6f6235e2bda860d6cd8a11bab28c6eee356ccc417c88d503d2466d12fea076aacbae7e3703f1f8e88f6de70eeabb1e7d1e2067b99e148a0a96b7c10cedd3fc78a679e610aee1e1ecc4222db0e702799a97e8cca19042b142456d407788a5fd85ad25e0c5cb485f0429e8b58ef06d710c3b5d2ea66f9b969c06e7686b6cf28cda4468cd0f59d635f1e43349409b9189cc5cbd86cfbb2a011863791dcc0f0389a096c1f4bcbc2c830338b828017af0c604c606f2d77c9eda2aa6aace69b73f4fc84734ef1797bae9f40856f4b02b993610827e9e5d4fbdf35b3db1f4187b09c9a288ec7fae3d277a802aaed9d854ccf781c6c930070333ba14f22c745fdf236fd2fc9915e6d7184cb5ecb7a86bb8b2d99a6572dec1723a5dfa4cb37335a749    GET 200 text/css    xsa6cds.js?ver=1.0.0:8  322 KB  10 ms   
+dan-horowitz.jpg    GET 200 image/jpeg  www.outbrain.com/:294   30.7 KB 12 ms   
+katrina-craigwell.jpg   GET 200 image/jpeg  www.outbrain.com/:307   46.3 KB 19 ms   
+dc.js   GET 200 text/javascript header-scripts.js?ver=1421251169:27 15.8 KB 14 ms   
+bailey-foote.jpg    GET 200 image/jpeg  www.outbrain.com/:320   9.8 KB  14 ms   
+neal-moore.jpg  GET 200 image/jpeg  www.outbrain.com/:333   8.2 KB  20 ms   
+i.js    GET 200 application/x-javascript    header-scripts.js?ver=1421251169:33 321 B   13 ms   
+gtm.js?id=GTM-MNMBTC    GET 200 text/javascript header-scripts.js?ver=1421251169:21 21.8 KB 10 ms   
+andy-blau.jpg   GET 200 image/jpeg  www.outbrain.com/:281   24.6 KB 10 ms   
+789c08a013da3c28146d21b31603af344e16f6ef.1.js   GET 200 application/x-javascript    header-scripts.js?ver=1421251169:33 21.0 KB 10 ms   
+zach-zavos.jpg  GET 200 image/jpeg  www.outbrain.com/:346   10.3 KB 13 ms   
+mike-brito.jpg  GET 200 image/jpeg  www.outbrain.com/:359   21.5 KB 55 ms   
+social-googleplus.png   GET 200 image/png   www.outbrain.com/:431   1.8 KB  10 ms   
+social-facebook.png GET 200 image/png   www.outbrain.com/:441   1.7 KB  13 ms   
+social-linkedin.png GET 200 image/png   www.outbrain.com/:436   1.8 KB  9 ms    
+social-twitter.png  GET 200 image/png   www.outbrain.com/:446   1.8 KB  6 ms    
+logo-footer.png GET 200 image/png   www.outbrain.com/:455   2.6 KB  10 ms   
+e?Viewed%20URL=http%3A%2F%2Fwww.outbrain.com%2F&Referrer=Direct&_n=Page%20View&_k=789c08a013da3c28146d21b31603af344e16f6ef&_p=AEuCmrGl5sQGGIq6FgbeeFSDhoA%3D&_t=1428586753  GET 200 image/gif   www.outbrain.com/:461   294 B   7 ms    
+e?URL=http%3A%2F%2Fwww.outbrain.com%2F&Referrer=Direct&_n=Visited%20Site&_k=789c08a013da3c28146d21b31603af344e16f6ef&_p=AEuCmrGl5sQGGIq6FgbeeFSDhoA%3D&_t=1428586753    GET 200 image/gif   www.outbrain.com/:461   294 B   5 ms    
+hero.jpg    GET 200 image/jpeg  dc.js:23    59.1 KB 9 ms    
+data:font/opentype;…    GET 200 font/opentype   dc.js:23    0 B 82 ms   
+amplify-bg.jpg  GET 200 image/jpeg  dc.js:23    207 KB  7 ms    
+engage-bg.jpg   GET 200 image/jpeg  dc.js:23    209 KB  7 ms    
+numbers-bg.jpg  GET 200 image/jpeg  dc.js:23    387 KB  8 ms    
+arrow_right.png GET 200 image/png   dc.js:23    1.6 KB  7 ms    
+arrow_left.png  GET 200 image/png   dc.js:23    1.6 KB  11 ms   
+quote.png   GET 200 image/png   dc.js:23    1.4 KB  7 ms    
+powered-people.jpg  GET 200 image/jpeg  dc.js:23    183 KB  6 ms    
+__utm.gif?utmwv=5.6.4dc&utms=1&utmn=2048062812&utmhn=www.outbrain.com&utmcs=UTF-8&utmsr=1920x1200&utmvp=1840x189&utmsc=24-bit&utmul=en-us&utmje=1&utmfl=17.0%20r0&utmdt=Outbrain%20%7C%20The%20Most%20Trusted%20Content%20Discovery%20Platform&utmhid=436652982&utmr=-&utmp=%2F&utmht=1428586752733&utmac=UA-294746-2&utmcc=__utma%3D17407783.51236415.1428586753.1428586753.1428586753.1%3B%2B__utmz%3D17407783.1428586753.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=qB~ GET 200 image/gif   www.outbrain.com/:461   410 B   6 ms    
+vrs.js  GET 200 application/x-javascript    footer-scripts.js?ver=1425394220:26 8.7 KB  7 ms    
+adsct?p_id=Twitter&p_user_id=0&txn_id=l4hrj&tw_sale_amount=0&tw_order_quantity=0    GET (failed)        www.outbrain.com/:470   0 B 20 ms   
+insight.min.js  GET 200 application/x-javascript    footer-scripts.js?ver=1425394220:39 23.8 KB 6 ms    
+adsct?p_id=Twitter&p_user_id=0&txn_id=l4hrj&tw_sale_amount=0&tw_order_quantity=0    GET 200 image/gif   www.outbrain.com/:470   662 B   7 ms    
+query-session?callback=jQuery111109411274341400713_1428586752560&_=1428586752561    GET (failed)        jquery.js?ver=1.11.1:4  0 B 19 ms   
+l.gif?experiment_id=97&account_id=65230&combination=1&ed={%22lt%22:%221428586752790%22,%22r%22:%22%22,%22ul%22:%22en-us%22,%22de%22:%22UTF-8%22,%22sc%22:%2224%22}&u=6DBA3E34B360A3E72295579600349672&s=1&random=0.07897444348782301    GET 200 image/gif   www.outbrain.com/:1 343 B   8 ms    
+__utm.gif?utmwv=5.6.4dc&utms=2&utmn=2120663881&utmhn=www.outbrain.com&utmt=event&utme=5(VWO*Visit*)(0)8(4!VWO-97)9(4!Control)11(4!1)&utmcs=UTF-8&utmsr=1920x1200&utmvp=1840x189&utmsc=24-bit&utmul=en-us&utmje=1&utmfl=17.0%20r0&utmdt=Outbrain%20%7C%20The%20Most%20Trusted%20Content%20Discovery%20Platform&utmhid=436652982&utmr=-&utmp=%2F&utmht=1428586752795&utmac=UA-294746-2&utmni=1&utmcc=__utma%3D17407783.51236415.1428586753.1428586753.1428586753.1%3B%2B__utmz%3D17407783.1428586753.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=6R~  GET 200 image/gif   www.outbrain.com/:1 410 B   7 ms    
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 100 ms  
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 81 ms   
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 64 ms   
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 58 ms   
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 58 ms   
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 54 ms   
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 44 ms   
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 38 ms   
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 32 ms   
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 25 ms   
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 24 ms   
+data:font/opentype;…    GET 200 font/opentype   xsa6cds.js?ver=1.0.0:28 0 B 24 ms   
+6084.js?396829  GET 200 application/x-javascript    footer-scripts.js?ver=1425394220:45 9.3 KB  5 ms    
+conversion_async.js GET 200 text/javascript gtm.js?id=GTM-MNMBTC:12 3.4 KB  5 ms    
+optiTrack.js    GET 200 application/x-javascript    Other   1.5 KB  13 ms   
+piwik.js    GET 200 application/x-javascript    Other   23.7 KB 15 ms   
+oct.js  GET 200 application/javascript  gtm.js?id=GTM-MNMBTC:55 971 B   6 ms    
+bat.js  GET 200 application/javascript  Other   3.0 KB  11 ms   
+fbds.js GET 200 application/x-javascript    Other   2.0 KB  13 ms   
+hotjar-17612.js?sv=3    GET 200 application/javascript  Other   34.0 KB 7 ms    
+iMAWebCookie.js?273261ef-13a9ed106b5-5fb2bd720d5cf67c7bdb5a02a7e699d8&h=www.pages04.net GET 200 text/javascript gtm.js?id=GTM-MNMBTC:55 5.3 KB  13 ms   
+?transport=jsonp&idsite=570&url=http://www.outbrain.com/&content_type=utf-8&callback=_vrq.jsonp.callbackFn  GET 200 text/javascript vrs.js:6    231 B   5 ms    
+?idsite=570&url=http%3A%2F%2Fwww.outbrain.com%2F&seen_url=http%3A%2F%2Fwww.outbrain.com%2F&t=Outbrain%20%7C%20The%20Most%20Trusted%20Content%20Discovery%20Platform&c=1428586752965z96VSqtB6KwJtJHKoDPeTbZPg45iycNo&r=1428586752968&ypos=-1&zone=&debug=loadTime.5&content_type=utf-8&v=31  GET 200 image/gif   www.outbrain.com/:1 346 B   5 ms    
+p.gif?s=1&k=xsa6cds&app=&ht=tk&h=www.outbrain.com&f=570.10890.10891.10892.10894.10954.13454.13455.13456.13457.13458.13460.13407&a=584323&sl=60&fl=351&js=1.12.3&_=1428586752981 GET 200 image/gif   www.outbrain.com/:1 334 B   6 ms    
+?random=1428586752986&cv=7&fst=1428586752986&num=1&fmt=3&label=YWoXCNGj6gMQy8Wj9QM&guid=ON&u_h=1200&u_w=1920&u_ah=1176&u_aw=1920&u_cd=24&u_his=2&u_tz=-240&u_java=true&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1   GET 302 image/gif   www.outbrain.com/:1 758 B   35 ms   
+?random=1428586752989&cv=7&fst=1428586752989&num=1&fmt=3&label=-93QCICE2QYQgJSi0wM&guid=ON&u_h=1200&u_w=1920&u_ah=1176&u_aw=1920&u_cd=24&u_his=2&u_tz=-240&u_java=true&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1   GET 302 image/gif   www.outbrain.com/:1 756 B   34 ms   
+?random=1428586752990&cv=7&fst=1428586752990&num=1&fmt=3&label=Remarketing%20EU&guid=ON&u_h=1200&u_w=1920&u_ah=1176&u_aw=1920&u_cd=24&u_his=2&u_tz=-240&u_java=true&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1  GET 302 image/gif   www.outbrain.com/:1 753 B   49 ms   
+?random=1428586752992&cv=7&fst=1428586752992&num=1&fmt=3&label=v2-BCMng8AYQy8Wj9QM&guid=ON&u_h=1200&u_w=1920&u_ah=1176&u_aw=1920&u_cd=24&u_his=2&u_tz=-240&u_java=true&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1   GET 302 image/gif   www.outbrain.com/:1 758 B   48 ms   
+?random=1428586752994&cv=7&fst=1428586752994&num=1&fmt=3&guid=ON&u_h=1200&u_w=1920&u_ah=1176&u_aw=1920&u_cd=24&u_his=2&u_tz=-240&u_java=true&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1 GET 302 image/gif   www.outbrain.com/:1 731 B   46 ms   
+?random=1428586752996&cv=7&fst=1428586752996&num=1&fmt=3&label=Remarketing%20APAC&guid=ON&u_h=1200&u_w=1920&u_ah=1176&u_aw=1920&u_cd=24&u_his=2&u_tz=-240&u_java=true&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1    GET 302 image/gif   www.outbrain.com/:1 756 B   70 ms   
+?id=551009445004294&ev=PixelInitialized&dl=http%3A%2F%2Fwww.outbrain.com%2F&rl=&if=false&ts=1428586753000   GET (failed)        www.outbrain.com/:1 0 B 41 ms   
+?id=1429858990587745&ev=PixelInitialized&dl=http%3A%2F%2Fwww.outbrain.com%2F&rl=&if=false&ts=1428586753001  GET (failed)        www.outbrain.com/:1 0 B 41 ms   
+?id=1384693421829556&ev=PixelInitialized&dl=http%3A%2F%2Fwww.outbrain.com%2F&rl=&if=false&ts=1428586753001  GET (failed)        www.outbrain.com/:1 0 B 41 ms   
+0?ti=4018046&Ver=2&mid=76b46480-4fa8-45d6-9bde-c09a090da693&evt=pageLoad&lt=375&pi=2054644622&lg=en-US&sw=1920&sh=1200&sc=24&tl=Outbrain%20|%20The%20Most%20Trusted%20Content%20Discovery%20Platform&p=http%3A%2F%2Fwww.outbrain.com%2F&r=&rn=386526    GET 204 text/plain  www.outbrain.com/:1 446 B   8 ms    
+?id=739164362840972&ev=PixelInitialized&dl=http%3A%2F%2Fwww.outbrain.com%2F&rl=&if=false&ts=1428586753001   GET (failed)        www.outbrain.com/:1 0 B 41 ms   
+?id=256591781210497&ev=PixelInitialized&dl=http%3A%2F%2Fwww.outbrain.com%2F&rl=&if=false&ts=1428586753001   GET (failed)        www.outbrain.com/:1 0 B 44 ms   
+?id=1462419784029746&ev=PixelInitialized&dl=http%3A%2F%2Fwww.outbrain.com%2F&rl=&if=false&ts=1428586753001  GET (failed)        www.outbrain.com/:1 0 B 44 ms   
+?id=1500940326803058&ev=PixelInitialized&dl=http%3A%2F%2Fwww.outbrain.com%2F&rl=&if=false&ts=1428586753001  GET (failed)        www.outbrain.com/:1 0 B 44 ms   
+?id=810343928991466&ev=PixelInitialized&dl=http%3A%2F%2Fwww.outbrain.com%2F&rl=&if=false&ts=1428586753001   GET (failed)        www.outbrain.com/:1 0 B 44 ms   
+0?ti=4018046&Ver=2&mid=76b46480-4fa8-45d6-9bde-c09a090da693&evt=pageLoad&lt=375&pi=2054644622&lg=en-US&sw=1920&sh=1200&sc=24&tl=Outbrain%20|%20The%20Most%20Trusted%20Content%20Discovery%20Platform&p=http%3A%2F%2Fwww.outbrain.com%2F&r=&rn=791463    GET 204 text/plain  www.outbrain.com/:1 242 B   9 ms    
+piwik.php?action_name=Outbrain%20%7C%20The%20Most%20Trusted%20Content%20Discovery%20Platform&idsite=113&rec=1&r=802071&h=9&m=39&s=13&url=http%3A%2F%2Fwww.outbrain.com%2F&_id=8748c0c5d2626ab2&_idts=1428586753&_idvc=1&_idn=1&_refts=0&_viewts=1428586753&pdf=1&qt=0&realp=0&wma=0&dir=0&fla=1&java=1&gears=0&ag=0&cookie=1&res=1920x1200&gt_ms=5  GET 200 image/gif   www.outbrain.com/:1 235 B   5 ms    
+adsct?p_id=Twitter&p_user_id=0&txn_id=l5c1t&tw_sale_amount=0&tw_order_quantity=0    GET (failed)        www.outbrain.com/:1 0 B 34 ms   
+adsct?p_id=Twitter&p_user_id=0&txn_id=l5c1t&tw_sale_amount=0&tw_order_quantity=0    GET 200 image/gif   www.outbrain.com/:1 662 B   5 ms    
+?label=YWoXCNGj6gMQy8Wj9QM&fmt=3&num=1&cv=7&frm=0&url=http%3A//www.outbrain.com/&random=1523345526  GET 200 image/gif   http://googleads.g.doubleclick.net/pagead/viewthroughconversion/1051255499/…rue&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1  378 B   6 ms    
+?label=-93QCICE2QYQgJSi0wM&fmt=3&num=1&cv=7&frm=0&url=http%3A//www.outbrain.com/&random=148950010   GET 200 image/gif   http://googleads.g.doubleclick.net/pagead/viewthroughconversion/979929600/?…rue&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1  378 B   11 ms   
+?fmt=3&num=1&cv=7&frm=0&url=http%3A//www.outbrain.com/&random=1953817667    GET 200 image/gif   http://googleads.g.doubleclick.net/pagead/viewthroughconversion/966212275/?…rue&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1  378 B   8 ms    
+?label=YWoXCNGj6gMQy8Wj9QM&fmt=3&num=1&cv=7&frm=0&url=http%3A//www.outbrain.com/&random=1523345526  GET 200 image/gif   http://googleads.g.doubleclick.net/pagead/viewthroughconversion/1051255499/…rue&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1  378 B   8 ms    
+?label=Remarketing%20EU&fmt=3&num=1&cv=7&frm=0&url=http%3A//www.outbrain.com/&random=563703989  GET 200 image/gif   http://googleads.g.doubleclick.net/pagead/viewthroughconversion/970689397/?…rue&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1  378 B   16 ms   
+visit-data?sv=3 OPTIONS (failed)        hotjar-17612.js?sv=3:5  0 B 3 ms    
+?label=Remarketing%20APAC&fmt=3&num=1&cv=7&frm=0&url=http%3A//www.outbrain.com/&random=3344977340   GET 200 image/gif   http://googleads.g.doubleclick.net/pagead/viewthroughconversion/962993172/?…rue&u_nplug=5&u_nmime=8&frm=0&url=http%3A//www.outbrain.com/&vis=1&async=1  378 B   5 ms    
+?time=1428586753075&pid=4757&url=http%3A%2F%2Fwww.outbrain.com%2F&pageUrl=http%3A%2F%2Fwww.outbrain.com%2F&ref=&fmt=js  GET 302     insight.min.js:12   634 B   10 ms   
+event.jpeg?accesskey=273261ef-13a9ed106b5-5fb2bd720d5cf67c7bdb5a02a7e699d8&v=1.28&isNewSession=1&type=pageview&isNewVisitor=1&sessionGUID=cb679667-a28d-1284-1cba-bb176ac52014&webSyncID=0aad69a3-dc09-26b2-adc5-5ed402912cd6&url=http%3A%2F%2Fwww.outbrain.com%2F&newSiteVisit=1&hostname=www.outbrain.com&pathname=%2F&newPageVisit=1&eventKey=19e01d10-c376-ee03-10bb-7c3079841ed9   GET 200 image/jpeg  Other   294 B   7 ms    
+getuid?http%3A%2F%2Fwww.linkedin.com%2Fcsp%2Fdtag%3Fp%3D9%26_x%3D%252526fmt%25253Djs%252526pageUrl%25253Dhttp%2525253A%2525252F%2525252Fwww.outbrain.com%2525252F%252526time%25253D1428585711889%252526opid%25253D4757%252526url%25253Dhttp%2525253A%2525252F%2525252Fwww.outbrain.com%2525252F%252526ref%25253D%2525263pc%25253Dtrue%252526an_user_id%25253D%24UID GET 302 text/html   http://www.bizographics.com/collect/?time=1428586753075&pid=4757&url=http%3…2Fwww.outbrain.com%2F&pageUrl=http%3A%2F%2Fwww.outbrain.com%2F&ref=&fmt=js  1.1 KB  8 ms    
+bounce?%2Fgetuid%3Fhttp%253A%252F%252Fwww.linkedin.com%252Fcsp%252Fdtag%253Fp%253D9%2526_x%253D%25252526fmt%2525253Djs%25252526pageUrl%2525253Dhttp%252525253A%252525252F%252525252Fwww.outbrain.com%252525252F%25252526time%2525253D1428585711889%25252526opid%2525253D4757%25252526url%2525253Dhttp%252525253A%252525252F%252525252Fwww.outbrain.com%252525252F%25252526ref%2525253D%252525263pc%2525253Dtrue%25252526an_user_id%2525253D%2524UID GET 302 text/html   http://ib.adnxs.com/getuid?http%3A%2F%2Fwww.linkedin.com%2Fcsp%2Fdtag%3Fp%3…25252F%252526ref%25253D%2525263pc%25253Dtrue%252526an_user_id%25253D%24UID  965 B   5 ms    
+dtag?p=9&_x=%2526fmt%253Djs%2526pageUrl%253Dhttp%25253A%25252F%25252Fwww.outbrain.com%25252F%2526time%253D1428585711889%2526opid%253D4757%2526url%253Dhttp%25253A%25252F%25252Fwww.outbrain.com%25252F%2526ref%253D%25263pc%253Dtrue%2526an_user_id%253D8791666540407355685 GET 301     http://ib.adnxs.com/bounce?%2Fgetuid%3Fhttp%253A%252F%252Fwww.linkedin.com%…6ref%2525253D%252525263pc%2525253Dtrue%25252526an_user_id%2525253D%2524UID  456 B   6 ms    
+dtag?p=9&_x=%2526fmt%253Djs%2526pageUrl%253Dhttp%25253A%25252F%25252Fwww.outbrain.com%25252F%2526time%253D1428585711889%2526opid%253D4757%2526url%253Dhttp%25253A%25252F%25252Fwww.outbrain.com%25252F%2526ref%253D%25263pc%253Dtrue%2526an_user_id%253D8791666540407355685 GET (failed)        http://www.linkedin.com/csp/dtag?p=9&_x=%2526fmt%253Djs%2526pageUrl%253Dhtt…5252F%2526ref%253D%25263pc%253Dtrue%2526an_user_id%253D8791666540407355685  0 B 1 ms    

@@ -1,0 +1,87 @@
+www.ask.com GET 200 text/html   Other   11.4 KB 5 ms    
+ask_home.min.c321868e.css   GET 200 text/css    www.ask.com/:23 11.2 KB 8 ms    
+generic.png GET 200 image/png   www.ask.com/:195    2.0 KB  9 ms    
+ask_home.min.6239cf50.js    GET 200 application/javascript  www.ask.com/:532    41.3 KB 9 ms    
+ask_unified.min.c7f61e55.js GET 200 application/javascript  www.ask.com/:579    5.0 KB  9 ms    
+ga.js   GET 200 text/javascript www.ask.com/:673    16.1 KB 12 ms   
+beacon.js   GET 200 application/x-javascript    www.ask.com/:688    1.4 KB  14 ms   
+20150407.jpg    GET 200 image/jpeg  www.ask.com/:195    3.9 KB  26 ms   
+20150406.jpg    GET 200 image/jpeg  www.ask.com/:287    3.4 KB  12 ms   
+20150405.jpg    GET 200 image/jpeg  www.ask.com/:287    5.0 KB  10 ms   
+20150404.jpg    GET 200 image/jpeg  www.ask.com/:287    2.8 KB  23 ms   
+20150403.jpg    GET 200 image/jpeg  www.ask.com/:287    4.0 KB  8 ms    
+poll-20150307073308264-3728-large.jpg   GET 200 image/jpeg  www.ask.com/:357    83.9 KB 6 ms    
+var=ccauds  GET 200 application/javascript  (index):288 353 B   13 ms   
+gpt.js  GET 200 text/javascript (index):320 16.0 KB 13 ms   
+bluelinen.jpg   GET 200 image/jpeg  www.ask.com/:532    190 KB  12 ms   
+peel_weather.png    GET 200 image/png   www.ask.com/:532    9.1 KB  11 ms   
+legacy_homepage-LegacyHP-031dff5815f66e80b1c1af80d2e8f5c5.png   GET 200 image/png   www.ask.com/:532    10.8 KB 11 ms   
+us_sprite-LegacyHP-b9ed5c7f27cbcc2256d96d2324494317.png GET 200 image/png   www.ask.com/:532    21.9 KB 7 ms    
+ulog?anxuu=C11F8BAC-77F5-411D-A1A7-9FF9DB9B988E&anxa=T2_AskUS&anxv=372c321&anxd=2015-03-24T18%3A48%3A00Z&anxsn=askus013iad.io.askjeeves.info&anxu=http%3A%2F%2Fwww.ask.com%2F&anxl=en-us&anxlv=1428436869816&anxrd=none&anxrk=-&anxsq=2&pl_cm=true&anxi=9FC8FD95-C3FB-44A7-A4E2-A72E570E48C9&anxe=BackFill&anxr=1228879420  GET 204 text/plain  www.ask.com/:672    266 B   4 ms    
+__utm.gif?utmwv=5.6.4&utms=1&utmn=1522989516&utmhn=www.ask.com&utme=8(LD)9(0)&utmcs=UTF-8&utmsr=1920x1200&utmvp=1830x189&utmsc=24-bit&utmul=en-us&utmje=1&utmfl=17.0%20r0&utmdt=Ask.com%20-%20What%27s%20Your%20Question%3F&utmhid=884454568&utmr=-&utmp=%2F&utmht=1428444216936&utmac=UA-5081537-46&utmcc=__utma%3D252994457.1001428662.1428444217.1428444217.1428444217.1%3B%2B__utmz%3D252994457.1428444217.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=1651865668&utmredir=1&utmu=qQAAAAAAAAAAAAAAAAAAAAAE~   GET 200 image/gif   www.ask.com/:686    408 B   5 ms    
+cc.js?ns=_cc4737    GET 200 application/x-javascript    (index):729 12.2 KB 7 ms    
+pubads_impl_58.js   GET 200 text/javascript gpt.js:48   34.0 KB 6 ms    
+container.html  GET 200 text/html   gpt.js:87   2.2 KB  9 ms    
+check_359604.js GET 200 text/javascript gpt.js:87   2.4 KB  8 ms    
+ads?gdfp_req=1&correlator=2219349520678912&output=json_html&callback=callbackProxy&impl=fifs&json_a=1&eid=108809021&sfv=1-0-2&iu_parts=23219321%2Ciac.ask-ask.us.dw%2Chomepage&enc_prev_ius=%2F0%2F1%2F2%2F2%2F2&prev_iu_szs=300x250&prev_scp=pos%3Dtop&cust_params=iabcat%3Diab19-35%26ptype%3Dhomepage%26ref%3Ddirect%26rpv%3D69%26tx1%3Dhomepage%26tx2%3Dhomepage%26tx3%3Dnull%26lang%3Deng%26loc%3Dus%26kw%3Dnull%26dc_ref%3Dhttp%25253A%25252F%25252Fwww.ask.com%25252F&cookie_enabled=1&lmt=1428444217&dt=1428444217020&cc=19&frm=20&biw=1830&bih=189&oid=3&adks=2296567755&gut=v2&ifi=1&u_tz=-240&u_his=2&u_java=true&u_h=1200&u_w=1920&u_ah=1176&u_aw=1920&u_cd=24&u_nplug=5&u_nmime=8&u_sd=1&flash=17.0.0&url=http%3A%2F%2Fwww.ask.com%2F&vrg=58&vrp=58&ga_vid=1001428662.1428444217&ga_sid=1428444217&ga_hid=884454568&ga_fc=true GET 200 text/javascript pubads_impl_58.js:121   7.7 KB  6 ms    
+10952.js    GET 200 text/javascript pubads_impl_58.js:121   6.9 KB  5 ms    
+osd.js  GET 200 text/javascript pubads_impl_58.js:9 19.6 KB 7 ms    
+167564-15.js?&cb=0.10655647795647383&tk_st=1&rf=http%3A//www.ask.com/&rp_s=c&p_pos=btf&p_screen_res=1920x1200   GET 200 text/javascript 10952.js:1  3.7 KB  8 ms    
+show_ads.js GET 200 text/javascript 167564-15.js?&cb=0.10655647795647383&tk_st=1&rf=http%3A//www.ask.com/&rp_s=c&p_pos=btf&p_screen_res…:2  8.1 KB  5 ms    
+ca-pub-1776282838082166.js  GET 200 text/javascript show_ads.js:24  515 B   5 ms    
+show_ads_impl.js    GET 200 text/javascript show_ads.js:15  59.7 KB 9 ms    
+zrt_lookup.html GET 200 text/html   show_ads.js:15  5.5 KB  7 ms    
+beacon.js   GET 200 application/x-javascript    (index):23  (from cache)    0 ms    
+emily.html?rtb_ext=1&pc=10952/40362&geo=na&co=us    GET 200 text/html   (index):2   8.0 KB  6 ms    
+b?c1=8&c2=6135404&c3=1000&c4=40362&c10=3872060&ns__t=1428444217095&ns_c=UTF-8&c8=&c7=http%3A%2F%2Fwww.ask.com%2F&c9=http%3A%2F%2Fwww.ask.com%2F GET 302     www.ask.com/:1  654 B   48 ms   
+ads?client=ca-pub-1776282838082166&output=html&h=250&slotname=9884231937%2F5174602857%2F1280135337%2F8523922017&adk=4065295617&w=300&lmt=1428444217&ea=0&flash=17.0.0&url=http%3A%2F%2Fwww.ask.com%2F&dt=1428444217078&bpp=8&bdt=60&shv=r20150402&cbv=r20150224&saldr=sa&correlator=2758940835841&frm=23&ga_vid=1001428662.1428444217&ga_sid=1428444217&ga_hid=340584051&ga_fc=1&u_tz=-240&u_his=2&u_java=1&u_h=1200&u_w=1920&u_ah=1176&u_aw=1920&u_cd=24&u_nplug=5&u_nmime=8&dff=times%20new%20roman&dfs=16&adx=1090&ady=227&biw=1830&bih=189&isw=300&ish=250&ifk=481021502&eid=317150304%2C828064100&oid=3&loc=http%3A%2F%2Fwww.ask.com%2F&rx=0&eae=2&fc=24&brdim=2002%2C24%2C2002%2C24%2C1920%2C24%2C1855%2C1176%2C300%2C250&vis=1&rsz=%7C%7Co%7C&abl=CS&ppjl=u&srr=1&fu=4&bc=1&ifi=1&dtd=63 GET 200 text/html   show_ads_impl.js:306    44.7 KB 7 ms    
+b2?c1=8&c2=6135404&c3=1000&c4=40362&c10=3872060&ns__t=1428436888860&ns_c=windows-1252&c8=&c7=http%3A%2F%2Fwww.ask.com%2F&c9=    GET 204 text/plain  http://b.scorecardresearch.com/b?c1=8&c2=6135404&c3=1000&c4=40362&c10=38720…_c=UTF-8&c8=&c7=http%3A%2F%2Fwww.ask.com%2F&c9=http%3A%2F%2Fwww.ask.com%2F  248 B   5 ms    
+pixel.htm?fpid=6&sp=y   GET 200 text/html   emily.html?rtb_ext=1&pc=10952/40362&geo=na&co=us:252    784 B   6 ms    
+osd.js  GET 200 text/javascript show_ads_impl.js:15 19.6 KB 6 ms    
+6015556649819274920 GET 200 image/gif   ads:5   43.9 KB 11 ms   
+abg.js  GET 200 text/javascript ads:5   14.6 KB 7 ms    
+google-logo.png GET 200 image/png   ads:5   4.5 KB  10 ms   
+ddc.htm?uid=3073708154474896527&rnd=3145765748512824463&fpid=6&nu=y&t=&sp=y&purl=&ctid=1&cyid=2 GET 200 text/html   pixel.htm:8 5.6 KB  5 ms    
+s?v=r20120211   GET 200 text/html   ads:5   449 B   4 ms    
+push?client=ca-pub-1776282838082166 GET 200 text/html   ads:5   506 B   5 ms    
+x_button_blue2.png  GET 200 image/png   ads:5   593 B   5 ms    
+tap.php?v=4212&nid=1185&put=3073708154474896527&expires=60  GET 200 image/gif   ddc.htm:39  826 B   6 ms    
+google?google_gid=CAESEPRNjYVQtM8BfUPhurcgL0I&google_cver=1&google_push=AHNF13IWeqxit-u6uJCJfbV9sedvApsqYGm44lMKQQ  GET 302 text/html   push:1  386 B   11 ms   
+ui  GET (failed)        ads:1   0 B 1 ms    
+pixel?google_nid=magnetic&google_push=AHNF13IWeqxit-u6uJCJfbV9sedvApsqYGm44lMKQQ&google_hm= GET 200 image/png   http://magnetic.t.domdex.com/sync/google?google_gid=CAESEPRNjYVQtM8BfUPhurcgL0I&google_cver=1&google_push=AHNF13IWeqxit-u6uJCJfbV9sedvApsqYGm44lMKQQ    471 B   7 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3114   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3115   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3116   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3117   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3118   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3119   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3120   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3123   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3124   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3125   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3126   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3127   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3128   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:3129   (from cache)    0 ms    
+data:image/png;base…    GET (data)  image/png   data:text/html,chro…:1  (from cache)    0 ms    
+rt=ifr  GET 404 text/plain  cc.js?ns=_cc4737:1  143 B   5 ms    
+rubicon GET (failed)        Other   0 B 19 ms   
+cfcm.ashx?providerId=1007&extMatch=1    GET 302     Other   496 B   27 ms   
+?rt=pixel   GET 302 text/plain  Other   988 B   27 ms   
+0.302?matchId=102   GET 302     Other   745 B   29 ms   
+getuidnb?http%3A%2F%2Fpixel.rubiconproject.com%2Ftap.php%3Fv%3D109108%26nid%3D3876%26put%3D$UID%26expires%3D30  GET 302 text/html   Other   863 B   20 ms   
+img?mt_exid=9   GET 302 image/gif   Other   738 B   20 ms   
+getuidnb?http%3A%2F%2Fpixel.rubiconproject.com%2Ftap.php%3Fv%3D4894%26nid%3D1986%26put%3D$UID%26expires%3D30    GET 302 text/html   Other   861 B   28 ms   
+71ikiLcMrGYIGyvMYn7ZsljFfaS4wGaxf80-aqUxjBw.js  GET 200 text/javascript ads?client=ca-pub-1776282838082166&output=html&h=250&slotname=9884231937%2F5174602857%2F1280135337%…:5  4.0 KB  13 ms   
+b?c1=2&c2=6034776&c3=&c4=&c5=&c6=&c15=&ns__t=1428444217299&ns_c=UTF-8&c8=Ask.com%20-%20What%27s%20Your%20Question%3F&c7=http%3A%2F%2Fwww.ask.com%2F&c9= GET 204 text/plain  Other   248 B   12 ms   
+bounce?%2Fgetuidnb%3Fhttp%253A%252F%252Fpixel.rubiconproject.com%252Ftap.php%253Fv%253D109108%2526nid%253D3876%2526put%253D%24UID%2526expires%253D30    GET 302 text/html   http://ib.adnxs.com/getuidnb?http%3A%2F%2Fpixel.rubiconproject.com%2Ftap.php%3Fv%3D109108%26nid%3D3876%26put%3D$UID%26expires%3D30  762 B   54 ms   
+img?mt_exid=9&mm_bnc&mm_bct GET 302 image/gif   http://sync.mathtag.com/sync/img?mt_exid=9  582 B   57 ms   
+cfcm.ashx?providerId=1007&extMatch=1&ctst=1 GET 302     http://extmap.rub.ace.advertising.com/cfcm.ashx?providerId=1007&extMatch=1  599 B   49 ms   
+563a100d61f65cc7cf8ff9b280c2d50da4b179ae?csrc=  GET (failed)        http://tap.rubiconproject.com/oz/feeds/admovate-rtb/tokens/?rt=pixel    0 B 48 ms   
+0.302?matchId=102&asidi=xgTSBlu0TQZJNf6MDa0-ug  GET 302     http://pix04.revsci.net/D08734/a3/0/3/0.302?matchId=102 933 B   48 ms   
+bounce?%2Fgetuidnb%3Fhttp%253A%252F%252Fpixel.rubiconproject.com%252Ftap.php%253Fv%253D4894%2526nid%253D1986%2526put%253D%24UID%2526expires%253D30  GET 302 text/html   http://ib.adnxs.com/getuidnb?http%3A%2F%2Fpixel.rubiconproject.com%2Ftap.php%3Fv%3D4894%26nid%3D1986%26put%3D$UID%26expires%3D30    760 B   48 ms   
+tap.php?v=109108&nid=3876&put=5211232126804468531&expires=30    GET 200 image/gif   http://ib.adnxs.com/bounce?%2Fgetuidnb%3Fhttp%253A%252F%252Fpixel.rubiconpr…hp%253Fv%253D109108%2526nid%253D3876%2526put%253D%24UID%2526expires%253D30  830 B   6 ms    
+tap.php?v=7249%7c%7c11203&nid=2146,2309&put=RUIDcxqgpm9hx63xrturms9arrph9p131ftgpf4akuxg6o4udasacaxo====&expires=30 GET 200 image/gif   http://extmap.rub.ace.advertising.com/cfcm.ashx?providerId=1007&extMatch=1&ctst=1   1.1 KB  7 ms    
+tap.php?v=16728&nid=2810&put=BN6e-GyOVjPJfwEyp4jZOmrKfcyk&expires=40    GET 200 image/gif   http://pix04.revsci.net/D08734/a3/Z/3/0.302?matchId=102&asidi=xgTSBlu0TQZJNf6MDa0-ug    919 B   8 ms    
+tap.php?v=4894&nid=1986&put=5211232126804468531&expires=30  GET 200 image/gif   http://ib.adnxs.com/bounce?%2Fgetuidnb%3Fhttp%253A%252F%252Fpixel.rubiconpr….php%253Fv%253D4894%2526nid%253D1986%2526put%253D%24UID%2526expires%253D30  827 B   7 ms    
+tap.php?v=4222&nid=1512&put=d4845524-3788-4800-9cff-883f38bcc98a    GET 200 image/gif   http://sync.mathtag.com/sync/img?mt_exid=9&mm_bnc&mm_bct    967 B   7 ms    

@@ -1,0 +1,16 @@
+"No_Write" -> "jquery.min.js"[color=red];
+"No_Write" -> "stub.en.js"[color=red];
+"jquery.min.js" -> "stub.en.js"[color=red];
+"stub.en.js" -> "/"[color=red];
+"No_Write" -> "/"[color=red];
+"jquery.min.js" -> "/"[color=red];
+"No_Write" -> "ados.js"[color=red];
+"No_Write" -> "analytics.js"[color=red];
+"No_Write" -> "quant.js"[color=red];
+"No_Write" -> "beacon.js"[color=red];
+"No_Write" -> "ados"[color=red];
+"No_Write" -> "adFeedback.js"[color=red];
+"beacon.js" -> "/"[color=red];
+"analytics.js" -> "/"[color=red];
+"quant.js" -> "/"[color=red];
+"ados.js" -> "/"[color=red];

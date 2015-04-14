@@ -1,0 +1,14 @@
+"optimizely.js" -> "/"[color=red];
+"No_Write" -> "optimizely.js"[color=red];
+"No_Write" -> "/"[color=red];
+"No_Write" -> "c?launchVideoOverlayTopics.r5.js"[color=red];
+"c?launchVideoOverlayTopics.r5.js" -> "/"[color=red];
+"No_Write" -> "vrs.js"[color=red];
+"sbMaster" -> "/"[color=red];
+"c?launchVideoOverlayTopics.r5.js" -> "espn.pluginTracking.js"[color=red];
+"No_Write" -> "espn.pluginTracking.js"[color=red];
+"No_Write" -> "nodetag.js"[color=red];
+"No_Write" -> "c?js=espn.ui.shpoll.r3-4.js"[color=red];
+"c?js=espn.ui.shpoll.r3-4.js" -> "/"[color=red];
+"No_Write" -> "moth-min.js"[color=red];
+"No_Write" -> "initialize"[color=red];
