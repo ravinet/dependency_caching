@@ -28,6 +28,8 @@ for filename in files:
     return_code = proc.returncode
     out = out.strip("\n")
     print out
+    # get object name (only care if it is html)
+    html_name = out.split("=")[1]
     # need to still handle if response is chunked and gzipped (we can't just run gzip on it)!
     if ( ("html" in out) or ("javascript" in out) ): # html or javascript file, so rewrite
         if ( "chunked" in out ): # response chunked so we must unchunk
@@ -46,7 +48,7 @@ for filename in files:
             if ( "html" in out ): # rewrite all inline js in html files
                os.system('python html_rewrite_linux.py rewritten/tempfile rewritten/htmltempfile')
                os.system('mv rewritten/htmltempfile rewritten/tempfile')
-               os.system('python html_parser.py rewritten/tempfile > rewritten/htmltempfile')
+               os.system('python html_parser.py rewritten/tempfile ' + html_name + ' > rewritten/htmltempfile')
                os.system('mv rewritten/htmltempfile rewritten/tempfile')
                body = open("rewritten/tempfile", 'r')
                first_line = body.readline()
@@ -80,7 +82,7 @@ for filename in files:
             if ( "html" in out ): # rewrite all inline js in html files
                 os.system('python html_rewrite_linux.py rewritten/plaintext rewritten/htmltempfile')
                 os.system('mv rewritten/htmltempfile rewritten/plaintext')
-                os.system('python html_parser.py rewritten/plaintext > rewritten/htmltempfile')
+                os.system('python html_parser.py rewritten/plaintext ' + html_name + ' > rewritten/htmltempfile')
                 os.system('mv rewritten/htmltempfile rewritten/plaintext')
                 body = open("rewritten/plaintext", 'r')
                 first_line = body.readline()

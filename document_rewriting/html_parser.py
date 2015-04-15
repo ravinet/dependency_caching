@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup, element
 import sys
 
 html_doc = sys.argv[1]
+html_name = sys.argv[2]
 soup = BeautifulSoup(open(html_doc))
 log = []
 
@@ -54,20 +55,20 @@ def func(head, parent_path=[]):
       child_path = [index] + parent_path
 
       #current node
-      log.append(logString(child_path, "null", html_doc, child.name))
+      log.append(logString(child_path, "null", html_name, child.name))
 
       #parent node
       if len(child_path) > 1:
-        log.append(logString(child_path[1:], "childNodes", html_doc, child.name))
-        log.append(logString(child_path[1:], "lastChild", html_doc, child.name))
+        log.append(logString(child_path[1:], "childNodes", html_name, child.name))
+        log.append(logString(child_path[1:], "lastChild", html_name, child.name))
         if child_path[0] == 0:
-          log.append(logString(child_path[1:], "firstChild", html_doc, child.name))
+          log.append(logString(child_path[1:], "firstChild", html_name, child.name))
 
       #previousSibling
       if child_path[0] > 0:
           previous_sibling = child_path[:]
           previous_sibling[0] -= 1
-          log.append(logString(previous_sibling, "nextSibling", html_doc, child.name))
+          log.append(logString(previous_sibling, "nextSibling", html_name, child.name))
 
       func(child, child_path)
       index += 1
