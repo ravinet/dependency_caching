@@ -50,7 +50,7 @@ def func(head, parent_path=[]):
   for child in head.children:
     if isinstance(child, element.Tag):
       if child.name == "script":
-        child['log'] = '\n'.join(log) 
+        child['htmllogs'] = '\n'.join(log)
         del log[:]
       child_path = [index] + parent_path
 
