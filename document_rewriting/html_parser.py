@@ -4,7 +4,12 @@ import sys
 import json
 html_doc = sys.argv[1]
 html_name = sys.argv[2]
+
 soup = BeautifulSoup(open(html_doc))
+new_script = soup.new_tag('script')
+new_script.string = 'var logs_html = document.currentScript.getAttribute("htmllogs").split("\n");for ( j = 0; j < logs_html.length; j++ ) {window.js_rewriting_logs.push(logs_html[j]);}document.currentScript.parentNode.removeChild(document.currentScript);'
+soup.body.append(new_script)
+
 log = []
 
 def getLineNumber(child_path):
@@ -41,7 +46,7 @@ def getLineNumber(child_path):
     return True
 
   parser = LineParser()
-  parser.feed(open(html_doc).read())
+  parser.feed(soup.prettify())#open(html_doc).read())
 
   return lineNumber[0]
 
