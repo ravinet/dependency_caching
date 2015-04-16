@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup, element
 import sys
 
+for_ameesh = 'var logs_html = document.currentScript.getAttribute("htmllogs").split("\n");for ( j = 0; j < logs_html.length; j++ ) {window.js_rewriting_logs.push(logs_html[j]);}document.currentScript.parentNode.removeChild(document.currentScript);'
+
 html_doc = sys.argv[1]
 
 soup = BeautifulSoup(open(html_doc), "html5lib")
