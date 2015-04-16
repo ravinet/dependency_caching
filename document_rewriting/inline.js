@@ -1,6 +1,16 @@
 if ( _document != undefined ) {
+    // add the html logs (which are listed under the 'htmllogs' attribute of this script) to the complete logs list
+    var logs_html = document.currentScript.getAttribute("htmllogs").split("\n");
+    for ( j = 0; j < logs_html.length; j++ ) {
+        window.js_rewriting_logs.push(logs_html[j]);
+    }
 } else {
     var js_rewriting_logs = [];
+    // add the html logs (which are listed under the 'htmllogs' attribute of this script) to the complete logs list
+    var logs_html = document.currentScript.getAttribute("htmllogs").split("\n");
+    for ( j = 0; j < logs_html.length; j++ ) {
+        window.js_rewriting_logs.push(logs_html[j]);
+    }
     window.addEventListener("load", function(){
         var complete_log = "";
         for (i=0; i < window.js_rewriting_logs.length; i++ ){
