@@ -1,7 +1,7 @@
 from HTMLParser import HTMLParser
 from bs4 import BeautifulSoup, element
 import sys
-
+import json
 html_doc = sys.argv[1]
 html_name = sys.argv[2]
 soup = BeautifulSoup(open(html_doc))
@@ -76,17 +76,10 @@ def func(head, parent_path=[]):
 def logString(child_path, node_prop, script, name):
   prop_name = "$$dom." + ".".join([str(num) for num in child_path])
   string_path = ", ".join([str(num) for num in child_path])
-  output = str({'name': name, 'OpType': 'WRITE', 'method': "null", 'PropName': prop_name, 'NodeProp': node_prop, 
-    'id': "null", 'child_path': child_path, 'script': script, 'line': getLineNumber(child_path)})
+  output = str(json.dumps({"name": name, "OpType": "WRITE", "method": "null", "PropName": prop_name, "NodeProp": node_prop,
+    "id": "null", "child_path": child_path, "script": script, "line": getLineNumber(child_path)}))
   return output
 
 func(soup)
 
 print soup.prettify().encode('utf-8')
-
-
-
-
-
-
-
