@@ -3,7 +3,7 @@ import sys
 
 html_doc = sys.argv[1]
 
-soup = BeautifulSoup(open(html_doc))
+soup = BeautifulSoup(open(html_doc), "html5lib")
 
 def func(head, parent_path=[]):
   index = 0
@@ -12,15 +12,18 @@ def func(head, parent_path=[]):
       child_path = [index] + parent_path
       prop_name = "$$dom." + ".".join([str(num) for num in child_path])
       string_path = ", ".join([str(num) for num in child_path])
-      if ( child.name == "img" ):
+      if ( child.name == "img" or child.name == "script" ):
         original_src = child.get('src')
-        child['src'] = ""
-        new_script = soup.new_tag('script')
-        new_script.string = 'var req = new XMLHttpRequest;req.open("get", "' + original_src + '");if(document.currentScript.previousSibling instanceof Text){console.log("Text node between image tag and corresponding inline script!");}req.domref = document.currentScript.previousSibling;req.send();document.currentScript.parentNode.removeChild(document.currentScript);';
-        #print index
-        child.parent.insert(index+2, new_script);
-        func(child, child_path)
-        index += 2
+        if ( original_src != None and original_src != ""):
+          child['src'] = ""
+          new_script = soup.new_tag('script')
+          new_script.string = 'var req = new XMLHttpRequest;req.open("get", "' + original_src + '");if(document.currentScript.previousSibling instanceof Text){console.log("Text node between image tag and corresponding inline script!");}req.domref = document.currentScript.previousSibling;req.send();document.currentScript.parentNode.removeChild(document.currentScript);';
+          child.insert_after(new_script);
+          func(child, child_path)
+          index += 2
+        else:
+          func(child, child_path)
+          index += 1
       else:
         func(child, child_path)
         index += 1
