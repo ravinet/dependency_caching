@@ -40,6 +40,9 @@ final_dependencies = []
 # list of original dependencies on page (avoid having duplicates between new and old)
 original = []
 
+# store html dependencies with line numbers for chunking (dictionary where key is tuple of parent,child and value is array of line numbers)
+html_deps = {}
+
 with open(original_log) as file1:
     for line1 in file1:
         original.append(line1[0:len(line1)-1])
@@ -94,6 +97,13 @@ with open(log) as file:
                     else:
                         dependencies[logs[n].get('script')] = [log.get('script')]
                         dependency_edges.append((logs[n].get('script'), log.get('script')))
+                    if ( 'line' in logs[n] ):
+                        # this is an html dep (js is read and html is write)
+                        dep_tuple = (logs[n].get('script'), log.get('script'))
+                        if ( dep_tuple in html_deps ):
+                            html_deps[dep_tuple].append(logs[n].get('line'));
+                        else:
+                            html_deps[dep_tuple] = [logs[n].get('line')]
                     # add detailed dependency to detailed_deps with var causing dep
                     parent_child = (logs[n].get('script'), log.get('script'))
                     dep_var = (log.get('PropName'), log.get('id'))
@@ -166,6 +176,8 @@ print >> sys.stderr, "\nList of write/write deps:"
 print >> sys.stderr, write_write_deps
 print >> sys.stderr, "\nList of final dependencies:"
 print >> sys.stderr, final_dependencies
+print >> sys.stderr, "\nHTML dependencies:"
+print >> sys.stderr, html_deps
 print >> sys.stderr, "\n\n"
 
 #pipe this output to dot
