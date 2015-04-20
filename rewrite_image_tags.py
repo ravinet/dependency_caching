@@ -17,7 +17,7 @@ def func(head, parent_path=[]):
         if ( original_src != None and original_src != ""):
           child['src'] = ""
           new_script = soup.new_tag('script')
-          new_script.string = 'var req = new XMLHttpRequest();req.orig_location = window.location;if(document.currentScript.previousSibling instanceof Text){console.log("Text node between image tag and corresponding inline script!");}req.domref = document.currentScript.previousSibling;req.open("GET", "' + original_src + '", false);req.send();document.currentScript.parentNode.removeChild(document.currentScript);';
+          new_script.string = 'var req = new XMLHttpRequest();req.orig_location = window.location;if(document.currentScript.previousSibling instanceof Text){console.log("Text node between image tag and corresponding inline script!");}req.domref = document.currentScript.previousSibling;req.requested_url = "' + original_src + '";req.open("GET", "' + original_src + '", false);req.send();document.currentScript.parentNode.removeChild(document.currentScript);';
           child.insert_after(new_script);
           func(child, child_path)
           index += 2
