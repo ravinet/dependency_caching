@@ -2,8 +2,6 @@
 
 // have a 'pending' queue per origin
 pending_queues = {};
-// iterate through tree and populate pending_queues with origins as keys and arrays as values
-// values should be arrays of requests
 
 // pointers in tree, already sent list, etc. to make sure we know the progress, current state
 
