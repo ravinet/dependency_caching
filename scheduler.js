@@ -3,40 +3,33 @@
 // have a 'pending' queue per origin
 pending_queues = {};
 // iterate through tree and populate pending_queues with origins as keys and arrays as values
-// values should be arrays of tuples (xhrrequest, url)
-
-// tree
+// values should be arrays of requests
 
 // pointers in tree, already sent list, etc. to make sure we know the progress, current state
 
 // global callback function for requests
-function xhr_callback {
-    // check state of tree and pending requests to this origin and make next one if we want to
+xhr_callback = function () {
     // if request has a domref property, re-assign the source
     if ( this.hasOwnProperty("domref") ) {
-        // from our html rewriting
         this.domref.setAttribute("src", this.requested_url);
     } else {
-        // from original JS so much execute properly
-        window.eval(this.responseText);
+        // from original JS so just execute default callback
+        this.onload_orig();
     }
-
-    // we need to evaluate the original onload function (isn't that all we have to do if there is no domref?)
-    this.onload();
 
     // check the pending queue for this origin and make the next best request!
-
-}
-
-
-//function that decides whether or not to make a request based on the tree, pending lists, etc.
-function send_request_now(req, url) {
-    // make synchronous requests right away
-    if( req._async == false ) {
-        return true;
+    var ret = best_request(this.orig_location.origin);
+    if ( ret[0] ) {
+        var retVal = _xhrsend.call(ret[1]);
+        //!!!!still must update the list of current requests in-flight
     }
+};
 
-    return true;
+// function that decides whether or not to make a request based on the tree, pending lists, etc.
+// returns an array where first element is bool stating whether or not to make request now, second is the request to make
+function best_request(origin) {
+    // consult the number of pending requests to this origin and all requests in pending queue for this origin
+    return [true, req];
 }
 
 // given request, function returns the corresponding complete url
@@ -67,20 +60,29 @@ var _xhrsend = XMLHttpRequest.prototype.send;
 XMLHttpRequest.prototype.send = function(){
     // requests coming in have URL and location and async info
 
-    var url = validURL(this);
+    // assign new callback while preserving original
+    this.onload_orig = this.onload;
+    this.onload = xhr_callback;
 
-    // decide if we are going to make the request or add it to pending for its origin
-    if ( send_request_now( req, url ) ) {
-        // request now
+    // if the request is synchronous, make it right away, update in-flight vals, and exit
+    if ( this.async == false ) {
         var retVal = _xhrsend.call(this);
-        handle_response(retVal, this);
+        //!!!!! still have to update in-flight counter
+        break;
+    }
+
+    // always add incoming request to pending for the right origin
+    if ( this.orig_location.origin in pending_queues ) {
+        pending_queues[this.orig_location.origin].append(this);
     } else {
-        // add to pending
-        if ( this.orig_location.origin in pending_queues ) {
-            pending_queues[this.orig_location.origin].append((req, url));
-        } else {
-            console.log("Request to origin we were not expecting!");
-        }
+        pending_queues[this.orig_location.origin] = [this];
+    }
+
+    // find the best request for this origin and make it if we can make one now
+    var ret = best_request( this.orig_location.origin );
+    if ( ret[0] ) {
+        // make a request now
+        var retVal = _xhrsend.call(ret[1]);
     }
 };
 
