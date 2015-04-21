@@ -20,6 +20,12 @@ function xhr_callback {
         // from original JS so much execute properly
         window.eval(this.responseText);
     }
+
+    // we need to evaluate the original onload function (isn't that all we have to do if there is no domref?)
+    this.onload();
+
+    // check the pending queue for this origin and make the next best request!
+
 }
 
 
