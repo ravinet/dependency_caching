@@ -1,25 +1,57 @@
-// global variables:
-
-// have a 'pending' queue per origin
+// have a 'pending' queue per origin and also number of requests in flight
 pending_queues = {};
+in_flight = {};
 
-// pointers in tree, already sent list, etc. to make sure we know the progress, current state
+// list parent and children (direct parents and children) URLs for each url
+parents = {};
+children = {};
+
+// number of urls which are later in the chain for each url
+depth = {};
+
+// urls which we have already evaluated
+evaluated = [];
+
+// requests which we have not yet evaluated because parent was not yet evaluated
+to_evaluate = [];
+
+// function which recursively handles all to_eval requests based on what urls have already been evaluated
+function handle_to_eval () {
+
+};
 
 // global callback function for requests
 xhr_callback = function () {
-    // if request has a domref property, re-assign the source
-    if ( this.hasOwnProperty("domref") ) {
-        this.domref.setAttribute("src", this.requested_url);
-    } else {
-        // from original JS so just execute default callback
-        this.onload_orig();
+    curr_url = validURL(this);
+    eval_now = true;
+    // first check if we can eval it now (are all of its parents evaluated)
+    for ( j = 0; j < parents(curr_url); j++ ) {
+        if ( evaluted.indexOf(parents(curr_url)[j]) == -1 )
+            eval_now = false;
+        }
     }
 
-    // check the pending queue for this origin and make the next best request!
-    var ret = best_request(this.orig_location.origin);
-    if ( ret[0] ) {
-        var retVal = _xhrsend.call(ret[1]);
-        //!!!!still must update the list of current requests in-flight
+    if ( eval_now ) {
+        // if request has a domref property, re-assign the source
+        if ( this.hasOwnProperty("domref") ) {
+            this.domref.setAttribute("src", this.requested_url);
+        } else {
+            // from original JS so just execute default callback
+            this.onload_orig();
+        }
+
+        // check the pending queue for this origin and make the next best request!
+        var ret = best_request(this.orig_location.origin);
+        if ( ret[0] ) {
+            var retVal = _xhrsend.call(ret[1]);
+            //!!!!still must update the list of current requests in-flight
+        }
+
+        // handle as many to_eval requests as possible (should only be children this request or grandchildren, etc
+        handle_to_eval();
+    } else {
+        // a parent is not yet evaluated so add this to the "to_eval" array
+        to_evaluate.append(this);
     }
 };
 
@@ -27,7 +59,30 @@ xhr_callback = function () {
 // returns an array where first element is bool stating whether or not to make request now, second is the request to make
 function best_request(origin) {
     // consult the number of pending requests to this origin and all requests in pending queue for this origin
-    return [true, req];
+    var best_req = "null";
+    var best_req_index = "null";
+    var curr_depth = 0;
+    // find request if we have open connections
+    if ( in_flight[origin] < 6 ) {
+        // find the request with the longest chain remaining
+        for ( int i = 0; i < pending_queues[origin].length; i++ ) {
+            var curr = pending_queues[origin][i];
+            if ( depth[validURL(req)] > curr_depth ) {
+                curr_depth = depth[validURL(req)];
+                best_req_index = i;
+                best_req = curr;
+            }
+        }
+    }
+
+    if ( best_req != "null" ) {
+        // we have a request to send so remove from pending
+        pending_queues[origin].splice(best_req_index, 1);
+        return [true, best_req];
+    }
+
+    // we can't send anything!
+    return [false, "null"];
 }
 
 // given request, function returns the corresponding complete url
@@ -65,7 +120,7 @@ XMLHttpRequest.prototype.send = function(){
     // if the request is synchronous, make it right away, update in-flight vals, and exit
     if ( this.async == false ) {
         var retVal = _xhrsend.call(this);
-        //!!!!! still have to update in-flight counter
+        in_flight[this.orig_location.origin] = in_flight[this.orig_location.origin] + 1;
         break;
     }
 
@@ -76,11 +131,12 @@ XMLHttpRequest.prototype.send = function(){
         pending_queues[this.orig_location.origin] = [this];
     }
 
-    // find the best request for this origin and make it if we can make one now
+    // find the best request for this origin and make it if we can make one now, until we can't make one
     var ret = best_request( this.orig_location.origin );
-    if ( ret[0] ) {
-        // make a request now
+    while ( ret[0] ) {
         var retVal = _xhrsend.call(ret[1]);
+        in_flight[ret[1].orig_location.origin] = in_flight[ret[1].orig_location.origin] + 1;
+        ret = best_request( this.orig_location.origin );
     }
 };
 
