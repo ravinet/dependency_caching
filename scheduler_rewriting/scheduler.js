@@ -14,6 +14,9 @@ evaluated = [];
 // requests which we have not yet evaluated because parent was not yet evaluated
 to_evaluate = [];
 
+// assign id to scheduler so we can remove it after the page is loaded
+document.currentScript.setAttribute("id", "scheduler");
+
 // function to evaluate a response
 function evaluate_response(req) {
     // if request has a domref property, re-assign the source
@@ -194,3 +197,9 @@ XMLHttpRequest.prototype.open = function(method, url, async, user, password){
     var retVal = _xhropen.call(this, method, url, async_use, user_use, password_use);
     return retVal;
 };
+
+// add onload which remove "scheduler" from DOM
+window.addEventListener("load", function(){
+    var t = document.getElementById("scheduler");
+    t.parentNode.removeChild(t);
+});
