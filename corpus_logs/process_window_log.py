@@ -180,6 +180,8 @@ print >> sys.stderr, "\nList of write/write deps:"
 print >> sys.stderr, write_write_deps
 print >> sys.stderr, "\nList of final dependencies:"
 print >> sys.stderr, final_dependencies
+print >> sys.stderr, "\nDetailed dependencies: "
+print >> sys.stderr, detailed_deps
 print >> sys.stderr, "\n\n"
 
 #pipe this output to dot
