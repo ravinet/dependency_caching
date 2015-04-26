@@ -5,33 +5,34 @@ html_doc = sys.argv[1]
 
 soup = BeautifulSoup(open(html_doc), "html5lib")
 
-def func(head, parent_path=[]):
-  index = 0
+# mapping urls to ids
+url_map = {}
+
+def func(head):
+  counter = 0
   for child in head.children:
     if isinstance(child, element.Tag):
-      child_path = [index] + parent_path
-      prop_name = "$$dom." + ".".join([str(num) for num in child_path])
-      string_path = ", ".join([str(num) for num in child_path])
       if ( child.name == "img" or child.name == "script" ):
         original_src = child.get('src')
         if ( original_src != None and original_src != ""):
           child['src'] = ""
-          new_script = soup.new_tag('script')
-          new_script.string = 'var req = new XMLHttpRequest();req.orig_location = window.location;if(document.currentScript.previousSibling instanceof Text){console.log("Text node between image tag and corresponding inline script!");}req.domref = document.currentScript.previousSibling;req.requested_url = "' + original_src + '";req.open("GET", "' + original_src + '", false);req.send();document.currentScript.parentNode.removeChild(document.currentScript);';
-          child.insert_after(new_script);
-          func(child, child_path)
-          index += 2
+          if ( child.name == "img" ):
+            child['imgid'] = counter
+            url_map[original_src] = counter
+            counter = counter + 1
+          else:
+            url_map[original_src] = "null"
+          func(child)
         else:
-          func(child, child_path)
-          index += 1
+          func(child)
       else:
-        func(child, child_path)
-        index += 1
+        func(child)
 
 func(soup)
 
 print soup.prettify().encode('utf-8')
 
+print >> sys.stderr, url_map
 ''' problems
 1. we are adding a script to the DOM after each image tag---we probably want to remove this script tag in the xhr wrapper
 meaning we probably have to pass the script id or path to the xhr wrapper so we can delete it
