@@ -10,6 +10,7 @@ dot = sys.argv[1]
 
 child_deps = {}
 unique_edges = []
+parents = {}
 # must figure out what to do with two edges connecting the nodes (for now, include them in count)
 with open(dot) as f:
     for line in f:
@@ -27,6 +28,12 @@ with open(dot) as f:
                 child_deps[parent].append(child)
             if child not in child_deps:
                 child_deps[child] = []
+            if ( parent not in parents ):
+                parents[parent] = []
+            if ( child not in parents ):
+                parents[child] = [parent]
+            else:
+                parents[child].append(parent)
 
 root = '"/"'
 
@@ -47,5 +54,5 @@ def mapping_to_child_dict(mappings, current_node):
       return None
 
 child_dict = mapping_to_child_dict(child_deps, root)
+print json.dumps(parents)
 print json.dumps(child_dict[root])
-
