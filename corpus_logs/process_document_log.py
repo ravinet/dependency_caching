@@ -101,7 +101,7 @@ with open(log) as file:
                         # this is an html dep (js is read and html is write)
                         dep_tuple = (logs[n].get('script'), log.get('script'))
                         if ( dep_tuple in html_deps ):
-                            html_deps[dep_tuple].append(logs[n].get('line'));
+                            html_deps[dep_tuple].append(int(logs[n].get('line')));
                         else:
                             html_deps[dep_tuple] = [logs[n].get('line')]
                     # add detailed dependency to detailed_deps with var causing dep
@@ -182,18 +182,71 @@ print >> sys.stderr, "\nHTML dependencies:"
 print >> sys.stderr, html_deps
 print >> sys.stderr, "\n\n"
 
+# keys are parents and values are dictionaries with keys as children and values as tuples (chunk line start, chunk line end)
+final_html_chunks = {}
+
+# make chunks based on HTML/JS dependencies (line ranges for each and for each JS file, store tuple (html file, line range))
+# iterate through html_chunks and for each parent, iterate to find all other cases where it is parent and then for each one find max in array (store it as a local var dict with child and line number and then make chunks based on that...then print parent:line range and then child
+# don't want to keep iterating over same parents!
+
+new_final_dependencies = []
+
+handled_parents = []
+for dep in html_deps:
+    curr_parent = dep[0]
+    if ( curr_parent not in handled_parents ):
+      final_html_chunks[curr_parent] = {}
+      chunks = {}
+      lines = []
+      handled_parents.append(curr_parent)
+      for inner_dep in html_deps:
+          if ( inner_dep[0] == curr_parent ):
+              chunks[int(max(html_deps[inner_dep]))] = inner_dep[1]
+              lines.append(html_deps[inner_dep])
+      # now we have chunks where keys are line numbers  and values are the children
+      # want to go through this and make the chunks and link them to their children
+      prev = -1
+      prev_chunk = ()
+      for x in sorted(chunks):
+        child = chunks[x]
+        begin = int(prev) + 1
+        final_html_chunks[curr_parent][child] = (begin, x)
+        prev = x
+        if ( prev_chunk != () ):
+          prev_name = curr_parent + "---" + str(prev_chunk[0]) + ":" + str(prev_chunk[1])
+          new_name = curr_parent + "---" + str(begin) + ":" + str(x)
+          new_final_dependencies.append((prev_name, new_name))
+          prev_chunk = (begin,x)
+        prev_chunk = (begin,x)
+      if ( prev_chunk != () ):
+        last_prev = curr_parent + "---" + str(prev_chunk[0]) + ":" + str(prev_chunk[1])
+        final_curr = curr_parent + "---" + str(prev_chunk[1] + 1) + ":end"
+        new_final_dependencies.append((last_prev, final_curr))
+
 #pipe this output to dot
 #print "digraph G {"
 #print "ratio=compress;"
 #print "concentrate=true;"
 
-for (a,b) in final_dependencies:
+for (x,y) in final_dependencies:
+  if ( x in final_html_chunks ):
+    if (y in final_html_chunks[x] ):
+      # chunk dependency!
+      new_parent = x + "---" + str(final_html_chunks[x][y][0]) + ":" + str(final_html_chunks[x][y][1])
+      new_final_dependencies.append((new_parent, y))
+    else:
+      new_final_dependencies.append((x,y))
+  else:
+    new_final_dependencies.append((x,y))
+
+
+for (a,b) in new_final_dependencies:
   if ( a != b ):
     parent_name = a.split("/")[-1]
     child_name = b.split("/")[-1]
-    if ( a == "/" ):
+    if ( a[0:4] == "/---" ):
         parent_name = a
-    if ( b == "/" ):
+    if ( b[0:4] == "/---" ):
         child_name = b
     if ( "?" in parent_name ):
         temp = parent_name
