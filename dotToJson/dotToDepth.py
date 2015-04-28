@@ -10,6 +10,7 @@ dot = sys.argv[1]
 
 child_deps = {}
 unique_edges = []
+parents = {}
 # must figure out what to do with two edges connecting the nodes (for now, include them in count)
 with open(dot) as f:
     for line in f:
@@ -27,6 +28,12 @@ with open(dot) as f:
                 child_deps[parent].append(child)
             if child not in child_deps:
                 child_deps[child] = []
+            if ( parent not in parents ):
+                parents[parent] = []
+            if ( child not in parents ):
+                parents[child] = [parent]
+            else:
+                parents[child].append(parent)
 
 def depth(mappings, node):
   if len(mappings[node]) == 0:
@@ -34,4 +41,5 @@ def depth(mappings, node):
   return max([depth(mappings, child) for child in mappings[node]]) + 1
   
 depths = {node: depth(child_deps, node) for node in child_deps}
-print depths
+print json.dumps(parents)
+print json.dumps(depths)
