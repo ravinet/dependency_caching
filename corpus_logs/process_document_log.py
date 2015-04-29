@@ -87,6 +87,8 @@ with open(log) as file:
                         if ( (logs[n].get('NodeProp') == log.get('NodeProp')) or (logs[n].get('NodeProp') == "null" ) or (log.get('NodeProp') == "null") ):
                             matching_write = 1
                 if ( matching_write ):
+                    print log
+                    print logs[n]
                     set_write = 1
                     # this is the corresponding write
                     if ( logs[n].get('script') in dependencies ):
@@ -192,6 +194,7 @@ final_html_chunks = {}
 new_final_dependencies = []
 
 handled_parents = []
+last_chunks = {}
 for dep in html_deps:
     curr_parent = dep[0]
     if ( curr_parent not in handled_parents ):
@@ -222,6 +225,7 @@ for dep in html_deps:
         last_prev = curr_parent + "---" + str(prev_chunk[0]) + ":" + str(prev_chunk[1])
         final_curr = curr_parent + "---" + str(prev_chunk[1] + 1) + ":end"
         new_final_dependencies.append((last_prev, final_curr))
+        last_chunks[curr_parent] = final_curr
 
 #pipe this output to dot
 #print "digraph G {"
@@ -235,18 +239,66 @@ for (x,y) in final_dependencies:
       new_parent = x + "---" + str(final_html_chunks[x][y][0]) + ":" + str(final_html_chunks[x][y][1])
       new_final_dependencies.append((new_parent, y))
     else:
-      new_final_dependencies.append((x,y))
+      if ( x in last_chunks ):
+        new_final_dependencies.append((last_chunks[x], y))
+      else:
+        new_final_dependencies.append((x,y))
   else:
     new_final_dependencies.append((x,y))
 
+# if chunk is only based on one file then change it to just be normal dependency for that file and remove other instances
+handled = []
+to_handle = {}
+for i in range(0, len(new_final_dependencies)):
+  p = new_final_dependencies[i][0]
+  c = new_final_dependencies[i][1]
+  parents_to_replace = []
+  children_to_replace = []
+  if ( "---" in p ):
+    curr_parent = p.split("---")[0]
+    if ( curr_parent not in handled ):
+      handled.append(curr_parent)
+      curr_children = []
+      for j in range(i, len(new_final_dependencies)):
+        inp = new_final_dependencies[j][0]
+        inc = new_final_dependencies[j][1]
+        now_parent = inp.split("---")[0]
+        if ( now_parent == curr_parent ):
+          if ( "---" not in inc):
+            if ( inc not in curr_children ):
+              curr_children.append(inc)
+          elif ( inc.split("---")[0] == curr_parent ):
+              children_to_replace.append(j)
+          if ( j not in children_to_replace ):
+            parents_to_replace.append(j)
+      to_handle[curr_parent] = ((parents_to_replace, children_to_replace), curr_children)
+
+print to_handle
+print "to handle ---"
+print new_final_dependencies
+print "\n"
+# parents_to_replace has lines where parent should remove chunk name but child is not chunk
+# children_to_replace has lines to be removed because child is chunk!
+# only do anything if there is one non-chunk child for the parent
+for par in to_handle:
+  if (len(to_handle[par][1]) == 1):
+    # only one child so fix all parents and children
+    for y in to_handle[par][0][0]:
+      orig = new_final_dependencies[y]
+      new_final_dependencies[y] = (par, orig[1])
+    # remove children
+    removed = 0
+    for x in to_handle[curr_parent][0][1]:
+      new_final_dependencies.pop(x-removed)
+      removed = removed + 1
 
 for (a,b) in new_final_dependencies:
   if ( a != b ):
     parent_name = a.split("/")[-1]
     child_name = b.split("/")[-1]
-    if ( a[0:4] == "/---" ):
+    if ( (a[0:4] == "/---") or (a == "/") ):
         parent_name = a
-    if ( b[0:4] == "/---" ):
+    if ( (b[0:4] == "/---") or (b == "/") ):
         child_name = b
     if ( "?" in parent_name ):
         temp = parent_name
