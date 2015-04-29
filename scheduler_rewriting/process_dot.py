@@ -33,11 +33,25 @@ with open(dot) as f:
             else:
                 parents[child].append(parent)
 
-def depth(mappings, node):
-  if len(mappings[node]) == 0:
+seen = {}
+def depth(mappings, node, path=None):
+  if path == None:
+    path = []
+  #if len(mappings[node]) == 0 or node in path:
+  if node in path:
     return 0
-  return max([depth(mappings, child) for child in mappings[node]]) + 1
+  if len(mappings[node]) == 0:
+    seen[node] = 0
+    return seen[node]
+  print node
+  path.append(node)
+  seen[node] = max([depth(mappings, child, path[:]) for child in mappings[node]]) + 1
+  return seen[node]
+
   
-depths = {node: depth(child_deps, node) for node in child_deps}
+#depths = {node: depth(child_deps, node) for node in child_deps}
 print json.dumps(parents)
-print >> sys.stderr, json.dumps(depths)
+depth(child_deps, '"/"')
+print >> sys.stderr, json.dumps(seen)
+print len(parents)
+print len(seen)
