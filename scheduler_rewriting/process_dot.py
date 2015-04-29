@@ -2,8 +2,6 @@ import re, sys, urlparse
 import json
 from json import JSONEncoder
 
-import critical_path
-
 # takes in the dot file that we use (it ignores first three lines) and creates dictionary with key for each node and value for each as an array listing its children
 # for now, assumes that '/' is the root node
 dot = sys.argv[1]
@@ -42,4 +40,4 @@ def depth(mappings, node):
   
 depths = {node: depth(child_deps, node) for node in child_deps}
 print json.dumps(parents)
-print json.dumps(depths)
+print >> sys.stderr, json.dumps(depths)
