@@ -31,9 +31,11 @@ def func(head):
 
 func(soup)
 
-print soup.prettify().encode('utf-8')
+output = soup.prettify().encode('utf-8')
+print output.split("\n")
 
 print >> sys.stderr, json.dumps(url_map)
+
 ''' problems
 1. we are adding a script to the DOM after each image tag---we probably want to remove this script tag in the xhr wrapper
 meaning we probably have to pass the script id or path to the xhr wrapper so we can delete it
