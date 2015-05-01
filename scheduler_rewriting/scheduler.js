@@ -1,3 +1,6 @@
+// format of a chunk: /---10:40
+
+
 // have a 'pending' queue per origin and also number of requests in flight
 pending_queues = {};
 in_flight = {};
@@ -7,6 +10,10 @@ evaluated = [];
 
 // requests which we have not yet evaluated because parent was not yet evaluated
 to_evaluate = [];
+
+// TODO: immediately make as many requests as possible here from the list of external requests (update per origin counters)
+// if there is no origin then use window.location.origin (this has http://128.30.79.9 for instance so probably want to strip it depending on how we are adding origins)
+
 
 // assign id to scheduler so we can remove it after the page is loaded
 document.currentScript.setAttribute("id", "scheduler");
@@ -50,6 +57,7 @@ function handle_to_eval () {
 // function which checks if we can evaluate a specific response now
 function can_eval (req) {
     curr_url = validURL(req);
+    // TODO: add logic if only parent that must be handled is a chunk (chunk format at top), then check if that chunk has anything not evaled and if not, then document.write and return true
     for ( j = 0; j < scheduler_parents(curr_url); j++ ) {
         if ( evaluted.indexOf(scheduler_parents(curr_url)[j]) == -1 )
             return false;
