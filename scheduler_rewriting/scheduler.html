@@ -1,13 +1,6 @@
-<script>
     // have a 'pending' queue per origin and also number of requests in flight
     pending_queues = {};
     in_flight = {};
-    
-    // list parent URLs for each url
-    parents = {};
-    
-    // number of urls which are later in the chain for each url
-    depth = {};
     
     // urls which we have already evaluated
     evaluated = [];
@@ -57,8 +50,8 @@
     // function which checks if we can evaluate a specific response now
     function can_eval (req) {
         curr_url = validURL(req);
-        for ( j = 0; j < parents(curr_url); j++ ) {
-            if ( evaluted.indexOf(parents(curr_url)[j]) == -1 )
+        for ( j = 0; j < scheduler_parents(curr_url); j++ ) {
+            if ( evaluted.indexOf(scheduler_parents(curr_url)[j]) == -1 )
                 return false;
             }
         }
@@ -95,8 +88,8 @@
             // find the request with the longest chain remaining
             for ( int i = 0; i < pending_queues[origin].length; i++ ) {
                 var curr = pending_queues[origin][i];
-                if ( depth[validURL(req)] > curr_depth ) {
-                    curr_depth = depth[validURL(req)];
+                if ( scheduler_depths[validURL(req)] > curr_depth ) {
+                    curr_depth = scheduler_depths[validURL(req)];
                     best_req_index = i;
                     best_req = curr;
                 }
