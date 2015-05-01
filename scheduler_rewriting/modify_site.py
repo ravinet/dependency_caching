@@ -4,7 +4,16 @@ import subprocess
 
 # recorded folder to be copied and rewritten
 recorded_folder = sys.argv[1]
-rewritten_folder = sys.argv[2]
+dot_file = sys.argv[2]
+rewritten_folder = sys.argv[3]
+
+# get parent and depth info (to prepend to scheduler)
+command1 = "python process_dot.py " + str(dot_file)
+proc = subprocess.Popen([command1], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+(out1,err1) = proc.communicate()
+depths = err1.strip("\n")
+parents = out1.strip("\n")
+scheduler_prepend = "<script>\nwindow.scheduler_depths = " + depths + ";\nwindow.scheduler_parents = " + parents +";\n"
 
 # temp folder to store rewritten protobufs
 os.system("rm -rf rewritten")
@@ -41,7 +50,15 @@ for filename in files:
                os.system('cat scheduler.html >> rewritten/prependtempfile')
                os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
                os.system('mv rewritten/prependtempfile rewritten/tempfile')
-               os.system('python rewrite_image_tags.py rewritten/tempfile >> rewritten/htmltempfile')
+               command = "python rewrite_image_tags.py rewritten/tempfile"
+               proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+               (out,err) = proc.communicate()
+               image_map = err.strip("\n")
+               curr_scheduler_prepend = scheduler_prepend + "window.prefetch = " + image_map +";\n"
+               file1 = open("rewritten/htmltempfile", "w")
+               file1.write(curr_scheduler_prepend)
+               file1.write("window.chunked_html = " + out.strip("\n") + ";\n")
+               file1.close()
                os.system('mv rewritten/htmltempfile rewritten/tempfile')
                body = open("rewritten/tempfile", 'r')
                first_line = body.readline()
@@ -72,7 +89,15 @@ for filename in files:
                 os.system('cat scheduler.html >> rewritten/prependtempfile')
                 os.system('cat rewritten/plaintext >> rewritten/prependtempfile')
                 os.system('mv rewritten/prependtempfile rewritten/plaintext')
-                os.system('python rewrite_image_tags.py rewritten/plaintext >> rewritten/htmltempfile')
+                command = "python rewrite_image_tags.py rewritten/plaintext"
+                proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+                (out,err) = proc.communicate()
+                image_map = err.strip("\n")
+                curr_scheduler_prepend = scheduler_prepend + "window.prefetch = " + image_map +";\n"
+                file1 = open("rewritten/htmltempfile", "w")
+                file1.write(curr_scheduler_prepend)
+                file1.write("window.chunked_html = " + out.strip("\n") + ";\n")
+                file1.close()
                 os.system('mv rewritten/htmltempfile rewritten/plaintext')
                 body = open("rewritten/plaintext", 'r')
                 first_line = body.readline()
