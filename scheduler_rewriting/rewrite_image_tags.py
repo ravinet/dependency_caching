@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup, element
 import sys
 import json
+from urlparse import urlparse
 
 html_doc = sys.argv[1]
 
@@ -34,7 +35,20 @@ func(soup)
 output = soup.prettify().encode('utf-8')
 print output.split("\n")
 
-print >> sys.stderr, json.dumps(url_map)
+# go through url_map and organize per origin
+origin_mappings= {}
+for url in url_map:
+  curr_origin = urlparse(url).netloc
+  if ( curr_origin == '' ):
+    curr_origin = "use_location"
+  if ( curr_origin in origin_mappings ):
+    origin_mappings[curr_origin].append([url, url_map[url]])
+  else:
+    origin_mappings[curr_origin] = [[url, url_map[url]]]
+
+
+print >> sys.stderr, json.dumps(origin_mappings)
+#print >> sys.stderr, json.dumps(url_map)
 
 ''' problems
 1. we are adding a script to the DOM after each image tag---we probably want to remove this script tag in the xhr wrapper
