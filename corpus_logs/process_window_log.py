@@ -173,6 +173,7 @@ for ww_dep in write_write_deps:
     if ( ww_dep not in final_dependencies ):
         final_dependencies.append( ww_dep)
 
+
 #print these to stderr so that you can pipe output for the graph (below) easily
 print >> sys.stderr, "List of read/write deps:"
 print >> sys.stderr, dependency_edges
@@ -180,9 +181,18 @@ print >> sys.stderr, "\nList of write/write deps:"
 print >> sys.stderr, write_write_deps
 print >> sys.stderr, "\nList of final dependencies:"
 print >> sys.stderr, final_dependencies
-print >> sys.stderr, "\nDetailed dependencies: "
-print >> sys.stderr, detailed_deps
+#print >> sys.stderr, "\nDetailed dependencies: "
+#print >> sys.stderr, detailed_deps
 print >> sys.stderr, "\n\n"
+
+# detailed deps between separate files
+print >> sys.stderr, "\n\nDETAILED DEPS: "
+for dep in detailed_deps:
+    if ( dep[0] != dep[1] ):
+        print >> sys.stderr, dep
+        for inner in detailed_deps[dep]:
+            print >> sys.stderr, inner
+        print >> sys.stderr, "\n\n"
 
 #pipe this output to dot
 #print "digraph G {"
