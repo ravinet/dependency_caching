@@ -37,9 +37,9 @@ document.currentScript.setAttribute("id", "scheduler");
 
 // function to evaluate a response
 function evaluate_response(req) {
-    // if request has a domref property, re-assign the source
-    if ( req.hasOwnProperty("domref") ) {
-        req.domref.setAttribute("src", req.requested_url);
+    // if request has an imageid, re-assign the source
+    if ( req.hasOwnProperty("src_tag") ) {
+        document.getElementById(req.src_tag).setAttribute("src", req.requested_url);
     } else {
         // from original JS so just execute default callback
         req.onload_orig();
