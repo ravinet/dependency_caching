@@ -2,6 +2,7 @@ import re, sys, urlparse
 import json
 from json import JSONEncoder
 
+
 # takes in the dot file that we use (it ignores first three lines) and creates dictionary with key for each node and value for each as an array listing its children
 # for now, assumes that '/' is the root node
 dot = sys.argv[1]
@@ -37,19 +38,20 @@ seen = {}
 def depth(mappings, node, path=None):
   if path == None:
     path = []
-  #if len(mappings[node]) == 0 or node in path:
   if node in path:
-    return 0
+    return -1
   if len(mappings[node]) == 0:
     seen[node] = 0
     return seen[node]
-  print node
   path.append(node)
-  seen[node] = max([depth(mappings, child, path[:]) for child in mappings[node]]) + 1
-  return seen[node]
+  d = max([depth(mappings, child, path[:]) for child in mappings[node]]) + 1
+  if node in seen:
+    seen[node] = max(seen[node], d)
+  else:
+    seen[node] = d
+  return d
 
   
-#depths = {node: depth(child_deps, node) for node in child_deps}
 print json.dumps(parents)
 depth(child_deps, '"/"')
 print >> sys.stderr, json.dumps(seen)
