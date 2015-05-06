@@ -105,7 +105,7 @@ for parent in list(set([parent for parent in parents if not(parent in urls) and 
 print "digraph G {"
 
 print "ratio=compress;"
-print "concentrate=true;"
+#print "concentrate=true;"
 
 all_urls = []
 zipped = []
