@@ -1,6 +1,5 @@
 // format of a chunk: /---10:40
 
-
 // have a 'pending' queue per origin and also number of requests in flight
 pending_queues = {};
 in_flight = {};
@@ -13,7 +12,25 @@ to_evaluate = [];
 
 // TODO: immediately make as many requests as possible here from the list of external requests (update per origin counters)
 // if there is no origin then use window.location.origin (this has http://128.30.79.9 for instance so probably want to strip it depending on how we are adding origins)
-
+// should we consider depth?
+// prefetch is dict where keys are origins and values are arrays...values are arrays of arrays where each array is url and the corresponding id
+for ( y = 0; y < Object.keys(prefetch); y++ ) {
+    // handle this origin (if more than 6, consider depth)!
+    curr_origin = Object.keys[y]
+    if ( curr_origin == "use_location" ) {
+        curr_origin == window.location.hostname
+    }
+    reqs_to_make = prefetch[Object.keys[y]] // array of arrays where each inner array is url, id
+    //if ( reqs_to_make.length > 6 ) {
+    for ( i = 0; i < reqs_to_make.length; i++ ) {
+        // make xhr request for each (and add origin attirbute as location.hostname) and then send it
+        var req = new XMLHttpRequest();
+        req.original_origin = curr_origin;
+        req.requested_url = reqs_to_make[i][0];
+        req.src_tag = reqs_to_make[i][1];
+        req.async == true;
+        req.open("GET", reqs_to_make[i][0], "false");
+        req.send();
 
 // assign id to scheduler so we can remove it after the page is loaded
 document.currentScript.setAttribute("id", "scheduler");
@@ -76,8 +93,8 @@ xhr_callback = function () {
         var ret = best_request( this.orig_location.origin );
         while ( ret[0] ) {
             var retVal = _xhrsend.call(ret[1]);
-            in_flight[ret[1].orig_location.origin] = in_flight[ret[1].orig_location.origin] + 1;
-            ret = best_request( this.orig_location.origin );
+            in_flight[ret[1].orig_location.hostname] = in_flight[ret[1].orig_location.hostname] + 1;
+            ret = best_request( this.orig_location.hostname );
         }
 
         handle_to_eval();
@@ -116,7 +133,7 @@ function best_request(origin) {
 
 // given request, function returns the corresponding complete url
 function validURL(req) {
-    var url = this.requested_url;
+    var url = this.complete_url;
 
     // check if it is valid---probably need a better way
     var top_domains = [".com", ".org", ".net", ".int", ".edu", ".gov", ".mil"];
@@ -147,23 +164,23 @@ XMLHttpRequest.prototype.send = function(){
     // if the request is synchronous, make it right away, update in-flight vals, and exit
     if ( this.async == false ) {
         var retVal = _xhrsend.call(this);
-        in_flight[this.orig_location.origin] = in_flight[this.orig_location.origin] + 1;
+        in_flight[this.original_origin] = in_flight[this.original_origin] + 1;
         return;
     }
 
     // always add incoming request to pending for the right origin
-    if ( this.orig_location.origin in pending_queues ) {
-        pending_queues[this.orig_location.origin].append(this);
+    if ( this.original_origin in pending_queues ) {
+        pending_queues[this.original_origin].append(this);
     } else {
-        pending_queues[this.orig_location.origin] = [this];
+        pending_queues[this.original_origin] = [this];
     }
 
     // find the best request for this origin and make it if we can make one now, until we can't make one
-    var ret = best_request( this.orig_location.origin );
+    var ret = best_request( this.original_origin );
     while ( ret[0] ) {
         var retVal = _xhrsend.call(ret[1]);
-        in_flight[ret[1].orig_location.origin] = in_flight[ret[1].orig_location.origin] + 1;
-        ret = best_request( this.orig_location.origin );
+        in_flight[ret[1].original_origin] = in_flight[ret[1].original_origin] + 1;
+        ret = best_request( this.original_origin );
     }
 };
 
@@ -185,13 +202,13 @@ XMLHttpRequest.prototype.open = function(method, url, async, user, password){
 
     // check if URL info was added to request...if not, add it
     if ( !this.hasOwnProperty("orig_location") ) {
-        this.orig_location = window.location;
+        this.original_origin = window.location.hostname;
         this.requested_url = url;
     }
 
     // check if request is synchronous
     if ( async == false ) {
-         this._async = false;
+        this._async = false;
     } else {
         this._async = true;
     }
