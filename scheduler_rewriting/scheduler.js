@@ -165,7 +165,7 @@ function best_request(origin) {
 
 // given request, function returns the corresponding complete url
 function validURL(req) {
-    var url = this.complete_url;
+    var url = this.requested_url;
 
     // check if it is valid---probably need a better way
     var top_domains = [".com", ".org", ".net", ".int", ".edu", ".gov", ".mil"];
@@ -176,13 +176,12 @@ function validURL(req) {
         }
     }
 
-    // TODO: cannot use location.origin to make url---check if https and if not, add http and send that back (use requested_url and origin to make url)
     // url did not have top level domain so assume file and add domain
     if ( url.charAt(0) == '/' ) {
         // starts with / so likely request to same domain as original scope
-        url = req.orig_location.origin + url;
+        url = "http://" + req.original_origin + url;
     } else {
-        url = req.orig_location.origin + "/" + url
+        url = "http://" + req.original_origin + "/" + url;
     }
 
     return url;
