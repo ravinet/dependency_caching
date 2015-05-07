@@ -33,7 +33,12 @@
     function evaluate_response(req) {
         // if request has an imageid, re-assign the source
         if ( req.hasOwnProperty("src_tag") ) {
-            document.getElementById(req.src_tag).setAttribute("src", req.requested_url);
+            if ( req.src_tag != "null" ) {
+                document.getElementById(req.src_tag).setAttribute("src", req.requested_url);
+            } else {
+                // javascript so eval it right away
+                window.eval(req.responseText);
+            }
         } else {
             // from original JS so just execute default callback
             req.onload_orig();
