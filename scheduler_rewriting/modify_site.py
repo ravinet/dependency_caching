@@ -33,8 +33,6 @@ for filename in files:
     print out
     # need to still handle if response is chunked and gzipped (we can't just run gzip on it)!
 
-    # prepend the scheduler (js and html) and rewrite html
-
     if ( ("html" in out) or ("javascript" in out) ): # html or javascript file, so rewrite
         if ( "chunked" in out ): # response chunked so we must unchunk
             os.system( "python unchunk.py rewritten/tempfile rewritten/tempfile1" )
@@ -42,32 +40,22 @@ for filename in files:
             # remove transfer-encoding chunked header from original file since we are unchunking
             os.system( "removeheader rewritten/" + filename + " Transfer-Encoding" )
         if ( "not" in out ): # html or javascript but not gzipped
-            if ( "javascript" in out ):
-                os.system('cp scheduler.js rewritten/prependtempfile')
-                os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
-                os.system('mv rewritten/prependtempfile rewritten/tempfile')
+            #if ( "javascript" in out ):
+            #    os.system('cp scheduler.js rewritten/prependtempfile')
+            #    os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
+            #    os.system('mv rewritten/prependtempfile rewritten/tempfile')
             if ( "html" in out ): # rewrite all inline js in html files
-               os.system('cat scheduler.html >> rewritten/prependtempfile')
-               os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
-               os.system('mv rewritten/prependtempfile rewritten/tempfile')
                command = "python rewrite_image_tags.py rewritten/tempfile"
                proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                (out,err) = proc.communicate()
                image_map = err.strip("\n")
                curr_scheduler_prepend = scheduler_prepend + "window.prefetch = " + image_map +";\n"
-               file1 = open("rewritten/htmltempfile", "w")
+               file1 = open("rewritten/prependtempfile", "w")
                file1.write(curr_scheduler_prepend)
                file1.write("window.chunked_html = " + out.strip("\n") + ";\n")
                file1.close()
-               os.system('mv rewritten/htmltempfile rewritten/tempfile')
-               body = open("rewritten/tempfile", 'r')
-               first_line = body.readline()
-               if ( "<!doctype html>" in first_line.lower() ):
-                   new_file = open("rewritten/prependtempfile", 'a')
-                   new_file.write("<!doctype html>\n")
-                   new_file.close()
-               body.close()
-
+               os.system('cat scheduler.html >> rewritten/prependtempfile')
+               os.system('mv rewritten/prependtempfile rewritten/tempfile')
 
             # get new length of response
             size = os.path.getsize('rewritten/tempfile')
@@ -79,33 +67,23 @@ for filename in files:
             os.system( "changeheader rewritten/" + filename + " Content-Length " + str(size) )
         else: # gzipped
             os.system("gzip -d -c rewritten/tempfile > rewritten/plaintext")
-            if ( "javascript" in out ):
-                os.system('cp scheduler.js rewritten/prependtempfile')
-                os.system('cat rewritten/plaintext >> rewritten/prependtempfile')
-                os.system('mv rewritten/prependtempfile rewritten/plaintext')
-
+            #if ( "javascript" in out ):
+                #os.system('cp scheduler.js rewritten/prependtempfile')
+                #os.system('cat rewritten/plaintext >> rewritten/prependtempfile')
+                #os.system('mv rewritten/prependtempfile rewritten/plaintext')
 
             if ( "html" in out ): # rewrite all inline js in html files
-                os.system('cat scheduler.html >> rewritten/prependtempfile')
-                os.system('cat rewritten/plaintext >> rewritten/prependtempfile')
-                os.system('mv rewritten/prependtempfile rewritten/plaintext')
                 command = "python rewrite_image_tags.py rewritten/plaintext"
                 proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                 (out,err) = proc.communicate()
                 image_map = err.strip("\n")
                 curr_scheduler_prepend = scheduler_prepend + "window.prefetch = " + image_map +";\n"
-                file1 = open("rewritten/htmltempfile", "w")
+                file1 = open("rewritten/prependtempfile", "w")
                 file1.write(curr_scheduler_prepend)
                 file1.write("window.chunked_html = " + out.strip("\n") + ";\n")
                 file1.close()
-                os.system('mv rewritten/htmltempfile rewritten/plaintext')
-                body = open("rewritten/plaintext", 'r')
-                first_line = body.readline()
-                if ( "<!doctype html>" in first_line.lower() ):
-                    new_file = open("rewritten/prependtempfile", 'a')
-                    new_file.write("<!doctype html>\n")
-                    new_file.close()
-                body.close()
+                os.system('cat scheduler.html >> rewritten/prependtempfile')
+                os.system('mv rewritten/prependtempfile rewritten/plaintext')
 
             # after modifying plaintext, gzip it again (gzipped file is 'finalfile')
             os.system( "gzip -c rewritten/plaintext > rewritten/finalfile" )
