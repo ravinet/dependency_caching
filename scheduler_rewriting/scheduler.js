@@ -1,5 +1,3 @@
-// format of a chunk: /---10:40
-
 // have a 'pending' queue per origin and also number of requests in flight
 pending_queues = {};
 in_flight = {};
@@ -9,10 +7,6 @@ evaluated = [];
 
 // requests which we have not yet evaluated because parent was not yet evaluated
 to_evaluate = [];
-
-// TODO: immediately make as many requests as possible here from the list of external requests (update per origin counters)
-// if there is no origin then use window.location.origin (this has http://128.30.79.9 for instance so probably want to strip it depending on how we are adding origins)
-// should we consider depth?
 // prefetch is dict where keys are origins and values are arrays...values are arrays of arrays where each array is url and the corresponding id
 for ( y = 0; y < Object.keys(prefetch); y++ ) {
     // handle this origin (if more than 6, consider depth)!
@@ -71,15 +65,53 @@ function handle_to_eval () {
     }
 };
 
+// function that returns array stating whether it is a chunk, begin line and end line
+function is_chunk (url) {
+// format of a chunk: /---10:40
+    if ( url.indexOf("---") != -1 ) {
+        // this is a chunk
+        chunk = url.split("---");
+        lines = chunk[1].split(":");
+        return [true, lines[0], lines[1]];
+    }
+
+    // not a chunk!
+    return [false, 0, 0];
+}
+
 // function which checks if we can evaluate a specific response now
 function can_eval (req) {
     curr_url = validURL(req);
-    // TODO: add logic if only parent that must be handled is a chunk (chunk format at top), then check if that chunk has anything not evaled and if not, then document.write and return true
+    can_eval_req = true;
     for ( j = 0; j < scheduler_parents(curr_url); j++ ) {
-        if ( evaluted.indexOf(scheduler_parents(curr_url)[j]) == -1 )
-            return false;
+        parent_url = scheduler_parents(curr_url)[j];
+        if ( evaluated.indexOf(parent_url) == -1 ) {
+            ret = is_chunk(parent_url);
+            if ( ret[0] ) {
+                can_eval_parent = true;
+                // this is a chunk so check if we can eval it and if so, do it
+                for ( q = 0; q < scheduler_parents(parent_url); q++ ) {
+                    parent_parent = scheduler_parents(parent_url)[q];
+                    if ( evaluated.indexOf(parent_parent) == -1 ) {
+                        can_eval_parent = false;
+                    }
+                }
+                if ( can_eval_parent ) {
+                    // document.write chunk and add to evaled
+                    var html_to_eval = window.chunked_html.slice(ret[1]-1, ret[2]).join("");
+                    document.write(html_to_eval);
+                    evaluated.push(parent_url);
+                } else {
+                    // chunk can't be evaled
+                    return false;
+                }
+            } else {
+                // not a chunk so we can't be evaled yet!
+                return false;
+            }
         }
     }
+
     // we can evaluate it now!
     return true;
 }
@@ -144,6 +176,7 @@ function validURL(req) {
         }
     }
 
+    // TODO: cannot use location.origin to make url---check if https and if not, add http and send that back (use requested_url and origin to make url)
     // url did not have top level domain so assume file and add domain
     if ( url.charAt(0) == '/' ) {
         // starts with / so likely request to same domain as original scope
