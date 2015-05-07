@@ -55,5 +55,5 @@ def depth(mappings, node, path=None):
 print json.dumps(parents)
 depth(child_deps, '"/"')
 print >> sys.stderr, json.dumps(seen)
-print len(parents)
-print len(seen)
+#print len(parents)
+#print len(seen)
