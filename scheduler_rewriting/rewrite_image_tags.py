@@ -33,7 +33,12 @@ def func(head):
 func(soup)
 
 output = soup.prettify().encode('utf-8')
-print output.split("\n")
+chunked = output.split("\n")
+clean_chunked = []
+for line in chunked:
+  clean_chunked.append(line.replace("</script>", "<\/script>"))
+
+print json.dumps(clean_chunked)
 
 # go through url_map and organize per origin
 origin_mappings= {}
