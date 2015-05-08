@@ -7,14 +7,106 @@ evaluated = [];
 
 // requests which we have not yet evaluated because parent was not yet evaluated
 to_evaluate = [];
-// prefetch is dict where keys are origins and values are arrays...values are arrays of arrays where each array is url and the corresponding id
-for ( y = 0; y < Object.keys(prefetch); y++ ) {
-    // handle this origin (if more than 6, consider depth)!
-    curr_origin = Object.keys[y]
-    if ( curr_origin == "use_location" ) {
-        curr_origin == window.location.hostname
+
+// global callback function for requests
+xhr_callback = function () {
+    if ( can_eval(this) ) { // we can eval it now!
+        evaluate_response(this);
+
+        // check the pending queue for this origin and make the next best request (as many as possible)!
+        var ret = best_request( this.orig_location.origin );
+        while ( ret[0] ) {
+            var retVal = _xhrsend.call(ret[1]);
+            in_flight[ret[1].orig_location.hostname] = in_flight[ret[1].orig_location.hostname] + 1;
+            ret = best_request( this.orig_location.hostname );
+        }
+
+        handle_to_eval();
+    } else { // we cant eval it now
+        to_evaluate.push(this);
     }
-    reqs_to_make = prefetch[Object.keys[y]] // array of arrays where each inner array is url, id
+};
+
+var _xhrsend = XMLHttpRequest.prototype.send;
+XMLHttpRequest.prototype.send = function(){
+    // assign new callback while preserving original
+    this.onload_orig = this.onload;
+    this.onload = xhr_callback;
+
+    // if the request is synchronous, make it right away, update in-flight vals, and exit
+    if ( this.async == false ) {
+        var retVal = _xhrsend.call(this);
+        in_flight[this.original_origin] = in_flight[this.original_origin] + 1;
+        return;
+    }
+
+    // always add incoming request to pending for the right origin
+    if ( this.original_origin in pending_queues ) {
+        pending_queues[this.original_origin].push(this);
+    } else {
+        pending_queues[this.original_origin] = [this];
+    }
+
+    if ( !(this.original_origin in in_flight) ) {
+        in_flight[this.original_origin] = 0;
+    }
+
+    // find the best request for this origin and make it if we can make one now, until we can't make one
+    var ret = best_request( this.original_origin );
+    while ( ret[0] ) {
+        var retVal = _xhrsend.call(ret[1]);
+        in_flight[ret[1].original_origin] = in_flight[ret[1].original_origin] + 1;
+        ret = best_request( this.original_origin );
+    }
+};
+
+var _xhropen = XMLHttpRequest.prototype.open;
+XMLHttpRequest.prototype.open = function(method, url, async, user, password){
+    // handle optional arguments
+    var async_use;
+    var user_use;
+    var password_use;
+    if ( async == undefined ) {
+        async_use = true;
+    }
+    if ( user == undefined ) {
+        user_use = "";
+    }
+    if ( password == undefined ) {
+        password_use = "";
+    }
+
+    // check if URL info was added to request...if not, add it
+    if ( !this.hasOwnProperty("original_origin") ) {
+        this.original_origin = window.location.hostname;
+        this.requested_url = url;
+    }
+
+    // check if request is synchronous
+    if ( async == false ) {
+        this._async = false;
+    } else {
+        this._async = true;
+    }
+
+    var retVal = _xhropen.call(this, method, url, async_use, user_use, password_use);
+    return retVal;
+};
+
+// add onload which remove "scheduler" from DOM
+window.addEventListener("load", function(){
+    var t = document.getElementById("scheduler");
+    t.parentNode.removeChild(t);
+});
+
+// prefetch is dict where keys are origins and values are arrays...values are arrays of arrays where each array is url and the corresponding id
+for ( y = 0; y < Object.keys(prefetch).length; y++ ) {
+    // handle this origin (if more than 6, consider depth)!
+    curr_origin = Object.keys(prefetch)[y];
+    if ( curr_origin == "use_location" ) {
+        curr_origin = window.location.hostname;
+    }
+    reqs_to_make = prefetch[Object.keys(prefetch)[y]]; // array of arrays where each inner array is url, id
     //if ( reqs_to_make.length > 6 ) {
     for ( i = 0; i < reqs_to_make.length; i++ ) {
         // make xhr request for each (and add origin attirbute as location.hostname) and then send it
@@ -25,6 +117,8 @@ for ( y = 0; y < Object.keys(prefetch); y++ ) {
         req.async == true;
         req.open("GET", reqs_to_make[i][0], "false");
         req.send();
+    }
+}
 
 // assign id to scheduler so we can remove it after the page is loaded
 document.currentScript.setAttribute("id", "scheduler");
@@ -45,16 +139,16 @@ function evaluate_response(req) {
     }
 
     // add url to evaluated list
-    evaluated.append(validURL(req));
+    evaluated.push(validURL(req));
 }
 
 // function which recursively handles all to_eval requests based on what urls have already been evaluated
 function handle_to_eval () {
-    eval_index = []
-    for ( int q = 0; q < to_evaluate.length(); q++ ) {
+    eval_index = [];
+    for ( q = 0; q < to_evaluate.length(); q++ ) {
         if ( can_eval(to_evaluate[q]) ) {
             evaluate_response(to_evaluate[q]);
-            eval_index.append(q);
+            eval_index.push(q);
         }
     }
 
@@ -121,25 +215,6 @@ function can_eval (req) {
     return true;
 }
 
-// global callback function for requests
-xhr_callback = function () {
-    if ( can_eval(this) ) { // we can eval it now!
-        evaluate_response(this);
-
-        // check the pending queue for this origin and make the next best request (as many as possible)!
-        var ret = best_request( this.orig_location.origin );
-        while ( ret[0] ) {
-            var retVal = _xhrsend.call(ret[1]);
-            in_flight[ret[1].orig_location.hostname] = in_flight[ret[1].orig_location.hostname] + 1;
-            ret = best_request( this.orig_location.hostname );
-        }
-
-        handle_to_eval();
-    } else { // we cant eval it now
-        to_evaluate.append(this);
-    }
-};
-
 // function that decides whether or not to make a request based on the tree, pending lists, etc.
 function best_request(origin) {
     var best_req = "null";
@@ -148,7 +223,7 @@ function best_request(origin) {
     // find request if we have open connections
     if ( in_flight[origin] < 6 ) {
         // find the request with the longest chain remaining
-        for ( int i = 0; i < pending_queues[origin].length; i++ ) {
+        for ( i = 0; i < pending_queues[origin].length; i++ ) {
             var curr = pending_queues[origin][i];
             if ( scheduler_depths[validURL(req)] > curr_depth ) {
                 curr_depth = scheduler_depths[validURL(req)];
@@ -170,12 +245,13 @@ function best_request(origin) {
 
 // given request, function returns the corresponding complete url
 function validURL(req) {
-    var url = this.requested_url;
+    var url = req.requested_url;
 
     // check if it is valid---probably need a better way
     var top_domains = [".com", ".org", ".net", ".int", ".edu", ".gov", ".mil"];
-    for (domain in top_domains) {
-        if ( url.indexOf(domain) > -1 ) {
+    for ( y = 0; y < top_domains.length; y++ ) {
+        curr_domain = top_domains[y];
+        if ( url.indexOf(curr_domain) != -1 ) {
             // contains a valid top-level domain so assume it is a url, not filename
             return url;
         }
@@ -191,68 +267,6 @@ function validURL(req) {
 
     return url;
 }
-
-var _xhrsend = XMLHttpRequest.prototype.send;
-XMLHttpRequest.prototype.send = function(){
-    // assign new callback while preserving original
-    this.onload_orig = this.onload;
-    this.onload = xhr_callback;
-
-    // if the request is synchronous, make it right away, update in-flight vals, and exit
-    if ( this.async == false ) {
-        var retVal = _xhrsend.call(this);
-        in_flight[this.original_origin] = in_flight[this.original_origin] + 1;
-        return;
-    }
-
-    // always add incoming request to pending for the right origin
-    if ( this.original_origin in pending_queues ) {
-        pending_queues[this.original_origin].append(this);
-    } else {
-        pending_queues[this.original_origin] = [this];
-    }
-
-    // find the best request for this origin and make it if we can make one now, until we can't make one
-    var ret = best_request( this.original_origin );
-    while ( ret[0] ) {
-        var retVal = _xhrsend.call(ret[1]);
-        in_flight[ret[1].original_origin] = in_flight[ret[1].original_origin] + 1;
-        ret = best_request( this.original_origin );
-    }
-};
-
-var _xhropen = XMLHttpRequest.prototype.open;
-XMLHttpRequest.prototype.open = function(method, url, async, user, password){
-    // handle optional arguments
-    var async_use;
-    var user_use;
-    var password_use;
-    if ( async == undefined ) {
-        async_use = true;
-    }
-    if ( user == undefined ) {
-        user_use = "";
-    }
-    if ( password == undefined ) {
-        password_use = "";
-    }
-
-    // check if URL info was added to request...if not, add it
-    if ( !this.hasOwnProperty("orig_location") ) {
-        this.original_origin = window.location.hostname;
-        this.requested_url = url;
-    }
-
-    // check if request is synchronous
-    if ( async == false ) {
-        this._async = false;
-    } else {
-        this._async = true;
-    }
-
-    var retVal = _xhropen.call(this, method, url, async_use, user_use, password_use);
-    return retVal;
-};
 
 // add onload which remove "scheduler" from DOM
 window.addEventListener("load", function(){
