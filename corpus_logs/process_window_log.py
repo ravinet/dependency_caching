@@ -12,6 +12,9 @@ dependencies = {}
 # same info as dependencies---key is (parent,child) tuple and value is tuple of variable and parentid
 detailed_deps = {}
 
+# key is (parent, child) tupe and value is array of (var_name, obj_id, line_number_parent, line_number_child)
+dep_lines = {}
+
 # same info as dependencies, but only stores edges as tuple pairs
 # of file names i.e. ("file1", "file2")
 # use for making dot graphs
@@ -98,11 +101,23 @@ with open(log) as file:
                     # add detailed dependency to detailed_deps with var causing dep
                     parent_child = (logs[n].get('script'), log.get('script'))
                     dep_var = (log.get('PropName'), log.get('ParentId'))
+                    parent_line = "null"
+                    child_line = "null"
+                    if ( 'OrigLine' in logs[n] ):
+                        parent_line = logs[n].get('OrigLine')
+                    if ( 'OrigLine' in log ):
+                        child_line = log.get('OrigLine')
+                    line_dep = (log.get('PropName'), log.get('id'), parent_line, child_line)
                     if ( parent_child in detailed_deps ):
                         if ( dep_var not in detailed_deps[parent_child]):
                             detailed_deps[parent_child].append( dep_var )
                     else:
                         detailed_deps[parent_child] = [dep_var]
+                    # add line number deps
+                    if ( parent_child in dep_lines ):
+                        dep_lines[parent_child].append( line_dep )
+                    else:
+                        dep_lines[parent_child] = [line_dep]
                     break;
             if ( not set_write ):
                 # no corresponding write (dependency because it cannot be moved after a write!)
@@ -183,6 +198,14 @@ print >> sys.stderr, "\nList of final dependencies:"
 print >> sys.stderr, final_dependencies
 #print >> sys.stderr, "\nDetailed dependencies: "
 #print >> sys.stderr, detailed_deps
+
+print >> sys.stderr, "\n\nLINE dependencies (var_name, id, parent_line, child_line):\n"
+for deppair in dep_lines:
+    print >> sys.stderr, deppair
+    for i in dep_lines[deppair]:
+        print >> sys.stderr, i
+    print "\n"
+
 print >> sys.stderr, "\n\n"
 
 # detailed deps between separate files
