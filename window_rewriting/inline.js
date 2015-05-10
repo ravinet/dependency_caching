@@ -188,8 +188,10 @@ if ( _window != undefined ) {
     var _alert = window.alert;
     window.alert = function(arg){
                        var caller = get_caller( document.currentScript);
-                       var log_read = {'OpType': 'READ', 'ParentId': 'window', 'PropName': 'screen', 'NewValId': 'null', 'OldValId': 'null', 'script': caller};
-                       var log_write = {'OpType': 'WRITE', 'ParentId': 'window', 'PropName': 'screen', 'NewValId': 'null', 'OldValId': 'null', 'script': caller};
+                       var stack = new Error().stack.split("\n")[1].split(":");
+                       var line = stack[stack.length - 2];
+                       var log_read = {'OpType': 'READ', 'ParentId': 'window', 'PropName': 'screen', 'NewValId': 'null', 'OldValId': 'null', 'script': caller, 'OrigLine': line};
+                       var log_write = {'OpType': 'WRITE', 'ParentId': 'window', 'PropName': 'screen', 'NewValId': 'null', 'OldValId': 'null', 'script': caller, 'OrigLine': line};
                        //console.log( JSON.stringify( log_read ) );
                        window.js_rewriting_logs.push(JSON.stringify(log_read));
                        //console.log( JSON.stringify( log_write ) );
@@ -392,6 +394,8 @@ if ( _window != undefined ) {
                                  var old_id = "null";
                                  var new_id = "null";
                                  var caller = get_caller(document.currentScript);
+                                 var stack = new Error().stack.split("\n")[1].split(":");
+                                 var line = stack[stack.length - 2];
 
                                  switch( typeof( value ) ){
                                      case "number":
@@ -432,7 +436,7 @@ if ( _window != undefined ) {
                                  }
                                  var new_id = "null";
                                  if ( name != "_id" ){
-                                     var log = {'OpType': 'READ', 'ParentId': parent_id, 'PropName': name, 'NewValId': new_id, 'OldValId': old_id, 'script': caller};
+                                     var log = {'OpType': 'READ', 'ParentId': parent_id, 'PropName': name, 'NewValId': new_id, 'OldValId': old_id, 'script': caller, 'OrigLine': line};
                                      //console.log( JSON.stringify( log ) );
                                      window.js_rewriting_logs.push(JSON.stringify(log));
                                  }
@@ -444,6 +448,8 @@ if ( _window != undefined ) {
                              },
                       "set": function(base, name, value){
                                  var caller = get_caller(document.currentScript);
+                                 var stack = new Error().stack.split("\n")[1].split(":");
+                                 var line = stack[stack.length - 2];
                                  var prev = base[name];
                                  var parent_id = "null";
                                  var new_id = "null";
@@ -517,7 +523,7 @@ if ( _window != undefined ) {
                                      }
                                  }
                                  if ( name != "_id" ){
-                                     var log = {'OpType': 'WRITE', 'ParentId': parent_id, 'PropName': name, 'NewValId': new_id, 'OldValId': old_id, 'script': caller}
+                                     var log = {'OpType': 'WRITE', 'ParentId': parent_id, 'PropName': name, 'NewValId': new_id, 'OldValId': old_id, 'script': caller, 'OrigLine': line}
                                      //console.log( JSON.stringify( log ) );
                                      window.js_rewriting_logs.push(JSON.stringify(log));
                                  }
