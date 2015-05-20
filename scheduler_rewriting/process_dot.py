@@ -15,8 +15,8 @@ with open(dot) as f:
     for line in f:
         curr = line.strip("\n")
         if "digraph G {" not in curr and curr != "ratio=compress;" and curr != "concentrate=true;" and curr != "}":
-            parent = curr.split(" ")[0]
-            child = curr.split("> ")[1].strip(";").strip("[color=red]")
+            parent = curr.split(" ")[0].replace('"', '')
+            child = curr.split("> ")[1].strip(";").strip("[color=red]").replace('"', '')
             if parent != child:
                 curr_edge = curr.strip(";").strip("[color=red]")
                 if curr_edge not in unique_edges:
@@ -53,7 +53,7 @@ def depth(mappings, node, path=None):
 
   
 print json.dumps(parents)
-depth(child_deps, '"/"')
+depth(child_deps, '/')
 print >> sys.stderr, json.dumps(seen)
 #print len(parents)
 #print len(seen)
