@@ -17,7 +17,10 @@ def func(head):
       if ( child.name == "img" or child.name == "script" ):
         original_src = child.get('src')
         if ( original_src != None and original_src != ""):
-          child['src'] = ""
+          if ( child.name == "script" ):
+            del child['src']
+          else:
+            child['src'] = ""
           if ( child.name == "img" ):
             child['imgid'] = counter
             url_map[original_src] = counter
