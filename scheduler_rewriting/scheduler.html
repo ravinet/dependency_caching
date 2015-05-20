@@ -2,6 +2,14 @@
     pending_queues = {};
     in_flight = {};
 
+    written_html = false;
+
+    for ( var ii = 0; ii < chunked_html.length; ii++ ) {
+         if ( chunked_html[ii].indexOf("<\\/script>") != -1 ) {
+            chunked_html[ii] = "</sc" + "ript>";
+         }
+    }
+
     cleared_document = false;
 
     // urls which we have already evaluated
@@ -119,7 +127,10 @@
             req.send();
         }
     }
-    
+
+    // don't want the document to close until we have finished writing and loading the page (otherwise our writes will clear it)!
+    while(!written_html) {}
+
     // assign id to scheduler so we can remove it after the page is loaded
     document.currentScript.setAttribute("id", "scheduler");
     
@@ -128,7 +139,8 @@
         // if request has an imageid, re-assign the source
         if ( req.hasOwnProperty("src_tag") ) {
             if ( req.src_tag != "null" ) {
-                document.getElementById(req.src_tag).setAttribute("src", req.requested_url);
+                document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("src", req.requested_url);
+                document.querySelector("[imgid=" + req.src_tag + "]").removeAttribute("imgid");
             } else {
                 // javascript so eval it right away
                 window.eval(req.responseText);
@@ -203,10 +215,13 @@
                     if ( can_eval_parent ) {
                         // document.write chunk and add to evaled
                         if ( ret[2] == 'all' ) {
-                            //document.write(window.chunked_html.join(""));
+                            console.log( "wrote to document");
+                            document.write(window.chunked_html.join(""));
+                            written_html = true;
                         } else {
                             var html_to_eval = window.chunked_html.slice(ret[1]-1, ret[2]).join("");
-                            //document.write(html_to_eval);
+                            document.write(html_to_eval);
+                            written_html = true;
                         }
                         evaluated.push(parent_url);
                     } else {
