@@ -305,9 +305,7 @@
         return url;
     }
 
-    //add onload which remove "scheduler" from DOM
-    window.addEventListener("load", function(){
-        var t = document.getElementById("scheduler");
-        t.parentNode.removeChild(t);
-    });
+    // remove scheduler immediately after defining callbacks/wrappers and making prefetch requests
+    var t = document.getElementById("scheduler");
+    t.parentNode.removeChild(t);
 </script>
