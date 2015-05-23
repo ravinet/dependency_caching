@@ -193,6 +193,10 @@
         if ( url == "/" ) {
             return [true, 0, 'all'];
         }
+        // handle case where it is not chunk but it is an iframe (not "/")
+        if ( url.substr(url.length - 4) == "html" ) {
+            return [true, 0, 'all'];
+        }
 
         // not a chunk!
         return [false, 0, 0];
