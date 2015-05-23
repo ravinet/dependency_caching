@@ -126,6 +126,9 @@
             req.requested_url = reqs_to_make[i][0];
             req.src_tag = reqs_to_make[i][1];
             req.open("GET", reqs_to_make[i][0], "true");
+            if ( req.src_tag != "null" ) { // image so make blob request
+                req.responseType = "blob";
+            }
             req.send();
         }
     }
@@ -138,7 +141,8 @@
         // if request has an imageid, re-assign the source
         if ( req.hasOwnProperty("src_tag") ) {
             if ( req.src_tag != "null" ) {
-                document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("src", req.requested_url);
+                var imgurl = window.URL.createObjectURL(req.response);
+                document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("src", imgurl);
                 document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
             } else {
                 // javascript so eval it right away
