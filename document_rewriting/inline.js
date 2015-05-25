@@ -1,6 +1,6 @@
 if ( _document != undefined ) {
     // add the html logs (which are listed under the 'htmllogs' attribute of this script) to the complete logs list
-    var logs_html = document.currentScript.getAttribute("htmllogs").split("\n");
+    var logs_html = _getAttribute.call(document.currentScript, "htmllogs" ).split("\n");
     for ( j = 0; j < logs_html.length; j++ ) {
         window.js_rewriting_logs.push(logs_html[j]);
     }
