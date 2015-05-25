@@ -112,8 +112,8 @@ with open(log) as file:
                     dep_var = (log.get('PropName'), log.get('id'))
                     parent_line = "null"
                     child_line = "null"
-                    if ( 'OrigLine' in logs[n] ):
-                        parent_line = logs[n].get('OrigLine')
+                    if ( 'line' in logs[n] ):
+                        parent_line = logs[n].get('line')
                     if ( 'OrigLine' in log ):
                         child_line = log.get('OrigLine')
                     line_dep = (log.get('PropName'), log.get('id'), parent_line, child_line)
