@@ -342,8 +342,15 @@ new_original.append("}")
 
 # print original without the closing '}'
 for line in new_original:
-  if ( line != "}" ):
+  if ( line == "strict digraph G {" or line == "ratio=compress;" or line == "concentrate=true;"):
     print line
+  else:
+    if ( line != "}" ):
+      parent = line.split(" ")[0]
+      child = line.split("> ")[1].strip(";")
+      parent = "\"" + parent + "\""
+      child = "\"" + child + "\""
+      print parent + " -> " + child + ";"
 
 for (a,b) in new_final_dependencies:
   if ( a != b ):
