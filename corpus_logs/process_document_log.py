@@ -267,46 +267,46 @@ for (x,y) in final_dependencies:
     new_final_dependencies.append((x,y))
 
 # if chunk is only based on one file then change it to just be normal dependency for that file and remove other instances
-handled = []
-to_handle = {}
-for i in range(0, len(new_final_dependencies)):
-  p = new_final_dependencies[i][0]
-  c = new_final_dependencies[i][1]
-  parents_to_replace = []
-  children_to_replace = []
-  if ( "---" in p ):
-    curr_parent = p.split("---")[0]
-    if ( curr_parent not in handled ):
-      handled.append(curr_parent)
-      curr_children = []
-      for j in range(i, len(new_final_dependencies)):
-        inp = new_final_dependencies[j][0]
-        inc = new_final_dependencies[j][1]
-        now_parent = inp.split("---")[0]
-        if ( now_parent == curr_parent ):
-          if ( "---" not in inc):
-            if ( inc not in curr_children ):
-              curr_children.append(inc)
-          elif ( inc.split("---")[0] == curr_parent ):
-              children_to_replace.append(j)
-          if ( j not in children_to_replace ):
-            parents_to_replace.append(j)
-      to_handle[curr_parent] = ((parents_to_replace, children_to_replace), curr_children)
-
-# parents_to_replace has lines where parent should remove chunk name but child is not chunk
-# children_to_replace has lines to be removed because child is chunk!
-# only do anything if there is one non-chunk child for the parent
-for par in to_handle:
-  if (len(to_handle[par][1]) == 1):
-    # only one child so fix all parents and children
-    for y in to_handle[par][0][0]:
-      orig = new_final_dependencies[y]
-      new_final_dependencies[y] = (par, orig[1])
-    # remove children
-    removed = 0
-    for x in to_handle[curr_parent][0][1]:
-      new_final_dependencies.pop(x-removed)
-      removed = removed + 1
+#handled = []
+#to_handle = {}
+#for i in range(0, len(new_final_dependencies)):
+#  p = new_final_dependencies[i][0]
+#  c = new_final_dependencies[i][1]
+#  parents_to_replace = []
+#  children_to_replace = []
+#  if ( "---" in p ):
+#    curr_parent = p.split("---")[0]
+#    if ( curr_parent not in handled ):
+#      handled.append(curr_parent)
+#      curr_children = []
+#      for j in range(i, len(new_final_dependencies)):
+#        inp = new_final_dependencies[j][0]
+#        inc = new_final_dependencies[j][1]
+#        now_parent = inp.split("---")[0]
+#        if ( now_parent == curr_parent ):
+#          if ( "---" not in inc):
+#            if ( inc not in curr_children ):
+#              curr_children.append(inc)
+#          elif ( inc.split("---")[0] == curr_parent ):
+#              children_to_replace.append(j)
+#          if ( j not in children_to_replace ):
+#            parents_to_replace.append(j)
+#      to_handle[curr_parent] = ((parents_to_replace, children_to_replace), curr_children)
+#
+## parents_to_replace has lines where parent should remove chunk name but child is not chunk
+## children_to_replace has lines to be removed because child is chunk!
+## only do anything if there is one non-chunk child for the parent
+#for par in to_handle:
+#  if (len(to_handle[par][1]) == 1):
+#    # only one child so fix all parents and children
+#    for y in to_handle[par][0][0]:
+#      orig = new_final_dependencies[y]
+#      new_final_dependencies[y] = (par, orig[1])
+#    # remove children
+#    removed = 0
+#    for x in to_handle[curr_parent][0][1]:
+#      new_final_dependencies.pop(x-removed)
+#      removed = removed + 1
 
 for (a,b) in new_final_dependencies:
   if ( a != b ):
