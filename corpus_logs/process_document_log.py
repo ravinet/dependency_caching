@@ -213,6 +213,9 @@ final_html_chunks = {}
 
 new_final_dependencies = []
 
+# keys are original files and values are tuples (start chunk name and end chunk name)
+chunk_info = {}
+
 handled_parents = []
 last_chunks = {}
 for dep in html_deps:
@@ -230,6 +233,7 @@ for dep in html_deps:
       # want to go through this and make the chunks and link them to their children
       prev = -1
       prev_chunk = ()
+      start_chunk = ""
       for x in sorted(chunks):
         child = chunks[x]
         begin = int(prev) + 1
@@ -240,12 +244,15 @@ for dep in html_deps:
           new_name = curr_parent + "---" + str(begin) + ":" + str(x)
           new_final_dependencies.append((prev_name, new_name))
           prev_chunk = (begin,x)
+        else: # if prev chunk was (), then this is the first chunk!
+          start_chunk = curr_parent + "---" + str(begin) + ":" + str(x)
         prev_chunk = (begin,x)
       if ( prev_chunk != () ):
         last_prev = curr_parent + "---" + str(prev_chunk[0]) + ":" + str(prev_chunk[1])
         final_curr = curr_parent + "---" + str(prev_chunk[1] + 1) + ":end"
         new_final_dependencies.append((last_prev, final_curr))
         last_chunks[curr_parent] = final_curr
+      chunk_info[curr_parent] = (start_chunk, final_curr)
 
 #pipe this output to dot
 #print "digraph G {"
@@ -265,6 +272,31 @@ for (x,y) in final_dependencies:
         new_final_dependencies.append((x,y))
   else:
     new_final_dependencies.append((x,y))
+
+# iterate through original deps and replace non-chunked nodes with their chunked counterparts (consider start and end chunks
+# depending on whether the node was a parent or a child in the original deps
+new_original = []
+for line in original:
+  if ( line != "strict digraph G {" and line != "ratio=compress;" and line != "concentrate=true;" and line != '}' ):
+    parent = line.split(" ")[0].replace("\"","")
+    child = line.split("> ")[1].strip(";").replace("\"","")
+    new_parent = parent
+    new_child = child
+    if ( parent in chunk_info ): # use end chunk because this is a parent (whole file must finish before child)
+        new_parent = chunk_info[parent][1]
+        # check if child was part of real chunks made---if so, delete original
+        if ( parent in final_html_chunks ):
+            if ( child in final_html_chunks[parent] ):
+                # was previously a child of a chunk so delete original
+                continue
+    if ( child in chunk_info ): # use start chunk because this is a child (parent should go to the start of this file)
+        new_child = chunk_info[child][0]
+
+    new_original.append(new_parent + " -> " + new_child + ";")
+  else:
+    if ( line != "}" ):
+        new_original.append(line)
+new_original.append("}")
 
 # if chunk is only based on one file then change it to just be normal dependency for that file and remove other instances
 #handled = []
@@ -308,6 +340,11 @@ for (x,y) in final_dependencies:
 #      new_final_dependencies.pop(x-removed)
 #      removed = removed + 1
 
+# print original without the closing '}'
+for line in new_original:
+  if ( line != "}" ):
+    print line
+
 for (a,b) in new_final_dependencies:
   if ( a != b ):
     parent_name = a.split("/")[-1]
@@ -323,8 +360,8 @@ for (a,b) in new_final_dependencies:
         temp = child_name
         child_name = temp.split("?")[0]
     new_line = "\"" + parent_name + "\" -> \"" + child_name + "\";"
-    if ( new_line not in original ):
+    if ( new_line not in new_original ):
         #print "\"" + a.split("/")[-1] + "\" -> \"" + b.split("/")[-1] + "\";"
         print "\"" + parent_name + "\" -> \"" + child_name + "\"[color=red];"
 
-#print "}"
+print "}"

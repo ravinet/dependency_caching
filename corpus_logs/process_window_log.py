@@ -107,7 +107,7 @@ with open(log) as file:
                         parent_line = logs[n].get('OrigLine')
                     if ( 'OrigLine' in log ):
                         child_line = log.get('OrigLine')
-                    line_dep = (log.get('PropName'), log.get('id'), parent_line, child_line)
+                    line_dep = (log.get('PropName'), log.get('OldValId'), log.get('ParentId'), parent_line, child_line)
                     if ( parent_child in detailed_deps ):
                         if ( dep_var not in detailed_deps[parent_child]):
                             detailed_deps[parent_child].append( dep_var )
@@ -115,7 +115,8 @@ with open(log) as file:
                         detailed_deps[parent_child] = [dep_var]
                     # add line number deps
                     if ( parent_child in dep_lines ):
-                        dep_lines[parent_child].append( line_dep )
+                        if ( line_dep not in dep_lines[parent_child] ):
+                            dep_lines[parent_child].append( line_dep )
                     else:
                         dep_lines[parent_child] = [line_dep]
                     break;
@@ -199,7 +200,7 @@ print >> sys.stderr, final_dependencies
 #print >> sys.stderr, "\nDetailed dependencies: "
 #print >> sys.stderr, detailed_deps
 
-print >> sys.stderr, "\n\nLINE dependencies (var_name, id, parent_line, child_line):\n"
+print >> sys.stderr, "\n\nLINE dependencies (var_name, obj_id, parent_id, parent_line, child_line):\n"
 for deppair in dep_lines:
     print >> sys.stderr, deppair
     for i in dep_lines[deppair]:
@@ -208,19 +209,24 @@ for deppair in dep_lines:
 
 print >> sys.stderr, "\n\n"
 
-# detailed deps between separate files
-print >> sys.stderr, "\n\nDETAILED DEPS: "
-for dep in detailed_deps:
-    if ( dep[0] != dep[1] ):
-        print >> sys.stderr, dep
-        for inner in detailed_deps[dep]:
-            print >> sys.stderr, inner
-        print >> sys.stderr, "\n\n"
+## detailed deps between separate files
+#print >> sys.stderr, "\n\nDETAILED DEPS: "
+#for dep in detailed_deps:
+#    if ( dep[0] != dep[1] ):
+#        print >> sys.stderr, dep
+#        for inner in detailed_deps[dep]:
+#            print >> sys.stderr, inner
+#        print >> sys.stderr, "\n\n"
 
 #pipe this output to dot
 #print "digraph G {"
 #print "ratio=compress;"
 #print "concentrate=true;"
+
+# print original without the closing '}'
+for line in original:
+  if ( line != "}" ):
+    print line
 
 for (a,b) in final_dependencies:
   if ( a != b ):
@@ -236,9 +242,10 @@ for (a,b) in final_dependencies:
     if ( "?" in child_name ):
         temp = child_name
         child_name = temp.split("?")[0]
-    new_line = "\"" + parent_name + "\" -> \"" + child_name + "\";"
-    if ( new_line not in original ):
-        #print "\"" + a.split("/")[-1] + "\" -> \"" + b.split("/")[-1] + "\";"
-        print "\"" + parent_name + "\" -> \"" + child_name + "\"[color=red];"
+    if ( parent_name != "No_Write" and child_name != "No_Write" ):
+        new_line = "\"" + parent_name + "\" -> \"" + child_name + "\";"
+        if ( new_line not in original ):
+            #print "\"" + a.split("/")[-1] + "\" -> \"" + b.split("/")[-1] + "\";"
+            print "\"" + parent_name + "\" -> \"" + child_name + "\"[color=red];"
 
-#print "}"
+print "}"
