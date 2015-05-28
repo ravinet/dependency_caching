@@ -188,6 +188,86 @@
         }
     }
 
+    // handle case where there is nothing to prefetch!
+    if ( Object.keys(prefetch).length == 0 ) {
+        var curr_html = window.location.pathname;
+        if ( curr_html != "/" ) {
+            // remove path "/"
+            var split_path = curr_html.split("/");
+            curr_html = split_path[split_path.length - 1];
+        }
+        // iterate through scheduler parents and find the smallest chunk that we can evaluate right away
+        // also store the parents of any chunk for this file to make sure we actually can eval it!
+        var final_chunk_start = "null";
+        var final_chunk_end = "null";
+        for ( var child in scheduler_parents ) {
+            var parents = scheduler_parents[child];
+            for ( curr_parent in parents ) {
+                var file_name = curr_parent;
+                var chunk_start = "null";
+                var chunk_end = "null";
+                if ( curr_parent.indexOf("---") != -1 ) {
+                    // it is a chunk!
+                    file_name = curr_parent.split("---")[0];
+                    chunk_start = curr_parent.split("---")[1].split(":")[0];
+                    chunk_end = curr_parent.split("---")[1].split(":")[1];
+                }
+                if ( file_name == curr_html ) { // relevant parent so see if this is the best chunk
+                    if ( chunk_start != "null" ) {
+                        if ( (final_chunk_start == "null") || (chunk_start < final_chunk_start) ) {
+                            final_chunk_start = chunk_start;
+                            final_chunk_end = chunk_end;
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        // check if there is a 'best' chunk...if not, add all html!
+        var html_url;
+        if ( final_chunk_start == "null" ) { // no 'best' chunk
+            html_url = file_name;
+            var prev_inner = "null";
+            if ( document.body != null ) {
+                prev_inner = document.body.innerHTML;
+            } else {
+                var new_body = document.createElement("body");
+                document.firstChild.appendChild(new_body);
+            }
+            new_inner = window.chunked_html.join("");
+            if ( prev_inner != "null" ) {
+                new_inner = prev_inner + window.chunked_html.join("");
+            }
+            document.body.innerHTML = new_inner;
+        } else { // there is a best chunk
+            html_url = file_name + "---" + final_chunk_start + ":" + final_chunk_end;
+            if ( final_chunk_start == "0" ) { // start first chunk at 0, not -1
+                final_chunk_start = "1";
+            }
+            var html_to_eval = "";
+            if ( final_chunk_end == "end" ) {
+                html_to_eval = window.chunked_html.slice(final_chunk_start-1).join("");
+            } else {
+                html_to_eval = window.chunked_html.slice(final_chunk_start-1, final_chunk_end).join("");
+            }
+            var prev_inner = "null";
+            if ( document.body != null ) {
+                prev_inner = document.body.innerHTML;
+            } else {
+                var new_body = document.createElement("body");
+                document.firstChild.appendChild(new_body);
+            }
+            if ( prev_inner != "null" ) {
+                html_to_eval = prev_inner + html_to_eval;
+            }
+
+            document.body.innerHTML = html_to_eval;
+        }
+        evaluated.push(html_url);
+    }
+
     // assign id to scheduler so we can remove it after the page is loaded
     document.currentScript.setAttribute("id", "scheduler");
     
