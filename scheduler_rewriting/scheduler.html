@@ -1,14 +1,17 @@
     // have a 'pending' queue per origin and also number of requests in flight
     pending_queues = {};
-    in_flight = {};
+    in_flight = {"bootstrap": "waiting"};
+
+    // if top-frame, we don't need to bootstrap
+    if ( window.top == window.self ) {
+        in_flight["bootstrap"] = "done";
+    }
 
     for ( var ii = 0; ii < chunked_html.length; ii++ ) {
          if ( chunked_html[ii].indexOf("<\\/script>") != -1 ) {
             chunked_html[ii] = "</sc" + "ript>";
          }
     }
-
-    cleared_document = false;
 
     // urls which we have already evaluated
     evaluated = [];
@@ -20,6 +23,9 @@
 
     // global callback function for requests
     xhr_callback = function () {
+        if ( this.requested_url == "a.js" ) {
+            console.log("stop here");
+        }
         // decrement the in_flight counter
         in_flight[this.original_origin] = in_flight[this.original_origin] - 1;
 
@@ -41,10 +47,9 @@
             to_evaluate.push(this);
         }
 
-        // check to see if we can eval any other chunks!
-        handle_all_chunks();
+        // check to see if we can eval any other chunks! (don't for now because how do we know if chunk is from this frame??)
+        //handle_all_chunks();
     };
-
 
     // iterates through all nodes--if parents are all done and it is not evaluated, eval it (only chunks)
     function handle_all_chunks() {
@@ -165,107 +170,170 @@
         return retVal;
     };
 
-    // prefetch is dict where keys are origins and values are arrays...values are arrays of arrays where each array is url and the corresponding id
-    for ( var y = 0; y < Object.keys(prefetch).length; y++ ) {
-        // handle this origin (if more than 6, consider depth)!
-        curr_origin = Object.keys(prefetch)[y];
-        if ( curr_origin == "use_location" ) {
-            curr_origin = window.location.hostname;
-        }
-        reqs_to_make = prefetch[Object.keys(prefetch)[y]]; // array of arrays where each inner array is url, id
-        for ( var i = 0; i < reqs_to_make.length; i++ ) {
-            //console.log("handling request: " + reqs_to_make[i][0]);
-            // make xhr request for each (and add origin attirbute as location.hostname) and then send it
-            var req = new XMLHttpRequest();
-            req.original_origin = curr_origin;
-            req.requested_url = reqs_to_make[i][0];
-            req.src_tag = reqs_to_make[i][1];
-            req.open("GET", reqs_to_make[i][0], "true");
-            if ( req.src_tag != "null" ) { // image so make blob request
-                req.responseType = "blob";
+    // function to handle postMessages (top frame handles queries, query responses, and updates while other frames handle updates
+    // query is "query", query response is  and update is form "update~~origin~~new_num", query response is "queryresponse---origin::num~~..."
+    function handle_posts(event) {
+        // handle bootstrap
+        if ( event.data == "query" ) {
+            if ( window.top == window.self ) {
+                // we are top frame so respond with all in_flight info (queryresponse---origin::num~~origin::num~~ etc...)
+                var query_response = "queryresponse---";
+                for (orig in in_flight) {
+                    if ( orig != "bootstrap" ) {
+                        query_response = query_response + orig + "::" + in_flight[orig] + "~~";
+                    }
+                }
+                query_response = query_response.substring(0, query_response.length-2);
+                event.source.postMessage(query_response, event.origin);
             }
-            req.send();
+        }
+
+        // handle query responses
+        if ( event.data.split("---")[0] == "queryresponse" ) {
+            var stripped_response = event.data.split("---")[1];
+            var mappings = stripped_response.split("~~");
+            for ( var i = 0; i < mappings.length; i++ ) {
+                var curr_origin = mappings[i].split("::")[0];
+                var curr_num = mappings[i].split("::")[1];
+                in_flight[curr_origin] = curr_num;
+            }
+            in_flight["bootstrap"] = "done";
+        }
+
+        // handle update
+        if ( event.data.split("~~")[0] == "origin" ) {
+            if ( in_flight["bootstrap"] == "done" ) { // only use updates if you have finished bootstrap
+                var origin_to_update = event.data.split("~~")[1];
+                var new_num = event.data.split("~~")[2];
+                in_flight[origin_to_update] = new_num;
+            }
         }
     }
 
-    // handle case where there is nothing to prefetch!
-    if ( Object.keys(prefetch).length == 0 ) {
-        var curr_html = window.location.pathname;
-        if ( curr_html != "/" ) {
-            // remove path "/"
-            var split_path = curr_html.split("/");
-            curr_html = split_path[split_path.length - 1];
-        }
-        // iterate through scheduler parents and find the smallest chunk that we can evaluate right away
-        // also store the parents of any chunk for this file to make sure we actually can eval it!
-        var final_chunk_start = "null";
-        var final_chunk_end = "null";
-        for ( var child in scheduler_parents ) {
-            var parents = scheduler_parents[child];
-            for ( curr_parent in parents ) {
-                var file_name = curr_parent;
-                var chunk_start = "null";
-                var chunk_end = "null";
-                if ( curr_parent.indexOf("---") != -1 ) {
-                    // it is a chunk!
-                    file_name = curr_parent.split("---")[0];
-                    chunk_start = curr_parent.split("---")[1].split(":")[0];
-                    chunk_end = curr_parent.split("---")[1].split(":")[1];
+
+    // event listener for in_flight bootstrap or updates
+    window.addEventListener("message", handle_posts, false);
+
+    // if this is the top frame, do everything normally, otherwise make postMessage to get inflight from top frame
+    // and observe in_flight until it changes (handle prefetch and html chunks in handler)
+    if ( window.top == window.self ) {
+        handle_prefetch();
+    } else {
+        in_flight.watch( "bootstrap", watch_handler );
+        window.top.postMessage( "query", "*" );
+    }
+
+    // function for watch (must return the modified value and call prefetch handler!)
+    function watch_handler(id, oldval, newval) {
+        handle_prefetch();
+        return newval;
+    }
+
+    // prefetch is dict where keys are origins and values are arrays...values are arrays of arrays where each array is url and the corresponding id
+    function handle_prefetch() {
+        for ( var y = 0; y < Object.keys(prefetch).length; y++ ) {
+            // handle this origin (if more than 6, consider depth)!
+            curr_origin = Object.keys(prefetch)[y];
+            if ( curr_origin == "use_location" ) {
+                curr_origin = window.location.hostname;
+            }
+            reqs_to_make = prefetch[Object.keys(prefetch)[y]]; // array of arrays where each inner array is url, id
+            for ( var i = 0; i < reqs_to_make.length; i++ ) {
+                //console.log("handling request: " + reqs_to_make[i][0]);
+                // make xhr request for each (and add origin attirbute as location.hostname) and then send it
+                var req = new XMLHttpRequest();
+                req.original_origin = curr_origin;
+                req.requested_url = reqs_to_make[i][0];
+                req.src_tag = reqs_to_make[i][1];
+                req.open("GET", reqs_to_make[i][0], "true");
+                if ( req.src_tag != "null" ) { // image so make blob request
+                    req.responseType = "blob";
                 }
-                if ( file_name == curr_html ) { // relevant parent so see if this is the best chunk
-                    if ( chunk_start != "null" ) {
-                        if ( (final_chunk_start == "null") || (chunk_start < final_chunk_start) ) {
-                            final_chunk_start = chunk_start;
-                            final_chunk_end = chunk_end;
+                req.send();
+            }
+            console.log("done prefetching");
+        }
+
+        // handle case where there is nothing to prefetch!
+        if ( Object.keys(prefetch).length == 0 ) {
+            var curr_html = window.location.pathname;
+            if ( curr_html != "/" ) {
+                // remove path "/"
+                var split_path = curr_html.split("/");
+                curr_html = split_path[split_path.length - 1];
+            }
+            // iterate through scheduler parents and find the smallest chunk that we can evaluate right away
+            // also store the parents of any chunk for this file to make sure we actually can eval it!
+            var final_chunk_start = "null";
+            var final_chunk_end = "null";
+            for ( var child in scheduler_parents ) {
+                var parents = scheduler_parents[child];
+                for ( curr_parent in parents ) {
+                    var file_name = curr_parent;
+                    var chunk_start = "null";
+                    var chunk_end = "null";
+                    if ( curr_parent.indexOf("---") != -1 ) {
+                        // it is a chunk!
+                        file_name = curr_parent.split("---")[0];
+                        chunk_start = curr_parent.split("---")[1].split(":")[0];
+                        chunk_end = curr_parent.split("---")[1].split(":")[1];
+                    }
+                    if ( file_name == curr_html ) { // relevant parent so see if this is the best chunk
+                        if ( chunk_start != "null" ) {
+                            if ( (final_chunk_start == "null") || (chunk_start < final_chunk_start) ) {
+                                final_chunk_start = chunk_start;
+                                final_chunk_end = chunk_end;
+                            }
                         }
                     }
+
                 }
 
             }
 
-        }
+            // check if there is a 'best' chunk...if not, add all html!
+            var html_url;
+            if ( final_chunk_start == "null" ) { // no 'best' chunk
+                html_url = file_name;
+                var prev_inner = "null";
+                if ( document.body != null ) {
+                    prev_inner = document.body.innerHTML;
+                } else {
+                    var new_body = document.createElement("body");
+                    document.firstChild.appendChild(new_body);
+                }
+                new_inner = window.chunked_html.join("");
+                if ( prev_inner != "null" ) {
+                    new_inner = prev_inner + window.chunked_html.join("");
+                }
+                document.body.innerHTML = new_inner;
+                evaluated.push(html_url);
+            } else { // there is a best chunk
+                html_url = file_name + "---" + final_chunk_start + ":" + final_chunk_end;
+                if ( final_chunk_start == "0" ) { // start first chunk at 0, not -1
+                    final_chunk_start = "1";
+                }
+                var html_to_eval = "";
+                if ( final_chunk_end == "end" ) {
+                    html_to_eval = window.chunked_html.slice(final_chunk_start-1).join("");
+                } else {
+                    html_to_eval = window.chunked_html.slice(final_chunk_start-1, final_chunk_end).join("");
+                }
+                var prev_inner = "null";
+                if ( document.body != null ) {
+                    prev_inner = document.body.innerHTML;
+                } else {
+                    var new_body = document.createElement("body");
+                    document.firstChild.appendChild(new_body);
+                }
+                if ( prev_inner != "null" ) {
+                    html_to_eval = prev_inner + html_to_eval;
+                }
 
-        // check if there is a 'best' chunk...if not, add all html!
-        var html_url;
-        if ( final_chunk_start == "null" ) { // no 'best' chunk
-            html_url = file_name;
-            var prev_inner = "null";
-            if ( document.body != null ) {
-                prev_inner = document.body.innerHTML;
-            } else {
-                var new_body = document.createElement("body");
-                document.firstChild.appendChild(new_body);
+                document.body.innerHTML = html_to_eval;
+                evaluated.push(html_url);
             }
-            new_inner = window.chunked_html.join("");
-            if ( prev_inner != "null" ) {
-                new_inner = prev_inner + window.chunked_html.join("");
-            }
-            document.body.innerHTML = new_inner;
-        } else { // there is a best chunk
-            html_url = file_name + "---" + final_chunk_start + ":" + final_chunk_end;
-            if ( final_chunk_start == "0" ) { // start first chunk at 0, not -1
-                final_chunk_start = "1";
-            }
-            var html_to_eval = "";
-            if ( final_chunk_end == "end" ) {
-                html_to_eval = window.chunked_html.slice(final_chunk_start-1).join("");
-            } else {
-                html_to_eval = window.chunked_html.slice(final_chunk_start-1, final_chunk_end).join("");
-            }
-            var prev_inner = "null";
-            if ( document.body != null ) {
-                prev_inner = document.body.innerHTML;
-            } else {
-                var new_body = document.createElement("body");
-                document.firstChild.appendChild(new_body);
-            }
-            if ( prev_inner != "null" ) {
-                html_to_eval = prev_inner + html_to_eval;
-            }
-
-            document.body.innerHTML = html_to_eval;
         }
-        evaluated.push(html_url);
     }
 
     // assign id to scheduler so we can remove it after the page is loaded
