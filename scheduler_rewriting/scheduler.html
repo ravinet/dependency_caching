@@ -23,11 +23,9 @@
 
     // global callback function for requests
     xhr_callback = function () {
-        if ( this.requested_url == "a.js" ) {
-            console.log("stop here");
-        }
         // decrement the in_flight counter
         in_flight[this.original_origin] = in_flight[this.original_origin] - 1;
+        update_in_flight(this.original_origin, in_flight[this.original_origin]);
 
         // check the pending queue for this origin and make the next best request (as many as possible)!
         var ret = best_request( this.original_origin );
@@ -36,6 +34,7 @@
             console.log("Returned response for: " + this.requested_url + " now making: " + ret[1].requested_url );
             _xhrsend.call(ret[1]);
             in_flight[ret[1].original_origin] = in_flight[ret[1].original_origin] + 1;
+            update_in_flight(ret[1].original_origin, in_flight[ret[1].original_origin]);
             ret = best_request( this.original_origin );
         }
 
@@ -112,6 +111,7 @@
         if ( this.async == false ) {
             _xhrsend.call(this);
             in_flight[this.original_origin] = in_flight[this.original_origin] + 1;
+            update_in_flight(this.original_origin, in_flight[this.original_origin]);
             return;
         }
 
@@ -124,6 +124,7 @@
 
         if ( !(this.original_origin in in_flight) ) {
             in_flight[this.original_origin] = 0;
+            update_in_flight(this.original_origin, 0);
         }
 
         // find the best request for this origin and make it if we can make one now, until we can't make one
@@ -133,6 +134,7 @@
             console.log( "Incoming request is: " + this.requested_url + " Made: " + ret[1].requested_url );
             _xhrsend.call(ret[1]);
             in_flight[ret[1].original_origin] = in_flight[ret[1].original_origin] + 1;
+            update_in_flight(ret[1].original_origin, in_flight[ret[1].original_origin]);
             ret = best_request( this.original_origin );
         }
     };
@@ -201,7 +203,7 @@
         }
 
         // handle update
-        if ( event.data.split("~~")[0] == "origin" ) {
+        if ( event.data.split("~~")[0] == "update" ) {
             if ( in_flight["bootstrap"] == "done" ) { // only use updates if you have finished bootstrap
                 var origin_to_update = event.data.split("~~")[1];
                 var new_num = event.data.split("~~")[2];
@@ -229,6 +231,17 @@
         return newval;
     }
 
+    // function to update other frames with changed in_flight value
+    function update_in_flight(origin, new_num) {
+        var update_message = "update~~" + origin + "~~" + new_num;
+        var frames = window.top.frames;
+        for ( var i = 0; i < frames.length; i++ ) {
+            if ( frames[i] != window.self ) {
+                frames[i].postMessage(update_message, "*");
+            }
+        }
+    }
+
     // prefetch is dict where keys are origins and values are arrays...values are arrays of arrays where each array is url and the corresponding id
     function handle_prefetch() {
         for ( var y = 0; y < Object.keys(prefetch).length; y++ ) {
@@ -251,7 +264,6 @@
                 }
                 req.send();
             }
-            console.log("done prefetching");
         }
 
         // handle case where there is nothing to prefetch!
