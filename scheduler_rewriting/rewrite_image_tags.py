@@ -14,14 +14,14 @@ def func(head):
   counter = 0
   for child in head.children:
     if isinstance(child, element.Tag):
-      if ( child.name == "img" or child.name == "script" ):
+      if ( child.name == "img" or child.name == "script" or child.name == "iframe" ):
         original_src = child.get('src')
         if ( original_src != None and original_src != ""):
           if ( child.name == "script" ):
             del child['src']
           else:
             child['src'] = ""
-          if ( child.name == "img" ):
+          if ( child.name == "img" or child.name == "iframe" ):
             child['imgid'] = counter
             url_map[original_src] = counter
             counter = counter + 1
