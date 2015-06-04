@@ -64,35 +64,14 @@
                         }
                     }
                     if ( can_eval_node ) {
+                        if ( document.body == null ) {
+                            var x = document.createElement("body");
+                            document.firstChild.appendChild(x);
+                        }
                         if ( ret[2] == 'all' ) {
-                            var prev_inner = "null";
-                            if ( document.body != null ) {
-                                prev_inner = document.body.innerHTML;
-                            }
-                            new_inner = window.chunked_html.join("");
-                            if ( prev_inner != "null" ) {
-                                new_inner = prev_inner + window.chunked_html.join("");
-                            }
-                            document.body.innerHTML = new_inner;
+                            add_html(0, "end");
                         } else {
-                            if ( ret[1] == "0" ) { // start first chunk at 0, not -1
-                                ret[1] = "1";
-                            }
-                            var html_to_eval = "";
-                            if ( ret[2] == "end" ) {
-                                html_to_eval = window.chunked_html.slice(ret[1]-1).join("");
-                            } else {
-                                html_to_eval = window.chunked_html.slice(ret[1]-1, ret[2]).join("");
-                            }
-                            var prev_inner = "null";
-                            if ( document.body != null ) {
-                                prev_inner = document.body.innerHTML;
-                            }
-                            if ( prev_inner != "null" ) {
-                                html_to_eval = prev_inner + html_to_eval;
-                            }
-
-                            document.body.innerHTML = html_to_eval;
+                            add_html(ret[1], ret[2]);
                         }
                         evaluated.push(node);
                     }
@@ -280,7 +259,8 @@
             var final_chunk_end = "null";
             for ( var child in scheduler_parents ) {
                 var parents = scheduler_parents[child];
-                for ( curr_parent in parents ) {
+                for ( p in parents ) {
+                    var curr_parent = parents[p];
                     var file_name = curr_parent;
                     var chunk_start = "null";
                     var chunk_end = "null";
@@ -305,44 +285,16 @@
 
             // check if there is a 'best' chunk...if not, add all html!
             var html_url;
+            if ( document.body == null ) {
+                var new_body = document.createElement("body");
+                document.firstChild.appendChild(new_body);
+            }
             if ( final_chunk_start == "null" ) { // no 'best' chunk
-                html_url = file_name;
-                var prev_inner = "null";
-                if ( document.body != null ) {
-                    prev_inner = document.body.innerHTML;
-                } else {
-                    var new_body = document.createElement("body");
-                    document.firstChild.appendChild(new_body);
-                }
-                new_inner = window.chunked_html.join("");
-                if ( prev_inner != "null" ) {
-                    new_inner = prev_inner + window.chunked_html.join("");
-                }
-                document.body.innerHTML = new_inner;
+                add_html(0, "end");
                 evaluated.push(html_url);
             } else { // there is a best chunk
                 html_url = file_name + "---" + final_chunk_start + ":" + final_chunk_end;
-                if ( final_chunk_start == "0" ) { // start first chunk at 0, not -1
-                    final_chunk_start = "1";
-                }
-                var html_to_eval = "";
-                if ( final_chunk_end == "end" ) {
-                    html_to_eval = window.chunked_html.slice(final_chunk_start-1).join("");
-                } else {
-                    html_to_eval = window.chunked_html.slice(final_chunk_start-1, final_chunk_end).join("");
-                }
-                var prev_inner = "null";
-                if ( document.body != null ) {
-                    prev_inner = document.body.innerHTML;
-                } else {
-                    var new_body = document.createElement("body");
-                    document.firstChild.appendChild(new_body);
-                }
-                if ( prev_inner != "null" ) {
-                    html_to_eval = prev_inner + html_to_eval;
-                }
-
-                document.body.innerHTML = html_to_eval;
+                add_html(final_chunk_start, final_chunk_end);
                 evaluated.push(html_url);
             }
         }
@@ -436,36 +388,14 @@
                     }
                     if ( can_eval_parent ) {
                         // document.write chunk and add to evaled
+                        if ( document.body == null ) {
+                            var x = document.createElement("body");
+                            document.firstChild.appendChild(x);
+                        }
                         if ( ret[2] == 'all' ) {
-                            console.log( "wrote to document");
-                            var prev_inner = "null";
-                            if ( document.body != null ) {
-                                prev_inner = document.body.innerHTML;
-                            }
-                            new_inner = window.chunked_html.join("");
-                            if ( prev_inner != "null" ) {
-                                new_inner = prev_inner + window.chunked_html.join("");
-                            }
-                            document.body.innerHTML = new_inner;
+                            add_html(0, "end");
                         } else {
-                            if ( ret[1] == "0" ) { // start first chunk at 0, not -1
-                                ret[1] = "1";
-                            }
-                            var html_to_eval = "";
-                            if ( ret[2] == "end" ) {
-                                html_to_eval = window.chunked_html.slice(ret[1]-1).join("");
-                            } else {
-                                html_to_eval = window.chunked_html.slice(ret[1]-1, ret[2]).join("");
-                            }
-                            var prev_inner = "null";
-                            if ( document.body != null ) {
-                                prev_inner = document.body.innerHTML;
-                            }
-                            if ( prev_inner != "null" ) {
-                                html_to_eval = prev_inner + html_to_eval;
-                            }
-
-                            document.body.innerHTML = html_to_eval;
+                            add_html(ret[1], ret[2]);
                         }
                         evaluated.push(parent_url);
                     } else {
@@ -534,6 +464,46 @@
         //}
     
         return url;
+    }
+
+    function add_html( start, end ) {
+        var start_use = start;
+        var end_use = end;
+        if ( end == "end" ) {
+            end_use = chunked_html.length - 1;
+        }
+
+        var prev = document.body.innerHTML;
+
+        var in_script = false;
+        var curr_script = "";
+        var unadded = "";
+
+        var close_script = "</sc" + "ript>";
+
+        for ( var x = start_use; x <= end_use; x++ ) {
+            prev = prev + window.chunked_html[x];
+            unadded = unadded + window.chunked_html[x];
+            if ( chunked_html[x].trim() == "<script>" ) {
+                in_script = true;
+            }
+            if ( in_script ) { // add line if we are in a script
+                if ( chunked_html[x].trim() == close_script ) { //add the html to innerHTML and then eval the js and clear everything
+                    document.body.innerHTML = prev;
+                    unadded = "";
+                    window.eval(curr_script);
+                    curr_script = "";
+                    in_script = false;
+                } else {
+                    if ( chunked_html[x].trim() != "<script>" ) {
+                        curr_script = curr_script + window.chunked_html[x];
+                    }
+                }
+            }
+        }
+        // add unadded content
+        var last_prev = document.body.innerHTML;
+        document.body.innerHTML = last_prev + unadded;
     }
 
     // remove scheduler immediately after defining callbacks/wrappers and making prefetch requests
