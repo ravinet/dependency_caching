@@ -29,9 +29,7 @@
 
         // check the pending queue for this origin and make the next best request (as many as possible)!
         var ret = best_request( this.original_origin );
-        console.log( "response back for: " + this.requested_url + " status outstanding: " + in_flight[this.original_origin] );
         while ( ret[0] ) {
-            console.log("Returned response for: " + this.requested_url + " now making: " + ret[1].requested_url );
             _xhrsend.call(ret[1]);
             in_flight[ret[1].original_origin] = in_flight[ret[1].original_origin] + 1;
             update_in_flight(ret[1].original_origin, in_flight[ret[1].original_origin]);
@@ -53,13 +51,17 @@
     // iterates through all nodes--if parents are all done and it is not evaluated, eval it (only chunks)
     function handle_all_chunks() {
         for ( node in scheduler_depths ) {
-            if ( evaluated.indexOf(node) == -1 ) { // node not yet evaled!
+            if ( !(in_array(evaluated, node, "exact")) ) { // node not yet evaled!
                 var ret = is_chunk(node);
                 var can_eval_node = true;
                 if ( ret[0] ) { //it's a chunk!
-                    for ( var q = 0; q < scheduler_parents[node]; q++ ) {
-                        var parent_parent = scheduler_parents[node][q];
-                        if ( evaluated.indexOf(parent_parent) == -1 ) {
+                    var rel_key = best_key(scheduler_parents, node, "exact" );
+                    if ( rel_key == "null" ) {
+                        rel_key = best_key(scheduler_parents, node);
+                    }
+                    for ( var q = 0; q < scheduler_parents[rel_key]; q++ ) {
+                        var parent_parent = scheduler_parents[rel_key][q];
+                        if ( !(in_array(evaluated, parent_parent, "exact")) ) {
                             can_eval_node = false;
                         }
                     }
@@ -101,16 +103,14 @@
             pending_queues[this.original_origin] = [this];
         }
 
-        if ( !(this.original_origin in in_flight) ) {
+        if ( best_key(in_flight, this.original_origin, "exact" ) == "null" ) {
             in_flight[this.original_origin] = 0;
             update_in_flight(this.original_origin, 0);
         }
 
         // find the best request for this origin and make it if we can make one now, until we can't make one
         var ret = best_request( this.original_origin );
-        console.log( "Incoming request is: " + this.requested_url + " Make status: " + in_flight[this.original_origin] );
         while ( ret[0] ) {
-            console.log( "Incoming request is: " + this.requested_url + " Made: " + ret[1].requested_url );
             _xhrsend.call(ret[1]);
             in_flight[ret[1].original_origin] = in_flight[ret[1].original_origin] + 1;
             update_in_flight(ret[1].original_origin, in_flight[ret[1].original_origin]);
@@ -238,7 +238,7 @@
                 req.requested_url = reqs_to_make[i][0];
                 req.src_tag = reqs_to_make[i][1];
                 req.open("GET", reqs_to_make[i][0], "true");
-                if ( req.src_tag != "null" ) { // image so make blob request
+                if ( req.src_tag != "null" ) { // image, iframe so make blob request
                     req.responseType = "blob";
                 }
                 req.send();
@@ -248,6 +248,7 @@
         // handle case where there is nothing to prefetch!
         if ( Object.keys(prefetch).length == 0 ) {
             var curr_html = window.location.pathname;
+            // TODO: need to get complete URL here since we match it below with other URLs (if URL, change equality below to use match_urls)
             if ( curr_html != "/" ) {
                 // remove path "/"
                 var split_path = curr_html.split("/");
@@ -286,10 +287,11 @@
             // check if there is a 'best' chunk...if not, add all html!
             var html_url;
             if ( document.body == null ) {
-                var new_body = document.createElement("body");
-                document.firstChild.appendChild(new_body);
+                var x = document.createElement("body");
+                document.firstChild.appendChild(x);
             }
             if ( final_chunk_start == "null" ) { // no 'best' chunk
+                html_url = file_name;
                 add_html(0, "end");
                 evaluated.push(html_url);
             } else { // there is a best chunk
@@ -373,16 +375,25 @@
     function can_eval (req) {
         var curr_url = validURL(req);
         var can_eval_req = true;
-        for ( var j = 0; j < scheduler_parents[curr_url].length; j++ ) {
-            parent_url = scheduler_parents[curr_url][j];
-            if ( evaluated.indexOf(parent_url) == -1 ) {
+        var rel_key = best_key(scheduler_parents, curr_url, "exact" );
+        if ( rel_key == "null" ) {
+            rel_key = best_key(scheduler_parents, curr_url);
+        }
+        for ( var j = 0; j < scheduler_parents[rel_key].length; j++ ) {
+            parent_url = scheduler_parents[rel_key][j];
+            // check if parent has not yet been evaluated!
+            if ( !(in_array(evaluated, parent_url, "exact")) ) {
                 ret = is_chunk(parent_url);
                 if ( ret[0] ) {
                     can_eval_parent = true;
                     // this is a chunk so check if we can eval it and if so, do it
-                    for ( var q = 0; q < scheduler_parents[parent_url]; q++ ) {
-                        parent_parent = scheduler_parents[parent_url][q];
-                        if ( evaluated.indexOf(parent_parent) == -1 ) {
+                    var rel_parent_key = best_key(scheduler_parents, parent_url, "exact" );
+                    if ( rel_parent_key == "null" ) {
+                        rel_parent_key = best_key(scheduler_parents, parent_url);
+                    }
+                    for ( var q = 0; q < scheduler_parents[rel_parent_key]; q++ ) {
+                        parent_parent = scheduler_parents[rel_parent_key][q];
+                        if ( !(in_array(evaluated, parent_parent, "exact")) ) {
                             can_eval_parent = false;
                         }
                     }
@@ -423,8 +434,12 @@
             // find the request with the longest chain remaining
             for ( var i = 0; i < pending_queues[origin].length; i++ ) {
                 var curr = pending_queues[origin][i];
-                if ( scheduler_depths[validURL(curr)] > curr_depth ) {
-                    curr_depth = scheduler_depths[validURL(curr)];
+                var rel_key = best_key(scheduler_depths, validURL(curr), "exact" );
+                if ( rel_key == "null" ) {
+                    rel_key = best_key(scheduler_depths, validURL(curr));
+                }
+                if ( scheduler_depths[rel_key] > curr_depth ) {
+                    curr_depth = scheduler_depths[rel_key];
                     best_req_index = i;
                     best_req = curr;
                 }
@@ -464,6 +479,133 @@
         //}
     
         return url;
+    }
+
+    // function returns the length of max common substring between args
+    function max_common_substring(string1, string2){
+        var longestCommonSubstring = 0;
+        var table = [],
+                len1 = string1.length,
+                len2 = string2.length,
+                row, col;
+        for(row = 0; row <= len1; row++){
+            table[row] = [];
+            for(col = 0; col <= len2; col++){
+                table[row][col] = 0;
+            }
+        }
+        var i, j;
+        for(i = 0; i < len1; i++){
+            for(j = 0; j < len2; j++){
+                if(string1[i]==string2[j]){
+                    if(table[i][j] == 0){
+                        table[i+1][j+1] = 1;
+                    } else {
+                        table[i+1][j+1] = table[i][j] + 1;
+                    }
+                    if(table[i+1][j+1] > longestCommonSubstring){
+                        longestCommonSubstring = table[i+1][j+1];
+                    }
+                } else {
+                    table[i+1][j+1] = 0;
+                }
+            }
+        }
+        return longestCommonSubstring;
+    }
+
+    // function that matches urls and returns array [true/false about whether it matches, max substring length]
+    function match_urls(firsturl, secondurl) {
+        var first_is_url = true;
+        var second_is_url = true;
+        var url1 = "";
+        var url2 = "";
+        try {
+            url1 = new URL(firsturl);
+        } catch(err) {
+            first_is_url = false;
+        }
+        try {
+            url2 = new URL(secondurl);
+        } catch(err) {
+            second_is_url = false;
+        }
+
+        if ( first_is_url && second_is_url ) {
+            // both are URLs so check if resource name matches
+            if ( url1.origin == url2.origin ) {
+                if ( url1.pathname == url2.pathname ) {
+                    // assume entire path must match (should we only care about object name?)
+                    // find querystring max substring length
+                    if ( ((url1.search == "") && (url2.search == "" )) || ((url1.search == url2.search )) ) {
+                        return [true, Infinity];
+                    }
+                    return [true, max_common_substring(url1.search, url2.search)];
+                }
+            }
+            return [false, 0];
+        } else if ( first_is_url != second_is_url ) {
+            // one is complete URL and other is not (assume they don't match)
+            return [false, 0];
+        } else {
+            // neither is complete url so assume they are files (check if they match exactly)
+            if ( firsturl == secondurl ) {
+                return [true, Infinity];
+            } else {
+                return [false, 0];
+            }
+        }
+    }
+
+    // function that iterates through a specified dictionary and finds the best matching URL with the url argument (return matching key)
+    function best_key(dict, url, quality="rough") {
+        var possible = [];
+        for ( var i = 0; i < Object.keys(dict).length; i++ ) {
+            var ret = match_urls(Object.keys(dict)[i], url);
+            if ( ret[0] ) {
+                if ( quality == "exact" ) {
+                    if ( ret[1] == Infinity ) {
+                        return Object.keys(dict)[i];
+                    }
+                } else {
+                    // there is a matching url in this dict so add to possible
+                    possible.push([Object.keys(dict)[i], ret[1]]);
+                }
+            }
+        }
+
+        if ( possible.length == 0 ) {
+            // not in dictionary!
+            return "null";
+        }
+        // iterate through possibles and find the best match and return the value
+        var best_url = "";
+        var match_length = -1;
+        for ( var x = 0; x < possible.length; x++ ) {
+            if ( possible[x][1] > match_length ) {
+                best_url = possible[x][0];
+                match_length = possible[x][1];
+            }
+        }
+        return best_url;
+    }
+
+    // function that iterates through specified array and returns bool about whether url argument is in array
+    function in_array(arr, url, quality="rough") {
+        for ( var j = 0; j < arr.length; j++ ) {
+            var ret = match_urls(arr[j], url);
+            if ( ret[0] ) {
+                // some url in the array matches
+                if ( quality == "exact" ) {
+                    if ( ret[1] == Infinity ) {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     function add_html( start, end ) {
