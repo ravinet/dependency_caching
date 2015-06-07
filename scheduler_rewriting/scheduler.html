@@ -238,6 +238,11 @@
                 req.requested_url = reqs_to_make[i][0];
                 req.src_tag = reqs_to_make[i][1];
                 req.open("GET", reqs_to_make[i][0], "true");
+                if ( reqs_to_make[i][0].indexOf(".css") != -1 ) { // it is a css file (use href, not src)
+                    req.is_css = true;
+                } else {
+                    req.is_css = false;
+                }
                 if ( req.src_tag != "null" ) { // image, iframe so make blob request
                     req.responseType = "blob";
                 }
@@ -311,8 +316,13 @@
         if ( req.hasOwnProperty("src_tag") ) {
             if ( req.src_tag != "null" ) {
                 var imgurl = window.URL.createObjectURL(req.response);
-                document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("src", imgurl);
-                document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
+                if ( req.is_css ) {
+                    document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("href", imgurl);
+                    document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
+                } else {
+                    document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("src", imgurl);
+                    document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
+                }
             } else {
                 // javascript so eval it right away
                 window.eval(req.responseText);
