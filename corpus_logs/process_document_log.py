@@ -352,6 +352,9 @@ for line in new_original:
       child = "\"" + child + "\""
       print parent + " -> " + child + ";"
 
+css_to_handle = []
+list_of_chunks = {}
+
 for (a,b) in new_final_dependencies:
   if ( a != b ):
     parent_name = a.split("/")[-1]
@@ -366,9 +369,36 @@ for (a,b) in new_final_dependencies:
     if ( "?" in child_name ):
         temp = child_name
         child_name = temp.split("?")[0]
+    if ( (".css" in child_name ) and ("---" in parent_name)):
+        css_to_handle.append((parent_name, child_name))
+    if ( "---" in child_name ):
+        orig_name = child_name.split("---")[0]
+        if ( orig_name in list_of_chunks ):
+            list_of_chunks[orig_name].append(child_name)
+        else:
+            list_of_chunks[orig_name] = [child_name]
+    if ( "---" in parent_name ):
+        orig_name = parent_name.split("---")[0]
+        if ( orig_name in list_of_chunks ):
+            list_of_chunks[orig_name].append(parent_name)
+        else:
+            list_of_chunks[orig_name] = [parent_name]
     new_line = "\"" + parent_name + "\" -> \"" + child_name + "\";"
     if ( new_line not in new_original ):
         #print "\"" + a.split("/")[-1] + "\" -> \"" + b.split("/")[-1] + "\";"
         print "\"" + parent_name + "\" -> \"" + child_name + "\"[color=red];"
 
+for x in range (0, len(css_to_handle)):
+    curr_css_dep = css_to_handle[x]
+    chunk_end = curr_css_dep[0].split("---")[1].split(":")[1]
+    if ( chunk_end == "end" ):
+        continue
+    else:
+        chunk_end = int(chunk_end)
+    curr_chunks = list_of_chunks[curr_css_dep[0].split("---")[0]]
+    for y in range(0, len(curr_chunks)):
+        poss_start = int(curr_chunks[y].split("---")[1].split(":")[0])
+        if ( poss_start == (chunk_end + 1) ):
+            print "\"" + curr_css_dep[1] + "\" -> \"" + curr_chunks[y] + "\"[color=red];"
+            continue
 print "}"
