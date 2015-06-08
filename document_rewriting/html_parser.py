@@ -62,6 +62,11 @@ def func(head, parent_path=[]):
       #current node
       log.append(logString(child_path, "null", html_name, child.name))
 
+      if child.name == "link":
+        log.append(linkLogString("WRITE", html_name, getLineNumber(child_path)))
+        css_name = child["src"]
+        log.append(linkLogString("READ", css_name, getLineNumber(child_path)))
+
       #parent node
       if len(child_path) > 1:
         log.append(logString(child_path[1:], "childNodes", html_name, child.name))
@@ -80,9 +85,17 @@ def func(head, parent_path=[]):
 
 def logString(child_path, node_prop, script, name):
   prop_name = "$$dom." + ".".join([str(num) for num in child_path])
-  string_path = ", ".join([str(num) for num in child_path])
   output = str(json.dumps({"name": name, "OpType": "WRITE", "method": "null", "PropName": prop_name, "NodeProp": node_prop,
     "id": "null", "child_path": child_path, "script": script, "line": getLineNumber(child_path)}))
+  return output
+
+def linkLogString(optype, script, linenumber):
+  if optype == "READ":
+    output = str(json.dumps({"OpType": optype, "method": "cssfile", "PropName": "csschunk", "NodeProp": "null",
+      "id": "null", "child_path": "null", "script": script, "line": linenumber}))
+    return output
+  output = str(json.dumps({"name": "cssclose", "OpType": optype, "method": "null", "PropName": "csschunk", "NodeProp": "null",
+    "id": "null", "child_path": "null", "script": script, "line": linenumber}))
   return output
 
 func(soup)
