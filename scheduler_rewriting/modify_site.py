@@ -6,9 +6,12 @@ import subprocess
 recorded_folder = sys.argv[1]
 dot_file = sys.argv[2]
 rewritten_folder = sys.argv[3]
+start_node = "/"
+if ( len(sys.argv) == 5 ):
+    start_node = sys.argv[4]
 
 # get parent and depth info (to prepend to scheduler)
-command1 = "python process_dot.py " + str(dot_file)
+command1 = "python process_dot.py " + str(dot_file) + " " + start_node
 proc = subprocess.Popen([command1], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 (out1,err1) = proc.communicate()
 depths = err1.strip("\n")

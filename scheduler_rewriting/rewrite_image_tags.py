@@ -10,30 +10,44 @@ soup = BeautifulSoup(open(html_doc), "html5lib")
 # mapping urls to ids
 url_map = {}
 
-def func(head):
-  counter = 0
+
+def func(head, counter=0):
   for child in head.children:
     if isinstance(child, element.Tag):
-      if ( child.name == "img" or child.name == "script" ):
-        original_src = child.get('src')
+      if ( child.name == "img" or child.name == "script" or child.name == "iframe" or child.name == "link" ):
+        if ( child.name == "link" ):
+          original_src = child.get('href')
+        else:
+          original_src = child.get('src')
         if ( original_src != None and original_src != ""):
-          child['src'] = ""
-          if ( child.name == "img" ):
+          if ( child.name == "script" ):
+            del child['src']
+          else:
+            if ( child.name == "link" ):
+              child['href'] = ""
+            else:
+              child['src'] = ""
+          if ( child.name == "img" or child.name == "iframe" or child.name == "link" ):
             child['imgid'] = counter
             url_map[original_src] = counter
             counter = counter + 1
           else:
             url_map[original_src] = "null"
-          func(child)
+          func(child, counter)
         else:
-          func(child)
+          func(child, counter)
       else:
-        func(child)
+        func(child, counter)
 
 func(soup)
 
 output = soup.prettify().encode('utf-8')
-print output.split("\n")
+chunked = output.split("\n")
+clean_chunked = []
+for line in chunked:
+  clean_chunked.append(line.replace("</script>", "<\/script>"))
+
+print json.dumps(clean_chunked)
 
 # go through url_map and organize per origin
 origin_mappings= {}

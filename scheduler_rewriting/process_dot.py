@@ -6,6 +6,9 @@ from json import JSONEncoder
 # takes in the dot file that we use (it ignores first three lines) and creates dictionary with key for each node and value for each as an array listing its children
 # for now, assumes that '/' is the root node
 dot = sys.argv[1]
+start_node = '/'
+if ( len(sys.argv) == 3 ):
+    start_node = sys.argv[2]
 
 child_deps = {}
 unique_edges = []
@@ -15,8 +18,8 @@ with open(dot) as f:
     for line in f:
         curr = line.strip("\n")
         if "digraph G {" not in curr and curr != "ratio=compress;" and curr != "concentrate=true;" and curr != "}":
-            parent = curr.split(" ")[0]
-            child = curr.split("> ")[1].strip(";").strip("[color=red]")
+            parent = curr.split(" ")[0].replace('"', '')
+            child = curr.split("> ")[1].strip(";").strip("[color=red]").replace('"', '')
             if parent != child:
                 curr_edge = curr.strip(";").strip("[color=red]")
                 if curr_edge not in unique_edges:
@@ -53,7 +56,7 @@ def depth(mappings, node, path=None):
 
   
 print json.dumps(parents)
-depth(child_deps, '"/"')
+depth(child_deps, start_node)
 print >> sys.stderr, json.dumps(seen)
 #print len(parents)
 #print len(seen)

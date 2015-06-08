@@ -20,6 +20,9 @@ dependencies = {}
 # same info as dependencies---key is (parent,child) tuple and value is tuple of variable and id
 detailed_deps = {}
 
+# key is (parent, child) tupe and value is array of (var_name, obj_id, line_number_parent, line_number_child)
+dep_lines = {}
+
 # same info as dependencies, but only stores edges as tuple pairs
 # of file names i.e. ("file1", "file2")
 # use for making dot graphs
@@ -87,8 +90,6 @@ with open(log) as file:
                         if ( (logs[n].get('NodeProp') == log.get('NodeProp')) or (logs[n].get('NodeProp') == "null" ) or (log.get('NodeProp') == "null") ):
                             matching_write = 1
                 if ( matching_write ):
-                    print log
-                    print logs[n]
                     set_write = 1
                     # this is the corresponding write
                     if ( logs[n].get('script') in dependencies ):
@@ -109,11 +110,23 @@ with open(log) as file:
                     # add detailed dependency to detailed_deps with var causing dep
                     parent_child = (logs[n].get('script'), log.get('script'))
                     dep_var = (log.get('PropName'), log.get('id'))
+                    parent_line = "null"
+                    child_line = "null"
+                    if ( 'line' in logs[n] ):
+                        parent_line = logs[n].get('line')
+                    if ( 'OrigLine' in log ):
+                        child_line = log.get('OrigLine')
+                    line_dep = (log.get('PropName'), log.get('id'), parent_line, child_line)
                     if ( parent_child in detailed_deps ):
                         if ( dep_var not in detailed_deps[parent_child]):
                             detailed_deps[parent_child].append( dep_var )
                     else:
                         detailed_deps[parent_child] = [dep_var]
+                    # add line number deps
+                    if ( parent_child in dep_lines ):
+                        dep_lines[parent_child].append( line_dep )
+                    else:
+                        dep_lines[parent_child] = [line_dep]
                     break;
             if ( not set_write ):
                 # no corresponding write (dependency because it cannot be moved after a write!)
@@ -182,6 +195,13 @@ print >> sys.stderr, "\nDetailed dependencies: "
 print >> sys.stderr, detailed_deps
 print >> sys.stderr, "\nHTML dependencies:"
 print >> sys.stderr, html_deps
+print >> sys.stderr, "\n\nLINE dependencies (var_name, id, parent_line, child_line):\n"
+for deppair in dep_lines:
+    print >> sys.stderr, deppair
+    for i in dep_lines[deppair]:
+        print >> sys.stderr, i
+    print "\n"
+
 print >> sys.stderr, "\n\n"
 
 # keys are parents and values are dictionaries with keys as children and values as tuples (chunk line start, chunk line end)
@@ -192,6 +212,9 @@ final_html_chunks = {}
 # don't want to keep iterating over same parents!
 
 new_final_dependencies = []
+
+# keys are original files and values are tuples (start chunk name and end chunk name)
+chunk_info = {}
 
 handled_parents = []
 last_chunks = {}
@@ -210,6 +233,7 @@ for dep in html_deps:
       # want to go through this and make the chunks and link them to their children
       prev = -1
       prev_chunk = ()
+      start_chunk = ""
       for x in sorted(chunks):
         child = chunks[x]
         begin = int(prev) + 1
@@ -220,12 +244,15 @@ for dep in html_deps:
           new_name = curr_parent + "---" + str(begin) + ":" + str(x)
           new_final_dependencies.append((prev_name, new_name))
           prev_chunk = (begin,x)
+        else: # if prev chunk was (), then this is the first chunk!
+          start_chunk = curr_parent + "---" + str(begin) + ":" + str(x)
         prev_chunk = (begin,x)
       if ( prev_chunk != () ):
         last_prev = curr_parent + "---" + str(prev_chunk[0]) + ":" + str(prev_chunk[1])
         final_curr = curr_parent + "---" + str(prev_chunk[1] + 1) + ":end"
         new_final_dependencies.append((last_prev, final_curr))
         last_chunks[curr_parent] = final_curr
+      chunk_info[curr_parent] = (start_chunk, final_curr)
 
 #pipe this output to dot
 #print "digraph G {"
@@ -246,51 +273,87 @@ for (x,y) in final_dependencies:
   else:
     new_final_dependencies.append((x,y))
 
-# if chunk is only based on one file then change it to just be normal dependency for that file and remove other instances
-handled = []
-to_handle = {}
-for i in range(0, len(new_final_dependencies)):
-  p = new_final_dependencies[i][0]
-  c = new_final_dependencies[i][1]
-  parents_to_replace = []
-  children_to_replace = []
-  if ( "---" in p ):
-    curr_parent = p.split("---")[0]
-    if ( curr_parent not in handled ):
-      handled.append(curr_parent)
-      curr_children = []
-      for j in range(i, len(new_final_dependencies)):
-        inp = new_final_dependencies[j][0]
-        inc = new_final_dependencies[j][1]
-        now_parent = inp.split("---")[0]
-        if ( now_parent == curr_parent ):
-          if ( "---" not in inc):
-            if ( inc not in curr_children ):
-              curr_children.append(inc)
-          elif ( inc.split("---")[0] == curr_parent ):
-              children_to_replace.append(j)
-          if ( j not in children_to_replace ):
-            parents_to_replace.append(j)
-      to_handle[curr_parent] = ((parents_to_replace, children_to_replace), curr_children)
+# iterate through original deps and replace non-chunked nodes with their chunked counterparts (consider start and end chunks
+# depending on whether the node was a parent or a child in the original deps
+new_original = []
+for line in original:
+  if ( line != "strict digraph G {" and line != "ratio=compress;" and line != "concentrate=true;" and line != '}' ):
+    parent = line.split(" ")[0].replace("\"","")
+    child = line.split("> ")[1].strip(";").replace("\"","")
+    new_parent = parent
+    new_child = child
+    if ( parent in chunk_info ): # use end chunk because this is a parent (whole file must finish before child)
+        new_parent = chunk_info[parent][1]
+        # check if child was part of real chunks made---if so, delete original
+        if ( parent in final_html_chunks ):
+            if ( child in final_html_chunks[parent] ):
+                # was previously a child of a chunk so delete original
+                continue
+    if ( child in chunk_info ): # use start chunk because this is a child (parent should go to the start of this file)
+        new_child = chunk_info[child][0]
 
-print to_handle
-print "to handle ---"
-print new_final_dependencies
-print "\n"
-# parents_to_replace has lines where parent should remove chunk name but child is not chunk
-# children_to_replace has lines to be removed because child is chunk!
-# only do anything if there is one non-chunk child for the parent
-for par in to_handle:
-  if (len(to_handle[par][1]) == 1):
-    # only one child so fix all parents and children
-    for y in to_handle[par][0][0]:
-      orig = new_final_dependencies[y]
-      new_final_dependencies[y] = (par, orig[1])
-    # remove children
-    removed = 0
-    for x in to_handle[curr_parent][0][1]:
-      new_final_dependencies.pop(x-removed)
-      removed = removed + 1
+    new_original.append(new_parent + " -> " + new_child + ";")
+  else:
+    if ( line != "}" ):
+        new_original.append(line)
+new_original.append("}")
+
+# if chunk is only based on one file then change it to just be normal dependency for that file and remove other instances
+#handled = []
+#to_handle = {}
+#for i in range(0, len(new_final_dependencies)):
+#  p = new_final_dependencies[i][0]
+#  c = new_final_dependencies[i][1]
+#  parents_to_replace = []
+#  children_to_replace = []
+#  if ( "---" in p ):
+#    curr_parent = p.split("---")[0]
+#    if ( curr_parent not in handled ):
+#      handled.append(curr_parent)
+#      curr_children = []
+#      for j in range(i, len(new_final_dependencies)):
+#        inp = new_final_dependencies[j][0]
+#        inc = new_final_dependencies[j][1]
+#        now_parent = inp.split("---")[0]
+#        if ( now_parent == curr_parent ):
+#          if ( "---" not in inc):
+#            if ( inc not in curr_children ):
+#              curr_children.append(inc)
+#          elif ( inc.split("---")[0] == curr_parent ):
+#              children_to_replace.append(j)
+#          if ( j not in children_to_replace ):
+#            parents_to_replace.append(j)
+#      to_handle[curr_parent] = ((parents_to_replace, children_to_replace), curr_children)
+#
+## parents_to_replace has lines where parent should remove chunk name but child is not chunk
+## children_to_replace has lines to be removed because child is chunk!
+## only do anything if there is one non-chunk child for the parent
+#for par in to_handle:
+#  if (len(to_handle[par][1]) == 1):
+#    # only one child so fix all parents and children
+#    for y in to_handle[par][0][0]:
+#      orig = new_final_dependencies[y]
+#      new_final_dependencies[y] = (par, orig[1])
+#    # remove children
+#    removed = 0
+#    for x in to_handle[curr_parent][0][1]:
+#      new_final_dependencies.pop(x-removed)
+#      removed = removed + 1
+
+# print original without the closing '}'
+for line in new_original:
+  if ( line == "strict digraph G {" or line == "ratio=compress;" or line == "concentrate=true;"):
+    print line
+  else:
+    if ( line != "}" ):
+      parent = line.split(" ")[0]
+      child = line.split("> ")[1].strip(";")
+      parent = "\"" + parent + "\""
+      child = "\"" + child + "\""
+      print parent + " -> " + child + ";"
+
+css_to_handle = []
+list_of_chunks = {}
 
 for (a,b) in new_final_dependencies:
   if ( a != b ):
@@ -306,9 +369,36 @@ for (a,b) in new_final_dependencies:
     if ( "?" in child_name ):
         temp = child_name
         child_name = temp.split("?")[0]
+    if ( (".css" in child_name ) and ("---" in parent_name)):
+        css_to_handle.append((parent_name, child_name))
+    if ( "---" in child_name ):
+        orig_name = child_name.split("---")[0]
+        if ( orig_name in list_of_chunks ):
+            list_of_chunks[orig_name].append(child_name)
+        else:
+            list_of_chunks[orig_name] = [child_name]
+    if ( "---" in parent_name ):
+        orig_name = parent_name.split("---")[0]
+        if ( orig_name in list_of_chunks ):
+            list_of_chunks[orig_name].append(parent_name)
+        else:
+            list_of_chunks[orig_name] = [parent_name]
     new_line = "\"" + parent_name + "\" -> \"" + child_name + "\";"
-    if ( new_line not in original ):
+    if ( new_line not in new_original ):
         #print "\"" + a.split("/")[-1] + "\" -> \"" + b.split("/")[-1] + "\";"
         print "\"" + parent_name + "\" -> \"" + child_name + "\"[color=red];"
 
-#print "}"
+for x in range (0, len(css_to_handle)):
+    curr_css_dep = css_to_handle[x]
+    chunk_end = curr_css_dep[0].split("---")[1].split(":")[1]
+    if ( chunk_end == "end" ):
+        continue
+    else:
+        chunk_end = int(chunk_end)
+    curr_chunks = list_of_chunks[curr_css_dep[0].split("---")[0]]
+    for y in range(0, len(curr_chunks)):
+        poss_start = int(curr_chunks[y].split("---")[1].split(":")[0])
+        if ( poss_start == (chunk_end + 1) ):
+            print "\"" + curr_css_dep[1] + "\" -> \"" + curr_chunks[y] + "\"[color=red];"
+            continue
+print "}"

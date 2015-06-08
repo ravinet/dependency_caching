@@ -1,31 +1,312 @@
     // have a 'pending' queue per origin and also number of requests in flight
     pending_queues = {};
-    in_flight = {};
-    
+    in_flight = {"bootstrap": "waiting"};
+
+    // if top-frame, we don't need to bootstrap
+    if ( window.top == window.self ) {
+        in_flight["bootstrap"] = "done";
+    }
+
+    for ( var ii = 0; ii < chunked_html.length; ii++ ) {
+         if ( chunked_html[ii].indexOf("<\\/script>") != -1 ) {
+            chunked_html[ii] = "</sc" + "ript>";
+         }
+    }
+
     // urls which we have already evaluated
     evaluated = [];
-    
+
+    console.log("IN THE SCHEDULER");
+
     // requests which we have not yet evaluated because parent was not yet evaluated
     to_evaluate = [];
-    // prefetch is dict where keys are origins and values are arrays...values are arrays of arrays where each array is url and the corresponding id
-    for ( y = 0; y < Object.keys(prefetch); y++ ) {
-        // handle this origin (if more than 6, consider depth)!
-        curr_origin = Object.keys[y]
-        if ( curr_origin == "use_location" ) {
-            curr_origin == window.location.hostname
+
+    // global callback function for requests
+    xhr_callback = function () {
+        // decrement the in_flight counter
+        in_flight[this.original_origin] = in_flight[this.original_origin] - 1;
+        update_in_flight(this.original_origin, in_flight[this.original_origin]);
+
+        // check the pending queue for this origin and make the next best request (as many as possible)!
+        var ret = best_request( this.original_origin );
+        while ( ret[0] ) {
+            _xhrsend.call(ret[1]);
+            in_flight[ret[1].original_origin] = in_flight[ret[1].original_origin] + 1;
+            update_in_flight(ret[1].original_origin, in_flight[ret[1].original_origin]);
+            ret = best_request( this.original_origin );
         }
-        reqs_to_make = prefetch[Object.keys[y]] // array of arrays where each inner array is url, id
-        //if ( reqs_to_make.length > 6 ) {
-        for ( i = 0; i < reqs_to_make.length; i++ ) {
-            // make xhr request for each (and add origin attirbute as location.hostname) and then send it
-            var req = new XMLHttpRequest();
-            req.original_origin = curr_origin;
-            req.requested_url = reqs_to_make[i][0];
-            req.src_tag = reqs_to_make[i][1];
-            req.async == true;
-            req.open("GET", reqs_to_make[i][0], "false");
-            req.send();
-    
+
+        handle_to_eval();
+
+        if ( can_eval(this) ) { // we can eval it now!
+            evaluate_response(this);
+        } else { // we cant eval it now
+            to_evaluate.push(this);
+        }
+
+        // check to see if we can eval any other chunks! (don't for now because how do we know if chunk is from this frame??)
+        //handle_all_chunks();
+    };
+
+    // iterates through all nodes--if parents are all done and it is not evaluated, eval it (only chunks)
+    function handle_all_chunks() {
+        for ( node in scheduler_depths ) {
+            if ( !(in_array(evaluated, node, "exact")) ) { // node not yet evaled!
+                var ret = is_chunk(node);
+                var can_eval_node = true;
+                if ( ret[0] ) { //it's a chunk!
+                    var rel_key = best_key(scheduler_parents, node, "exact" );
+                    if ( rel_key == "null" ) {
+                        rel_key = best_key(scheduler_parents, node);
+                    }
+                    for ( var q = 0; q < scheduler_parents[rel_key]; q++ ) {
+                        var parent_parent = scheduler_parents[rel_key][q];
+                        if ( !(in_array(evaluated, parent_parent, "exact")) ) {
+                            can_eval_node = false;
+                        }
+                    }
+                    if ( can_eval_node ) {
+                        if ( document.body == null ) {
+                            var x = document.createElement("body");
+                            document.firstChild.appendChild(x);
+                        }
+                        if ( ret[2] == 'all' ) {
+                            add_html(0, "end");
+                        } else {
+                            add_html(ret[1], ret[2]);
+                        }
+                        evaluated.push(node);
+                    }
+                }
+            }
+        }
+    }
+
+    var _xhrsend = XMLHttpRequest.prototype.send;
+    XMLHttpRequest.prototype.send = function(){
+        // assign new callback while preserving original
+        this.onload_orig = this.onload;
+        this.onload = xhr_callback;
+
+        // if the request is synchronous, make it right away, update in-flight vals, and exit
+        if ( this.async == false ) {
+            _xhrsend.call(this);
+            in_flight[this.original_origin] = in_flight[this.original_origin] + 1;
+            update_in_flight(this.original_origin, in_flight[this.original_origin]);
+            return;
+        }
+
+        // always add incoming request to pending for the right origin
+        if ( this.original_origin in pending_queues ) {
+            pending_queues[this.original_origin].push(this);
+        } else {
+            pending_queues[this.original_origin] = [this];
+        }
+
+        if ( best_key(in_flight, this.original_origin, "exact" ) == "null" ) {
+            in_flight[this.original_origin] = 0;
+            update_in_flight(this.original_origin, 0);
+        }
+
+        // find the best request for this origin and make it if we can make one now, until we can't make one
+        var ret = best_request( this.original_origin );
+        while ( ret[0] ) {
+            _xhrsend.call(ret[1]);
+            in_flight[ret[1].original_origin] = in_flight[ret[1].original_origin] + 1;
+            update_in_flight(ret[1].original_origin, in_flight[ret[1].original_origin]);
+            ret = best_request( this.original_origin );
+        }
+    };
+
+    var _xhropen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url, async, user, password){
+        // handle optional arguments
+        var async_use = async;
+        var user_use = user;
+        var password_use = password;
+        if ( async == undefined ) {
+            async_use = true;
+        }
+        if ( user == undefined ) {
+            user_use = "";
+        }
+        if ( password == undefined ) {
+            password_use = "";
+        }
+
+        // check if URL info was added to request...if not, add it
+        if ( !this.hasOwnProperty("original_origin") ) {
+            this.original_origin = window.location.hostname;
+            this.requested_url = url;
+        }
+
+        // check if request is synchronous
+        if ( async == false ) {
+            this._async = false;
+        } else {
+            this._async = true;
+        }
+
+        var retVal = _xhropen.call(this, method, url, async_use, user_use, password_use);
+        return retVal;
+    };
+
+    // function to handle postMessages (top frame handles queries, query responses, and updates while other frames handle updates
+    // query is "query", query response is  and update is form "update~~origin~~new_num", query response is "queryresponse---origin::num~~..."
+    function handle_posts(event) {
+        // handle bootstrap
+        if ( event.data == "query" ) {
+            if ( window.top == window.self ) {
+                // we are top frame so respond with all in_flight info (queryresponse---origin::num~~origin::num~~ etc...)
+                var query_response = "queryresponse---";
+                for (orig in in_flight) {
+                    if ( orig != "bootstrap" ) {
+                        query_response = query_response + orig + "::" + in_flight[orig] + "~~";
+                    }
+                }
+                query_response = query_response.substring(0, query_response.length-2);
+                event.source.postMessage(query_response, event.origin);
+            }
+        }
+
+        // handle query responses
+        if ( event.data.split("---")[0] == "queryresponse" ) {
+            var stripped_response = event.data.split("---")[1];
+            var mappings = stripped_response.split("~~");
+            for ( var i = 0; i < mappings.length; i++ ) {
+                var curr_origin = mappings[i].split("::")[0];
+                var curr_num = mappings[i].split("::")[1];
+                in_flight[curr_origin] = curr_num;
+            }
+            in_flight["bootstrap"] = "done";
+        }
+
+        // handle update
+        if ( event.data.split("~~")[0] == "update" ) {
+            if ( in_flight["bootstrap"] == "done" ) { // only use updates if you have finished bootstrap
+                var origin_to_update = event.data.split("~~")[1];
+                var new_num = event.data.split("~~")[2];
+                in_flight[origin_to_update] = new_num;
+            }
+        }
+    }
+
+
+    // event listener for in_flight bootstrap or updates
+    window.addEventListener("message", handle_posts, false);
+
+    // if this is the top frame, do everything normally, otherwise make postMessage to get inflight from top frame
+    // and observe in_flight until it changes (handle prefetch and html chunks in handler)
+    if ( window.top == window.self ) {
+        handle_prefetch();
+    } else {
+        in_flight.watch( "bootstrap", watch_handler );
+        window.top.postMessage( "query", "*" );
+    }
+
+    // function for watch (must return the modified value and call prefetch handler!)
+    function watch_handler(id, oldval, newval) {
+        handle_prefetch();
+        return newval;
+    }
+
+    // function to update other frames with changed in_flight value
+    function update_in_flight(origin, new_num) {
+        var update_message = "update~~" + origin + "~~" + new_num;
+        var frames = window.top.frames;
+        for ( var i = 0; i < frames.length; i++ ) {
+            if ( frames[i] != window.self ) {
+                frames[i].postMessage(update_message, "*");
+            }
+        }
+    }
+
+    // prefetch is dict where keys are origins and values are arrays...values are arrays of arrays where each array is url and the corresponding id
+    function handle_prefetch() {
+        for ( var y = 0; y < Object.keys(prefetch).length; y++ ) {
+            // handle this origin (if more than 6, consider depth)!
+            curr_origin = Object.keys(prefetch)[y];
+            if ( curr_origin == "use_location" ) {
+                curr_origin = window.location.hostname;
+            }
+            reqs_to_make = prefetch[Object.keys(prefetch)[y]]; // array of arrays where each inner array is url, id
+            for ( var i = 0; i < reqs_to_make.length; i++ ) {
+                //console.log("handling request: " + reqs_to_make[i][0]);
+                // make xhr request for each (and add origin attirbute as location.hostname) and then send it
+                var req = new XMLHttpRequest();
+                req.original_origin = curr_origin;
+                req.requested_url = reqs_to_make[i][0];
+                req.src_tag = reqs_to_make[i][1];
+                req.open("GET", reqs_to_make[i][0], "true");
+                if ( reqs_to_make[i][0].indexOf(".css") != -1 ) { // it is a css file (use href, not src)
+                    req.is_css = true;
+                } else {
+                    req.is_css = false;
+                }
+                if ( req.src_tag != "null" ) { // image, iframe so make blob request
+                    req.responseType = "blob";
+                }
+                req.send();
+            }
+        }
+
+        // handle case where there is nothing to prefetch!
+        if ( Object.keys(prefetch).length == 0 ) {
+            var curr_html = window.location.pathname;
+            // TODO: need to get complete URL here since we match it below with other URLs (if URL, change equality below to use match_urls)
+            if ( curr_html != "/" ) {
+                // remove path "/"
+                var split_path = curr_html.split("/");
+                curr_html = split_path[split_path.length - 1];
+            }
+            // iterate through scheduler parents and find the smallest chunk that we can evaluate right away
+            // also store the parents of any chunk for this file to make sure we actually can eval it!
+            var final_chunk_start = "null";
+            var final_chunk_end = "null";
+            for ( var child in scheduler_parents ) {
+                var parents = scheduler_parents[child];
+                for ( p in parents ) {
+                    var curr_parent = parents[p];
+                    var file_name = curr_parent;
+                    var chunk_start = "null";
+                    var chunk_end = "null";
+                    if ( curr_parent.indexOf("---") != -1 ) {
+                        // it is a chunk!
+                        file_name = curr_parent.split("---")[0];
+                        chunk_start = curr_parent.split("---")[1].split(":")[0];
+                        chunk_end = curr_parent.split("---")[1].split(":")[1];
+                    }
+                    if ( file_name == curr_html ) { // relevant parent so see if this is the best chunk
+                        if ( chunk_start != "null" ) {
+                            if ( (final_chunk_start == "null") || (chunk_start < final_chunk_start) ) {
+                                final_chunk_start = chunk_start;
+                                final_chunk_end = chunk_end;
+                            }
+                        }
+                    }
+
+                }
+
+            }
+
+            // check if there is a 'best' chunk...if not, add all html!
+            var html_url;
+            if ( document.body == null ) {
+                var x = document.createElement("body");
+                document.firstChild.appendChild(x);
+            }
+            if ( final_chunk_start == "null" ) { // no 'best' chunk
+                html_url = file_name;
+                add_html(0, "end");
+                evaluated.push(html_url);
+            } else { // there is a best chunk
+                html_url = file_name + "---" + final_chunk_start + ":" + final_chunk_end;
+                add_html(final_chunk_start, final_chunk_end);
+                evaluated.push(html_url);
+            }
+        }
+    }
+
     // assign id to scheduler so we can remove it after the page is loaded
     document.currentScript.setAttribute("id", "scheduler");
     
@@ -34,7 +315,14 @@
         // if request has an imageid, re-assign the source
         if ( req.hasOwnProperty("src_tag") ) {
             if ( req.src_tag != "null" ) {
-                document.getElementById(req.src_tag).setAttribute("src", req.requested_url);
+                var imgurl = window.URL.createObjectURL(req.response);
+                if ( req.is_css ) {
+                    document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("href", imgurl);
+                    document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
+                } else {
+                    document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("src", imgurl);
+                    document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
+                }
             } else {
                 // javascript so eval it right away
                 window.eval(req.responseText);
@@ -45,22 +333,22 @@
         }
     
         // add url to evaluated list
-        evaluated.append(validURL(req));
+        evaluated.push(validURL(req));
     }
     
     // function which recursively handles all to_eval requests based on what urls have already been evaluated
     function handle_to_eval () {
-        eval_index = []
-        for ( int q = 0; q < to_evaluate.length(); q++ ) {
+        eval_index = [];
+        for ( var q = 0; q < to_evaluate.length; q++ ) {
             if ( can_eval(to_evaluate[q]) ) {
                 evaluate_response(to_evaluate[q]);
-                eval_index.append(q);
+                eval_index.push(q);
             }
         }
     
         // remove all evaluated responses from the to_evaluate queue
         first = true;
-        for ( i = 0; i < eval_index.length; i++) {
+        for ( var i = 0; i < eval_index.length; i++) {
             if ( first) {
                 to_evaluate.splice(eval_index[i],1);
                 first = false;
@@ -80,31 +368,56 @@
             return [true, lines[0], lines[1]];
         }
 
+        // handle case where no chunks but it is html!
+        if ( url == "/" ) {
+            return [true, 0, 'all'];
+        }
+        // handle case where it is not chunk but it is an iframe (not "/")
+        if ( url.substr(url.length - 4) == "html" ) {
+            return [true, 0, 'all'];
+        }
+
         // not a chunk!
         return [false, 0, 0];
     }
 
     // function which checks if we can evaluate a specific response now
     function can_eval (req) {
-        curr_url = validURL(req);
-        can_eval_req = true;
-        for ( j = 0; j < scheduler_parents(curr_url); j++ ) {
-            parent_url = scheduler_parents(curr_url)[j];
-            if ( evaluated.indexOf(parent_url) == -1 ) {
+        var curr_url = validURL(req);
+        var can_eval_req = true;
+        var rel_key = best_key(scheduler_parents, curr_url, "exact" );
+        if ( rel_key == "null" ) {
+            rel_key = best_key(scheduler_parents, curr_url);
+        }
+        for ( var j = 0; j < scheduler_parents[rel_key].length; j++ ) {
+            parent_url = scheduler_parents[rel_key][j];
+            // check if parent has not yet been evaluated!
+            if ( !(in_array(evaluated, parent_url, "exact")) ) {
                 ret = is_chunk(parent_url);
                 if ( ret[0] ) {
                     can_eval_parent = true;
                     // this is a chunk so check if we can eval it and if so, do it
-                    for ( q = 0; q < scheduler_parents(parent_url); q++ ) {
-                        parent_parent = scheduler_parents(parent_url)[q];
-                        if ( evaluated.indexOf(parent_parent) == -1 ) {
+                    var rel_parent_key = best_key(scheduler_parents, parent_url, "exact" );
+                    if ( rel_parent_key == "null" ) {
+                        rel_parent_key = best_key(scheduler_parents, parent_url);
+                    }
+                    for ( var q = 0; q < scheduler_parents[rel_parent_key]; q++ ) {
+                        parent_parent = scheduler_parents[rel_parent_key][q];
+                        if ( !(in_array(evaluated, parent_parent, "exact")) ) {
                             can_eval_parent = false;
                         }
                     }
                     if ( can_eval_parent ) {
                         // document.write chunk and add to evaled
-                        var html_to_eval = window.chunked_html.slice(ret[1]-1, ret[2]).join("");
-                        document.write(html_to_eval);
+                        if ( document.body == null ) {
+                            var x = document.createElement("body");
+                            document.firstChild.appendChild(x);
+                        }
+                        if ( ret[2] == 'all' ) {
+                            add_html(0, "end");
+                        } else {
+                            add_html(ret[1], ret[2]);
+                        }
                         evaluated.push(parent_url);
                     } else {
                         // chunk can't be evaled
@@ -121,37 +434,22 @@
         return true;
     }
     
-    // global callback function for requests
-    xhr_callback = function () {
-        if ( can_eval(this) ) { // we can eval it now!
-            evaluate_response(this);
-    
-            // check the pending queue for this origin and make the next best request (as many as possible)!
-            var ret = best_request( this.orig_location.origin );
-            while ( ret[0] ) {
-                var retVal = _xhrsend.call(ret[1]);
-                in_flight[ret[1].orig_location.hostname] = in_flight[ret[1].orig_location.hostname] + 1;
-                ret = best_request( this.orig_location.hostname );
-            }
-    
-            handle_to_eval();
-        } else { // we cant eval it now
-            to_evaluate.append(this);
-        }
-    };
-    
     // function that decides whether or not to make a request based on the tree, pending lists, etc.
     function best_request(origin) {
         var best_req = "null";
         var best_req_index = "null";
-        var curr_depth = 0;
+        var curr_depth = -1;
         // find request if we have open connections
         if ( in_flight[origin] < 6 ) {
             // find the request with the longest chain remaining
-            for ( int i = 0; i < pending_queues[origin].length; i++ ) {
+            for ( var i = 0; i < pending_queues[origin].length; i++ ) {
                 var curr = pending_queues[origin][i];
-                if ( scheduler_depths[validURL(req)] > curr_depth ) {
-                    curr_depth = scheduler_depths[validURL(req)];
+                var rel_key = best_key(scheduler_depths, validURL(curr), "exact" );
+                if ( rel_key == "null" ) {
+                    rel_key = best_key(scheduler_depths, validURL(curr));
+                }
+                if ( scheduler_depths[rel_key] > curr_depth ) {
+                    curr_depth = scheduler_depths[rel_key];
                     best_req_index = i;
                     best_req = curr;
                 }
@@ -170,93 +468,197 @@
     
     // given request, function returns the corresponding complete url
     function validURL(req) {
-        var url = this.requested_url;
+        var url = req.requested_url;
     
         // check if it is valid---probably need a better way
         var top_domains = [".com", ".org", ".net", ".int", ".edu", ".gov", ".mil"];
-        for (domain in top_domains) {
-            if ( url.indexOf(domain) > -1 ) {
+        for ( var y = 0; y < top_domains.length; y++ ) {
+            curr_domain = top_domains[y];
+            if ( url.indexOf(curr_domain) > -1 ) {
                 // contains a valid top-level domain so assume it is a url, not filename
                 return url;
             }
         }
     
         // url did not have top level domain so assume file and add domain
-        if ( url.charAt(0) == '/' ) {
-            // starts with / so likely request to same domain as original scope
-            url = "http://" + req.original_origin + url;
-        } else {
-            url = "http://" + req.original_origin + "/" + url;
-        }
+        //if ( url.charAt(0) == '/' ) {
+        //    // starts with / so likely request to same domain as original scope
+        //    url = "http://" + req.original_origin + url;
+        //} else {
+        //    url = "http://" + req.original_origin + "/" + url;
+        //}
     
         return url;
     }
-    
-    var _xhrsend = XMLHttpRequest.prototype.send;
-    XMLHttpRequest.prototype.send = function(){
-        // assign new callback while preserving original
-        this.onload_orig = this.onload;
-        this.onload = xhr_callback;
-    
-        // if the request is synchronous, make it right away, update in-flight vals, and exit
-        if ( this.async == false ) {
-            var retVal = _xhrsend.call(this);
-            in_flight[this.original_origin] = in_flight[this.original_origin] + 1;
-            return;
+
+    // function returns the length of max common substring between args
+    function max_common_substring(string1, string2){
+        var longestCommonSubstring = 0;
+        var table = [],
+                len1 = string1.length,
+                len2 = string2.length,
+                row, col;
+        for(row = 0; row <= len1; row++){
+            table[row] = [];
+            for(col = 0; col <= len2; col++){
+                table[row][col] = 0;
+            }
         }
-    
-        // always add incoming request to pending for the right origin
-        if ( this.original_origin in pending_queues ) {
-            pending_queues[this.original_origin].append(this);
+        var i, j;
+        for(i = 0; i < len1; i++){
+            for(j = 0; j < len2; j++){
+                if(string1[i]==string2[j]){
+                    if(table[i][j] == 0){
+                        table[i+1][j+1] = 1;
+                    } else {
+                        table[i+1][j+1] = table[i][j] + 1;
+                    }
+                    if(table[i+1][j+1] > longestCommonSubstring){
+                        longestCommonSubstring = table[i+1][j+1];
+                    }
+                } else {
+                    table[i+1][j+1] = 0;
+                }
+            }
+        }
+        return longestCommonSubstring;
+    }
+
+    // function that matches urls and returns array [true/false about whether it matches, max substring length]
+    function match_urls(firsturl, secondurl) {
+        var first_is_url = true;
+        var second_is_url = true;
+        var url1 = "";
+        var url2 = "";
+        try {
+            url1 = new URL(firsturl);
+        } catch(err) {
+            first_is_url = false;
+        }
+        try {
+            url2 = new URL(secondurl);
+        } catch(err) {
+            second_is_url = false;
+        }
+
+        if ( first_is_url && second_is_url ) {
+            // both are URLs so check if resource name matches
+            if ( url1.origin == url2.origin ) {
+                if ( url1.pathname == url2.pathname ) {
+                    // assume entire path must match (should we only care about object name?)
+                    // find querystring max substring length
+                    if ( ((url1.search == "") && (url2.search == "" )) || ((url1.search == url2.search )) ) {
+                        return [true, Infinity];
+                    }
+                    return [true, max_common_substring(url1.search, url2.search)];
+                }
+            }
+            return [false, 0];
+        } else if ( first_is_url != second_is_url ) {
+            // one is complete URL and other is not (assume they don't match)
+            return [false, 0];
         } else {
-            pending_queues[this.original_origin] = [this];
+            // neither is complete url so assume they are files (check if they match exactly)
+            if ( firsturl == secondurl ) {
+                return [true, Infinity];
+            } else {
+                return [false, 0];
+            }
         }
-    
-        // find the best request for this origin and make it if we can make one now, until we can't make one
-        var ret = best_request( this.original_origin );
-        while ( ret[0] ) {
-            var retVal = _xhrsend.call(ret[1]);
-            in_flight[ret[1].original_origin] = in_flight[ret[1].original_origin] + 1;
-            ret = best_request( this.original_origin );
+    }
+
+    // function that iterates through a specified dictionary and finds the best matching URL with the url argument (return matching key)
+    function best_key(dict, url, quality="rough") {
+        var possible = [];
+        for ( var i = 0; i < Object.keys(dict).length; i++ ) {
+            var ret = match_urls(Object.keys(dict)[i], url);
+            if ( ret[0] ) {
+                if ( quality == "exact" ) {
+                    if ( ret[1] == Infinity ) {
+                        return Object.keys(dict)[i];
+                    }
+                } else {
+                    // there is a matching url in this dict so add to possible
+                    possible.push([Object.keys(dict)[i], ret[1]]);
+                }
+            }
         }
-    };
-    
-    var _xhropen = XMLHttpRequest.prototype.open;
-    XMLHttpRequest.prototype.open = function(method, url, async, user, password){
-        // handle optional arguments
-        var async_use;
-        var user_use;
-        var password_use;
-        if ( async == undefined ) {
-            async_use = true;
+
+        if ( possible.length == 0 ) {
+            // not in dictionary!
+            return "null";
         }
-        if ( user == undefined ) {
-            user_use = "";
+        // iterate through possibles and find the best match and return the value
+        var best_url = "";
+        var match_length = -1;
+        for ( var x = 0; x < possible.length; x++ ) {
+            if ( possible[x][1] > match_length ) {
+                best_url = possible[x][0];
+                match_length = possible[x][1];
+            }
         }
-        if ( password == undefined ) {
-            password_use = "";
+        return best_url;
+    }
+
+    // function that iterates through specified array and returns bool about whether url argument is in array
+    function in_array(arr, url, quality="rough") {
+        for ( var j = 0; j < arr.length; j++ ) {
+            var ret = match_urls(arr[j], url);
+            if ( ret[0] ) {
+                // some url in the array matches
+                if ( quality == "exact" ) {
+                    if ( ret[1] == Infinity ) {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            }
         }
-    
-        // check if URL info was added to request...if not, add it
-        if ( !this.hasOwnProperty("orig_location") ) {
-            this.original_origin = window.location.hostname;
-            this.requested_url = url;
+        return false;
+    }
+
+    function add_html( start, end ) {
+        var start_use = start;
+        var end_use = end;
+        if ( end == "end" ) {
+            end_use = chunked_html.length - 1;
         }
-    
-        // check if request is synchronous
-        if ( async == false ) {
-            this._async = false;
-        } else {
-            this._async = true;
+
+        var prev = document.body.innerHTML;
+
+        var in_script = false;
+        var curr_script = "";
+        var unadded = "";
+
+        var close_script = "</sc" + "ript>";
+
+        for ( var x = start_use; x <= end_use; x++ ) {
+            prev = prev + window.chunked_html[x];
+            unadded = unadded + window.chunked_html[x];
+            if ( chunked_html[x].trim() == "<script>" ) {
+                in_script = true;
+            }
+            if ( in_script ) { // add line if we are in a script
+                if ( chunked_html[x].trim() == close_script ) { //add the html to innerHTML and then eval the js and clear everything
+                    document.body.innerHTML = prev;
+                    unadded = "";
+                    window.eval(curr_script);
+                    curr_script = "";
+                    in_script = false;
+                } else {
+                    if ( chunked_html[x].trim() != "<script>" ) {
+                        curr_script = curr_script + window.chunked_html[x];
+                    }
+                }
+            }
         }
-    
-        var retVal = _xhropen.call(this, method, url, async_use, user_use, password_use);
-        return retVal;
-    };
-    
-    // add onload which remove "scheduler" from DOM
-    window.addEventListener("load", function(){
-        var t = document.getElementById("scheduler");
-        t.parentNode.removeChild(t);
-    });
+        // add unadded content
+        var last_prev = document.body.innerHTML;
+        document.body.innerHTML = last_prev + unadded;
+    }
+
+    // remove scheduler immediately after defining callbacks/wrappers and making prefetch requests
+    var t = document.getElementById("scheduler");
+    t.parentNode.removeChild(t);
 </script>
