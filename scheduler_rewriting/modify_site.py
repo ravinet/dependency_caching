@@ -48,11 +48,12 @@ for filename in files:
             #    os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
             #    os.system('mv rewritten/prependtempfile rewritten/tempfile')
             if ( "html" in out ): # rewrite all inline js in html files
+               html_obj_name = out.split("name=")[1]
                command = "python rewrite_image_tags.py rewritten/tempfile"
                proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                (out,err) = proc.communicate()
                image_map = err.strip("\n")
-               curr_scheduler_prepend = scheduler_prepend + "window.prefetch = " + image_map +";\n"
+               curr_scheduler_prepend = scheduler_prepend + "window.prefetch = " + image_map +";\n" + "window.html_name = \"" + html_obj_name + "\";\n"
                file1 = open("rewritten/prependtempfile", "w")
                file1.write(curr_scheduler_prepend)
                file1.write("window.chunked_html = " + out.strip("\n") + ";\n")
@@ -76,11 +77,12 @@ for filename in files:
                 #os.system('mv rewritten/prependtempfile rewritten/plaintext')
 
             if ( "html" in out ): # rewrite all inline js in html files
+                html_obj_name = out.split("name=")[1]
                 command = "python rewrite_image_tags.py rewritten/plaintext"
                 proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                 (out,err) = proc.communicate()
                 image_map = err.strip("\n")
-                curr_scheduler_prepend = scheduler_prepend + "window.prefetch = " + image_map +";\n"
+                curr_scheduler_prepend = scheduler_prepend + "window.prefetch = " + image_map +";\n" + "window.html_name = \"" + html_obj_name + "\";\n"
                 file1 = open("rewritten/prependtempfile", "w")
                 file1.write(curr_scheduler_prepend)
                 file1.write("window.chunked_html = " + out.strip("\n") + ";\n")

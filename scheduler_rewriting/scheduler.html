@@ -103,6 +103,9 @@
             pending_queues[this.original_origin] = [this];
         }
 
+        // ensure that requested url is in depth/parent info
+        check_graph(this);
+
         if ( best_key(in_flight, this.original_origin, "exact" ) == "null" ) {
             in_flight[this.original_origin] = 0;
             update_in_flight(this.original_origin, 0);
@@ -223,12 +226,15 @@
 
     // prefetch is dict where keys are origins and values are arrays...values are arrays of arrays where each array is url and the corresponding id
     function handle_prefetch() {
+        // make sure that we copy over "use_location" to be window.location.hostname;
+        if ( "use_location" in prefetch ) {
+            prefetch[window.location.hostname] = prefetch["use_location"];
+            delete prefetch["use_location"];
+        }
+
         for ( var y = 0; y < Object.keys(prefetch).length; y++ ) {
             // handle this origin (if more than 6, consider depth)!
             curr_origin = Object.keys(prefetch)[y];
-            if ( curr_origin == "use_location" ) {
-                curr_origin = window.location.hostname;
-            }
             reqs_to_make = prefetch[Object.keys(prefetch)[y]]; // array of arrays where each inner array is url, id
             for ( var i = 0; i < reqs_to_make.length; i++ ) {
                 //console.log("handling request: " + reqs_to_make[i][0]);
@@ -656,6 +662,66 @@
         // add unadded content
         var last_prev = document.body.innerHTML;
         document.body.innerHTML = last_prev + unadded;
+    }
+
+    function check_graph (req ) {
+        var curr_url = req.requested_url;
+        // check scheduler_depths: if not there, add depth (js-2, css-1, html-2, img-0)
+        var rel_key = best_key(scheduler_depths, curr_url);
+        if ( rel_key == "null" ) {
+            if ( (curr_url.indexOf(".jpg") != -1 ) || (curr_url.indexOf(".jpeg") != -1 ) || (curr_url.indexOf(".png") != -1 ) ||
+               (curr_url.indexOf(".pdf") != -1 ) || (curr_url.indexOf(".gif") != -1 )) {
+                scheduler_depths[curr_url] = 0;
+            } else if ( (curr_url.indexOf(".js") != -1 ) ) {
+                scheduler_depths[curr_url] = 2;
+            } else if ( (curr_url.indexOf(".html") != -1 ) ) {
+                scheduler_depths[curr_url] = 2;
+            } else if ( (curr_url.indexOf(".css") != -1 ) ) {
+                scheduler_depths[curr_url] = 1;
+            } else { // default fallback of 1
+                scheduler_depths[curr_url] = 1;
+            }
+        }
+
+        // check parent list and if not there, check if the url is to be prefetched...if not then set parent to ""
+        // if yes, then set parents to be all other nodes listed in depths for that same origin
+        var rel_key = best_key(scheduler_parents, curr_url, "exact");
+        if ( rel_key == "null" ) {
+            var rel_key = best_key(scheduler_parents, curr_url);
+        }
+        var prefetched = false;
+        var origin_key = best_key(prefetch, req.original_origin, "exact");
+        if ( rel_key == "null" ) {
+            if ( origin_key != "null" ) { // origin in prefetch!
+                reqs_to_make = prefetch[origin_key]; // array of arrays where each inner array is url, id
+                for ( var i = 0; i < reqs_to_make.length; i++ ) {
+                    if ( match_urls(reqs_to_make[i][0], curr_url)[0] ) { // urls match
+                        prefetched = true;
+                    }
+                }
+            }
+            if ( prefetched ) { // set parents to be the last chunk of the current HTML (since it is where we got prefetch from!)
+                // go through scheduler_parents to get the last chunk name (html name is html_name)
+                var last_chunk = "null";
+                for ( var x = 0; x < Object.keys(scheduler_parents).length; x++ ) {
+                    var curr_key = Object.keys(scheduler_parents)[x];
+                    if ( curr_key.substring(0, html_name.length) == html_name ) { //relevant child!
+                        if ( curr_key.indexOf("---") != -1 ) { // it is a chunk!
+                            if ( curr_key.substring(curr_key.length - 3) == "end" ) { // last chunk!
+                                last_chunk = curr_key;
+                            }
+                        }
+                    }
+                }
+                if ( last_chunk == "null" ) {
+                    scheduler_parents[curr_url] = [html_name];
+                } else {
+                    scheduler_parents[curr_url] = [last_chunk];
+                }
+            } else {
+                scheduler_parents[curr_url] = [];
+            }
+        }
     }
 
     // remove scheduler immediately after defining callbacks/wrappers and making prefetch requests
