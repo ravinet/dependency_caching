@@ -26,7 +26,7 @@ function onEvent(debuggeeId, message, params) {
 
   if (firstRequest) {
     var headerDiv = document.createElement("div");
-    headerDiv.textContent = "digraph G {\nratio=compress;\n"
+    headerDiv.textContent = "strict digraph G {\nratio=compress;\n"
     document.getElementById("container").appendChild(headerDiv);
     undefinedURL = params.request.url;
     firstRequest = false;
