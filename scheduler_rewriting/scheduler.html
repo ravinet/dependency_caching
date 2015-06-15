@@ -407,7 +407,7 @@
                     if ( rel_parent_key == "null" ) {
                         rel_parent_key = best_key(scheduler_parents, parent_url);
                     }
-                    for ( var q = 0; q < scheduler_parents[rel_parent_key]; q++ ) {
+                    for ( var q = 0; q < scheduler_parents[rel_parent_key].length; q++ ) {
                         parent_parent = scheduler_parents[rel_parent_key][q];
                         if ( !(in_array(evaluated, parent_parent, "exact")) ) {
                             can_eval_parent = false;
