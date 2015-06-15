@@ -21,41 +21,14 @@ if ( _window != undefined ) {
     });
 
     function get_caller(caller){
-        var script_attributes = "";
         if ( caller == null ) {
-            longname = window.location.pathname;
-            if ( longname == "/" ) {
-                script_attributes = "/";
-            } else {
-                script_attributes = longname.split('/').pop();
-            }
-            if ( script_attributes == "" ) {
-                script_attributes = "event_handler_or_callback";
-            }
+            return window.location.href;
         } else {
-            var attr = caller.attributes;
-            if( attr.length == 0 ) {
-                longname = window.location.pathname;
-                if ( longname == "/" ) {
-                    script_attributes = "/";
-                } else {
-                    script_attributes = longname.split('/').pop();
-                }
-                if ( script_attributes == "" ) {
-                    script_attributes = "inline_script";
-                }
-            } else {
-                for(j=0; j < attr.length; j++) {
-                    if( attr[j].name == "src" ) {
-                        script_attributes = script_attributes.concat( attr[j].value );
-                    }
-                    if ( script_attributes == "" ) {
-                        script_attributes = window.location.pathname;
-                    }
-                }
+            if ( caller.src == "" ) {
+                return window.location.href;
             }
+            return caller.src;
         }
-        return script_attributes;
     }
 
     function get_child_path(curr){
