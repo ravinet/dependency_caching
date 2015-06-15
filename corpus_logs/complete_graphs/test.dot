@@ -1,0 +1,36 @@
+strict digraph G {
+ratio=compress;
+"http://stackoverflow.com/" -> "http://stackoverflow.com/";
+"http://stackoverflow.com/" -> "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js";
+"http://stackoverflow.com/" -> "http://cdn.sstatic.net/Js/stub.en.js?v=f79ea677275d";
+"http://stackoverflow.com/" -> "http://cdn.sstatic.net/stackoverflow/all.css?v=21e2177a80d8";
+"http://stackoverflow.com/" -> "http://b.scorecardresearch.com/beacon.js";
+"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -> "http://cdn.sstatic.net/img/favicons-sprite16.png?v=fddce2e0664fc366fd231694e681377";
+"http://stackoverflow.com/" -> "http://pixel.quantserve.com/pixel;r=1878758578;a=p-c1rF4kxgLUzNc;fpan=0;fpa=P0-1946119077-1434373122237;ns=0;ce=1;cm=;je=1;sr=1920x1200x24;enc=n;dst=1;et=1434373153862;tzo=240;ref=;url=http%3A%2F%2Fstackoverflow.com%2F;ogl=type.website%2Cimage.http%3A%2F%2Fcdn%252Esstatic%252Enet%2Fstackoverflow%2Fimg%2Fapple-touch-icon%402%252Epng%3Fv%3Dea71a5211a91%2Ctitle.Stack%20Overflow%2Cdescription.Q%26A%20for%20professional%20and%20enthusiast%20programmers%2Curl.http%3A%2F%2Fstackoverflow%252Ecom%2F";
+"http://static.adzerk.net/ados.js" -> "http://engine.adzerk.net/ados?t=1434373153869&request={%22Placements%22:[{%22A%22:22,%22S%22:8277,%22D%22:%22adzerk1518586457%22,%22ATA%22:[17,2221],%22Z%22:45}],%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true}";
+"http://stackoverflow.com/" -> "http://b.scorecardresearch.com/b?c1=2&c2=17440561&ns__t=1434373153861&ns_c=UTF-8&c8=Stack%20Overflow&c7=http%3A%2F%2Fstackoverflow.com%2F&c9=";
+"http://stackoverflow.com/" -> "http://b.scorecardresearch.com/b2?c1=2&c2=17440561&ns__t=1425137796640&ns_c=UTF-8&c8=Stack%20Overflow&c7=http%3A%2F%2Fstackoverflow.com%2F&c9=";
+"http://static.adzerk.net/ados.js" -> "http://static.adzerk.net/Extensions/adFeedback.js";
+"http://static.adzerk.net/ados.js" -> "http://static.adzerk.net/Extensions/adFeedback.css";
+"http://cdn.sstatic.net/Js/full-anon.en.js?v=c5525e7a9906" -> "http://stackoverflow.com/gps/event";
+"http://static.adzerk.net/ados.js" -> "http://view.atdmt.com/MRT/iview/478350399/direct;wi.220;hi.250/01?click=http://engine.adzerk.net/r?e=eyJhdiI6NDM3LCJhdCI6MTcsImJ0IjowLCJjbSI6MjEzNzQ3LCJjaCI6MTE3OCwiY3IiOjcyNTg2OSwiZGkiOiI2MGUxZDI3MzNiODI0MGQxOGI1OGM0YWVhODljNjQzMyIsImRtIjoxLCJmYyI6NzU2MTgxLCJmbCI6NDY5MDk4LCJpcCI6IjEyOC4zMC43OS45IiwibnciOjIyLCJwYyI6MywicHIiOjU3OTMsInJ0IjoyLCJzdCI6ODI3NywidWsiOiJ1ZTEtNTkxMGY0OTQ5ZTg3NGRkMjgzMWU2ZjkxMWE0OGJiMjciLCJ6biI6NDUsInRzIjoxNDI1MTM3NzkwNTEzLCJiZiI6dHJ1ZSwicG4iOiJhZHplcmsxNTE4NTg2NDU3IiwidXIiOm51bGx9&s=Jce3Ee-l-qvPpN6UAnYgMVd-nTE&url=%u";
+"http://stackoverflow.com/" -> "http://engine.adzerk.net/i.gif?e=eyJhdiI6NDM3LCJhdCI6MTcsImJ0IjowLCJjbSI6MjEzNzQ3LCJjaCI6MTE3OCwiY3IiOjcyNTg2OSwiZGkiOiI2MGUxZDI3MzNiODI0MGQxOGI1OGM0YWVhODljNjQzMyIsImRtIjoxLCJmYyI6NzU2MTgxLCJmbCI6NDY5MDk4LCJpcCI6IjEyOC4zMC43OS45IiwibnciOjIyLCJwYyI6MywicHIiOjU3OTMsInJ0IjoyLCJzdCI6ODI3NywidWsiOiJ1ZTEtNTkxMGY0OTQ5ZTg3NGRkMjgzMWU2ZjkxMWE0OGJiMjciLCJ6biI6NDUsInRzIjoxNDI1MTM3NzkwNTEzLCJiZiI6dHJ1ZSwicG4iOiJhZHplcmsxNTE4NTg2NDU3IiwiZnEiOjF9&s=Y-X32WvjBfDgicq6FPTyWq9TvgM";
+"http://stackoverflow.com/" -> "http://clc.stackoverflow.com/j/p?d=hireme";
+"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -> "http://cdn.sstatic.net/clc/styles/jobs.min.css?v=202e16fd8420";
+"http://stackoverflow.com/" -> "http://clc.stackoverflow.com/j/i?an=Y5pzpLi0WfGSBwMQMDEyMLMyMjAxsDMCeRxgIYYjHUwM3nqSNxL0F9gzgWUZuRiA8h0NWMVz--Z7cNq1tFr-BAA";
+"a" -> "http://clc.stackoverflow.com/j/i?an=Y5pzpLi0WfGSBwMQMDEyMLMyMjAxsDMCeRxgIYYjHUwieeeqSNxL0F9gzgWUZuRiA8h0NWMVz--Z7cNq1tFr-BAA";
+"http://stackoverflow.com/" -> "http://cdn.sstatic.net/img/share-sprite-new.svg?v=7966d6d82b78";
+"http://stackoverflow.com/" -> "http://static.adzerk.net/ados.js";
+"http://stackoverflow.com/" -> "http://www.google-analytics.com/analytics.js";
+"http://stackoverflow.com/" -> "http://edge.quantserve.com/quant.js";
+"http://stackoverflow.com/" -> "http://b.scorecardresearch.com/beacon.js";
+"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -> "http://cdn.sstatic.net/stackoverflow/img/sprites.svg?v=1bc6a0c03b68";
+"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -> "http://cdn.sstatic.net/Img/mini-hero-bg.png?v=7f269bbbdb22";
+"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -> "http://cdn.sstatic.net/Img/sprite-herobox.png?v=d173774f3a9f";
+"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -> "http://cdn.sstatic.net/img/favicons-sprite16.png?v=fddce2e0664fc366fd231694e681377";
+"http://view.atdmt.com/MRT/iview/478350399/direct;wi.220;hi.250/01?click=http://engine.adzerk.net/r?e=eyJhdiI6NDM3LCJhdCI6MTcsImJ0IjowLCJjbSI6MjEzNzQ3LCJjaCI6MTE3OCwiY3IiOjcyNTg2OSwiZGkiOiI2MGUxZDI3MzNiODI0MGQxOGI1OGM0YWVhODljNjQzMyIsImRtIjoxLCJmYyI6NzU2MTgxLCJmbCI6NDY5MDk4LCJpcCI6IjEyOC4zMC43OS45IiwibnciOjIyLCJwYyI6MywicHIiOjU3OTMsInJ0IjoyLCJzdCI6ODI3NywidWsiOiJ1ZTEtNTkxMGY0OTQ5ZTg3NGRkMjgzMWU2ZjkxMWE0OGJiMjciLCJ6biI6NDUsInRzIjoxNDI1MTM3NzkwNTEzLCJiZiI6dHJ1ZSwicG4iOiJhZHplcmsxNTE4NTg2NDU3IiwidXIiOm51bGx9&s=Jce3Ee-l-qvPpN6UAnYgMVd-nTE&url=%u" -> "http://cdn.atdmt.com/ds/NMMRTRUMTCRF/141212_StaticRebuild/websites_manage_ft_220x250.gif";
+"http://view.atdmt.com/MRT/iview/478350399/direct;wi.220;hi.250/01?click=http://engine.adzerk.net/r?e=eyJhdiI6NDM3LCJhdCI6MTcsImJ0IjowLCJjbSI6MjEzNzQ3LCJjaCI6MTE3OCwiY3IiOjcyNTg2OSwiZGkiOiI2MGUxZDI3MzNiODI0MGQxOGI1OGM0YWVhODljNjQzMyIsImRtIjoxLCJmYyI6NzU2MTgxLCJmbCI6NDY5MDk4LCJpcCI6IjEyOC4zMC43OS45IiwibnciOjIyLCJwYyI6MywicHIiOjU3OTMsInJ0IjoyLCJzdCI6ODI3NywidWsiOiJ1ZTEtNTkxMGY0OTQ5ZTg3NGRkMjgzMWU2ZjkxMWE0OGJiMjciLCJ6biI6NDUsInRzIjoxNDI1MTM3NzkwNTEzLCJiZiI6dHJ1ZSwicG4iOiJhZHplcmsxNTE4NTg2NDU3IiwidXIiOm51bGx9&s=Jce3Ee-l-qvPpN6UAnYgMVd-nTE&url=%u" -> "https://cdn.doubleverify.com/dvtp_src.js?ctx=2111880&cmp=RUMTCRF01833MRT&sid=478350399&plc=478350399&num=&adid=&advid=1611&adsrv=2&region=30&btreg=478350399&btadsrv=atdmt&crt=344797862&crtname=&chnl=&unit=&pid=&uid=&dvtagver=6.1.src";
+"http://stackoverflow.com/" -> "http://careers.stackoverflow.com/gethired/i/qKJITU4y8AV-q2Ub3BmKkcW-2yFdC";
+"http://static.adzerk.net/ados.js?blah" -> "http://www.google-anlytics.com/analyti.js"[color=red];
+"http://stackoverflow.com/" -> "http://clc.stackoverflow.com/j/i?an=Y5pzpLi0WfGSBwMQMDEyMLMyMjAxsDMCeRxgIYYjHUwM3nqiddddSNxL0F9gzgWUZuRiA8h0NWMVz--Z7cNq1tFr-BAA"[color=red];
+}
