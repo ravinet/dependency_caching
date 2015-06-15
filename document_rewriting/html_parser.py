@@ -64,7 +64,7 @@ def func(head, parent_path=[]):
 
       if child.name == "link":
         log.append(linkLogString("WRITE", html_name, getLineNumber(child_path)))
-        css_name = child["src"]
+        css_name = child["href"]
         log.append(linkLogString("READ", css_name, getLineNumber(child_path)))
 
       #parent node
