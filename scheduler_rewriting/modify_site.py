@@ -108,4 +108,6 @@ for filename in files:
     # delete original tempfile
     os.system("rm rewritten/tempfile")
 
+    # allow CORS for each file!
+    os.system("changeheader rewritten/" + filename + " Access-Control-Allow-Origin '*'")
 os.system("mv rewritten " + rewritten_folder)
