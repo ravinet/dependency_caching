@@ -561,7 +561,17 @@
             }
             return [false, 0];
         } else if ( first_is_url != second_is_url ) {
-            // one is complete URL and other is not (assume they don't match)
+            // one is complete URL and other is not (assume match if non-url is exact substring of url)
+            if ( first_is_url ) {
+                if ( url1.pathname.indexOf(secondurl) != -1 ) {
+                    return [true, Infinity];
+                }
+            } else {
+                if ( url2.pathname.indexOf(firsturl) != -1 ) {
+                    return [true, Infinity];
+                }
+            }
+            // non-url is not exact substring of url!
             return [false, 0];
         } else {
             // neither is complete url so assume they are files (check if they match exactly)
