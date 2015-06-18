@@ -36,7 +36,7 @@ for filename in files:
     print out
     # need to still handle if response is chunked and gzipped (we can't just run gzip on it)!
 
-    if ( ("html" in out) or ("javascript" in out) ): # html or javascript file, so rewrite
+    if ( ("html" in out) or ("javascript" in out) or ("css" in out)): # html or javascript file, so rewrite
         if ( "chunked" in out ): # response chunked so we must unchunk
             os.system( "python unchunk.py rewritten/tempfile rewritten/tempfile1" )
             os.system( "mv rewritten/tempfile1 rewritten/tempfile" )
@@ -60,6 +60,12 @@ for filename in files:
                file1.close()
                os.system('cat scheduler.html >> rewritten/prependtempfile')
                os.system('mv rewritten/prependtempfile rewritten/tempfile')
+            elif ( "css" in out ):
+                css_obj_name = out.split("name=")[1]
+                pos = css_obj_name.rfind("/")
+                css_obj_name = css_obj_name[0:pos+1]
+                os.system("python rewrite_css.py rewritten/tempfile " + css_obj_name + " >> rewritten/cssfile")
+                os.system("mv rewritten/cssfile rewritten/tempfile")
 
             # get new length of response
             size = os.path.getsize('rewritten/tempfile')
@@ -89,6 +95,13 @@ for filename in files:
                 file1.close()
                 os.system('cat scheduler.html >> rewritten/prependtempfile')
                 os.system('mv rewritten/prependtempfile rewritten/plaintext')
+            elif ( "css" in out ):
+                print "REWRITING CSS FOR : " + filename + " -- " + out
+                css_obj_name = out.split("name=")[1]
+                pos = css_obj_name.rfind("/")
+                css_obj_name = css_obj_name[0:pos+1]
+                os.system("python rewrite_css.py rewritten/plaintext " + css_obj_name + " >> rewritten/cssfile")
+                os.system("mv rewritten/cssfile rewritten/plaintext")
 
             # after modifying plaintext, gzip it again (gzipped file is 'finalfile')
             os.system( "gzip -c rewritten/plaintext > rewritten/finalfile" )
