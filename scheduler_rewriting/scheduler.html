@@ -16,6 +16,9 @@
     // urls which we have already evaluated
     evaluated = [];
 
+    // last html added
+    last_added = -1;
+
     console.log("IN THE SCHEDULER");
 
     // requests which we have not yet evaluated because parent was not yet evaluated
@@ -48,34 +51,40 @@
         //handle_all_chunks();
     };
 
-    // iterates through all nodes--if parents are all done and it is not evaluated, eval it (only chunks)
-    function handle_all_chunks() {
+    // iterates through all nodes--if parents are all done and it is not evaluated, eval it (only chunks)---assume start of chunk same as parent (should be same frame!)
+    function handle_all_chunks(parent_evaled) {
         for ( node in scheduler_depths ) {
             if ( !(in_array(evaluated, node, "exact")) ) { // node not yet evaled!
                 var ret = is_chunk(node);
                 var can_eval_node = true;
                 if ( ret[0] ) { //it's a chunk!
-                    var rel_key = best_key(scheduler_parents, node, "exact" );
-                    if ( rel_key == "null" ) {
-                        rel_key = best_key(scheduler_parents, node);
-                    }
-                    for ( var q = 0; q < scheduler_parents[rel_key]; q++ ) {
-                        var parent_parent = scheduler_parents[rel_key][q];
-                        if ( !(in_array(evaluated, parent_parent, "exact")) ) {
-                            can_eval_node = false;
+                    if ( (node.split("---")[0] == parent_evaled.split("---")[0]) || (parent_evaled.indexOf("---") == -1) ) { // same html file name or parent not a chunk
+                        var rel_key = best_key(scheduler_parents, node, "exact" );
+                        if ( rel_key == "null" ) {
+                            rel_key = best_key(scheduler_parents, node);
                         }
-                    }
-                    if ( can_eval_node ) {
-                        if ( document.body == null ) {
-                            var x = document.createElement("body");
-                            document.firstChild.appendChild(x);
+                        if ( scheduler_parents[rel_key].indexOf(parent_evaled) != -1 ) {
+                            for ( var q = 0; q < scheduler_parents[rel_key].length; q++ ) {
+                                var parent_parent = scheduler_parents[rel_key][q];
+                                if ( !(in_array(evaluated, parent_parent, "exact")) ) {
+                                    can_eval_node = false;
+                                }
+                            }
+                            if ( can_eval_node ) {
+                                if ( document.body == null ) {
+                                    var x = document.createElement("body");
+                                    document.firstChild.appendChild(x);
+                                }
+                                if ( ret[2] == 'all' ) {
+                                    add_html(0, "end");
+                                } else {
+                                    add_html(ret[1], ret[2]);
+                                }
+                                evaluated.push(node);
+                                handle_all_chunks(node);
+                                handle_to_eval();
+                            }
                         }
-                        if ( ret[2] == 'all' ) {
-                            add_html(0, "end");
-                        } else {
-                            add_html(ret[1], ret[2]);
-                        }
-                        evaluated.push(node);
                     }
                 }
             }
@@ -242,9 +251,12 @@
                 var req = new XMLHttpRequest();
                 req.original_origin = curr_origin;
                 req.requested_url = reqs_to_make[i][0];
+                if ( req.requested_url.substring(0,2) == "//" ) {
+                    req.requested_url = "http:" + reqs_to_make[i][0];
+                }
                 req.src_tag = reqs_to_make[i][1];
                 req.open("GET", reqs_to_make[i][0], "true");
-                if ( reqs_to_make[i][0].indexOf(".css") != -1 ) { // it is a css file (use href, not src)
+                if ( (reqs_to_make[i][0].indexOf(".css") != -1) || (reqs_to_make[i][0].indexOf(".ico") != -1) ) { // it is a css file (use href, not src)
                     req.is_css = true;
                 } else {
                     req.is_css = false;
@@ -340,6 +352,16 @@
     
         // add url to evaluated list
         evaluated.push(validURL(req));
+
+        // check if node is in to_evaluate, and if so, remove it
+        var pos = to_evaluate.indexOf(req);
+        if ( pos != -1 ) {
+            to_evaluate.splice(pos, 1);
+        }
+
+        // check if this triggers any other chunks
+        handle_all_chunks(validURL(req));
+
     }
     
     // function which recursively handles all to_eval requests based on what urls have already been evaluated
@@ -395,6 +417,7 @@
         if ( rel_key == "null" ) {
             rel_key = best_key(scheduler_parents, curr_url);
         }
+
         for ( var j = 0; j < scheduler_parents[rel_key].length; j++ ) {
             parent_url = scheduler_parents[rel_key][j];
             // check if parent has not yet been evaluated!
@@ -425,6 +448,8 @@
                             add_html(ret[1], ret[2]);
                         }
                         evaluated.push(parent_url);
+                        // handle any new chunks that we can based on this parent
+                        handle_all_chunks(parent_url);
                     } else {
                         // chunk can't be evaled
                         return false;
@@ -641,6 +666,17 @@
             end_use = chunked_html.length - 1;
         }
 
+        // if we have already added all HTML, then just return
+        if ( last_added >= window.chunked_html.length-1 ) {
+            return;
+        }
+        if ( end_use > window.chunked_html.length-1 ) {
+            end_use = window.chunked_html.length-1;
+            if ( start_use > end_use ) {
+                return;
+            }
+        }
+
         var prev = document.body.innerHTML;
 
         var in_script = false;
@@ -672,6 +708,7 @@
         // add unadded content
         var last_prev = document.body.innerHTML;
         document.body.innerHTML = last_prev + unadded;
+        window.last_added = end_use;
     }
 
     function check_graph (req ) {
