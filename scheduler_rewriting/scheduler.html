@@ -201,6 +201,13 @@
                 in_flight[origin_to_update] = new_num;
             }
         }
+
+        // handle eval updates
+        if ( event.data.substring(0,3) == "***" ) {
+            var evaled_url = event.data.split("~~~")[1];
+            evaluated.push(evaled_url);
+            handle_to_eval();
+        }
     }
 
 
@@ -225,6 +232,17 @@
     // function to update other frames with changed in_flight value
     function update_in_flight(origin, new_num) {
         var update_message = "update~~" + origin + "~~" + new_num;
+        var frames = window.top.frames;
+        for ( var i = 0; i < frames.length; i++ ) {
+            if ( frames[i] != window.self ) {
+                frames[i].postMessage(update_message, "*");
+            }
+        }
+    }
+
+    // function to update other frames about new responses that have been evaled
+    function notify_eval(url) {
+        var update_message = "***eval~~~url";
         var frames = window.top.frames;
         for ( var i = 0; i < frames.length; i++ ) {
             if ( frames[i] != window.self ) {
@@ -353,6 +371,9 @@
         // add url to evaluated list
         evaluated.push(validURL(req));
 
+        // notify other frames that this url is evaluated
+        notify_eval(validURL(req));
+
         // check if node is in to_evaluate, and if so, remove it
         var pos = to_evaluate.indexOf(req);
         if ( pos != -1 ) {
@@ -396,12 +417,13 @@
             return [true, lines[0], lines[1]];
         }
 
+
         // handle case where no chunks but it is html!
         if ( url == "/" ) {
             return [true, 0, 'all'];
         }
         // handle case where it is not chunk but it is an iframe (not "/")
-        if ( url.substr(url.length - 4) == "html" ) {
+        if ( (url.substr(url.length - 4) == "html") || (url == window.html_name) ) {
             return [true, 0, 'all'];
         }
 
