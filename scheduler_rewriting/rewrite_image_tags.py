@@ -20,6 +20,8 @@ def func(head, counter=0):
         else:
           original_src = child.get('src')
         if ( original_src != None and original_src != ""):
+          #if ( original_src[0:5] == "https" ): # force http, disallow https
+          #  original_src = "http" + original_src[5:]
           if ( child.name == "script" ):
             del child['src']
           else:
