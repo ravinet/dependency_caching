@@ -2,18 +2,33 @@ from bs4 import BeautifulSoup, element
 import sys
 import json
 from urlparse import urlparse
+import re
 
 html_doc = sys.argv[1]
+html_name = sys.argv[2]
 
 soup = BeautifulSoup(open(html_doc), "html5lib")
 
 # mapping urls to ids
 url_map = {}
 
+def rewrite_css(css, site):
+  pattern = r"url\([\"']?([./a-gi-z][^/].*?)[\"']?\)"
+  replacement = r"url(" + html_doc + r"\1)"
+  first = re.sub(pattern, replacement, css, flags=re.IGNORECASE)
+  
+  pattern = r"url\([\"']?(//.*?)[\"']?\)"
+  replacement = r"url(http:" + r"\1)"
+  return re.sub(pattern, replacement, first, flags=re.IGNORECASE)
+
 
 def func(head, counter=0):
   for child in head.children:
     if isinstance(child, element.Tag):
+      # remove relative paths from css
+      orig_css = child.get('style')
+      if ( orig_css != None and orig_css != "" ):
+        child['style'] = rewrite_css(orig_css, html_name)
       if ( child.name == "img" or child.name == "script" or child.name == "iframe" or child.name == "link" ):
         if ( child.name == "link" ):
           original_src = child.get('href')
