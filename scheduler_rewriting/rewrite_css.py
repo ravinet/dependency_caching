@@ -12,4 +12,9 @@ with open(css_file) as f:
 
 pattern = r"url\([\"']?([./a-gi-z][^/].*?)[\"']?\)"
 replacement = r"url(" + site + r"\1)"
-print re.sub(pattern, replacement, css, flags=re.IGNORECASE)
+first = re.sub(pattern, replacement, css, flags=re.IGNORECASE)
+
+pattern = r"url\([\"']?(//.*?)[\"']?\)"
+replacement = r"url(http:" + r"\1)" 
+print re.sub(pattern, replacement, first, flags=re.IGNORECASE)
+
