@@ -34,22 +34,25 @@ for filename in files:
     return_code = proc.returncode
     out = out.strip("\n")
     print out
+    res_type = out.split("*")[0].split("=")[1]
+    gzip = out.split("*")[2].split("=")[1]
+    chunked = out.split("*")[1].split("=")[1]
     # need to still handle if response is chunked and gzipped (we can't just run gzip on it)!
 
-    if ( ("html" in out) or ("javascript" in out) or ("css" in out)): # html or javascript file, so rewrite
-        if ( "chunked" in out ): # response chunked so we must unchunk
+    if ( ("html" in res_type) or ("javascript" in res_type) or ("css" in res_type)): # html or javascript file, so rewrite
+        if ( "true" in chunked ): # response chunked so we must unchunk
             os.system( "python unchunk.py rewritten/tempfile rewritten/tempfile1" )
             os.system( "mv rewritten/tempfile1 rewritten/tempfile" )
             # remove transfer-encoding chunked header from original file since we are unchunking
             os.system( "removeheader rewritten/" + filename + " Transfer-Encoding" )
-        if ( "not" in out ): # html or javascript but not gzipped
+        if ( "false" in gzip ): # html or javascript but not gzipped
             #if ( "javascript" in out ):
             #    os.system('cp scheduler.js rewritten/prependtempfile')
             #    os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
             #    os.system('mv rewritten/prependtempfile rewritten/tempfile')
-            if ( "html" in out ): # rewrite all inline js in html files
+            if ( "html" in res_type ): # rewrite all inline js in html files
                html_obj_name = out.split("name=")[1]
-               command = "python rewrite_image_tags.py rewritten/tempfile"
+               command = "python rewrite_image_tags.py rewritten/tempfile " + html_obj_name
                proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                (out,err) = proc.communicate()
                image_map = err.strip("\n")
@@ -60,7 +63,7 @@ for filename in files:
                file1.close()
                os.system('cat scheduler.html >> rewritten/prependtempfile')
                os.system('mv rewritten/prependtempfile rewritten/tempfile')
-            elif ( "css" in out ):
+            elif ( "css" in res_type ):
                 css_obj_name = out.split("name=")[1]
                 pos = css_obj_name.rfind("/")
                 css_obj_name = css_obj_name[0:pos+1]
@@ -82,9 +85,9 @@ for filename in files:
                 #os.system('cat rewritten/plaintext >> rewritten/prependtempfile')
                 #os.system('mv rewritten/prependtempfile rewritten/plaintext')
 
-            if ( "html" in out ): # rewrite all inline js in html files
+            if ( "html" in res_type ): # rewrite all inline js in html files
                 html_obj_name = out.split("name=")[1]
-                command = "python rewrite_image_tags.py rewritten/plaintext"
+                command = "python rewrite_image_tags.py rewritten/plaintext " + html_obj_name
                 proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                 (out,err) = proc.communicate()
                 image_map = err.strip("\n")
@@ -95,7 +98,7 @@ for filename in files:
                 file1.close()
                 os.system('cat scheduler.html >> rewritten/prependtempfile')
                 os.system('mv rewritten/prependtempfile rewritten/plaintext')
-            elif ( "css" in out ):
+            elif ( "css" in res_type ):
                 print "REWRITING CSS FOR : " + filename + " -- " + out
                 css_obj_name = out.split("name=")[1]
                 pos = css_obj_name.rfind("/")
