@@ -4,6 +4,8 @@ import json
 from urlparse import urlparse
 import re
 
+counter = 0
+
 html_doc = sys.argv[1]
 html_name = sys.argv[2]
 
@@ -22,7 +24,8 @@ def rewrite_css(css, site):
   return re.sub(pattern, replacement, first, flags=re.IGNORECASE)
 
 
-def func(head, counter=0):
+def func(head):
+  global counter
   for child in head.children:
     if isinstance(child, element.Tag):
       # remove relative paths from css
@@ -46,15 +49,19 @@ def func(head, counter=0):
               child['src'] = ""
           if ( child.name == "img" or child.name == "iframe" or child.name == "link" ):
             child['imgid'] = counter
-            url_map[original_src] = counter
+            if ( original_src in url_map ):
+              to_use = "**" + original_src
+              url_map[to_use] = counter
+            else:
+              url_map[original_src] = counter
             counter = counter + 1
           else:
             url_map[original_src] = "null"
-          func(child, counter)
+          func(child)
         else:
-          func(child, counter)
+          func(child)
       else:
-        func(child, counter)
+        func(child)
 
 func(soup)
 
@@ -69,13 +76,16 @@ print json.dumps(clean_chunked)
 # go through url_map and organize per origin
 origin_mappings= {}
 for url in url_map:
+  real_url = url
+  if ( url[0:2] == "**" ):
+    url = url[2:]
   curr_origin = urlparse(url).netloc
   if ( curr_origin == '' ):
     curr_origin = "use_location"
   if ( curr_origin in origin_mappings ):
-    origin_mappings[curr_origin].append([url, url_map[url]])
+    origin_mappings[curr_origin].append([url, url_map[real_url]])
   else:
-    origin_mappings[curr_origin] = [[url, url_map[url]]]
+    origin_mappings[curr_origin] = [[url, url_map[real_url]]]
 
 
 print >> sys.stderr, json.dumps(origin_mappings)
