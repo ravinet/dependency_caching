@@ -12,43 +12,35 @@ soup.body.append(new_script)
 
 log = []
 
+lineNumbers = {}
 def getLineNumber(child_path):
-  lineNumber = [] 
-
   class LineParser(HTMLParser):
     def __init__(self):
       HTMLParser.__init__(self)
       self.depth = -1
       self.index = 0
-      self.indices = {}
+      self.indices = []
 
     def handle_starttag(self, tag, attrs):
       self.depth += 1
-      self.indices.setdefault(self.depth, -1)
+      if len(self.indices) < self.depth + 1:
+        self.indices.append(-1)
       self.indices[self.depth] += 1
-      matches(self.indices)
+      lineNumbers[listToString(self.indices)] = parser.getpos()[0]
 
     def handle_endtag(self, tag):
-      if self.depth+1 in self.indices:
+      if len(self.indices) == self.depth + 2:
         del self.indices[self.depth+1]
       self.depth -= 1
 
-    def handle_startendtag(self, tag, attrs):
-      self.handle_starttag(tag,attrs)
-      self.handle_endtag(tag)
+  def listToString(l):
+    return ','.join([str(i) for i in l])
 
-  def matches(indices):
-    #just to make it easier to think about, reverse the childpath
-    for i, x in enumerate(child_path[::-1]):
-      if i not in indices or indices[i] != x:
-        return False
-    lineNumber.append(parser.getpos()[0])
-    return True
+  if listToString(child_path[::-1]) not in lineNumbers:
+    parser = LineParser()
+    parser.feed(soup.prettify())
 
-  parser = LineParser()
-  parser.feed(soup.prettify())#open(html_doc).read())
-
-  return lineNumber[0]
+  return lineNumbers[listToString(child_path[::-1])]
 
 def func(head, parent_path=[]):
   index = 0
