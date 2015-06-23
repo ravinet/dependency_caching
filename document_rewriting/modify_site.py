@@ -51,7 +51,7 @@ for filename in files:
             if ( "html" in res_type ): # rewrite all inline js in html files
                os.system('python html_rewrite_linux.py rewritten/tempfile rewritten/htmltempfile')
                os.system('mv rewritten/htmltempfile rewritten/tempfile')
-               os.system('python html_parser.py rewritten/tempfile ' + html_name + ' > rewritten/htmltempfile')
+               os.system("python html_parser.py rewritten/tempfile '" + html_name + "' > rewritten/htmltempfile")
                os.system('mv rewritten/htmltempfile rewritten/tempfile')
                body = open("rewritten/tempfile", 'r')
                first_line = body.readline()
@@ -85,7 +85,7 @@ for filename in files:
             if ( "html" in res_type ): # rewrite all inline js in html files
                 os.system('python html_rewrite_linux.py rewritten/plaintext rewritten/htmltempfile')
                 os.system('mv rewritten/htmltempfile rewritten/plaintext')
-                os.system('python html_parser.py rewritten/plaintext ' + html_name + ' > rewritten/htmltempfile')
+                os.system("python html_parser.py rewritten/plaintext '" + html_name + "' > rewritten/htmltempfile")
                 os.system('mv rewritten/htmltempfile rewritten/plaintext')
                 body = open("rewritten/plaintext", 'r')
                 first_line = body.readline()

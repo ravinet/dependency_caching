@@ -1,4 +1,4 @@
-digraph G {
+strict digraph G {
 ratio=compress;
 concentrate=true;
 "/" -> "/";
@@ -49,4 +49,6 @@ concentrate=true;
 "/" -> "rtm2";
 "/" -> "rtm3";
 "/" -> "0 B";
+"yfv1ij0moq55lfv2tyn2hql3rug.js" -> "/"[color=red];
+"yfv1ij0moq55lfv2tyn2hql3rug.js" -> "/"[color=red];
 }

@@ -357,18 +357,22 @@ list_of_chunks = {}
 
 for (a,b) in new_final_dependencies:
   if ( a != b ):
-    parent_name = a.split("/")[-1]
-    child_name = b.split("/")[-1]
-    if ( (a[0:4] == "/---") or (a == "/") ):
-        parent_name = a
-    if ( (b[0:4] == "/---") or (b == "/") ):
-        child_name = b
-    if ( "?" in parent_name ):
-        temp = parent_name
-        parent_name = temp.split("?")[0]
-    if ( "?" in child_name ):
-        temp = child_name
-        child_name = temp.split("?")[0]
+    parent_name = a
+    child_name = b
+    if ( (a == "No_Write") or (b == "No_Write") ):
+        continue
+#    parent_name = a.split("/")[-1]
+#    child_name = b.split("/")[-1]
+#    if ( (a[0:4] == "/---") or (a == "/") ):
+#        parent_name = a
+#    if ( (b[0:4] == "/---") or (b == "/") ):
+#        child_name = b
+#    if ( "?" in parent_name ):
+#        temp = parent_name
+#        parent_name = temp.split("?")[0]
+#    if ( "?" in child_name ):
+#        temp = child_name
+#        child_name = temp.split("?")[0]
     if ( (".css" in child_name ) and ("---" in parent_name)):
         css_to_handle.append((parent_name, child_name))
     if ( "---" in child_name ):

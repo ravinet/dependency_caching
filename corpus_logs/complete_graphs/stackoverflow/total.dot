@@ -68,9 +68,9 @@ ratio=compress;
 "http://stackoverflow.com/---10:16" -> "http://stackoverflow.com/---17:19487"[color=red];
 "http://stackoverflow.com/---17:19487" -> "http://stackoverflow.com/---19488:end"[color=red];
 "http://stackoverflow.com/---0:7" -> "//cdn.sstatic.net/stackoverflow/img/favicon.ico?v=00a326f96f68"[color=red];
-"//cdn.sstatic.net/stackoverflow/img/favicon.ico?v=00a326f96f68" -> "http://stackoverflow.com/"[color=red];
+"//cdn.sstatic.net/stackoverflow/img/favicon.ico?v=00a326f96f68" -> "http://stackoverflow.com/---0:7"[color=red]
 "http://stackoverflow.com/---8:8" -> "//cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=41f6e13ade69"[color=red];
-"//cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=41f6e13ade69" -> "http://stackoverflow.com/"[color=red];
+"//cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=41f6e13ade69" -> "http://stackoverflow.com/---0:7"[color=red];
 "http://stackoverflow.com/---9:9" -> "/opensearch.xml"[color=red];
 "/opensearch.xml" -> "http://stackoverflow.com/---0:7"[color=red];
 "http://stackoverflow.com/---10:16" -> "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"[color=red];

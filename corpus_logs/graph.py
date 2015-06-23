@@ -87,7 +87,7 @@ def uuid(url):
   ret = url
   if ( "?" in url ):
     ret = url.split("?")[0]
-  return "\"" + ret + "\""
+  return "\"" + url + "\""
 
 for parent in list(set([parent for parent in parents if not(parent in urls) and parent != "/"])):
   # only add edge from "/" to orphan node if orphan node is not the parent of "/"
