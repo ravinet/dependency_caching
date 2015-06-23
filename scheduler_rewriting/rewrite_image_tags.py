@@ -34,7 +34,10 @@ def func(head):
         child['style'] = rewrite_css(orig_css, html_name)
       if ( child.name == "img" or child.name == "script" or child.name == "iframe" or child.name == "link" ):
         if ( child.name == "link" ):
-          original_src = child.get('href')
+          if ( child['rel'][0] == 'canonical' ):
+            original_src = ""
+          else:
+            original_src = child.get('href')
         else:
           original_src = child.get('src')
         if ( original_src != None and original_src != ""):
