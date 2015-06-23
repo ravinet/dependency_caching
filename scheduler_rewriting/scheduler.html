@@ -16,6 +16,9 @@
     // urls which we have already evaluated
     evaluated = [];
 
+    // html currently being evaluated
+    curr_html_eval = [];
+
     // last html added
     last_added = -1;
 
@@ -76,9 +79,16 @@
                                     document.firstChild.appendChild(x);
                                 }
                                 if ( ret[2] == 'all' ) {
-                                    add_html(0, "end");
+                                    var pret = add_html(0, "end");
+                                    if ( pret == false ) {
+                                        return;
+                                    }
                                 } else {
-                                    add_html(ret[1], ret[2]);
+                                    evaluated.push(node);
+                                    var pret = add_html(ret[1], ret[2]);
+                                    if ( pret == false ) {
+                                        return;
+                                    }
                                 }
                                 evaluated.push(node);
                                 notify_eval();
@@ -490,9 +500,15 @@
                             document.firstChild.appendChild(x);
                         }
                         if ( ret[2] == 'all' ) {
-                            add_html(0, "end");
+                            var pret = add_html(0, "end");
+                            if ( pret == false ) {
+                                return false;
+                            }
                         } else {
-                            add_html(ret[1], ret[2]);
+                            var pret = add_html(ret[1], ret[2]);
+                            if ( pret == false ) {
+                                return false;
+                            }
                         }
                         evaluated.push(parent_url);
                         notify_eval();
@@ -708,58 +724,77 @@
     }
 
     function add_html( start, end ) {
-        var start_use = start;
-        var end_use = end;
-        if ( end == "end" ) {
-            end_use = chunked_html.length - 1;
-        }
+        if ( (curr_html_eval.indexOf((start,end)) != -1 ) ) {
+            return false;
+        } else {
+            var start_use = start;
+            var end_use = end;
+            if ( end == "end" ) {
+                end_use = chunked_html.length - 1;
+            }
 
-        // if we have already added all HTML, then just return
-        if ( last_added >= window.chunked_html.length-1 ) {
-            return;
-        }
-        if ( end_use > window.chunked_html.length-1 ) {
-            end_use = window.chunked_html.length-1;
-            if ( start_use > end_use ) {
+            // if we have already added all HTML, then just return
+            if ( last_added >= window.chunked_html.length-1 ) {
                 return;
             }
-        }
-
-        var prev = document.body.innerHTML;
-
-        var in_script = false;
-        var curr_script = "";
-        var unadded = "";
-
-        var close_script = "</sc" + "ript>";
-
-        for ( var x = start_use; x <= end_use; x++ ) {
-            prev = prev + window.chunked_html[x];
-            unadded = unadded + window.chunked_html[x];
-            if ( chunked_html[x].trim() == "<script>" ) {
-                in_script = true;
+            if ( end_use > window.chunked_html.length-1 ) {
+                end_use = window.chunked_html.length-1;
+                if ( start_use > end_use ) {
+                    return;
+                }
             }
-            if ( in_script ) { // add line if we are in a script
-                if ( chunked_html[x].trim() == close_script ) { //add the html to innerHTML and then eval the js and clear everything
-                    document.body.innerHTML = prev;
-                    unadded = "";
-                    window.eval(curr_script);
-                    curr_script = "";
-                    in_script = false;
-                } else {
-                    if ( chunked_html[x].trim() != "<script>" ) {
-                        curr_script = curr_script + window.chunked_html[x];
+
+            //var prev = document.body.innerHTML;
+            var prev = "";
+
+            var in_script = false;
+            var curr_script = "";
+            var unadded = "";
+
+            var close_script = "</sc" + "ript>";
+
+            for ( var x = start_use; x <= end_use; x++ ) {
+                prev = prev + window.chunked_html[x];
+                unadded = unadded + window.chunked_html[x];
+                if ( chunked_html[x].trim() == "<script>" ) {
+                    in_script = true;
+                }
+                if ( chunked_html[x].trim().indexOf( "<script type=\"text/javascript\"") != -1 ) {
+                    in_script = true;
+                }
+                if ( in_script ) { // add line if we are in a script
+                    if ( chunked_html[x].trim() == close_script ) { //add the html to innerHTML and then eval the js and clear everything
+                        var last_val = document.body.innerHTML;
+                        document.body.innerHTML = last_val + prev;
+                        prev = "";
+                        unadded = "";
+                        window.eval(curr_script);
+                        curr_script = "";
+                        in_script = false;
+                    } else {
+                        if ( chunked_html[x].trim() != "<script>" ) {
+                            if ( chunked_html[x].trim().indexOf("<script type=\"text/javascript\"") == -1 ) {
+                                curr_script = curr_script + window.chunked_html[x];
+                            }
+                        }
                     }
                 }
             }
+            // add unadded content
+            var last_prev = document.body.innerHTML;
+            document.body.innerHTML = last_prev + unadded;
+            window.last_added = end_use;
+            // remove the html from list of html currently being evaluated
+            for ( var x = 0; x < curr_html_eval.length; x++ ) {
+                if ( curr_html_eval[x] == (start, end) ) {
+                    curr_html_eval.splice(x,1);
+                }
+            }
         }
-        // add unadded content
-        var last_prev = document.body.innerHTML;
-        document.body.innerHTML = last_prev + unadded;
-        window.last_added = end_use;
+        return true;
     }
 
-    function check_graph (req ) {
+    function check_graph (req) {
         var curr_url = req.requested_url;
         // check scheduler_depths: if not there, add depth (js-2, css-1, html-2, img-0)
         var rel_key = best_key(scheduler_depths, curr_url);
