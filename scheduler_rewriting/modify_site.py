@@ -52,7 +52,7 @@ for filename in files:
             #    os.system('mv rewritten/prependtempfile rewritten/tempfile')
             if ( "html" in res_type ): # rewrite all inline js in html files
                html_obj_name = out.split("name=")[1]
-               command = "python rewrite_image_tags.py rewritten/tempfile " + html_obj_name
+               command = "python rewrite_image_tags.py rewritten/tempfile '" + html_obj_name + "'"
                proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                (out,err) = proc.communicate()
                image_map = err.strip("\n")
@@ -87,7 +87,7 @@ for filename in files:
 
             if ( "html" in res_type ): # rewrite all inline js in html files
                 html_obj_name = out.split("name=")[1]
-                command = "python rewrite_image_tags.py rewritten/plaintext " + html_obj_name
+                command = "python rewrite_image_tags.py rewritten/plaintext '" + html_obj_name + "'"
                 proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                 (out,err) = proc.communicate()
                 image_map = err.strip("\n")
