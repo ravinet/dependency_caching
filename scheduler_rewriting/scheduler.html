@@ -292,6 +292,17 @@
             delete prefetch["use_location"];
         }
 
+        var chunk_is_parent = false;
+        var first_chunk = "";
+        // find first chunk name
+        for ( node in scheduler_depths ) {
+            if ( node.indexOf("---") != -1 ) {
+                if ( node.split("---")[1].split(":")[0] == "0") {
+                    first_chunk = node;
+                }
+            }
+        }
+
         for ( var y = 0; y < Object.keys(prefetch).length; y++ ) {
             // handle this origin (if more than 6, consider depth)!
             curr_origin = Object.keys(prefetch)[y];
@@ -305,6 +316,9 @@
                 if ( req.requested_url.substring(0,2) == "//" ) {
                     req.requested_url = "http:" + reqs_to_make[i][0];
                 }
+                if ( req.requested_url.substring(0,2) == ".." ) {
+                    req.requested_url = html_name + reqs_to_make[i][0].substring(3);
+                }
                 req.src_tag = reqs_to_make[i][1];
                 req.open("GET", reqs_to_make[i][0], "true");
                 if ( (reqs_to_make[i][0].indexOf(".css") != -1) || (reqs_to_make[i][0].indexOf(".ico") != -1) ) { // it is a css file (use href, not src)
@@ -316,6 +330,38 @@
                     req.responseType = "blob";
                 }
                 req.send();
+                var rel_key = best_key(scheduler_parents, req.requested_url, "exact" );
+                if ( rel_key == "null" ) {
+                    rel_key = best_key(scheduler_parents, req.requested_url);
+                }
+                if ( first_chunk in scheduler_parents[rel_key] ) {
+                    chunk_is_parent = true;
+                }
+            }
+        }
+
+        if ( !chunk_is_parent ) {
+            var ret = is_chunk(first_chunk);
+            if ( ret[0] ) {
+                if ( document.body == null ) {
+                    var x = document.createElement("body");
+                    document.firstChild.appendChild(x);
+                }
+                if ( ret[2] == 'all' ) {
+                    var pret = add_html(0, "end");
+                    if ( pret == false ) {
+                        return false;
+                    }
+                } else {
+                    var pret = add_html(ret[1], ret[2]);
+                    if ( pret == false ) {
+                        return false;
+                    }
+                }
+                evaluated.push(first_chunk);
+                notify_eval();
+                handle_all_chunks(first_chunk);
+                handle_to_eval();
             }
         }
 
@@ -353,9 +399,7 @@
                             }
                         }
                     }
-
                 }
-
             }
 
             // check if there is a 'best' chunk...if not, add all html!
@@ -369,11 +413,13 @@
                 add_html(0, "end");
                 evaluated.push(html_url);
                 notify_eval();
+                handle_all_chunks(html_url);
             } else { // there is a best chunk
                 html_url = file_name + "---" + final_chunk_start + ":" + final_chunk_end;
                 add_html(final_chunk_start, final_chunk_end);
                 evaluated.push(html_url);
                 notify_eval();
+                handle_all_chunks(html_url);
             }
         }
     }
@@ -724,11 +770,12 @@
     }
 
     function add_html( start, end ) {
+        console.log("added html from: " + start + " end: " + end);
         if ( (curr_html_eval.indexOf((start,end)) != -1 ) ) {
             return false;
         } else {
-            var start_use = start;
-            var end_use = end;
+            var start_use = parseInt(start);
+            var end_use = parseInt(end);
             if ( end == "end" ) {
                 end_use = chunked_html.length - 1;
             }
@@ -773,8 +820,8 @@
                         in_script = false;
                     } else {
                         if ( chunked_html[x].trim() != "<script>" ) {
-                            if ( chunked_html[x].trim().indexOf("<script type=\"text/javascript\"") == -1 ) {
-                                curr_script = curr_script + window.chunked_html[x];
+                            if ( chunked_html[x].trim().indexOf("<script") == -1 ) {
+                                curr_script = curr_script + window.chunked_html[x] + "\n";
                             }
                         }
                     }
@@ -791,6 +838,7 @@
                 }
             }
         }
+        console.log("finished adding html");
         return true;
     }
 
