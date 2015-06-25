@@ -437,8 +437,14 @@
                     document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("href", imgurl);
                     document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
                 } else {
-                    document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("src", imgurl);
-                    document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
+                    var t = document.querySelector("[imgid=\"" + req.src_tag + "\"]");
+                    if ( document.querySelector("[imgid=\"" + req.src_tag + "\"]").nodeName == "LINK" ) {
+                        document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("href", imgurl);
+                        document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
+                    } else {
+                        document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("src", imgurl);
+                        document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
+                    }
                 }
             } else {
                 // javascript so eval it right away
@@ -463,7 +469,7 @@
 
         // check if this triggers any other chunks
         handle_all_chunks(validURL(req));
-
+        handle_to_eval();
     }
     
     // function which recursively handles all to_eval requests based on what urls have already been evaluated
@@ -476,16 +482,16 @@
             }
         }
     
-        // remove all evaluated responses from the to_evaluate queue
-        first = true;
-        for ( var i = 0; i < eval_index.length; i++) {
-            if ( first) {
-                to_evaluate.splice(eval_index[i],1);
-                first = false;
-            } else {
-                to_evaluate.splice(eval_index[i]-1, 1);
-            }
-        }
+        //// remove all evaluated responses from the to_evaluate queue
+        //first = true;
+        //for ( var i = 0; i < eval_index.length; i++) {
+        //    if ( first) {
+        //        to_evaluate.splice(eval_index[i],1);
+        //        first = false;
+        //    } else {
+        //        to_evaluate.splice(eval_index[i]-1, 1);
+        //    }
+        //}
     };
     
     // function that returns array stating whether it is a chunk, begin line and end line
@@ -560,6 +566,7 @@
                         notify_eval();
                         // handle any new chunks that we can based on this parent
                         handle_all_chunks(parent_url);
+                        handle_to_eval();
                     } else {
                         // chunk can't be evaled
                         return false;
@@ -801,8 +808,33 @@
             var close_script = "</sc" + "ript>";
 
             for ( var x = start_use; x <= end_use; x++ ) {
-                prev = prev + window.chunked_html[x];
-                unadded = unadded + window.chunked_html[x];
+                if ( window.chunked_html[x].indexOf("<body") != -1 ) {
+                    var tag_split = window.chunked_html[x].trim().split(" ");
+                    for ( var ii = 1; ii < tag_split.length; ii++ ) {
+                        var attr = tag_split[ii].split("=")[0];
+                        if ( tag_split[ii].indexOf("=") == -1 ) {
+                            var val = tag_split[ii];
+                            if ( val.slice(-1) == ">" ) {
+                                val = val.substring(0, val.length-1);
+                            }
+                            val = val.substring(1, val.length-1);
+                            document.body.setAttribute(val, "");
+                        } else {
+                            var val = tag_split[ii].split("=")[1];
+                            if ( val.slice(-1) == ">" ) {
+                                val = val.substring(0, val.length-1);
+                            }
+                            val = val.substring(1, val.length-1);
+                            document.body.setAttribute(attr, val);
+                        }
+                    }
+                }
+                if ( window.chunked_html[x].trim() != "</body>" ) {
+                    if ( window.chunked_html[x].trim().indexOf("<body") == -1 ) {
+                        prev = prev + window.chunked_html[x];
+                        unadded = unadded + window.chunked_html[x];
+                    }
+                }
                 if ( chunked_html[x].trim() == "<script>" ) {
                     in_script = true;
                 }
