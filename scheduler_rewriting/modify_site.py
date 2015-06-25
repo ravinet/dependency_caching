@@ -39,7 +39,7 @@ for filename in files:
     chunked = out.split("*")[1].split("=")[1]
     # need to still handle if response is chunked and gzipped (we can't just run gzip on it)!
 
-    if ( ("html" in res_type) or ("javascript" in res_type) or ("css" in res_type)): # html or javascript file, so rewrite
+    if ( ("html" in res_type) or ("javascript" in res_type) or ("css" in res_type) or ("woff" in res_type)): # html or javascript file, so rewrite
         if ( "true" in chunked ): # response chunked so we must unchunk
             os.system( "python unchunk.py rewritten/tempfile rewritten/tempfile1" )
             os.system( "mv rewritten/tempfile1 rewritten/tempfile" )
@@ -63,7 +63,7 @@ for filename in files:
                file1.close()
                os.system('cat scheduler.html >> rewritten/prependtempfile')
                os.system('mv rewritten/prependtempfile rewritten/tempfile')
-            elif ( "css" in res_type ):
+            elif ( ("css" in res_type) or ("woff" in res_type) ):
                 css_obj_name = out.split("name=")[1]
                 pos = css_obj_name.rfind("/")
                 css_obj_name = css_obj_name[0:pos+1]
@@ -98,8 +98,7 @@ for filename in files:
                 file1.close()
                 os.system('cat scheduler.html >> rewritten/prependtempfile')
                 os.system('mv rewritten/prependtempfile rewritten/plaintext')
-            elif ( "css" in res_type ):
-                print "REWRITING CSS FOR : " + filename + " -- " + out
+            elif ( ("css" in res_type) or ("woff" in res_type) ):
                 css_obj_name = out.split("name=")[1]
                 pos = css_obj_name.rfind("/")
                 css_obj_name = css_obj_name[0:pos+1]
