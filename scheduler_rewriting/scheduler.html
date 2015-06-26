@@ -288,7 +288,13 @@
     function handle_prefetch() {
         // make sure that we copy over "use_location" to be window.location.hostname;
         if ( "use_location" in prefetch ) {
-            prefetch[window.location.hostname] = prefetch["use_location"];
+            if ( window.location.hostname in prefetch ) {
+                for ( var p = 0; p < prefetch["use_location"].length; p++ ) {
+                    prefetch[window.location.hostname].push(prefetch["use_location"][p]);
+                }
+            } else {
+                prefetch[window.location.hostname] = prefetch["use_location"];
+            }
             delete prefetch["use_location"];
         }
 
