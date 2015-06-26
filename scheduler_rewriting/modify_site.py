@@ -34,9 +34,9 @@ for filename in files:
     return_code = proc.returncode
     out = out.strip("\n")
     print out
-    res_type = out.split("*")[0].split("=")[1]
-    gzip = out.split("*")[2].split("=")[1]
-    chunked = out.split("*")[1].split("=")[1]
+    res_type = out.split("*")[0].split("pe=")[1]
+    gzip = out.split("*")[2].split("pped=")[1]
+    chunked = out.split("*")[1].split("nked=")[1]
     # need to still handle if response is chunked and gzipped (we can't just run gzip on it)!
 
     if ( ("html" in res_type) or ("javascript" in res_type) or ("css" in res_type) or ("woff" in res_type)): # html or javascript file, so rewrite
@@ -67,7 +67,7 @@ for filename in files:
                 css_obj_name = out.split("name=")[1]
                 pos = css_obj_name.rfind("/")
                 css_obj_name = css_obj_name[0:pos+1]
-                os.system("python rewrite_css.py rewritten/tempfile " + css_obj_name + " >> rewritten/cssfile")
+                os.system("python rewrite_css.py rewritten/tempfile '" + css_obj_name + "' >> rewritten/cssfile")
                 os.system("mv rewritten/cssfile rewritten/tempfile")
 
             # get new length of response
@@ -102,7 +102,7 @@ for filename in files:
                 css_obj_name = out.split("name=")[1]
                 pos = css_obj_name.rfind("/")
                 css_obj_name = css_obj_name[0:pos+1]
-                os.system("python rewrite_css.py rewritten/plaintext " + css_obj_name + " >> rewritten/cssfile")
+                os.system("python rewrite_css.py rewritten/plaintext '" + css_obj_name + "' >> rewritten/cssfile")
                 os.system("mv rewritten/cssfile rewritten/plaintext")
 
             # after modifying plaintext, gzip it again (gzipped file is 'finalfile')
