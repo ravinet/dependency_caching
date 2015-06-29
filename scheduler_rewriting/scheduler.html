@@ -304,6 +304,12 @@
         for ( node in scheduler_depths ) {
             if ( node.indexOf("---") != -1 ) {
                 if ( node.split("---")[1].split(":")[0] == "0") {
+                    if ( node.split("---")[0] == window.html_name ) {
+                        first_chunk = node;
+                    }
+                }
+            } else {
+                if ( node == window.html_name ) {
                     first_chunk = node;
                 }
             }
@@ -346,7 +352,7 @@
             }
         }
 
-        if ( !chunk_is_parent ) {
+        if ( (!chunk_is_parent) && (Object.keys(prefetch).length > 0) ) {
             var ret = is_chunk(first_chunk);
             if ( ret[0] ) {
                 if ( document.body == null ) {
@@ -480,11 +486,12 @@
     
     // function which recursively handles all to_eval requests based on what urls have already been evaluated
     function handle_to_eval () {
-        eval_index = [];
         for ( var q = 0; q < to_evaluate.length; q++ ) {
             if ( can_eval(to_evaluate[q]) ) {
+                if ( to_evaluate[q] == undefined ) {
+                    continue;
+                }
                 evaluate_response(to_evaluate[q]);
-                eval_index.push(q);
             }
         }
     
@@ -827,6 +834,15 @@
                             document.body.setAttribute(val, "");
                         } else {
                             var val = tag_split[ii].split("=")[1];
+                            if ( tag_split[ii].split("=").length > 1 ) {
+                                val = "";
+                                for ( var uu = 1; uu < tag_split[ii].split("=").length; uu++ ) {
+                                    val = val + tag_split[ii].split("=")[uu] + "=";
+                                }
+                                if ( val.slice(-1) == "=" ) {
+                                    val = val.substring(0, val.length-1);
+                                }
+                            }
                             if ( val.slice(-1) == ">" ) {
                                 val = val.substring(0, val.length-1);
                             }
