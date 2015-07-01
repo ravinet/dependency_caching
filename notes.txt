@@ -1,0 +1,8 @@
+Cycle-breaking Algorithm:
+-Get a list of all cycles in the graph
+-Find the last link in each cycle, where "last" is the link visited last from the root node
+-Remove the last link that is lowest in the .dot file 
+-Keep removing links until no cycle remains
+
+
+Window rewriting algorithm - Section 4.4 of thesis (the 4 pages should explain everything)
