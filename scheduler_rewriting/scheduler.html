@@ -464,7 +464,9 @@
             }
         } else {
             // from original JS so just execute default callback
-            req.onload_orig();
+            if ( req.onload_orig != null ) {
+                req.onload_orig();
+            }
         }
     
         // add url to evaluated list

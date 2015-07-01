@@ -1,0 +1,56 @@
+Mobile.Fandango
+
+1. 
+In load.js:
+window.mps = window.mps || makeProxy({})  // here window.mps was null, so this makes window.mps an empty object
+...
+window.mps.getAd = function (adunit, _swap) { ... }; // window.mps.getAd is now defined
+
+In mobile.fandango.com/: 
+typeof window.mps.getAd == 'function' && window.document.write(window.mps.getAd('banner')); // here window.mps.getAd is read
+
+This can be used as an example of our recursive proxying. We track the write to window.mps, a write to window.mps.getAd, and on the subsequent call to window.mps.getAd(), we track a read to window.mps, as well as a read to window.mps.getAd
+
+
+2.
+In load.js:
+jQuery('head').append(mps.response.pagevars.insert_head);
+jQuery(elem).remove();
+
+jquery.touchwipe.js:
+jQuery(animObj).stop(true,false);
+
+
+3.
+load.js: function mpsCallback() { ...} // defines mpsCallback
+jsonp: mpsCallback(...) // reads mpsCallback
+
+
+
+Imgur
+
+1.
+In global.js: window.Namespace = function () {
+        var a, b, c, d = arguments, e = null;         for (a = 0; a < d.length; a += 1)             for (c = d[a].split('.'), e = window, b = 0; b < c.length; b += 1)                 e[c[b]] = e[c[b]] || makeProxy({}), e = e[c[b]];         return e; }
+In index.js: window.Namespace('Imgur.Upload.Index')
+
+This is just a standard function definition and subsequent function call.
+
+2.
+gallery.js: 
+requestAnimationFrame = d // write
+1507425748.js: 
+window.requestAnimationFrame(function () { ... } ) // read
+
+
+
+Ask.com
+
+1.
+ask_unified.min.c7f61e55.js: var JSUtil = ... ; // write
+ask.com: payload['anxi'] = JSUtil.defaultVal(_AnemoneParams2.eventId, ''); // read
+
+2.
+ask_home.min.6239cf50.js: var $j = jQuery; //write
+ask.com/: $j(document).ready(function () { ...}); // read
+
