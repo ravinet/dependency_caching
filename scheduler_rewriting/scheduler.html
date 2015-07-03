@@ -62,38 +62,40 @@
                 var can_eval_node = true;
                 if ( ret[0] ) { //it's a chunk!
                     if ( (node.split("---")[0] == parent_evaled.split("---")[0]) || (parent_evaled.indexOf("---") == -1) ) { // same html file name or parent not a chunk
-                        var rel_key = best_key(scheduler_parents, node, "exact" );
-                        if ( rel_key == "null" ) {
-                            rel_key = best_key(scheduler_parents, node);
-                        }
-                        if ( scheduler_parents[rel_key].indexOf(parent_evaled) != -1 ) {
-                            for ( var q = 0; q < scheduler_parents[rel_key].length; q++ ) {
-                                var parent_parent = scheduler_parents[rel_key][q];
-                                if ( !(in_array(evaluated, parent_parent, "exact")) ) {
-                                    can_eval_node = false;
-                                }
+                        if ( node.substring(0, node.substring(7).indexOf("/")) == html_name.substring(0, html_name.substring(7).indexOf("/")) ) {
+                            var rel_key = best_key(scheduler_parents, node, "exact" );
+                            if ( rel_key == "null" ) {
+                                rel_key = best_key(scheduler_parents, node);
                             }
-                            if ( can_eval_node ) {
-                                if ( document.body == null ) {
-                                    var x = document.createElement("body");
-                                    document.firstChild.appendChild(x);
-                                }
-                                if ( ret[2] == 'all' ) {
-                                    var pret = add_html(0, "end");
-                                    if ( pret == false ) {
-                                        return;
+                            if ( scheduler_parents[rel_key].indexOf(parent_evaled) != -1 ) {
+                                for ( var q = 0; q < scheduler_parents[rel_key].length; q++ ) {
+                                    var parent_parent = scheduler_parents[rel_key][q];
+                                    if ( !(in_array(evaluated, parent_parent, "exact")) ) {
+                                        can_eval_node = false;
                                     }
-                                } else {
+                                }
+                                if ( can_eval_node ) {
+                                    if ( document.body == null ) {
+                                        var x = document.createElement("body");
+                                        document.firstChild.appendChild(x);
+                                    }
+                                    if ( ret[2] == 'all' ) {
+                                        var pret = add_html(0, "end");
+                                        if ( pret == false ) {
+                                            return;
+                                        }
+                                    } else {
+                                        evaluated.push(node);
+                                        var pret = add_html(ret[1], ret[2]);
+                                        if ( pret == false ) {
+                                            return;
+                                        }
+                                    }
                                     evaluated.push(node);
-                                    var pret = add_html(ret[1], ret[2]);
-                                    if ( pret == false ) {
-                                        return;
-                                    }
+                                    notify_eval();
+                                    handle_all_chunks(node);
+                                    handle_to_eval();
                                 }
-                                evaluated.push(node);
-                                notify_eval();
-                                handle_all_chunks(node);
-                                handle_to_eval();
                             }
                         }
                     }
