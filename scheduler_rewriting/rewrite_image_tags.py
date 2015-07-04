@@ -53,13 +53,12 @@ def func(head):
           if ( child.name == "img" or child.name == "iframe" or child.name == "link" ):
             child['imgid'] = counter
             if ( original_src in url_map ):
-              to_use = "**" + original_src
-              url_map[to_use] = counter
+              url_map[original_src].append(counter)
             else:
-              url_map[original_src] = counter
+              url_map[original_src] = [counter]
             counter = counter + 1
           else:
-            url_map[original_src] = "null"
+            url_map[original_src] = ["null"]
           func(child)
         else:
           func(child)
@@ -80,15 +79,14 @@ print json.dumps(clean_chunked)
 origin_mappings= {}
 for url in url_map:
   real_url = url
-  if ( url[0:2] == "**" ):
-    url = url[2:]
   curr_origin = urlparse(url).netloc
   if ( curr_origin == '' ):
     curr_origin = "use_location"
-  if ( curr_origin in origin_mappings ):
-    origin_mappings[curr_origin].append([url, url_map[real_url]])
-  else:
-    origin_mappings[curr_origin] = [[url, url_map[real_url]]]
+  for x in range (0, len(url_map[real_url]) ):
+    if ( curr_origin in origin_mappings ):
+      origin_mappings[curr_origin].append([url, url_map[real_url][x]])
+    else:
+      origin_mappings[curr_origin] = [[url, url_map[real_url][x]]]
 
 
 print >> sys.stderr, json.dumps(origin_mappings)
