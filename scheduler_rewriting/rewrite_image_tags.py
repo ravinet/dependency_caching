@@ -27,6 +27,7 @@ def rewrite_css(css, site):
 def func(head):
   global counter
   for child in head.children:
+    data_src = False
     if isinstance(child, element.Tag):
       # remove relative paths from css
       orig_css = child.get('style')
@@ -40,16 +41,23 @@ def func(head):
             original_src = child.get('href')
         else:
           original_src = child.get('src')
+          if ( original_src == None or original_src == "" ):
+            original_src = child.get('data-src')
+            data_src = True
         if ( original_src != None and original_src != ""):
           #if ( original_src[0:5] == "https" ): # force http, disallow https
           #  original_src = "http" + original_src[5:]
           if ( child.name == "script" ):
             del child['src']
+            if ( data_src ):
+              del child['data-src']
           else:
             if ( child.name == "link" ):
               child['href'] = ""
             else:
               child['src'] = ""
+              if ( data_src ):
+                child['data-src'] = ""
           if ( child.name == "img" or child.name == "iframe" or child.name == "link" ):
             child['imgid'] = counter
             if ( original_src in url_map ):
