@@ -443,10 +443,12 @@
     
     // function to evaluate a response
     function evaluate_response(req) {
+        var iframe = false;
         // if request has an imageid, re-assign the source
         if ( req.hasOwnProperty("src_tag") ) {
             if ( req.src_tag != "null" ) {
                 var imgurl = window.URL.createObjectURL(req.response);
+                var yu = document.querySelector("[imgid=\"" + req.src_tag + "\"]");
                 if ( req.is_css ) {
                     document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("href", imgurl);
                     document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
@@ -456,6 +458,9 @@
                         document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("href", imgurl);
                         document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
                     } else {
+                        if ( document.querySelector("[imgid=\"" + req.src_tag + "\"]").nodeName == "IFRAME" ) {
+                            iframe = true;
+                        }
                         document.querySelector("[imgid=\"" + req.src_tag + "\"]").setAttribute("src", imgurl);
                         document.querySelector("[imgid=\"" + req.src_tag + "\"]").removeAttribute("imgid");
                     }
@@ -470,12 +475,14 @@
                 req.onload_orig();
             }
         }
-    
-        // add url to evaluated list
-        evaluated.push(validURL(req));
 
-        // notify other frames that this url is evaluated
-        notify_eval();
+        if ( !iframe ) {
+            // add url to evaluated list
+            evaluated.push(validURL(req));
+
+            // notify other frames that this url is evaluated
+            notify_eval();
+        }
 
         // check if node is in to_evaluate, and if so, remove it
         var pos = to_evaluate.indexOf(req);
