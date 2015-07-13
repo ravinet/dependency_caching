@@ -834,17 +834,52 @@
             for ( var x = start_use; x <= end_use; x++ ) {
                 if ( window.chunked_html[x].indexOf("<body") != -1 ) {
                     var tag_split = window.chunked_html[x].trim().split(" ");
+                    var prev_attr = "";
+                    var prev_val = "";
                     for ( var ii = 1; ii < tag_split.length; ii++ ) {
-                        var attr = tag_split[ii].split("=")[0];
                         if ( tag_split[ii].indexOf("=") == -1 ) {
                             var val = tag_split[ii];
+                            var count = (val.match(/"/g) || []).length;
+                            if ( count == 1 ) {
+                                if ( prev_val != "" ) {
+                                    if ( val.slice(-1) == ">" ) {
+                                        val = val.substring(0, val.length-1);
+                                    }
+                                    val = val.substring(1, val.length-1);
+                                    prev_val = prev_val + " " + val;
+                                    if ( prev_val.substring(0,1) == "\"" ) {
+                                        prev_val = prev_val.substring(1);
+                                    }
+                                    document.body.setAttribute(prev_attr, prev_val);
+                                    prev_attr = "";
+                                    prev_val = "";
+                                } else {
+                                    prev_val = val;
+                                }
+                                continue;
+                            } else if ( count == 0 ) {
+                                if ( prev_val != "" ) {
+                                    prev_val = prev_val + " " + val;
+                                    continue;
+                                }
+                            }
+
                             if ( val.slice(-1) == ">" ) {
                                 val = val.substring(0, val.length-1);
                             }
                             val = val.substring(1, val.length-1);
                             document.body.setAttribute(val, "");
+                            prev_attr = "";
                         } else {
+                            var attr = tag_split[ii].split("=")[0];
+                            prev_attr = attr;
                             var val = tag_split[ii].split("=")[1];
+                            var count = (val.match(/"/g) || []).length;
+                            if ( count == 1 ) {
+                                prev_attr = attr;
+                                prev_val = val;
+                                continue;
+                            }
                             if ( tag_split[ii].split("=").length > 1 ) {
                                 val = "";
                                 for ( var uu = 1; uu < tag_split[ii].split("=").length; uu++ ) {
@@ -858,7 +893,11 @@
                                 val = val.substring(0, val.length-1);
                             }
                             val = val.substring(1, val.length-1);
+                            if ( val.substring(0,1) == "\"" ) {
+                                val = val.substring(1);
+                            }
                             document.body.setAttribute(attr, val);
+                            prev_attr = "";
                         }
                     }
                 }
