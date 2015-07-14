@@ -36,7 +36,6 @@ for ts, buf in pcap:
             http = dpkt.http.Request(tcp.data)
             print http.uri
     except:
-        #print >> sys.stderr, "likely an incomplete entry in pcap file!"
         pass
 f.close()
 os.system("sudo rm test.pcap")
