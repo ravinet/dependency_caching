@@ -537,6 +537,11 @@
         if ( (url.substr(url.length - 4) == "html") || (url == window.html_name) ) {
             return [true, 0, 'all'];
         }
+        if ( url.indexOf("ads?") != -1 ) {
+            if ( match_urls(url, window.html_name)[0] ) {
+                return [true, 0, 'all'];
+            }
+        }
 
         // not a chunk!
         return [false, 0, 0];
