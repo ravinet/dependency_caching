@@ -26,13 +26,13 @@ pcap = dpkt.pcap.Reader(f)
 for ts, buf in pcap:
     try:
         eth = dpkt.ethernet.Ethernet(buf)
-        if eth.type!=2048: #For ipv4, dpkt.ethernet.Ethernet(buf).type =2048
+        if eth.type!=2048: # check if ip packet
             continue
         ip=eth.data
-        if ip.p!=6:
+        if ip.p!=6: # check if tcp
             continue
         tcp=ip.data
-        if tcp.dport == 80 and len(tcp.data) > 0:
+        if tcp.dport == 80 and len(tcp.data) > 0: # check if http
             http = dpkt.http.Request(tcp.data)
             print http.uri
     except:
