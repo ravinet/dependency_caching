@@ -51,7 +51,7 @@ for filename in files:
             #    os.system('cat rewritten/tempfile >> rewritten/prependtempfile')
             #    os.system('mv rewritten/prependtempfile rewritten/tempfile')
             if ( "html" in res_type ): # rewrite all inline js in html files
-               html_obj_name = out.split("name=")[1]
+               html_obj_name = out.split("na--me=")[1]
                command = "python rewrite_image_tags.py rewritten/tempfile '" + html_obj_name + "'"
                proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                (out,err) = proc.communicate()
@@ -64,7 +64,7 @@ for filename in files:
                os.system('cat scheduler.html >> rewritten/prependtempfile')
                os.system('mv rewritten/prependtempfile rewritten/tempfile')
             elif ( ("css" in res_type) or ("woff" in res_type) ):
-                css_obj_name = out.split("name=")[1]
+                css_obj_name = out.split("na--me=")[1]
                 pos = css_obj_name.rfind("/")
                 css_obj_name = css_obj_name[0:pos+1]
                 os.system("python rewrite_css.py rewritten/tempfile '" + css_obj_name + "' >> rewritten/cssfile")
@@ -86,7 +86,7 @@ for filename in files:
                 #os.system('mv rewritten/prependtempfile rewritten/plaintext')
 
             if ( "html" in res_type ): # rewrite all inline js in html files
-                html_obj_name = out.split("name=")[1]
+                html_obj_name = out.split("na--me=")[1]
                 command = "python rewrite_image_tags.py rewritten/plaintext '" + html_obj_name + "'"
                 proc = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                 (out,err) = proc.communicate()
@@ -99,7 +99,7 @@ for filename in files:
                 os.system('cat scheduler.html >> rewritten/prependtempfile')
                 os.system('mv rewritten/prependtempfile rewritten/plaintext')
             elif ( ("css" in res_type) or ("woff" in res_type) ):
-                css_obj_name = out.split("name=")[1]
+                css_obj_name = out.split("na--me=")[1]
                 pos = css_obj_name.rfind("/")
                 css_obj_name = css_obj_name[0:pos+1]
                 os.system("python rewrite_css.py rewritten/plaintext '" + css_obj_name + "' >> rewritten/cssfile")

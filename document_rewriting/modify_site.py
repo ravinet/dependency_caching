@@ -32,7 +32,7 @@ for filename in files:
     gzip = out.split("*")[2].split("=")[1]
     chunked = out.split("*")[1].split("=")[1]
     # get object name (only care if it is html)
-    html_name = out.split("name=")[1]
+    html_name = out.split("na--me=")[1]
     # need to still handle if response is chunked and gzipped (we can't just run gzip on it)!
     if ( ("html" in res_type) or ("javascript" in res_type) ): # html or javascript file, so rewrite
         if ( "true" in chunked ): # response chunked so we must unchunk
