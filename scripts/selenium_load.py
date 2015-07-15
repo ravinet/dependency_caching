@@ -38,7 +38,7 @@ profile = webdriver.FirefoxProfile()
 #profile.set_preference("webdriver_assume_untrusted_issuer", "false") 
 driver.set_page_load_timeout(300)
 driver.get(site)
-#sleep(10)
+sleep(2)
 
 
 #notes: http://www.sitepoint.com/profiling-page-loads-with-the-navigation-timing-api/
