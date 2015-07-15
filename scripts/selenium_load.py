@@ -19,8 +19,8 @@ from time import sleep
 
 site = sys.argv[1]
 
-#display = Display(visible=0, size=(800,600))
-#display.start()
+display = Display(visible=0, size=(800,600))
+display.start()
 
 curr_dir = os.getcwd()
 #chrome_path = str(curr_dir) + "/chromedriver"
@@ -36,7 +36,7 @@ driver = webdriver.Firefox()
 
 profile = webdriver.FirefoxProfile()
 #profile.set_preference("webdriver_assume_untrusted_issuer", "false") 
-driver.set_page_load_timeout(300)
+driver.set_page_load_timeout(500)
 driver.get(site)
 sleep(2)
 
@@ -52,6 +52,7 @@ if ( loadEventEnd != 0 ):
     print loadEventEnd - navigationStart
     driver.quit()
     sys.exit()
+count = 0
 while loadEventEnd == 0 and count < 3:
     loadEventEnd = driver.execute_script("return window.performance.timing.loadEventEnd")
     sleep(2)
