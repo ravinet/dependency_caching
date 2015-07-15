@@ -47,6 +47,7 @@ try:
                 responses.append(ts)
                 if ( len(responses) == response_count ): # we now have enough responses
                     page_load_time = float(responses[len(responses)-1]) - float(first_response_time)
+                    page_load_time = page_load_time * 1000
                     # currently prints page load time in seconds
                     print page_load_time
         except:

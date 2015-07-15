@@ -53,6 +53,7 @@ print first_response_time
 print len(responses)
 print responses
 page_load_time = float(responses[len(responses)-1]) - float(first_response_time)
+page_load_time = page_load_time * 1000
 # currently prints page load time in seconds
 print page_load_time
 os.system("sudo rm test.pcap")
