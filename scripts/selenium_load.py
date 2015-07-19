@@ -7,7 +7,7 @@ from pyvirtualdisplay import Display
 import os
 from time import sleep
 #TO RUN: download https://pypi.python.org/packages/source/s/selenium/selenium-2.39.0.tar.gz
-# more updated: https://pypi.python.org/packages/source/s/selenium/selenium-2.46.0.tar.gzhttps://pypi.python.org/packages/source/s/selenium/selenium-2.46.0.tar.gz
+# more updated: https://pypi.python.org/packages/source/s/selenium/selenium-2.46.0.tar.gz
 #run sudo apt-get install python-setuptools
 #after untar, run sudo python setup.py install
 #follow directions here: https://pypi.python.org/pypi/PyVirtualDisplay to install pyvirtualdisplay
