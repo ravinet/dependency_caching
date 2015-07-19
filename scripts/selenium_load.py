@@ -19,8 +19,10 @@ from time import sleep
 
 site = sys.argv[1]
 
-display = Display(visible=0, size=(800,600))
-display.start()
+sleep(10)
+print >>sys.stderr, "starting page load now"
+#display = Display(visible=0, size=(800,600))
+#display.start()
 
 curr_dir = os.getcwd()
 #chrome_path = str(curr_dir) + "/chromedriver"
