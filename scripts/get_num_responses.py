@@ -8,7 +8,7 @@ import numpy
 
 sites = sys.argv[1]
 results = {}
-
+delay = 50
 
 with open(sites) as f:
     for line in f:
@@ -17,47 +17,23 @@ with open(sites) as f:
         measurements = []
         results[url] = []
         for x in range(0,2):
-            command = "sudo tcpdump -i ingress -w test.pcap"
-            tcpdump = subprocess.Popen(command, shell=True, stderr=subprocess.STDOUT)
-            time.sleep(1)
-            sel_cmd = "replayshell /home/ravi/dependency_caching/window_rewriting/prettycorpus/" + folder + " /usr/local/bin/delayshell 50 /usr/bin/python selenium_load.py " + url
+            sel_cmd = "replayshell /home/ravi/dependency_caching/window_rewriting/prettycorpus/" + folder + " /usr/bin/python delay_tcpdump.py " + url + " 50 0"
             proc = subprocess.Popen([sel_cmd], stdout=subprocess.PIPE, shell=True)
             (out, err) = proc.communicate()
-            time.sleep(2)
-            tcpdump.kill()
             time.sleep(3)
             os.system("sudo killall replayshell 2>/dev/null")
             os.system("sudo killall delayshell 2>/dev/null")
-            os.system("rm -r /tmp/* > /dev/null")
+            os.system("sudo rm -r /tmp/* > /dev/null")
             time.sleep(3)
-            plt = out.strip("\n")
-            if ( out !=  " " and out != "" and len(out) < 10):
-                try:
-                    f = open('test.pcap')
-                    pcap = dpkt.pcap.Reader(f)
-                    for ts, buf in pcap:
-                        try:
-                            eth = dpkt.ethernet.Ethernet(buf)
-                            if eth.type!=2048: # check if ip packet
-                                continue
-                            ip=eth.data
-                            if ip.p!=6: # check if tcp 
-                                continue 
-                            tcp=ip.data
-                            if tcp.dport == 80 and len(tcp.data) > 0: # check if http request 
-                                http = dpkt.http.Request(tcp.data)
-                            if tcp.sport == 80: # this is a response
-                                y = dpkt.http.Response(tcp.data)
-                                responses.append(ts)
-                        except:
-                            pass
-                    results[url].append(len(responses))
-                except:
-                    print >> sys.stderr, "error reading pcap"
-                f.close()
-                os.system("sudo rm test.pcap")
-            else:
-                print "caught it!"
+            out_list = out.split("\n")
+            for entry in out_list:
+                if entry[0:10] == 'responses:':
+                    results[url].append(int(entry.split(": ")[1].strip("\n")))
+for key in results.keys():
+    print key + ": " + str(results[key])
+
+
+print "\n\naverages:\n"
 
 for key in results.keys():
-    print key + ": " + numpy.mean(results[key])
+    print key + ": mean=" + str(numpy.mean(results[key])) + " median=" + str(numpy.median(results[key])) 
