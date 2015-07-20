@@ -20,7 +20,6 @@ from time import sleep
 site = sys.argv[1]
 
 sleep(10)
-print >>sys.stderr, "starting page load now"
 #display = Display(visible=0, size=(800,600))
 #display.start()
 
@@ -66,5 +65,5 @@ if ( type(loadEventEnd) == int and type(navigationStart) == int ):
     else:
         print str(complete_process)
 
-sleep(1)
+sleep(3)
 driver.quit()
