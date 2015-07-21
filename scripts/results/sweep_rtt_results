@@ -1,0 +1,509 @@
+site: http://www.about.com delay: 100 plt: 16877 rtts: 84
+site: http://www.about.com delay: 100 plt: 16538 rtts: 82
+site: http://www.about.com delay: 200 plt: 39448 rtts: 98
+site: http://www.about.com delay: 200 plt: 39496 rtts: 98
+site: http://www.about.com delay: 300 plt: 58984 rtts: 98
+site: http://www.about.com delay: 300 plt: 58924 rtts: 98
+site: http://www.about.com delay: 400 plt: 78081 rtts: 97
+site: http://www.about.com delay: 400 plt: 77965 rtts: 97
+site: http://www.about.com delay: 500 plt: 100364 rtts: 100
+site: http://www.about.com delay: 500 plt: 83840 rtts: 83
+site: http://www.about.com delay: 600 plt: 98765 rtts: 82
+site: http://www.about.com delay: 600 plt: 97672 rtts: 81
+site: http://www.about.com delay: 700 plt: 116570 rtts: 83
+site: http://www.about.com delay: 700 plt: 136322 rtts: 97
+site: http://www.about.com delay: 800 plt: 134883 rtts: 84
+site: http://www.about.com delay: 800 plt: 155576 rtts: 97
+site: http://www.about.com delay: 900 plt: 158265 rtts: 87
+site: http://www.about.com delay: 900 plt: 180462 rtts: 100
+site: http://www.about.com delay: 1000 plt: 201036 rtts: 100
+site: http://www.about.com delay: 1000 plt: 167480 rtts: 83
+site: http://www.about.com delay: 1100 plt: 227023 rtts: 103
+site: http://www.about.com delay: 1100 plt: 224890 rtts: 102
+site: http://www.about.com delay: 1200 plt: 214132 rtts: 89
+site: http://www.about.com delay: 1200 plt: 214015 rtts: 89
+site: http://www.about.com delay: 1300 plt: 231913 rtts: 89
+site: http://www.about.com delay: 1300 plt: 232390 rtts: 89
+site: http://www.about.com delay: 1400 plt: 253414 rtts: 90
+site: http://www.about.com delay: 1400 plt: 252668 rtts: 90
+site: http://www.about.com delay: 1500 plt: 270526 rtts: 90
+site: http://www.about.com delay: 1500 plt: 271040 rtts: 90
+site: http://www.apple.com delay: 100 plt: 2942 rtts: 14
+site: http://www.apple.com delay: 100 plt: 2937 rtts: 14
+site: http://www.apple.com delay: 200 plt: 5170 rtts: 12
+site: http://www.apple.com delay: 200 plt: 5164 rtts: 12
+site: http://www.apple.com delay: 300 plt: 7574 rtts: 12
+site: http://www.apple.com delay: 300 plt: 7563 rtts: 12
+site: http://www.apple.com delay: 400 plt: 9964 rtts: 12
+site: http://www.apple.com delay: 400 plt: 9967 rtts: 12
+site: http://www.apple.com delay: 500 plt: 16115 rtts: 16
+site: http://www.apple.com delay: 500 plt: 14330 rtts: 14
+site: http://www.apple.com delay: 600 plt: 18368 rtts: 15
+site: http://www.apple.com delay: 600 plt: 18117 rtts: 15
+site: http://www.apple.com delay: 700 plt: 21373 rtts: 15
+site: http://www.apple.com delay: 700 plt: 19955 rtts: 14
+site: http://www.apple.com delay: 800 plt: 24108 rtts: 15
+site: http://www.apple.com delay: 800 plt: 24362 rtts: 15
+site: http://www.apple.com delay: 900 plt: 27103 rtts: 15
+site: http://www.apple.com delay: 900 plt: 30710 rtts: 17
+site: http://www.apple.com delay: 1000 plt: 30361 rtts: 15
+site: http://www.apple.com delay: 1000 plt: 34122 rtts: 17
+site: http://www.apple.com delay: 1100 plt: 39745 rtts: 18
+site: http://www.apple.com delay: 1100 plt: 39983 rtts: 18
+site: http://www.apple.com delay: 1200 plt: 43285 rtts: 18
+site: http://www.apple.com delay: 1200 plt: 43305 rtts: 18
+site: http://www.apple.com delay: 1300 plt: 47169 rtts: 18
+site: http://www.apple.com delay: 1300 plt: 47179 rtts: 18
+site: http://www.apple.com delay: 1400 plt: 50812 rtts: 18
+site: http://www.apple.com delay: 1400 plt: 50767 rtts: 18
+site: http://www.apple.com delay: 1500 plt: 54384 rtts: 18
+site: http://www.apple.com delay: 1500 plt: 54389 rtts: 18
+site: http://www.ask.com delay: 100 plt: 13886 rtts: 69
+site: http://www.ask.com delay: 100 plt: 6549 rtts: 32
+site: http://www.ask.com delay: 200 plt: 26144 rtts: 65
+site: http://www.ask.com delay: 200 plt: 26038 rtts: 65
+site: http://www.ask.com delay: 300 plt: 38788 rtts: 64
+site: http://www.ask.com delay: 300 plt: 18264 rtts: 30
+site: http://www.ask.com delay: 400 plt: 51631 rtts: 64
+site: http://www.ask.com delay: 400 plt: 51572 rtts: 64
+site: http://www.ask.com delay: 500 plt: 70407 rtts: 70
+site: http://www.ask.com delay: 500 plt: 65403 rtts: 65
+site: http://www.ask.com delay: 600 plt: 44715 rtts: 37
+site: http://www.ask.com delay: 600 plt: 78376 rtts: 65
+site: http://www.ask.com delay: 700 plt: 103988 rtts: 74
+site: http://www.ask.com delay: 700 plt: 98383 rtts: 70
+site: http://www.ask.com delay: 800 plt: 110826 rtts: 69
+site: http://www.ask.com delay: 800 plt: 105984 rtts: 66
+site: http://www.ask.com delay: 900 plt: 123089 rtts: 68
+site: http://www.ask.com delay: 900 plt: 130019 rtts: 72
+site: http://www.ask.com delay: 1000 plt: 96188 rtts: 48
+site: http://www.ask.com delay: 1000 plt: 158413 rtts: 79
+site: http://www.ask.com delay: 1100 plt: 187417 rtts: 85
+site: http://www.ask.com delay: 1100 plt: 99320 rtts: 45
+site: http://www.ask.com delay: 1200 plt: 211643 rtts: 88
+site: http://www.ask.com delay: 1200 plt: 204430 rtts: 85
+site: http://www.ask.com delay: 1300 plt: 229207 rtts: 88
+site: http://www.ask.com delay: 1300 plt: 229227 rtts: 88
+site: http://www.ask.com delay: 1400 plt: 249651 rtts: 89
+site: http://www.ask.com delay: 1400 plt: 249659 rtts: 89
+site: http://www.ask.com delay: 1500 plt: 264450 rtts: 88
+site: http://www.ask.com delay: 1500 plt: 264452 rtts: 88
+site: http://www.ebay.com delay: 100 plt: 6379 rtts: 31
+site: http://www.ebay.com delay: 100 plt: 5822 rtts: 29
+site: http://www.ebay.com delay: 200 plt: 10201 rtts: 25
+site: http://www.ebay.com delay: 200 plt: 10292 rtts: 25
+site: http://www.ebay.com delay: 300 plt: 14754 rtts: 24
+site: http://www.ebay.com delay: 300 plt: 15275 rtts: 25
+site: http://www.ebay.com delay: 400 plt: 18365 rtts: 22
+site: http://www.ebay.com delay: 400 plt: 18391 rtts: 22
+site: http://www.ebay.com delay: 500 plt: 22401 rtts: 22
+site: http://www.ebay.com delay: 500 plt: 26267 rtts: 26
+site: http://www.ebay.com delay: 600 plt: 24783 rtts: 20
+site: http://www.ebay.com delay: 600 plt: 28690 rtts: 23
+site: http://www.ebay.com delay: 700 plt: 33887 rtts: 24
+site: http://www.ebay.com delay: 700 plt: 31143 rtts: 22
+site: http://www.ebay.com delay: 800 plt: 34288 rtts: 21
+site: http://www.ebay.com delay: 800 plt: 34401 rtts: 21
+site: http://www.ebay.com delay: 900 plt: 46316 rtts: 25
+site: http://www.ebay.com delay: 900 plt: 38498 rtts: 21
+site: http://www.ebay.com delay: 1000 plt: 40448 rtts: 20
+site: http://www.ebay.com delay: 1000 plt: 48164 rtts: 24
+site: http://www.ebay.com delay: 1100 plt: 64485 rtts: 29
+site: http://www.ebay.com delay: 1100 plt: 61385 rtts: 27
+site: http://www.ebay.com delay: 1200 plt: 87267 rtts: 36
+site: http://www.ebay.com delay: 1200 plt: 83297 rtts: 34
+site: http://www.ebay.com delay: 1300 plt: 90272 rtts: 34
+site: http://www.ebay.com delay: 1300 plt: 94831 rtts: 36
+site: http://www.ebay.com delay: 1400 plt: 95879 rtts: 34
+site: http://www.ebay.com delay: 1400 plt: 95966 rtts: 34
+site: http://www.ebay.com delay: 1500 plt: 103439 rtts: 34
+site: http://www.ebay.com delay: 1500 plt: 103258 rtts: 34
+site: http://espn.go.com delay: 100 plt: 5859 rtts: 29
+site: http://espn.go.com delay: 100 plt: 5750 rtts: 28
+site: http://espn.go.com delay: 200 plt: 10086 rtts: 25
+site: http://espn.go.com delay: 200 plt: 10172 rtts: 25
+site: http://espn.go.com delay: 300 plt: 14877 rtts: 24
+site: http://espn.go.com delay: 300 plt: 14420 rtts: 24
+site: http://espn.go.com delay: 400 plt: 19034 rtts: 23
+site: http://espn.go.com delay: 400 plt: 19063 rtts: 23
+site: http://espn.go.com delay: 500 plt: 27420 rtts: 27
+site: http://espn.go.com delay: 500 plt: 27367 rtts: 27
+site: http://espn.go.com delay: 600 plt: 32018 rtts: 26
+site: http://espn.go.com delay: 600 plt: 30601 rtts: 25
+site: http://espn.go.com delay: 700 plt: 36160 rtts: 25
+site: http://espn.go.com delay: 700 plt: 37550 rtts: 26
+site: http://espn.go.com delay: 800 plt: 39016 rtts: 24
+site: http://espn.go.com delay: 800 plt: 40646 rtts: 25
+site: http://espn.go.com delay: 900 plt: 46401 rtts: 25
+site: http://espn.go.com delay: 900 plt: 46404 rtts: 25
+site: http://espn.go.com delay: 1000 plt: 52421 rtts: 26
+site: http://espn.go.com delay: 1000 plt: 50366 rtts: 25
+site: http://espn.go.com delay: 1100 plt: 68167 rtts: 30
+site: http://espn.go.com delay: 1100 plt: 73180 rtts: 33
+site: http://espn.go.com delay: 1200 plt: 84634 rtts: 35
+site: http://espn.go.com delay: 1200 plt: 81995 rtts: 34
+site: http://espn.go.com delay: 1300 plt: 91920 rtts: 35
+site: http://espn.go.com delay: 1300 plt: 95822 rtts: 36
+site: http://espn.go.com delay: 1400 plt: 98615 rtts: 35
+site: http://espn.go.com delay: 1400 plt: 98614 rtts: 35
+site: http://espn.go.com delay: 1500 plt: 103883 rtts: 34
+site: http://espn.go.com delay: 1500 plt: 105372 rtts: 35
+site: http://mobile.fandango.com delay: 100 plt: 3103 rtts: 15
+site: http://mobile.fandango.com delay: 100 plt: 3093 rtts: 15
+site: http://mobile.fandango.com delay: 200 plt: 5692 rtts: 14
+site: http://mobile.fandango.com delay: 200 plt: 5709 rtts: 14
+site: http://mobile.fandango.com delay: 300 plt: 8495 rtts: 14
+site: http://mobile.fandango.com delay: 300 plt: 8135 rtts: 13
+site: http://mobile.fandango.com delay: 400 plt: 10770 rtts: 13
+site: http://mobile.fandango.com delay: 400 plt: 10748 rtts: 13
+site: http://mobile.fandango.com delay: 500 plt: 13368 rtts: 13
+site: http://mobile.fandango.com delay: 500 plt: 15095 rtts: 15
+site: http://mobile.fandango.com delay: 600 plt: 20516 rtts: 17
+site: http://mobile.fandango.com delay: 600 plt: 18108 rtts: 15
+site: http://mobile.fandango.com delay: 700 plt: 25272 rtts: 18
+site: http://mobile.fandango.com delay: 700 plt: 18565 rtts: 13
+site: http://mobile.fandango.com delay: 800 plt: 22500 rtts: 14
+site: http://mobile.fandango.com delay: 800 plt: 27298 rtts: 17
+site: http://mobile.fandango.com delay: 900 plt: 28882 rtts: 16
+site: http://mobile.fandango.com delay: 900 plt: 27086 rtts: 15
+site: http://mobile.fandango.com delay: 1000 plt: 32122 rtts: 16
+site: http://mobile.fandango.com delay: 1000 plt: 34112 rtts: 17
+site: http://mobile.fandango.com delay: 1100 plt: 46307 rtts: 21
+site: http://mobile.fandango.com delay: 1100 plt: 46255 rtts: 21
+site: http://mobile.fandango.com delay: 1200 plt: 50487 rtts: 21
+site: http://mobile.fandango.com delay: 1200 plt: 50503 rtts: 21
+site: http://mobile.fandango.com delay: 1300 plt: 54709 rtts: 21
+site: http://mobile.fandango.com delay: 1300 plt: 54696 rtts: 21
+site: http://mobile.fandango.com delay: 1400 plt: 58894 rtts: 21
+site: http://mobile.fandango.com delay: 1400 plt: 58892 rtts: 21
+site: http://mobile.fandango.com delay: 1500 plt: 63102 rtts: 21
+site: http://mobile.fandango.com delay: 1500 plt: 63060 rtts: 21
+site: http://m.finishline.com delay: 100 plt: 11387 rtts: 56
+site: http://m.finishline.com delay: 100 plt: 11584 rtts: 57
+site: http://m.finishline.com delay: 200 plt: 23507 rtts: 58
+site: http://m.finishline.com delay: 200 plt: 24233 rtts: 60
+site: http://m.finishline.com delay: 300 plt: 35206 rtts: 58
+site: http://m.finishline.com delay: 300 plt: 35208 rtts: 58
+site: http://m.finishline.com delay: 400 plt: 46823 rtts: 58
+site: http://m.finishline.com delay: 400 plt: 46824 rtts: 58
+site: http://m.finishline.com delay: 500 plt: 79471 rtts: 79
+site: http://m.finishline.com delay: 500 plt: 78432 rtts: 78
+site: http://m.finishline.com delay: 600 plt: 83481 rtts: 69
+site: http://m.finishline.com delay: 600 plt: 70020 rtts: 58
+site: http://m.finishline.com delay: 700 plt: 78845 rtts: 56
+site: http://m.finishline.com delay: 700 plt: 95655 rtts: 68
+site: http://m.finishline.com delay: 800 plt: 96402 rtts: 60
+site: http://m.finishline.com delay: 800 plt: 109716 rtts: 68
+site: http://m.finishline.com delay: 900 plt: 106871 rtts: 59
+site: http://m.finishline.com delay: 900 plt: 108385 rtts: 60
+site: http://m.finishline.com delay: 1000 plt: 122734 rtts: 61
+site: http://m.finishline.com delay: 1000 plt: 118210 rtts: 59
+site: http://m.finishline.com delay: 1100 plt: 169591 rtts: 77
+site: http://m.finishline.com delay: 1100 plt: 196304 rtts: 89
+site: http://m.finishline.com delay: 1200 plt: 187413 rtts: 78
+site: http://m.finishline.com delay: 1200 plt: 183125 rtts: 76
+site: http://m.finishline.com delay: 1300 plt: 200644 rtts: 77
+site: http://m.finishline.com delay: 1300 plt: 200626 rtts: 77
+site: http://m.finishline.com delay: 1400 plt: 218848 rtts: 78
+site: http://m.finishline.com delay: 1400 plt: 218865 rtts: 78
+site: http://m.finishline.com delay: 1500 plt: 234248 rtts: 78
+site: http://m.finishline.com delay: 1500 plt: 234468 rtts: 78
+site: http://imgur.com delay: 100 plt: 7349 rtts: 36
+site: http://imgur.com delay: 100 plt: 7327 rtts: 36
+site: http://imgur.com delay: 200 plt: 11128 rtts: 27
+site: http://imgur.com delay: 200 plt: 11242 rtts: 28
+site: http://imgur.com delay: 300 plt: 16716 rtts: 27
+site: http://imgur.com delay: 300 plt: 16229 rtts: 27
+site: http://imgur.com delay: 400 plt: 20879 rtts: 26
+site: http://imgur.com delay: 400 plt: 21651 rtts: 27
+site: http://imgur.com delay: 500 plt: 32741 rtts: 32
+site: http://imgur.com delay: 500 plt: 29847 rtts: 29
+site: http://imgur.com delay: 600 plt: 33264 rtts: 27
+site: http://imgur.com delay: 600 plt: 36852 rtts: 30
+site: http://imgur.com delay: 700 plt: 38919 rtts: 27
+site: http://imgur.com delay: 700 plt: 41466 rtts: 29
+site: http://imgur.com delay: 800 plt: 44557 rtts: 27
+site: http://imgur.com delay: 800 plt: 41962 rtts: 26
+site: http://imgur.com delay: 900 plt: 56422 rtts: 31
+site: http://imgur.com delay: 900 plt: 47054 rtts: 26
+site: http://imgur.com delay: 1000 plt: 61224 rtts: 30
+site: http://imgur.com delay: 1000 plt: 52306 rtts: 26
+site: http://imgur.com delay: 1100 plt: 86918 rtts: 39
+site: http://imgur.com delay: 1100 plt: 93275 rtts: 42
+site: http://imgur.com delay: 1200 plt: 99512 rtts: 41
+site: http://imgur.com delay: 1200 plt: 99262 rtts: 41
+site: http://imgur.com delay: 1300 plt: 107961 rtts: 41
+site: http://imgur.com delay: 1300 plt: 107958 rtts: 41
+site: http://imgur.com delay: 1400 plt: 116162 rtts: 41
+site: http://imgur.com delay: 1400 plt: 117565 rtts: 41
+site: http://imgur.com delay: 1500 plt: 125540 rtts: 41
+site: http://imgur.com delay: 1500 plt: 125449 rtts: 41
+site: http://www.outbrain.com delay: 100 plt: 67019 rtts: 335
+site: http://www.outbrain.com delay: 100 plt: 69782 rtts: 348
+site: http://www.outbrain.com delay: 200 plt: 111714 rtts: 279
+site: http://www.outbrain.com delay: 200 plt: 140802 rtts: 352
+site: http://www.outbrain.com delay: 300 plt: 207460 rtts: 345
+site: http://www.outbrain.com delay: 300 plt: 197847 rtts: 329
+site: http://www.outbrain.com delay: 400 plt: 331019 rtts: 413
+site: http://www.outbrain.com delay: 400 plt: 331013 rtts: 413
+site: http://www.outbrain.com delay: 500 plt: 379608 rtts: 379
+site: http://www.outbrain.com delay: 500 plt: 363623 rtts: 363
+site: http://www.outbrain.com delay: 600 plt: 439864 rtts: 366
+site: http://www.outbrain.com delay: 600 plt: 439854 rtts: 366
+site: http://www.outbrain.com delay: 700 plt: 443020 rtts: 316
+site: http://www.outbrain.com delay: 700 plt: 461273 rtts: 329
+site: http://www.outbrain.com delay: 800 plt: 506274 rtts: 316
+site: http://www.outbrain.com delay: 800 plt: 501468 rtts: 313
+site: http://www.outbrain.com delay: 900 plt: 564111 rtts: 313
+site: http://www.outbrain.com delay: 900 plt: 573129 rtts: 318
+site: http://www.outbrain.com delay: 1000 plt: 666844 rtts: 333
+site: http://www.outbrain.com delay: 1000 plt: 598733 rtts: 299
+caught it!
+caught it!
+site: http://www.outbrain.com delay: 1200 plt: 679956 rtts: 283
+site: http://www.outbrain.com delay: 1200 plt: 678142 rtts: 282
+caught it!
+caught it!
+caught it!
+caught it!
+caught it!
+caught it!
+site: http://stackoverflow.com delay: 100 plt: 16350 rtts: 81
+site: http://stackoverflow.com delay: 100 plt: 16287 rtts: 81
+site: http://stackoverflow.com delay: 200 plt: 25873 rtts: 64
+site: http://stackoverflow.com delay: 200 plt: 25877 rtts: 64
+site: http://stackoverflow.com delay: 300 plt: 38844 rtts: 64
+site: http://stackoverflow.com delay: 300 plt: 38682 rtts: 64
+site: http://stackoverflow.com delay: 400 plt: 51493 rtts: 64
+site: http://stackoverflow.com delay: 400 plt: 51480 rtts: 64
+site: http://stackoverflow.com delay: 500 plt: 64323 rtts: 64
+site: http://stackoverflow.com delay: 500 plt: 64314 rtts: 64
+site: http://stackoverflow.com delay: 600 plt: 80678 rtts: 67
+site: http://stackoverflow.com delay: 600 plt: 80691 rtts: 67
+site: http://stackoverflow.com delay: 700 plt: 115125 rtts: 82
+site: http://stackoverflow.com delay: 700 plt: 115114 rtts: 82
+site: http://stackoverflow.com delay: 800 plt: 131509 rtts: 82
+site: http://stackoverflow.com delay: 800 plt: 107479 rtts: 67
+site: http://stackoverflow.com delay: 900 plt: 144353 rtts: 80
+site: http://stackoverflow.com delay: 900 plt: 120895 rtts: 67
+site: http://stackoverflow.com delay: 1000 plt: 134357 rtts: 67
+site: http://stackoverflow.com delay: 1000 plt: 134317 rtts: 67
+site: http://stackoverflow.com delay: 1100 plt: 152119 rtts: 69
+site: http://stackoverflow.com delay: 1100 plt: 116878 rtts: 53
+site: http://stackoverflow.com delay: 1200 plt: 165938 rtts: 69
+site: http://stackoverflow.com delay: 1200 plt: 165930 rtts: 69
+site: http://stackoverflow.com delay: 1300 plt: 179723 rtts: 69
+site: http://stackoverflow.com delay: 1300 plt: 179737 rtts: 69
+site: http://stackoverflow.com delay: 1400 plt: 193534 rtts: 69
+site: http://stackoverflow.com delay: 1400 plt: 193557 rtts: 69
+site: http://stackoverflow.com delay: 1500 plt: 207366 rtts: 69
+site: http://stackoverflow.com delay: 1500 plt: 207345 rtts: 69
+
+
+Measurements for RTT of 200 ms:
+url: http://stackoverflow.com mean_rtts: 81.0 median_rtts: 81.0
+url: http://m.finishline.com mean_rtts: 56.5 median_rtts: 56.5
+url: http://www.outbrain.com mean_rtts: 341.5 median_rtts: 341.5
+url: http://www.about.com mean_rtts: 83.0 median_rtts: 83.0
+url: http://www.ebay.com mean_rtts: 30.0 median_rtts: 30.0
+url: http://www.ask.com mean_rtts: 50.5 median_rtts: 50.5
+url: http://espn.go.com mean_rtts: 28.5 median_rtts: 28.5
+url: http://imgur.com mean_rtts: 36.0 median_rtts: 36.0
+url: http://mobile.fandango.com mean_rtts: 15.0 median_rtts: 15.0
+url: http://www.apple.com mean_rtts: 14.0 median_rtts: 14.0
+
+
+
+measurements for RTT of 400 ms:
+url: http://stackoverflow.com rtts: 64.0 median_rtts: 64.0
+url: http://m.finishline.com rtts: 59.0 median_rtts: 59.0
+url: http://www.outbrain.com rtts: 315.5 median_rtts: 315.5
+url: http://www.about.com rtts: 98.0 median_rtts: 98.0
+url: http://www.ebay.com rtts: 25.0 median_rtts: 25.0
+url: http://www.ask.com rtts: 65.0 median_rtts: 65.0
+url: http://espn.go.com rtts: 25.0 median_rtts: 25.0
+url: http://imgur.com rtts: 27.5 median_rtts: 27.5
+url: http://mobile.fandango.com rtts: 14.0 median_rtts: 14.0
+url: http://www.apple.com rtts: 12.0 median_rtts: 12.0
+
+
+
+measurements for RTT of 600 ms:
+url: http://stackoverflow.com rtts: 64.0 median_rtts: 64.0
+url: http://m.finishline.com rtts: 58.0 median_rtts: 58.0
+url: http://www.outbrain.com rtts: 337.0 median_rtts: 337.0
+url: http://www.about.com rtts: 98.0 median_rtts: 98.0
+url: http://www.ebay.com rtts: 24.5 median_rtts: 24.5
+url: http://www.ask.com rtts: 47.0 median_rtts: 47.0
+url: http://espn.go.com rtts: 24.0 median_rtts: 24.0
+url: http://imgur.com rtts: 27.0 median_rtts: 27.0
+url: http://mobile.fandango.com rtts: 13.5 median_rtts: 13.5
+url: http://www.apple.com rtts: 12.0 median_rtts: 12.0
+
+
+
+measurements for RTT of 800 ms:
+url: http://stackoverflow.com rtts: 64.0 median_rtts: 64.0
+url: http://m.finishline.com rtts: 58.0 median_rtts: 58.0
+url: http://www.outbrain.com rtts: 413.0 median_rtts: 413.0
+url: http://www.about.com rtts: 97.0 median_rtts: 97.0
+url: http://www.ebay.com rtts: 22.0 median_rtts: 22.0
+url: http://www.ask.com rtts: 64.0 median_rtts: 64.0
+url: http://espn.go.com rtts: 23.0 median_rtts: 23.0
+url: http://imgur.com rtts: 26.5 median_rtts: 26.5
+url: http://mobile.fandango.com rtts: 13.0 median_rtts: 13.0
+url: http://www.apple.com rtts: 12.0 median_rtts: 12.0
+
+
+
+measurements for RTT of 1000 ms:
+url: http://stackoverflow.com rtts: 64.0 median_rtts: 64.0
+url: http://m.finishline.com rtts: 78.5 median_rtts: 78.5
+url: http://www.outbrain.com rtts: 371.0 median_rtts: 371.0
+url: http://www.about.com rtts: 91.5 median_rtts: 91.5
+url: http://www.ebay.com rtts: 24.0 median_rtts: 24.0
+url: http://www.ask.com rtts: 67.5 median_rtts: 67.5
+url: http://espn.go.com rtts: 27.0 median_rtts: 27.0
+url: http://imgur.com rtts: 30.5 median_rtts: 30.5
+url: http://mobile.fandango.com rtts: 14.0 median_rtts: 14.0
+url: http://www.apple.com rtts: 15.0 median_rtts: 15.0
+
+
+
+measurements for RTT of 1200 ms:
+url: http://stackoverflow.com rtts: 67.0 median_rtts: 67.0
+url: http://m.finishline.com rtts: 63.5 median_rtts: 63.5
+url: http://www.outbrain.com rtts: 366.0 median_rtts: 366.0
+url: http://www.about.com rtts: 81.5 median_rtts: 81.5
+url: http://www.ebay.com rtts: 21.5 median_rtts: 21.5
+url: http://www.ask.com rtts: 51.0 median_rtts: 51.0
+url: http://espn.go.com rtts: 25.5 median_rtts: 25.5
+url: http://imgur.com rtts: 28.5 median_rtts: 28.5
+url: http://mobile.fandango.com rtts: 16.0 median_rtts: 16.0
+url: http://www.apple.com rtts: 15.0 median_rtts: 15.0
+
+
+
+measurements for RTT of 1400 ms:
+url: http://stackoverflow.com rtts: 82.0 median_rtts: 82.0
+url: http://m.finishline.com rtts: 62.0 median_rtts: 62.0
+url: http://www.outbrain.com rtts: 322.5 median_rtts: 322.5
+url: http://www.about.com rtts: 90.0 median_rtts: 90.0
+url: http://www.ebay.com rtts: 23.0 median_rtts: 23.0
+url: http://www.ask.com rtts: 72.0 median_rtts: 72.0
+url: http://espn.go.com rtts: 25.5 median_rtts: 25.5
+url: http://imgur.com rtts: 28.0 median_rtts: 28.0
+url: http://mobile.fandango.com rtts: 15.5 median_rtts: 15.5
+url: http://www.apple.com rtts: 14.5 median_rtts: 14.5
+
+
+
+measurements for RTT of 1600 ms:
+url: http://stackoverflow.com rtts: 74.5 median_rtts: 74.5
+url: http://m.finishline.com rtts: 64.0 median_rtts: 64.0
+url: http://www.outbrain.com rtts: 314.5 median_rtts: 314.5
+url: http://www.about.com rtts: 90.5 median_rtts: 90.5
+url: http://www.ebay.com rtts: 21.0 median_rtts: 21.0
+url: http://www.ask.com rtts: 67.5 median_rtts: 67.5
+url: http://espn.go.com rtts: 24.5 median_rtts: 24.5
+url: http://imgur.com rtts: 26.5 median_rtts: 26.5
+url: http://mobile.fandango.com rtts: 15.5 median_rtts: 15.5
+url: http://www.apple.com rtts: 15.0 median_rtts: 15.0
+
+
+
+measurements for RTT of 1800 ms:
+url: http://stackoverflow.com rtts: 73.5 median_rtts: 73.5
+url: http://m.finishline.com rtts: 59.5 median_rtts: 59.5
+url: http://www.outbrain.com rtts: 315.5 median_rtts: 315.5
+url: http://www.about.com rtts: 93.5 median_rtts: 93.5
+url: http://www.ebay.com rtts: 23.0 median_rtts: 23.0
+url: http://www.ask.com rtts: 70.0 median_rtts: 70.0
+url: http://espn.go.com rtts: 25.0 median_rtts: 25.0
+url: http://imgur.com rtts: 28.5 median_rtts: 28.5
+url: http://mobile.fandango.com rtts: 15.5 median_rtts: 15.5
+url: http://www.apple.com rtts: 16.0 median_rtts: 16.0
+
+
+
+measurements for RTT of 2000 ms:
+url: http://stackoverflow.com rtts: 67.0 median_rtts: 67.0
+url: http://m.finishline.com rtts: 60.0 median_rtts: 60.0
+url: http://www.outbrain.com rtts: 316.0 median_rtts: 316.0
+url: http://www.about.com rtts: 91.5 median_rtts: 91.5
+url: http://www.ebay.com rtts: 22.0 median_rtts: 22.0
+url: http://www.ask.com rtts: 63.5 median_rtts: 63.5
+url: http://espn.go.com rtts: 25.5 median_rtts: 25.5
+url: http://imgur.com rtts: 28.0 median_rtts: 28.0
+url: http://mobile.fandango.com rtts: 16.5 median_rtts: 16.5
+url: http://www.apple.com rtts: 16.0 median_rtts: 16.0
+
+
+
+measurements for RTT of 2200 ms:
+url: http://stackoverflow.com rtts: 61.0 median_rtts: 61.0
+url: http://m.finishline.com rtts: 83.0 median_rtts: 83.0
+url: http://www.outbrain.com rtts: nan median_rtts: nan
+url: http://www.about.com rtts: 102.5 median_rtts: 102.5
+url: http://www.ebay.com rtts: 28.0 median_rtts: 28.0
+url: http://www.ask.com rtts: 65.0 median_rtts: 65.0
+url: http://espn.go.com rtts: 31.5 median_rtts: 31.5
+url: http://imgur.com rtts: 40.5 median_rtts: 40.5
+url: http://mobile.fandango.com rtts: 21.0 median_rtts: 21.0
+url: http://www.apple.com rtts: 18.0 median_rtts: 18.0
+
+
+
+measurements for RTT of 2400 ms:
+url: http://stackoverflow.com rtts: 69.0 median_rtts: 69.0
+url: http://m.finishline.com rtts: 77.0 median_rtts: 77.0
+url: http://www.outbrain.com rtts: 282.5 median_rtts: 282.5
+url: http://www.about.com rtts: 89.0 median_rtts: 89.0
+url: http://www.ebay.com rtts: 35.0 median_rtts: 35.0
+url: http://www.ask.com rtts: 86.5 median_rtts: 86.5
+url: http://espn.go.com rtts: 34.5 median_rtts: 34.5
+url: http://imgur.com rtts: 41.0 median_rtts: 41.0
+url: http://mobile.fandango.com rtts: 21.0 median_rtts: 21.0
+url: http://www.apple.com rtts: 18.0 median_rtts: 18.0
+
+
+
+measurements for RTT of 2600 ms:
+url: http://stackoverflow.com rtts: 69.0 median_rtts: 69.0
+url: http://m.finishline.com rtts: 77.0 median_rtts: 77.0
+url: http://www.outbrain.com rtts: nan median_rtts: nan
+url: http://www.about.com rtts: 89.0 median_rtts: 89.0
+url: http://www.ebay.com rtts: 35.0 median_rtts: 35.0
+url: http://www.ask.com rtts: 88.0 median_rtts: 88.0
+url: http://espn.go.com rtts: 35.5 median_rtts: 35.5
+url: http://imgur.com rtts: 41.0 median_rtts: 41.0
+url: http://mobile.fandango.com rtts: 21.0 median_rtts: 21.0
+url: http://www.apple.com rtts: 18.0 median_rtts: 18.0
+
+
+
+measurements for RTT of 2800 ms:
+url: http://stackoverflow.com rtts: 69.0 median_rtts: 69.0
+url: http://m.finishline.com rtts: 78.0 median_rtts: 78.0
+url: http://www.outbrain.com rtts: nan median_rtts: nan
+url: http://www.about.com rtts: 90.0 median_rtts: 90.0
+url: http://www.ebay.com rtts: 34.0 median_rtts: 34.0
+url: http://www.ask.com rtts: 89.0 median_rtts: 89.0
+url: http://espn.go.com rtts: 35.0 median_rtts: 35.0
+url: http://imgur.com rtts: 41.0 median_rtts: 41.0
+url: http://mobile.fandango.com rtts: 21.0 median_rtts: 21.0
+url: http://www.apple.com rtts: 18.0 median_rtts: 18.0
+
+
+
+measurements for RTT of 3000 ms:
+url: http://stackoverflow.com rtts: 69.0 median_rtts: 69.0
+url: http://m.finishline.com rtts: 78.0 median_rtts: 78.0
+url: http://www.outbrain.com rtts: nan median_rtts: nan
+url: http://www.about.com rtts: 90.0 median_rtts: 90.0
+url: http://www.ebay.com rtts: 34.0 median_rtts: 34.0
+url: http://www.ask.com rtts: 88.0 median_rtts: 88.0
+url: http://espn.go.com rtts: 34.5 median_rtts: 34.5
+url: http://imgur.com rtts: 41.0 median_rtts: 41.0
+url: http://mobile.fandango.com rtts: 21.0 median_rtts: 21.0
+url: http://www.apple.com rtts: 18.0 median_rtts: 18.0
