@@ -16,8 +16,8 @@ with open(sites) as f:
         folder = line.split(" ")[1].strip("\n")
         measurements = []
         results[url] = []
-        for x in range(0,2):
-            sel_cmd = "replayshell /home/ravi/dependency_caching/window_rewriting/prettycorpus/" + folder + " /usr/bin/python delay_tcpdump.py " + url + " 50 0"
+        for x in range(0,4):
+            sel_cmd = "replayshell /home/ravi/dependency_caching/window_rewriting/prettycorpus/" + folder + " /usr/bin/python delay_tcpdump.py " + url + " 50 " + folder
             proc = subprocess.Popen([sel_cmd], stdout=subprocess.PIPE, shell=True)
             (out, err) = proc.communicate()
             time.sleep(3)
@@ -25,10 +25,12 @@ with open(sites) as f:
             os.system("sudo killall delayshell 2>/dev/null")
             os.system("sudo rm -r /tmp/* > /dev/null")
             time.sleep(3)
-            out_list = out.split("\n")
-            for entry in out_list:
-                if entry[0:10] == 'responses:':
-                    results[url].append(int(entry.split(": ")[1].strip("\n")))
+            count_cmd = "python count_pcap_responses.py " + folder + ".pcap"
+            proc = subprocess.Popen([count_cmd], stdout=subprocess.PIPE, shell=True)
+            (out, err) = proc.communicate()
+            out_list = out.strip("\n")
+            if ( int(out_list) != 0 ):
+                results[url].append(int(out_list))
 for key in results.keys():
     print key + ": " + str(results[key])
 

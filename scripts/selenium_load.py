@@ -20,8 +20,8 @@ from time import sleep
 site = sys.argv[1]
 
 sleep(10)
-#display = Display(visible=0, size=(800,600))
-#display.start()
+display = Display(visible=0, size=(800,600))
+display.start()
 
 curr_dir = os.getcwd()
 #chrome_path = str(curr_dir) + "/chromedriver"
@@ -39,7 +39,7 @@ profile = webdriver.FirefoxProfile()
 #profile.set_preference("webdriver_assume_untrusted_issuer", "false") 
 driver.set_page_load_timeout(500)
 driver.get(site)
-sleep(2)
+#sleep(2)
 
 
 #notes: http://www.sitepoint.com/profiling-page-loads-with-the-navigation-timing-api/
@@ -65,5 +65,5 @@ if ( type(loadEventEnd) == int and type(navigationStart) == int ):
     else:
         print str(complete_process)
 
-sleep(3)
 driver.quit()
+sleep(3)
