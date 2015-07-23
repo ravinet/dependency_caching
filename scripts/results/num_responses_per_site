@@ -8,6 +8,10 @@ http://espn.go.com: [108, 106, 109]
 http://imgur.com: [97, 92, 93, 93, 93]
 http://mobile.fandango.com: [29, 28, 30, 29, 30]
 http://www.apple.com: [30, 27, 26, 32]
+http://www.weather.com: [117, 118, 115, 114]
+http://www.imdb.com: [128, 123, 121, 126, 125, 121, 127]
+http://www.amazon.com: [216, 205, 204, 210, 208, 208]
+
 
 
 averages:
@@ -22,3 +26,6 @@ http://espn.go.com: mean=107.666666667 median=108.0
 http://imgur.com: mean=93.6 median=93.0
 http://mobile.fandango.com: mean=29.2 median=29.0
 http://www.apple.com: mean=28.75 median=28.5
+http://www.weather.com: mean=116.0 median=116.0
+http://www.imdb.com: mean=124.428571429 median=125.0
+http://www.amazon.com: mean=208.5 median=208.0
