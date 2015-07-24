@@ -1,10 +1,31 @@
 import sys, os
 
-pcap = sys.argv[1]
-response_count = int(sys.argv[2])
+site = sys.argv[1]
+folder = sys.argv[2]
+response_count = int(sys.argv[3])
+
+# start tcpdump on an ingress interface (should be run within delayshell or linkshell) and then run firefox for a long time!
+
+# find delayshell's egress interface
+delay_egress = ''
+ifs = netifaces.interfaces()
+for interface in ifs:
+    if ( interface[0:5] == 'delay' ):
+        delay_egress = interface
+
+tcpdump_cmd = "sudo tcpdump -i " + delay_egress + " -w " + folder + ".pcap &"
+proc1 = subprocess.Popen([tcpdump_cmd], shell=True)
+time.sleep(2)
+command = "firefox -private " + site
+firefox = subprocess.Popen(command, shell=True, stdout=FNULL, stderr=FNULL)
+time.sleep(12)
+os.system("sudo pkill -f -2 firefox")
+time.sleep(3)
+#tcpdump.kill()
+#time.sleep(3)
 
 count = 0
-
+pcap = folder + ".pcap"
 os.system("tcptrace -n -xhttp " + pcap + " > curr_pcap_info")
 # remove unnecessary output files from tcptrace
 os.system("rm *.dat")
