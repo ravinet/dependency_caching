@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, netifaces, subprocess, time
 
 site = sys.argv[1]
 folder = sys.argv[2]
@@ -12,12 +12,12 @@ ifs = netifaces.interfaces()
 for interface in ifs:
     if ( interface[0:5] == 'delay' ):
         delay_egress = interface
-
+print delay_egress
 tcpdump_cmd = "sudo tcpdump -i " + delay_egress + " -w " + folder + ".pcap &"
 proc1 = subprocess.Popen([tcpdump_cmd], shell=True)
 time.sleep(2)
 command = "firefox -private " + site
-firefox = subprocess.Popen(command, shell=True, stdout=FNULL, stderr=FNULL)
+firefox = subprocess.Popen(command, shell=True)
 time.sleep(12)
 os.system("sudo pkill -f -2 firefox")
 time.sleep(3)
