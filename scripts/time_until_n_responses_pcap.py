@@ -4,7 +4,7 @@ import sys, os, netifaces, subprocess, time
 url = sys.argv[1]
 delay = sys.argv[2]
 folder = sys.argv[3]
-response_count = int(sys.argv[2])
+response_count = int(sys.argv[4])
 
 cmd = "delayshell " + delay + " /usr/bin/python run_firefox.py " + url
 proc = subprocess.Popen([cmd], shell=True)
@@ -16,7 +16,6 @@ ifs = netifaces.interfaces()
 for interface in ifs:
     if ( interface[0:5] == 'delay' ):
         delay_egress = interface
-print delay_egress
 tcpdump_cmd = "sudo tcpdump -i " + delay_egress + " -w " + folder + ".pcap &"
 proc1 = subprocess.Popen([tcpdump_cmd], shell=True)
 
@@ -55,8 +54,6 @@ for y in range(0, len(output)):
                     break
 
 # print page load time in milliseconds
-print "nth: " + str(nth_response_time)
-print "first: " + str(first_request_time)
 plt = (nth_response_time - first_request_time)*1000
 print plt
 #
