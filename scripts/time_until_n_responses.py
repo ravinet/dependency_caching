@@ -50,12 +50,18 @@ for y in range(0, len(output)):
         if ( count == response_count ):
             for z in range(y, len(output)):
                 if ( "\tTime reply ACKed: " in output[z] ):
-                    nth_response_time = float(output[z].split("(")[1].split(")")[0])
+                    if ( "<the epoch>" in output[z] ):
+                        nth_response_time = ""
+                    else:
+                        nth_response_time = float(output[z].split("(")[1].split(")")[0])
                     break
 
 # print page load time in milliseconds
-plt = (nth_response_time - first_request_time)*1000
-print plt
+if ( nth_response_time == "" ):
+    print ""
+else:
+    plt = (nth_response_time - first_request_time)*1000
+    print plt
 #
 #        if ( "\tResponse Code:      " in line ):
 #            count = count + 1
