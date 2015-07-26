@@ -1,0 +1,34 @@
+handling: http://www.about.com
+handling: http://www.apple.com
+handling: http://www.ask.com
+handling: http://www.ebay.com
+handling: http://espn.go.com
+handling: http://mobile.fandango.com
+handling: http://m.finishline.com
+handling: http://imgur.com
+handling: http://www.outbrain.com
+handling: http://stackoverflow.com
+http://stackoverflow.com: [33, 34, 33]
+http://m.finishline.com: [101, 101, 101, 101]
+http://www.outbrain.com: [90, 90, 92, 90]
+http://www.about.com: [71, 71, 71, 71]
+http://www.ebay.com: [121, 113, 116, 121]
+http://www.ask.com: [2, 2, 3, 2]
+http://espn.go.com: [109, 109, 110, 108]
+http://imgur.com: [99, 79, 77, 78]
+http://mobile.fandango.com: [35, 33, 33, 33]
+http://www.apple.com: [30, 31, 29, 29]
+
+
+averages:
+
+http://stackoverflow.com: mean=33.3333333333 median=33.0
+http://m.finishline.com: mean=101.0 median=101.0
+http://www.outbrain.com: mean=90.5 median=90.0
+http://www.about.com: mean=71.0 median=71.0
+http://www.ebay.com: mean=117.75 median=118.5
+http://www.ask.com: mean=2.25 median=2.0
+http://espn.go.com: mean=109.0 median=109.0
+http://imgur.com: mean=83.25 median=78.5
+http://mobile.fandango.com: mean=33.5 median=33.0
+http://www.apple.com: mean=29.75 median=29.5
