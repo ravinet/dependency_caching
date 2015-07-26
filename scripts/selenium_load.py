@@ -19,7 +19,7 @@ from time import sleep
 
 site = sys.argv[1]
 
-sleep(10)
+sleep(15)
 display = Display(visible=0, size=(800,600))
 display.start()
 
@@ -29,7 +29,6 @@ curr_dir = os.getcwd()
 #options=Options()
 #options.add_argument("--incognito")
 #options.add_argument("--ignore-certificate-errors")
-#options.add_argument('--disable-application-cache')
 #driver=webdriver.Chrome(chrome_path, chrome_options=options)
 
 # to run firefox ###
@@ -41,7 +40,6 @@ driver.set_page_load_timeout(500)
 driver.get(site)
 #sleep(2)
 
-
 #notes: http://www.sitepoint.com/profiling-page-loads-with-the-navigation-timing-api/
 
 #beginning of page load as perceived by user (same as fetchstart if no previous document)
@@ -52,18 +50,20 @@ loadEventEnd = driver.execute_script("return window.performance.timing.loadEvent
 if ( loadEventEnd != 0 ):
     print loadEventEnd - navigationStart
     driver.quit()
+    display.stop()
     sys.exit()
 count = 0
-while loadEventEnd == 0 and count < 3:
+while loadEventEnd == 0 and count < 5:
     loadEventEnd = driver.execute_script("return window.performance.timing.loadEventEnd")
-    sleep(2)
+    sleep(4)
     count = count + 1
 if ( type(loadEventEnd) == int and type(navigationStart) == int ):
     complete_process = loadEventEnd - navigationStart
     if ( complete_process > 0 ):
-        print str()
-    else:
         print str(complete_process)
+    else:
+        print str()
 
 driver.quit()
+display.stop()
 sleep(3)
