@@ -32,3 +32,37 @@ http://espn.go.com: mean=109.0 median=109.0
 http://imgur.com: mean=83.25 median=78.5
 http://mobile.fandango.com: mean=33.5 median=33.0
 http://www.apple.com: mean=29.75 median=29.5
+handling: http://www.about.com
+handling: http://www.apple.com
+handling: http://www.ask.com
+handling: http://www.ebay.com
+handling: http://espn.go.com
+handling: http://mobile.fandango.com
+handling: http://m.finishline.com
+handling: http://imgur.com
+handling: http://www.outbrain.com
+handling: http://stackoverflow.com
+http://stackoverflow.com: [34, 34, 35, 34, 34, 34, 35, 34]
+http://m.finishline.com: [103, 99, 103, 101, 99]
+http://www.outbrain.com: [88, 91, 89]
+http://www.about.com: [71, 73, 70, 71, 70, 70]
+http://www.ebay.com: [156, 156, 156, 156, 157, 156, 156, 158]
+http://www.ask.com: [76, 66, 76, 37, 77, 78, 75, 67]
+http://espn.go.com: [112, 110, 110, 110, 112, 109, 111]
+http://imgur.com: [100, 101, 96, 99, 96, 97, 99, 100]
+http://mobile.fandango.com: [32, 33, 34, 33, 34, 33, 34, 34]
+http://www.apple.com: [30, 31, 30, 31, 31, 32, 30, 30]
+
+
+averages:
+
+http://stackoverflow.com: mean=34.25 median=34.0
+http://m.finishline.com: mean=101.0 median=101.0
+http://www.outbrain.com: mean=89.3333333333 median=89.0
+http://www.about.com: mean=70.8333333333 median=70.5
+http://www.ebay.com: mean=156.375 median=156.0
+http://www.ask.com: mean=69.0 median=75.5
+http://espn.go.com: mean=110.571428571 median=110.0
+http://imgur.com: mean=98.5 median=99.0
+http://mobile.fandango.com: mean=33.375 median=33.5
+http://www.apple.com: mean=30.625 median=30.5
