@@ -1,6 +1,6 @@
 set terminal svg size 544, 436 dashed rounded
 fontsize = 12
-set output "test_bar.svg"
+set output "plts.svg"
 set style fill solid 1.00 border 0
 #set style histogram gap 2 lw 1
 set style data histogram
@@ -10,5 +10,5 @@ set xlabel "Website"
 set ylabel "Page load time (ms)"
 set yrange [0:*]
 set datafile separator " "
-plot 'test_data1' using 2:xtic(1) ti "Firefox" linecolor rgb "#FF0000", \
-'' using 3 ti "Polaris" lt 1 lc rgb "#00FF00"
+plot 'plt_initial_results_12_50' using 2:xtic(1) ti "Firefox" linecolor rgb "blue", \
+'' using 3 ti "Polaris" lt 1 lc rgb "red"
