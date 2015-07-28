@@ -41,31 +41,30 @@ for x in range(0, len(output)):
         first_request_time = float(output[x].split("(")[1].split(")")[0])
         break
 
-
+res_times = []
 # find timestamp for nth (client specified) response
 nth_response_time = ""
 for y in range(0, len(output)):
     if ( "\tResponse Code: " in output[y] ):
-        count = count + 1
-        if ( count == response_count ):
-            for z in range(y, len(output)):
-                if ( "\tTime reply ACKed: " in output[z] ):
-                    if ( "<the epoch>" in output[z] ):
-                        nth_response_time = ""
-                    else:
-                        nth_response_time = float(output[z].split("(")[1].split(")")[0])
-                    break
+        for z in range(y, len(output)):
+            if ( "\tTime reply ACKed: " in output[z] ):
+                if ( "<the epoch>" in output[z] ):
+                    nth_response_time = ""
+                else:
+                    nth_response_time = float(output[z].split("(")[1].split(")")[0])
+                    res_times.append(float(output[z].split("(")[1].split(")")[0]))
+                break
+
+
+# sort the response times
+res_times.sort()
 
 # print page load time in milliseconds
-if ( nth_response_time == "" ):
+if ( len(res_times) < response_count ):
     print ""
 else:
+    nth_response_time = res_times[response_count-1]
+    #print "first: " + str(first_request_time)
+    #print "nth: " + str(nth_response_time)
     plt = (nth_response_time - first_request_time)*1000
     print plt
-#
-#        if ( "\tResponse Code:      " in line ):
-#            count = count + 1
-#
-#print count
-#os.system("rm curr_pcap_info")
-#os.system("sudo rm " + pcap)
