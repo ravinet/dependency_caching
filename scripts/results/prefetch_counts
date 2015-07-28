@@ -1,0 +1,13 @@
+# format is total_prefetch, prefetch for top-level html (prob more important), total responses we look for
+
+http://www.about.com 54 54 63
+http://www.apple.com 12 12 30
+http://www.ask.com 36 18 52
+http://www.ebay.com 148 146 156
+http://espn.go.com 64 59 110
+http://mobile.fandango.com 32 32 33
+http://m.finishline.com 31 29 101
+http://imgur.com 81 79 97
+http://www.outbrain.com 43 43 89
+http://stackoverflow.com 20 17 33
+http://www.weather.com 40 22 112
