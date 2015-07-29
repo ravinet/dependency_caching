@@ -17,8 +17,8 @@ with open(sites) as f:
         response_count = line.split(" ")[2].strip("\n")
         measurements = []
         results[url] = []
-        for x in range(0,1):
-            sel_cmd = "replayshell /home/ravi/dependency_caching/window_rewriting/prettycorpus/" + folder + " /usr/bin/python time_until_n_responses.py " + url + " 50 " + folder + " " + response_count
+        for x in range(0,10):
+            sel_cmd = "replayshell /home/ravi/dependency_caching/window_rewriting/prettycorpus/" + folder + " /usr/local/bin/linkshell 12Mbps.txt 12Mbps.txt /usr/bin/python time_until_n_responses.py " + url + " 50 " + folder + " " + response_count
             proc = subprocess.Popen([sel_cmd], stdout=subprocess.PIPE, shell=True)
             (out, err) = proc.communicate()
             time.sleep(3)
