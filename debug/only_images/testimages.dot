@@ -1,6 +1,5 @@
 strict digraph G {
 ratio=compress;
-"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/";
 "http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/1.jpg";
 "http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/2.jpg";
 "http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/3.jpg";
