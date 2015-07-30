@@ -2,3 +2,7 @@ toolkit.startup.max_resumed_crashes should be set to -1 in about:config for fire
 to prevent the safe mode popup from coming up!
 
 need to install netifaces for python
+
+To disable firefox cache:
+browser.cache.disk.enable- set to false
+browser.cache.memory.enable- set to false
