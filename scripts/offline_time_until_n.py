@@ -46,9 +46,11 @@ for y in range(0, len(output)):
                     nth_response_time = round(float(output[z].split("(")[1].split(")")[0]), 3)
                     res_times.append(round(float(output[z].split("(")[1].split(")")[0]), 3))
                     if ( req_time != "" ):
-                        total_info[nth_response_time] = (url, req_time)
+                        if ( nth_response_time in total_info ):
+                            total_info[nth_response_time].append((url, req_time))
+                        else:
+                            total_info[nth_response_time] = [(url, req_time)]
                 break
-
 
 # sort the response times
 res_times.sort()
@@ -64,4 +66,5 @@ else:
     print plt
 
 for res_time in sorted(total_info):
-  print "URL: " + str(total_info[res_time][0]) + " Request_time: " + str(total_info[res_time][1]) + " Response_time: " + str(res_time)
+    for i in range(0, len(total_info[res_time])):
+        print "URL: " + str(total_info[res_time][i][0]) + " Request_time: " + str(total_info[res_time][i][1]) + " Response_time: " + str(res_time)

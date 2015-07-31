@@ -1,0 +1,23 @@
+strict digraph G {
+ratio=compress;
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/1.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/2.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/3.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/4.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/5.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/6.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/7.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/8.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/9.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/10.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/11.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/12.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/13.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/14.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/15.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/16.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/17.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/18.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/19.jpg";
+"http://nyc.csail.mit.edu/" -> "http://nyc.csail.mit.edu/20.jpg";
+}
