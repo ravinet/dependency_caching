@@ -41,18 +41,33 @@ for x in range(0, len(output)):
         first_request_time = float(output[x].split("(")[1].split(")")[0])
         break
 
+
 res_times = []
+# key is response time and value is tuple of url and request time
+total_info = {}
 # find timestamp for nth (client specified) response
 nth_response_time = ""
 for y in range(0, len(output)):
     if ( "\tResponse Code: " in output[y] ):
+        req_time = ""
+        url = ""
         for z in range(y, len(output)):
+            if ( "\tTime request sent: " in output[z] ):
+                req_time = round(float(output[z].split("(")[1].split(")")[0]), 3)
+                if ( "GET /" in output[y-1] ):
+                    url = output[y-1].split("    ")[1].strip("\n")
+                    if ( url[0:3] == "GET" ):
+                        url = url[4:]
+                    if ( url[-3:] == "1.1" ):
+                        url = url[0:-9]
             if ( "\tTime reply ACKed: " in output[z] ):
                 if ( "<the epoch>" in output[z] ):
                     nth_response_time = ""
                 else:
-                    nth_response_time = float(output[z].split("(")[1].split(")")[0])
-                    res_times.append(float(output[z].split("(")[1].split(")")[0]))
+                    nth_response_time = round(float(output[z].split("(")[1].split(")")[0]), 3)
+                    res_times.append(round(float(output[z].split("(")[1].split(")")[0]), 3))
+                    if ( req_time != "" ):
+                        total_info[nth_response_time] = (url, req_time)
                 break
 
 
@@ -68,3 +83,4 @@ else:
     #print "nth: " + str(nth_response_time)
     plt = (nth_response_time - first_request_time)*1000
     print plt
+
