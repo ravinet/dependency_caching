@@ -321,6 +321,7 @@
             // handle this origin (if more than 6, consider depth)!
             curr_origin = Object.keys(prefetch)[y];
             reqs_to_make = prefetch[Object.keys(prefetch)[y]]; // array of arrays where each inner array is url, id
+            prefetch_to_make_soon = {};
             for ( var i = 0; i < reqs_to_make.length; i++ ) {
                 //console.log("handling request: " + reqs_to_make[i][0]);
                 // make xhr request for each (and add origin attirbute as location.hostname) and then send it
@@ -343,7 +344,16 @@
                 if ( req.src_tag != "null" ) { // image, iframe so make blob request
                     req.responseType = "blob";
                 }
-                req.send();
+                var depth_key = best_key(scheduler_depths, req.requested_url, "exact");
+                if ( depth_key == "null" ) {
+                    depth_key = best_key(scheduler_depths, req.requested_url);
+                }
+                if ( scheduler_depths[depth_key] in prefetch_to_make_soon ) {
+                    prefetch_to_make_soon[scheduler_depths[depth_key]].push(req);
+                } else {
+                    prefetch_to_make_soon[scheduler_depths[depth_key]] = [req];
+                }
+                //req.send();
                 var rel_key = best_key(scheduler_parents, req.requested_url, "exact" );
                 if ( rel_key == "null" ) {
                     rel_key = best_key(scheduler_parents, req.requested_url);
@@ -352,6 +362,13 @@
                     chunk_is_parent = true;
                 }
             }
+            for ( var t = 0; t < Object.keys(prefetch_to_make_soon).length; t++ ) {
+                var to_make = prefetch_to_make_soon[Object.keys(prefetch_to_make_soon).reverse()[t]];
+                for ( var qo = 0; qo < to_make.length; qo++ ) {
+                    to_make[qo].send();
+                }
+            }
+            prefetch_to_make_soon = {};
         }
 
         if ( (!chunk_is_parent) && (Object.keys(prefetch).length > 0) ) {
