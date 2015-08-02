@@ -752,11 +752,17 @@
             // one is complete URL and other is not (assume match if non-url is exact substring of url)
             if ( first_is_url ) {
                 if ( url1.pathname.indexOf(secondurl) != -1 ) {
-                    return [true, Infinity];
+                    var ind = url1.pathname.indexOf(secondurl);
+                    if ( url1.pathname[ind-1] == "/" ) {
+                        return [true, Infinity];
+                    }
                 }
             } else {
                 if ( url2.pathname.indexOf(firsturl) != -1 ) {
-                    return [true, Infinity];
+                    var ind = url2.pathname.indexOf(firsturl);
+                    if ( url2.pathname[ind-1] == "/" ) {
+                        return [true, Infinity];
+                    }
                 }
             }
             // non-url is not exact substring of url!
