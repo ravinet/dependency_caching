@@ -1,0 +1,17 @@
+set terminal svg size 544, 436 dashed rounded
+#set terminal svg size 2200, 1300
+set xlabel "Object Number"
+set ylabel "Outstanding Requests (when current request is made)"
+#set logscale x
+#set logscale y
+set yrange[0:5]
+set xrange[0: 24]
+set xtics 3
+set ytics 1
+
+set key left top
+
+set output "output.svg"
+#set title "Firefox vs"
+plot "polaris" using 1:4 with linespoints lw 4 title "Polaris", \
+"firefox" using 1:4 with linespoints lw 4 title "Firefox"
