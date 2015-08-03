@@ -1,0 +1,14 @@
+strict digraph G {
+ratio=compress;
+"/" -> "/1.jpg";
+"/" -> "/2.jpg";
+"/" -> "/3.jpg";
+"/" -> "/4.jpg";
+"/" -> "/5.jpg";
+"/" -> "/6.jpg";
+"/" -> "/deep.js";
+"/" -> "/7.jpg";
+"/deep.js" -> "/deep1.js";
+"/deep1.js" -> "/deep2.js";
+"/deep2.js" -> "/deep3.js";
+}
