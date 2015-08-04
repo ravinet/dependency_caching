@@ -6,3 +6,6 @@ need to install netifaces for python
 To disable firefox cache:
 browser.cache.disk.enable- set to false
 browser.cache.memory.enable- set to false
+
+to disable favicon, in about:config set
+browser.chrome.favicons to false
