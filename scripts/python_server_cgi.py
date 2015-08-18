@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+import BaseHTTPServer
+import SimpleHTTPServer
 import SocketServer
 import base64
 import urllib
@@ -7,7 +9,6 @@ import sys
 import subprocess
 
 def parse_header(x):
-    print "incoming: " + x
     pieces = x.split(":")
     head = pieces[0]
     val = pieces[1]
@@ -17,15 +18,17 @@ def parse_header(x):
         val = val[1:]
     return [head, val]
 
+class ThreadingSimpleServer(SocketServer.ThreadingMixIn,
+                   BaseHTTPServer.HTTPServer):
+    pass
+
 class Request_Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         command = "findmatch " + dir_to_use + " '" + self.requestline + "'"
         proc = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
         (out,err) = proc.communicate()
-        #print out.split("\r\n")
         y = out.split("\r\n")
         status = y[0].split(" ")[1]
-        print status
         self.send_response(int(status))
         for x in range(1, len(y)-1):
             if ( y[x] == '' ):
@@ -36,18 +39,18 @@ class Request_Handler(BaseHTTPRequestHandler):
         body = out.split("\r\n\r\n")[1]
         self.wfile.write(body)
 
-def run(server_class=HTTPServer, handler_class=Request_Handler, port=8090):
-    server_address = ('nyc.csail.mit.edu', port)
-    httpd = server_class(server_address, handler_class)
+def run(ip, port, server_class=HTTPServer, handler_class=Request_Handler):
+    server_address = (ip, port)
+    httpd = ThreadingSimpleServer(server_address, handler_class)
+    #httpd = server_class(server_address, handler_class)
     print 'Listening on port ' + str(port)
     httpd.serve_forever()
 
 if __name__ == "__main__":
     from sys import argv
-
-    if len(argv) == 3:
+    if len(argv) == 4:
         global dir_to_use
-        dir_to_use = argv[2]
-        run(port=int(argv[1]))
+        dir_to_use = argv[3]
+        run(ip=argv[1], port=int(argv[2]))
     else:
         print "ERROR"
