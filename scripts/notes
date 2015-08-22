@@ -9,3 +9,6 @@ browser.cache.memory.enable- set to false
 
 to disable favicon, in about:config set
 browser.chrome.favicons to false
+
+to reduce how quickly os reverts to swap memory:
+sudo sysctl vm.swappiness=20
