@@ -12,3 +12,7 @@ browser.chrome.favicons to false
 
 to reduce how quickly os reverts to swap memory:
 sudo sysctl vm.swappiness=20
+
+
+empty href ("") in link tag when rel=shortcut icon leads to double fetch
+https://bugzilla.mozilla.org/show_bug.cgi?id=489115
