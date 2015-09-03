@@ -1,0 +1,8 @@
+Install dependencies by running:
+> sudo pip install -r requirements.txt
+
+Open a chrome browser session with the --remote-debugging-port=9222 flag set.
+Make sure that at least one tab is open to some site (not the default "new tab" page).
+
+Run the script:
+> python graphing.py http://google.com
