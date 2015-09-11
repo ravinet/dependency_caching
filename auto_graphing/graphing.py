@@ -4,13 +4,14 @@ import websocket
 import subprocess
 import time
 import sys
+import signal
 from sys import platform
 
 chrome_path = "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 if platform == "linux" or platform == "linux2":
   chrome_path = "google-chrome"
 
-chrome = subprocess.Popen(chrome_path + " --incognito --remote-debugging-port=9222 http://google.com", shell=True)
+chrome = subprocess.Popen(chrome_path + " --incognito --remote-debugging-port=9222 about:blank", shell=True)
 time.sleep(8)
 
 site = "http://www.mit.edu/"
@@ -59,7 +60,7 @@ while True:
       output += "}\n"
       break
 soc.close()
-chrome.kill()
+chrome.send_signal(signal.SIGINT)
 
 print output
 with open(output_file, "w") as f:
