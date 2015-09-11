@@ -1,13 +1,24 @@
 import json
 import requests
 import websocket
+import subprocess
 import time
 import sys
-import os
+from sys import platform
+
+chrome_path = "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+if platform == "linux" or platform == "linux2":
+  chrome_path = "google-chrome"
+
+chrome = subprocess.Popen(chrome_path + " --incognito --remote-debugging-port=9222 http://google.com", shell=True)
+time.sleep(8)
 
 site = "http://www.mit.edu/"
+output_file = "output"
 if len(sys.argv) > 1:
   site = sys.argv[1]
+if len(sys.argv) > 2:
+  output_file = sys.argv[2]
 
 enable_network = json.dumps({"id": 0,
                              "method": "Network.enable"})
@@ -29,8 +40,8 @@ soc.send(enable_network)
 soc.send(set_cache_disabled)
 soc.send(load_page)
 
-print "strict digraph G {"
-print "ratio=compress;"
+output = "strict digraph G {\n"
+output += "ratio=compress;\n"
 
 while True:
   raw_recv = soc.recv()
@@ -43,8 +54,14 @@ while True:
           initiator = message["params"]["initiator"]["url"]
         if message["params"]["initiator"]["type"] == "script":
           initiator = message["params"]["initiator"]["stackTrace"][0]["url"]
-      print '"' + initiator + '" -> "' + message["params"]["request"]["url"] + '";'
+      output += '"' + initiator + '" -> "' + message["params"]["request"]["url"] + '";\n'
     if message["method"] == "Page.loadEventFired":
-      print "}"
+      output += "}\n"
       break
 soc.close()
+chrome.kill()
+
+print output
+with open(output_file, "w") as f:
+  f.write(output)
+
