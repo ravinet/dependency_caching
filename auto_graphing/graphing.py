@@ -37,7 +37,7 @@ while True:
   message = json.loads(raw_recv)
   if "method" in message:
     if message["method"] == "Network.requestWillBeSent":
-      initiator = ""
+      initiator = site
       if "initiator" in message["params"]:
         if "url" in message["params"]["initiator"]:
           initiator = message["params"]["initiator"]["url"]
