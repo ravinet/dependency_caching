@@ -1,0 +1,9 @@
+strict digraph G {
+ratio=compress;
+"https://www.usaa.com" -> "https://www.usaa.com/";
+"https://www.usaa.com" -> "https://www.usaa.com/?akredirect=true";
+"https://www.usaa.com" -> "https://www.usaa.com/inet/ent_logon/ent_login_redirect.jsp?akredirect=true";
+"https://www.usaa.com" -> "https://www.usaa.com/inet/ent_logon/Logon?redirectjsp=true";
+"https://www.usaa.com/inet/ent_logon/Logon?redirectjsp=true" -> "https://www.googleadservices.com/pagead/conversion.js"[color=red];
+"https://www.googleadservices.com/pagead/conversion.js" -> "https://www.usaa.com/inet/ent_logon/Logon?redirectjsp=true"[color=red];
+}

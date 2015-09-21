@@ -1,0 +1,6 @@
+strict digraph G {
+ratio=compress;
+"http://www.teensdigest.com" -> "http://www.teensdigest.com/";
+"http://www.teensdigest.com/" -> "http://www.teensdigest.com/cdn-cgi/styles/cf.errors.css";
+"http://www.teensdigest.com/" -> "http://ajax.cloudflare.com/cdn-cgi/nexp/dok3v=e9627cd26a/cloudflare.min.js";
+}

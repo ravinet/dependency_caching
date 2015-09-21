@@ -1,0 +1,17 @@
+strict digraph G {
+ratio=compress;
+"http://www.backpage.com" -> "http://www.backpage.com/";
+"http://www.backpage.com/" -> "http://www.backpage.com/styles/Home.css?cb=afaf12499b2979fdb2b337e46230c886";
+"http://www.backpage.com/" -> "http://www.backpage.com/scripts/global-compiled.js?afaf12499b2979fdb2b337e46230c886";
+"http://www.backpage.com/" -> "http://www.googletagmanager.com/gtm.js?id=GTM-5KCSP8";
+"http://www.backpage.com/" -> "http://www.backpage.com/images/logo.gif?cb=1";
+"http://www.backpage.com/" ->  "http://www.google-analytics.com/analytics.js";
+"http://www.backpage.com/" -> "http://www.google-analytics.com/r/collect?v=1&_v=j38&a=107906189&t=pageview&_s=1&dl=http%3A%2F%2Fwww.backpage.com%2F&ul=en-us&de=UTF-8&dt=Free%20classifieds%20-%20backpage.com&sd=24-bit&sr=800x600&vp=784x500&je=1&fl=18.0%20r0&_u=AEAAAEABI~&jid=390559904&cid=1792006667.1442072655&tid=UA-395280-1&_r=1&cd6=false&cd7=false&z=1928515044";
+"http://www.backpage.com/" -> "https://stats.g.doubleclick.net/r/collect?v=1&aip=1&t=dc&_r=3&tid=UA-395280-1&cid=765787367.1442063924&jid=1870865184&_v=j38&z=316606830";
+"http://www.backpage.com/---0:16" -> "http://www.backpage.com/---17:17"[color=red];
+"http://www.backpage.com/---17:17" -> "http://www.backpage.com/---18:end"[color=red];
+"http://www.backpage.com/---17:17" -> "/styles/Home.css?cb=afaf12499b2979fdb2b337e46230c886"[color=red];
+"/styles/Home.css?cb=afaf12499b2979fdb2b337e46230c886" -> "http://www.backpage.com/"[color=red];
+"http://www.backpage.com/---0:16" -> "http://www.backpage.com/"[color=red];
+"/styles/Home.css?cb=afaf12499b2979fdb2b337e46230c886" -> "http://www.backpage.com/---18:end"[color=red];
+}

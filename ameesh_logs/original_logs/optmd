@@ -1,0 +1,11 @@
+strict digraph G {
+ratio=compress;
+"http://www.optmd.com" -> "http://www.optmd.com/";
+"http://www.optmd.com/" -> "http://www.optmd.com/lib/public.js";
+"http://www.optmd.com/" -> "http://www.optmd.com/lib/optout.js";
+"http://www.optmd.com/" -> "http://www.optmd.com/lib/public-safe.css";
+"http://www.optmd.com/" -> "http://www.optmd.com/images/header.gif";
+"http://www.optmd.com/" -> "http://www.optmd.com/lib/casaleFlash.js";
+"http://www.optmd.com/" -> "http://www.optmd.com/images/opt-out.png";
+"http://www.optmd.com/" -> "http://www.optmd.com/images/s.gif";
+}

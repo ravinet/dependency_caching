@@ -1,0 +1,33 @@
+strict digraph G {
+ratio=compress;
+"http://www.directrev.com" -> "http://www.directrev.com/";
+"http://www.directrev.com/" -> "http://www.directrev.com/css/bootstrap.css";
+"http://www.directrev.com/" -> "http://www.directrev.com/style.css";
+"http://www.directrev.com/" -> "http://www.directrev.com/css/owl-carousel.css";
+"http://www.directrev.com/" -> "http://www.directrev.com/css/animate.min.css";
+"http://www.directrev.com/" -> "http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic";
+"http://www.directrev.com/" -> "http://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900";
+"http://www.directrev.com/" -> "http://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900";
+"http://www.directrev.com/" -> "http://www.directrev.com/logo.png";
+"http://www.directrev.com/" -> "http://www.directrev.com/js/jquery.js";
+"http://www.directrev.com/" -> "http://www.directrev.com/js/bootstrap.min.js";
+"http://www.directrev.com/" -> "http://www.directrev.com/js/menu.js";
+"http://www.directrev.com/" -> "http://www.directrev.com/js/owl.carousel.min.js";
+"http://www.directrev.com/" -> "http://www.directrev.com/js/jquery.parallax-1.1.3.js";
+"http://www.directrev.com/" -> "http://www.directrev.com/js/jquery.simple-text-rotator.js";
+"http://www.directrev.com/" -> "http://www.directrev.com/js/wow.min.js";
+"http://www.directrev.com/" -> "http://www.directrev.com/js/custom.js";
+"http://www.directrev.com/" -> "http://www.directrev.com/js/jquery.isotope.min.js";
+"http://www.directrev.com/" -> "http://www.directrev.com/js/custom-portfolio.js";
+"http://www.directrev.com/" -> "http://www.directrev.com/images/loading.gif";
+"http://www.directrev.com/" -> "http://www.directrev.com/fonts/fontawesome-webfont.woff?v=4.0.3";
+"http://www.directrev.com/" -> "http://fonts.gstatic.com/s/ptsans/v8/ATKpv8nLYAKUYexo8iqqrg.woff2";
+"http://www.directrev.com/" -> "http://fonts.gstatic.com/s/ptsans/v8/0XxGQsSc1g4rdRdjJKZrNPk_vArhqVIZ0nv9q090hN8.woff2";
+"http://www.directrev.com/" -> "http://www.directrev.com/images/arrow.png";
+"http://www.directrev.com/" -> "http://www.googletagmanager.com/gtm.js?id=GTM-5SWKRK";
+"http://www.googletagmanager.com/gtm.js?id=GTM-5SWKRK" -> "http://www.google-analytics.com/analytics.js";
+"http://www.directrev.com/" -> "http://www.google-analytics.com/collect?v=1&_v=j38&a=40520511&t=pageview&_s=1&dl=http%3A%2F%2Fwww.directrev.com%2F&ul=en-us&de=UTF-8&dt=DirectREV%20-%20Media%20Delivery%20Platform&sd=24-bit&sr=800x600&vp=784x500&je=1&fl=18.0%20r0&_u=QGAAgAAB~&jid=254761325&cid=560253134.1442072879&tid=UA-44188354-1&gtm=GTM-5SWKRK&z=1587223625";
+"http://www.directrev.com/" -> "https://stats.g.doubleclick.net/r/collect?t=dc&aip=1&_r=3&v=1&_v=j38&tid=UA-44188354-1&cid=560253134.1442072879&jid=254761325&_u=QGAAgAAB~&z=1625040934";
+"http://www.google-analytics.com/analytics.js" -> "http://www.googletagmanager.com/gtm.js?id=GTM-5SWKRK"[color=red];
+"http://www.googletagmanager.com/gtm.js?id=GTM-5SWKRK" -> "http://www.directrev.com/"[color=red];
+}

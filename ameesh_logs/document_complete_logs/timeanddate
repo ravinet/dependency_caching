@@ -1,0 +1,38 @@
+strict digraph G {
+ratio=compress;
+"http://www.timeanddate.com" -> "http://www.timeanddate.com/";
+"http://www.timeanddate.com/" -> "http://a.tadst.com/common/global_29.css";
+"http://www.timeanddate.com/" -> "http://a.tadst.com/common/indexes_4.css";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/n/tad-logo-com2.png";
+"http://www.timeanddate.com/" -> "http://www.googletagservices.com/tag/js/gpt.js";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/190x126/lunar-eclipse-shadow.jpg?1";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/190x126/patriot-day.jpg?1";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/190x126/bigstock-pyongyang-north-korea--july--67298320.jpg?1";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/190x126/i-nl51.png";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/n/w/f/7.png";
+"http://www.timeanddate.com/" -> "http://a.tadst.com/common/wcommon_50.js";
+"http://www.timeanddate.com/" -> "http://a.tadst.com/gfx/n/tad-logo-com2.png";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/n/banner-2015.png";
+"http://www.timeanddate.com/" -> "http://a.tadst.com/gfx/n/i/mag.png";
+"http://www.timeanddate.com/" -> "http://a.tadst.com/gfx/n/i/soc-mob.png";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/socialbar.png";
+"http://www.timeanddate.com/" -> "http://a.tadst.com/gfx/n/i/users.png";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/spr_fp.png";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/n/bg-cal.png";
+"http://www.timeanddate.com/" -> "http://c.tadst.com/gfx/n/select-arrow.svg";
+"http://a.tadst.com/common/wcommon_50.js" -> "http://www.timeanddate.com/scripts/ts.php?ut=1442016731934&cb=0.7615752727724612";
+"http://www.googletagservices.com/tag/js/gpt.js" -> "http://partner.googleadservices.com/gpt/pubads_impl_72.js";
+"http://partner.googleadservices.com/gpt/pubads_impl_72.js" -> "https://securepubads.g.doubleclick.net/gampad/ads?gdfp_req=1&correlator=4050908497313792&output=json_html&callback=callbackProxy&impl=fifs&json_a=1&eid=108809080%2C108809050&sc=0&sfv=1-0-2&iu_parts=1004254%2Ccom728&enc_prev_ius=%2F0%2F1&prev_iu_szs=728x90&cookie_enabled=1&lmt=1442016731&dt=1442016731986&cc=100&frm=20&biw=784&bih=500&oid=3&adks=532992623&gut=v2&ifi=1&u_tz=-240&u_his=2&u_java=true&u_h=600&u_w=800&u_ah=600&u_aw=800&u_cd=24&u_nplug=6&u_nmime=8&u_sd=1&flash=18.0.0&url=http%3A%2F%2Fwww.timeanddate.com%2F&dssz=9&icsg=32&std=0&vrg=72&vrp=72&ga_vid=121284587.1442016732&ga_sid=1442016732&ga_hid=600389440";
+"http://partner.googleadservices.com/gpt/pubads_impl_72.js" -> "http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html";
+"http://partner.googleadservices.com/gpt/pubads_impl_72.js" -> "http://pagead2.googlesyndication.com/pagead/expansion_embed.js?source=safeframe";
+"http://partner.googleadservices.com/gpt/pubads_impl_72.js" -> "http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html";
+"http://partner.googleadservices.com/gpt/pubads_impl_72.js" -> "http://pagead2.googlesyndication.com/pagead/osd.js";
+"http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html" -> "https://tpc.googlesyndication.com/pagead/js/r20150908/r20110914/abg.js";
+"http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html" -> "https://tpc.googlesyndication.com/pagead/images/google-logo.png";
+"http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html" -> "https://tpc.googlesyndication.com/simgad/17594581339139341161";
+"http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html" -> "https://googleads.g.doubleclick.net/pagead/drt/s?v=r20120211";
+"http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html" -> "https://p4-fkbypzuysdvqq-xmovb3bthjjltczu-if-v6exp3-v4.metric.gstatic.com/v6exp3/redir.html";
+"http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html" -> "https://tpc.googlesyndication.com/pagead/images/x_button_blue2.png";
+"http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html" -> "https://www.google.com/pagead/drt/ui";
+"http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html" -> "https://googleads.g.doubleclick.net/pagead/drt/si";
+}

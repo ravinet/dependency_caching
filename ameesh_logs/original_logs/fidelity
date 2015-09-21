@@ -1,0 +1,35 @@
+strict digraph G {
+ratio=compress;
+"https://www.fidelity.com" -> "https://www.fidelity.com/";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/css/responsive-landing-homepage.css";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/js/app-head.min.js";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/js/mbox.js";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/css/nav-08.14.min.css";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/js/nav-08.14.min.js";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/measurement/2.0/ms_common_navbar.js";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/homepage/Kiplingers.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/call.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/chat1.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/investor_ctr.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/facebook.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/twitter-icon.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/linkedin.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/fidelity/googleplus.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/youtube.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/fidelity-mobile-icon.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/Fidelity-footer-logo.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/js/jquery-ui.min.js";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/js/hp-body.min.js";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/multiplestar/scripts/underscore-min.js";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/js/multipleStars.js";
+"https://www.fidelity.com/bin-public/060_www_fidelity_com/js/mbox.js" -> "https://fmrcorp.tt.omtrdc.net/m2/fmrcorp/mbox/standard?mboxHost=www.fidelity.com&mboxSession=1442012428610-832007&mboxPage=1442012428610-832007&screenHeight=600&screenWidth=800&browserWidth=799&browserHeight=500&browserTimeOffset=-240&colorDepth=24&profile.cp=p71&mbox3rdPartyId=undefined&profile.p8=undefined&profile.p3=undefined&mboxCount=1&mbox=PI_HomePageProspect_Header&mboxId=0&mboxTime=1441998028614&mboxURL=https%3A%2F%2Fwww.fidelity.com%2F&mboxReferrer=&mboxVersion=42";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/homepage/Large_HomepageImage-iPhone.jpg;";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/homepage/reading_dadv3_l.jpg;";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/css/error.gif";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/homepage/300Trades_Large.jpg;";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/css/Footer_BG.png";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/css/grey-pipe-sm.gif";
+"https://www.fidelity.com/bin-public/060_www_fidelity_com/js/app-head.min.js" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/homepage/heros/ManagedAcct_L.jpg";
+"https://www.fidelity.com/" -> "https://www.fidelity.com/bin-public/060_www_fidelity_com/images/css/popup.gif";
+"https://www.fidelity.com/bin-public/060_www_fidelity_com/js/app-head.min.js" -> "https://www.fidelity.com/config/BaazarVoicePassKey";
+}

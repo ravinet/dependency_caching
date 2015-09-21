@@ -1,0 +1,33 @@
+strict digraph G {
+ratio=compress;
+"http://www.bloglovin.com" -> "http://www.bloglovin.com/";
+"http://www.bloglovin.com/" -> "https://static.blovcdn.com/assets/css/style-2.7.24.css";
+"http://www.bloglovin.com/" -> "https://static.blovcdn.com/assets/gfx/logo-2.svg";
+"http://www.bloglovin.com/" -> "http://www.bloglovin.com/assets/gfx/googleplay.png";
+"http://www.bloglovin.com/" -> "http://www.bloglovin.com/scripts/language-2.7.24/en.js";
+"http://www.bloglovin.com/" -> "http://www.bloglovin.com/scripts/moneymaker-2.7.24.js";
+"http://www.bloglovin.com/" -> "https://static.blovcdn.com/assets/js/all-2.7.24.js";
+"http://www.bloglovin.com/" -> "https://static.blovcdn.com/assets/gfx/walls/signup_light.jpg";
+"http://www.bloglovin.com/" -> "https://static.blovcdn.com/assets/fonts/OpenSans/opensans-1-light.woff";
+"http://www.bloglovin.com/" -> "https://static.blovcdn.com/assets/gfx/icons-10.png";
+"http://www.bloglovin.com/" -> "https://static.blovcdn.com/assets/fonts/OpenSans/opensans-1-bold.woff";
+"http://www.bloglovin.com/" -> "https://static.blovcdn.com/assets/fonts/OpenSans/opensans-1-regular.woff";
+"http://www.bloglovin.com/" -> "https://static.blovcdn.com/assets/gfx/appstore.svg";
+"http://www.bloglovin.com/" -> "http://www.google-analytics.com/ga.js";
+"http://www.bloglovin.com/" -> "http://edge.quantserve.com/quant.js";
+"http://www.bloglovin.com/" -> "http://b.scorecardresearch.com/beacon.js";
+"https://static.blovcdn.com/assets/js/all-2.7.24.js" -> "http://connect.facebook.net/en_US/sdk.js";
+"https://static.blovcdn.com/assets/js/all-2.7.24.js" -> "http://www.googletagservices.com/tag/js/gpt.js";
+"http://www.bloglovin.com/" -> "https://connect.facebook.net/en_US/sdk.js";
+"http://www.bloglovin.com/" -> "http://pixel.quantserve.com/pixel;r=1919032660;a=p-6EEmuZFR-4XGE;fpan=1;fpa=P0-2008877517-1442072719535;ns=0;ce=1;cm=;je=1;sr=800x600x24;enc=n;dst=1;et=1442072719534;tzo=240;ref=;url=http%3A%2F%2Fwww.bloglovin.com%2F;ogl=type.website%2Csite_name.Bloglovin'%2Ctitle.Bloglovin'%2Cimage.http%3A%2F%2Fwww%252Ebloglovin%252Ecom%2Fassets%2Fgfx%2Fget_mobile%2Fdevices%252Epng%2Cdescription.Follow%20your%20favorite%20blogs%20with%20Bloglovin'%252E%20Discover%20what's%20trending%20in%20Fashion%252C%2Curl.https%3A%2F%2Fwww%252Ebloglovin%252Ecom";
+"http://www.bloglovin.com/" -> "http://b.scorecardresearch.com/b?c1=2&c2=6035233&ns__t=1442072719538&ns_c=UTF-8&c8=Bloglovin%27&c7=http%3A%2F%2Fwww.bloglovin.com%2F&c9=";
+"http://www.googletagservices.com/tag/js/gpt.js" -> "http://partner.googleadservices.com/gpt/pubads_impl_72.js";
+"http://www.bloglovin.com/" -> "http://www.google-analytics.com/r/__utm.gif?utmwv=5.6.6&utms=1&utmn=1915264139&utmhn=www.bloglovin.com&utme=8(adview*signedin*category)9(yes*no*0)11(2!2)&utmcs=UTF-8&utmsr=800x600&utmvp=784x500&utmsc=24-bit&utmul=en-us&utmje=1&utmfl=18.0%20r0&utmdt=Bloglovin%27&utmhid=1139748379&utmr=-&utmp=%2F&utmht=1442072719557&utmac=UA-3062524-1&utmcc=__utma%3D76056006.1387855264.1442072720.1442072720.1442072720.1%3B%2B__utmz%3D76056006.1442072720.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=606346529&utmredir=1&utmu=qQCgAAAAAAAAAAAAAAAAAAAE~";
+"http://www.bloglovin.com/" -> "http://www.google-analytics.com/r/__utm.gif?utmwv=5.6.6&utms=2&utmn=1631074607&utmhn=www.bloglovin.com&utmcs=UTF-8&utmsr=800x600&utmvp=784x500&utmsc=24-bit&utmul=en-us&utmje=1&utmfl=18.0%20r0&utmdt=Bloglovin%27&utmhid=1139748379&utmr=-&utmp=%2F&utmht=1442072719560&utmac=UA-3062524-10&utmcc=__utma%3D76056006.1387855264.1442072720.1442072720.1442072720.1%3B%2B__utmz%3D76056006.1442072720.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=710426022&utmredir=1&utmmt=1&utmu=qQCgAAAAAAAAAAAAAAAAAAAE~";
+"http://www.bloglovin.com/" -> "http://www.google-analytics.com/r/__utm.gif?utmwv=5.6.6&utms=3&utmn=1525901276&utmhn=www.bloglovin.com&utmcs=UTF-8&utmsr=800x600&utmvp=784x500&utmsc=24-bit&utmul=en-us&utmje=1&utmfl=18.0%20r0&utmdt=Bloglovin%27&utmhid=1139748379&utmr=-&utmp=%2F&utmht=1442072719567&utmac=UA-3062524-12&utmcc=__utma%3D76056006.1387855264.1442072720.1442072720.1442072720.1%3B%2B__utmz%3D76056006.1442072720.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=565581686&utmredir=1&utmmt=1&utmu=qQCgAAAAAAAAAAAAAAAAAAAE~";
+"http://www.bloglovin.com/" -> "http://b.scorecardresearch.com/b2?c1=2&c2=6035233&ns__t=1442064056569&ns_c=UTF-8&c8=Bloglovin%27&c7=http%3A%2F%2Fwww.bloglovin.com%2F&c9=";
+"http://partner.googleadservices.com/gpt/pubads_impl_72.js" -> "http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html";
+"https://static.blovcdn.com/assets/js/all-2.7.24.js" -> "http://www.bloglovin.com/metrics/datapoints";
+"http://www.bloglovin.com/---0:271" -> "http://www.bloglovin.com/---272:end"[color=red];
+"http://www.bloglovin.com/---0:271" -> "http://www.bloglovin.com/"[color=red];
+}

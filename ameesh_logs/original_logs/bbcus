@@ -1,0 +1,35 @@
+strict digraph G {
+ratio=compress;
+"http://www.bbc.com" -> "http://www.bbc.com/";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/frameworks/barlesque/2.87.12/orb/4/style/orb.min.css";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/frameworks/barlesque/2.87.12/orb/4/script/orb/api.min.js";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/wwhp/1.82.0/responsive/css/wwhp.min.css";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/wwhp/1.82.0/modules/vendor/modernizr/modernizr.js";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/frameworks/barlesque/2.87.12/orb/4/img/bbc-blocks-light.png";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/id/0.32.00/img/bbcid_orb_signin_light.png";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/frameworks/barlesque/2.87.12/orb/4/img/orb-search-light.png";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/frameworks/barlesque/2.87.12/orb/4/img/orb-search-dark.png";
+"http://www.bbc.com/" -> "http://ichef.bbci.co.uk/wwhp/144/cpsprodpb/D1EC/production/_85504735_21493675-a914-495f-8047-a9545e230515.jpg";
+"http://www.bbc.com/" -> "http://ichef.bbci.co.uk/wwhp/144/ibroadcast/images/live/p0/32/6r/p0326rjj.jpg";
+"http://www.bbc.com/" -> "http://ichef.bbci.co.uk/wwhp/144/ibroadcast/images/live/p0/32/6w/p0326w0t.jpg";
+"http://www.bbc.com/" -> "http://ichef.bbci.co.uk/wwhp/144/cpsprodpb/BEE6/production/_85507884_split-pic-stones-berahino-m.jpg";
+"http://www.bbc.com/" -> "http://ichef.bbci.co.uk/wwhp/144/cpsprodpb/8ADD/production/_85494553_0724a730-f1be-4871-899d-f4bae8f8566b.jpg";
+"http://www.bbc.com/" -> "http://ichef.bbci.co.uk/wwhp/144/cpsprodpb/CE4A/production/_85501825_skunkpromo_alamy976.jpg";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/frameworks/requirejs/lib.js";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/weather/0.5.284/images/icons/individual_56_icons/en_on_light_bg/3.gif";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/weather/0.5.284/images/icons/individual_56_icons/en_on_light_bg/12.gif";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/weather/0.5.284/images/icons/individual_56_icons/en_on_light_bg/7.gif";
+"http://www.bbc.com/" -> "https://fig.bbc.co.uk/frameworks/fig/1/fig.js";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/frameworks/barlesque/2.87.12/orb/4/script/vendor/edr.js";
+"http://static.bbci.co.uk/frameworks/requirejs/lib.js" -> "http://static.bbci.co.uk/frameworks/istats/0.26.39/modules/istats-1.js";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/frameworks/barlesque/2.87.12/orb/4/img/bbccookies/cookie_prompt_sprite.png";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/frameworks/barlesque/2.87.12/orb/4/img/orb-sprite.gif";
+"http://static.bbci.co.uk/frameworks/requirejs/lib.js" -> "http://static.bbci.co.uk/wwhp/1.82.0/modules/compiled.js";
+"http://www.bbc.com/" -> "http://sa.bbc.co.uk/bbc/bbc/s?name=SET-COUNTER.page&pal_route=index&ml_name=barlesque&app_type=responsive&language=en-GB&ml_version=0.26.39&pal_webapp=wwhp&blq_s=4d&blq_r=3.5&blq_v=default&blq_e=pal&bbc_mc=ad1ps1pf1&screen_resolution=800x600&bbc_site=&ns_ti=BBC%20-%20Homepage&ns_c=UTF-8&ns__t=1442072682206&ns_jspageurl=http%3A%2F%2Fwww.bbc.com%2F&ns_referrer=";
+"http://www.bbc.com/" -> "http://sa.bbc.co.uk/bbc/bbc/s?name=SET-COUNTER.page&ns_m2=yes&ns_setsiteck=185.148.55F4262A001E3D014AD9162985&pal_route=index&ml_name=barlesque&app_type=responsive&language=en-GB&ml_version=0.26.39&pal_webapp=wwhp&blq_s=4d&blq_r=3.5&blq_v=default&blq_e=pal&bbc_mc=ad1ps1pf1&screen_resolution=800x600&bbc_site=&ns_ti=BBC%20-%20Homepage&ns_c=UTF-8&ns__t=1442063975219&ns_jspageurl=http%3A%2F%2Fwww.bbc.com%2F&ns_referrer=";
+"http://www.bbc.com/" -> "http://www.google-analytics.com/analytics.js";
+"http://www.bbc.com/" -> "http://static.bbci.co.uk/frameworks/barlesque/2.87.12/orb/4/script/orb.min.js";
+"http://www.google-analytics.com/analytics.js" -> "http://static.bbci.co.uk/wwhp/1.82.0/fonts/wwhp-icons.woff";
+"http://www.bbc.com/" -> "http://www.google-analytics.com/r/collect?v=1&_v=j38&a=689678801&t=pageview&_s=1&dl=http%3A%2F%2Fwww.bbc.com%2F&ul=en-us&de=UTF-8&dt=BBC%20-%20Homepage&sd=24-bit&sr=800x600&vp=784x500&je=1&fl=18.0%20r0&_u=AEAAAAABI~&jid=1235159391&cid=1801791641.1442072682&tid=UA-47973230-2&_r=1&z=2032740443";
+"http://static.bbci.co.uk/frameworks/requirejs/lib.js" -> "http://static.bbci.co.uk/frameworks/jquery/0.3.0/sharedmodules/jquery-1.9.1.js";
+}

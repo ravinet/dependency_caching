@@ -1,0 +1,4 @@
+strict digraph G {
+ratio=compress;
+"https://att.yahoo.com" -> "https://att.yahoo.com/";
+}

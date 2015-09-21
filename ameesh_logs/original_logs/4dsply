@@ -1,0 +1,17 @@
+strict digraph G {
+ratio=compress;
+"http://www.4dsply.com" -> "http://www.4dsply.com/";
+"http://www.4dsply.com/" -> "http://www.4dsply.com/css/normalize.css";
+"http://www.4dsply.com/" -> "http://www.4dsply.com/plugins/colorbox/colorbox.css";
+"http://www.4dsply.com/" -> "http://www.4dsply.com/css/bootstrap.css";
+"http://www.4dsply.com/" -> "http://www.4dsply.com/css/main.css";
+"http://www.4dsply.com/" -> "http://www.4dsply.com/css/style.css";
+"http://www.4dsply.com/" -> "http://www.4dsply.com/images/logo.png";
+"http://www.4dsply.com/" -> "http://www.4dsply.com/images/banner.jpg";
+"http://www.4dsply.com/" -> "http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js";
+"http://www.4dsply.com/" -> "http://www.4dsply.com/plugins/colorbox/jquery.colorbox.js";
+"http://www.4dsply.com/" -> "http://www.4dsply.com/js/validation.js";
+"http://www.4dsply.com/" -> "http://www.4dsply.com/js/main.js";
+"http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" -> "http://www.4dsply.com/images/bullet.png";
+"http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" -> "http://www.4dsply.com/images/btn-contact-adsupply.png";
+}

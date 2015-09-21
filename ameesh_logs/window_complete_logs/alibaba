@@ -1,0 +1,26 @@
+strict digraph G {
+ratio=compress;
+"http://www.alibaba.com" -> "http://www.alibaba.com/";
+"http://www.alibaba.com/" -> "http://style.aliunicorn.com/css/6v/??apollo/core/core-sc.css,apollo/core/rwd-sc.css,run/aisn/ghome/rwd-fixed.css,run/aisn/ghome/ghome.css,apollo/mod/header/header-v4-sc.css,run/common/top-reached/top-reached.css,run/aisn/ghome/new-start2.css,run/aisn/ghome/rfqbar.css,run/aisn/ghome/categories.css,run/aisn/ghome/banners.css,run/aisn/ghome/industry.css,run/aisn/ghome/rfq.css,run/aisn/ghome/ws.css,run/aisn/ghome/vs-v2.css,run/aisn/ghome/region.css,run/aisn/ghome/hp.css,run/aisn/ghome/ts.css,apollo/mod/footer/footer-v4-sc.css?t=5b9957e27_2030fdbe30";
+"http://www.alibaba.com/" -> "http://style.aliunicorn.com/js/6v/atom/??atom-sc.js?t=8e2771a7_10ac84c0a6";
+"http://www.alibaba.com/" -> "http://u.alicdn.com/js/beacon_en.js";
+"http://www.alibaba.com/" -> "https://img.alicdn.com/tps/TB1vy_LJpXXXXaxXXXXXXXXXXXX-740-420.jpg";
+"http://www.alibaba.com/" -> "http://img.alicdn.com/tps/i2/TB1dMB6FVXXXXb6XFXXSutbFXXX.jpg";
+"http://www.alibaba.com/" -> "http://img.alicdn.com/tps/i2/TB1rPEeJpXXXXc5XXXXHaRnHXXX-170-85.jpg";
+"http://www.alibaba.com/" -> "http://i02.i.aliimg.com/wimg/monitor/start-render.png";
+"http://www.alibaba.com/" -> "https://img.alicdn.com/tps/TB1vy_LJpXXXXaxXXXXXXXXXXXX-740-420.jpg";
+"http://www.alibaba.com/" -> "http://i02.i.aliimg.com/wimg/monitor/first-screen.png";
+"http://www.alibaba.com/" -> "http://www.google-analytics.com/analytics.js";
+"http://www.alibaba.com/" -> "https://img.alicdn.com/tps/TB1gxHNJpXXXXcvXpXXXXXXXXXX-436-160.jpg";
+"http://www.alibaba.com/" -> "http://gtms03.alicdn.com/tps/i3/TB127pdGXXXXXXpaXXXDNGzNFXX-1500-450.png";
+"http://www.alibaba.com/" -> "http://gtms01.alicdn.com/tps/i1/TB1yyaJGpXXXXbOXFXXDNGzNFXX-1500-450.png";
+"http://www.alibaba.com/" -> "http://gtms01.alicdn.com/tps/i1/TB1peJyGXXXXXcyXpXXDNGzNFXX-1500-450.png";
+"http://www.alibaba.com/" -> "http://gtms04.alicdn.com/tps/i4/TB1YadDGXXXXXa5XpXXDNGzNFXX-1500-450.png";
+"http://www.alibaba.com/" -> "http://gtms03.alicdn.com/tps/i3/TB1cGQzFVXXXXcAXpXXv6EaLpXX-500-450.png";
+"http://www.alibaba.com/" -> "http://gtms04.alicdn.com/tps/i4/TB1N1OQGpXXXXaZXFXXv6EaLpXX-500-450.png";
+"http://www.alibaba.com/" -> "http://gtms03.alicdn.com/tps/i3/TB1vmdxGXXXXXclXFXXv6EaLpXX-500-450.png";
+"http://www.alibaba.com/" -> "http://gtms02.alicdn.com/tps/i2/TB1iOk_FVXXXXaxXpXXv6EaLpXX-500-450.png";
+"http://www.alibaba.com/" -> "http://gtms01.alicdn.com/tps/i1/TB1HGIpFVXXXXa6XpXXS2V4NFXX-1500-200.png";
+"http://www.alibaba.com/" -> "http://www.google-analytics.com/r/collect?v=1&_v=j38&a=1988481390&t=pageview&_s=1&dl=http%3A%2F%2Fwww.alibaba.com%2F&ul=en-us&de=UTF-8&dt=Manufacturers%2C%20Suppliers%2C%20Exporters%20%26%20Importers%20from%20the%20world%27s%20largest%20online%20B2B%20marketplace-Alibaba.com&sd=24-bit&sr=800x600&vp=784x485&je=1&fl=18.0%20r0&_u=AEAAAAABI~&jid=1860482119&cid=23408962.1442072598&tid=UA-51403470-1&_r=1&z=1295807344";
+"http://www.google-analytics.com/analytics.js" -> "http://www.alibaba.com/"[color=red];
+}

@@ -1,0 +1,16 @@
+strict digraph G {
+ratio=compress;
+"http://www.baidu.com" -> "http://www.baidu.com/";
+"http://www.baidu.com/" -> "http://www.baidu.com/img/bd_logo1.png";
+"http://www.baidu.com/" -> "http://www.baidu.com/img/baidu_jgylogo3.gif";
+"http://www.baidu.com/" -> "http://s1.bdstatic.com/r/www/cache/static/jquery/jquery-1.10.2.min_f2fb5194.js";
+"http://www.baidu.com/" -> "http://s1.bdstatic.com/r/www/cache/static/global/img/icons_45de3f02.png";
+"http://www.baidu.com/" -> "http://s1.bdstatic.com/r/www/cache/static/global/js/all_async_search_6c646009.js";
+"http://s1.bdstatic.com/r/www/cache/static/jquery/jquery-1.10.2.min_f2fb5194.js" -> "http://s1.bdstatic.com/r/www/cache/static/home/js/nu_instant_search_96df21c7.js";
+"http://s1.bdstatic.com/r/www/cache/static/jquery/jquery-1.10.2.min_f2fb5194.js" -> "http://s1.bdstatic.com/r/www/cache/static/global/img/quickdelete_9c14b01a.png";
+"http://s1.bdstatic.com/r/www/cache/static/jquery/jquery-1.10.2.min_f2fb5194.js" -> "http://s1.bdstatic.com/r/www/cache/static/sug/js/bdsug_async_bfce8072.js";
+"http://s1.bdstatic.com/r/www/cache/static/jquery/jquery-1.10.2.min_f2fb5194.js" -> "http://s1.bdstatic.com/r/www/cache/static/baiduia/baiduia_b45d552b.js";
+"http://s1.bdstatic.com/r/www/cache/static/jquery/jquery-1.10.2.min_f2fb5194.js" -> "http://s1.bdstatic.com/r/www/cache/static/plugins/every_cookie_9876b8b5.js";
+"http://s1.bdstatic.com/r/www/cache/static/jquery/jquery-1.10.2.min_f2fb5194.js" -> "http://suggestion.baidu.com/su?wd=&json=1&p=3&sid=16484_1462_16989_17154_12772_12826_10212_12868_17105_17001_17003_17073_14976_12326_13932_10632_17051&req=2&csor=0&cb=jQuery11020673880162416026_1442011878130&_=1442011878131";
+"http://s1.bdstatic.com/r/www/cache/static/baiduia/baiduia_b45d552b.js" -> "http://s1.bdstatic.com/r/www/cache/static/baiduia/JSocket_9a52fc3e.swf?0.05";
+}

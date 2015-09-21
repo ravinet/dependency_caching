@@ -1,0 +1,32 @@
+strict digraph G {
+ratio=compress;
+"http://www.verizon.com" -> "http://www.verizon.com/";
+"http://www.verizon.com" -> "http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/cs/groups/public/documents/adacct/vzr.globalrouting2015_css.css";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://nexus.ensighten.com/verizon/Bootstrap.js";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/cs/groups/public/documents/adacct/businessunitcookie_js.js";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/resources/scripts/mpesp.js";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/includes/javascript/omnicode.js";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/resources/verizonglobalhome/scripts/oo_engine.js";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/resources/verizonglobalhome/scripts/pagetracker.js";
+"http://www.verizon.com/includes/javascript/omnicode.js" -> "http://dpm.demdex.net/id?d_rtbd=json&d_ver=2&d_verify=1&d_orgid=777B575E55828EBB7F000101%40AdobeOrg&d_nsid=0&d_cb=s_c_il%5B0%5D._setMarketingCloudFields";
+"http://nexus.ensighten.com/verizon/Bootstrap.js" -> "http://nexus.ensighten.com/verizon/prod/serverComponent.php?r=55.3312748670578&ClientID=534&PageID=http%3A%2F%2Fwww.verizon.com%2Fhome%2Fverizonglobalhome%2Fghp_landing.aspx";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/cs/groups/public/documents/adacct/vzlogo_lg.png";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/resources/fonts/NeueHaasGroteskTextBold.woff2";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/cs/groups/public/documents/adacct/lob_wireless2015.jpg";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/resources/fonts/NeueHaasGroteskDisplayBold.woff2";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/resources/fonts/NeueHaasGroteskText.woff2";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/cs/groups/public/documents/adacct/caret_svg.svg";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/resources/fonts/NeueHaasGroteskDisplayMedium.woff2";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/cs/groups/public/documents/adacct/lob_residential2015.jpg";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://www.verizon.com/cs/groups/public/documents/adacct/lob_business2015.jpg";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://dpm.demdex.net/id/rd?d_rtbd=json&d_ver=2&d_verify=1&d_orgid=777B575E55828EBB7F000101%40AdobeOrg&d_nsid=0&d_cb=s_c_il%5B0%5D._setMarketingCloudFields";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "https://www.verizon.com/vzTracker/vzTracker.aspx?appName=CorporateHome&type=1&requestUrl=http%3A//www.verizon.com/home/verizonglobalhome/ghp_landing.aspx&referrer=&Title=Verizon%20FiOS%20%26%20Custom%20TV%20%7C%20Internet%2C%20Cable%20%26%20Phone&Lang=en-US&scrRes=800X600&scrdepth=24&id=3909714503679.4243";
+"http://nexus.ensighten.com/verizon/Bootstrap.js" -> "http://nexus.ensighten.com/verizon/prod/code/cc0db78580eec1596a9cbdf840655746.js?conditionId0=353297";
+"http://www.verizon.com/includes/javascript/omnicode.js" -> "http://analytics.verizon.com/id?callback=s_c_il%5B0%5D._setAnalyticsFields&mcorgid=777B575E55828EBB7F000101%40AdobeOrg&mid=91417693345958670182137598639094937402";
+"http://nexus.ensighten.com/verizon/Bootstrap.js" -> "http://nexus.ensighten.com/verizon/prod/code/f1e26d7395edc40637e975ca102fbbae.js?conditionId0=323299";
+"http://nexus.ensighten.com/verizon/Bootstrap.js" -> "http://nexus.ensighten.com/verizon/prod/code/cc0db78580eec1596a9cbdf840655746.js?conditionId0=353300";
+"http://www.verizon.com/includes/javascript/omnicode.js" -> "http://fls.doubleclick.net/json?spot=2761768&src=&var=s_3_Integrate_DFA_get_0&host=integrate.112.2o7.net%2Fdfa_echo%3Fvar%3Ds_3_Integrate_DFA_get_0%26AQE%3D1%26A2S%3D1&ord=3418791063595";
+"http://www.verizon.com/home/verizonglobalhome/ghp_landing.aspx" -> "http://analytics.verizon.com/b/ss/verizontelecomglobal,verizontelecomres/1/JS-1.5/s92546587034594?AQB=1&ndh=1&pf=1&t=11%2F8%2F2015%2018%3A54%3A56%205%20240&mid=91417693345958670182137598639094937402&aamlh=9&ce=ISO-8859-1&ns=verizontelecom&pageName=ghp%7C%20routing%20page&g=http%3A%2F%2Fwww.verizon.com%2Fhome%2Fverizonglobalhome%2Fghp_landing.aspx&c.&visitorAPI=VisitorAPI%20Present&.c&cc=USD&ch=global%20homepage%7C%20routing-%20en&events=event1%2Cevent101&aamb=NRX38WO0n5BH8Th-nqAG_A&c1=ghp%7C%20routing%20page&v1=D%3Dc1&h1=D%3Dc38%7C%7CD%3Dc6%7C%7CD%3Dc2%7C%7CD%3Dc48%7C%7CD%3Dc3%7C%7CD%3Dc20&c2=routing&v2=D%3Dc2&c3=routing&v3=D%3Dc3&c4=%2Fvz%2Fhome%2Fresidential&v4=D%3Dc4&c5=not%20available&v5=D%3Dc5&c6=routing&v6=D%3Dc6&v7=D%3Dc7&c8=NESq7paeA73f%252BlA5bLFzoMAyg%253D%253D&v8=D%3Dc8&c9=New&v9=D%3Dc9&c10=Anonymous&v10=D%3Dc10&c13=First%20page%20view%20or%20cookies%20not%20supported&v13=D%3Dc13&c14=6%3A30PM&v14=D%3Dc14&c15=Friday&v15=D%3Dc15&c16=1&v16=D%3Dc16&v17=D%3Dc17&v19=D%3Dc19&c20=www.verizon.com%2Fhome%2Fverizonglobalhome%2Fghp_landing.aspx&v20=D%3Dc20&c21=www.verizon.com&v21=D%3Dc21&c22=no%20dma%20value&v22=D%3Dc22&v23=D%3Dc23&v24=D%3Dc24&v25=D%3Dc5&v26=D%3Dc5&v30=D%3DpageName&c31=D%3Dv0&v31=D%3Dv0&v32=D%3Dv0&v33=D%3Dv0&v34=D%3Dc44&v35=D%3Dc35&v36=D%3Dc36&c38=vz&v38=D%3Dc7&v39=D%3Dc7&v43=D%3Dc43&v45=D%3Dc45&v46=D%3Dc46&v47=D%3Dc47&c48=global%20homepage&c50=9c343299ab1d12eaf5c0b32ef2e4912c&v50=D%3Dc50&c74=not%20available&v74=D%3Dc74&c75=no%20verizon%20uid&v75=D%3Dc75&s=800x600&c=24&j=1.6&v=Y&k=Y&bw=799&bh=500&AQE=1";
+"http://www.verizon.com" -> "https://ad.doubleclick.net/ad/N6296.547841.VISUALIQINC/B8028261;sz=1x1;u=http%3A%2F%2Fwww.verizon.com%2Fhome%2Fverizonglobalhome%2Fghp_landing.aspx;ord=[1442012096481]?";
+}

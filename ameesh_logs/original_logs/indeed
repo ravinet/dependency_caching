@@ -1,0 +1,20 @@
+strict digraph G {
+ratio=compress;
+"http://www.indeed.com" -> "http://www.indeed.com/";
+"http://www.indeed.com/" -> "http://www.indeed.com/images/job_search_indeed.png";
+"http://www.indeed.com/" -> "http://www.googleadservices.com/pagead/conversion.js";
+"http://www.indeed.com/" -> "http://www.indeed.com/s/b39503e/jobsearch-all-compiled.js";
+"http://www.indeed.com/" -> "http://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&ActivityID=526926&rnd=723912.4677143991";
+"http://www.indeed.com/" -> "http://www.indeed.com/rpc/log?a=hpjsv&tk=19usjj6ag53u4a0f&zr=271842919";
+"http://www.indeed.com/" -> "http://www.google-analytics.com/analytics.js";
+"http://www.indeed.com/" -> "http://b.scorecardresearch.com/beacon.js";
+"http://www.googleadservices.com/pagead/conversion.js" -> "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1049100955/?random=1442011886711&cv=8&fst=1442011886711&num=1&fmt=1&label=GXkhCM2YtwMQm4Wg9AM&guid=ON&u_h=600&u_w=800&u_ah=600&u_aw=800&u_cd=24&u_his=2&u_tz=-240&u_java=true&u_nplug=6&u_nmime=8&frm=0&url=http%3A//www.indeed.com/";
+"http://www.google-analytics.com/analytics.js" -> "http://www.google-analytics.com/plugins/ua/linkid.js";
+"http://www.indeed.com/" -> "http://b.scorecardresearch.com/b?c1=2&c2=6486505&c4=www.indeed.com%2F&c15=19usjj6ad53u4cq8&ns__t=1442011886744&ns_c=UTF-8&c8=Job%20Search%20%7C%20one%20search.%20all%20jobs.%20Indeed.com&c7=http%3A%2F%2Fwww.indeed.com%2F&c9=";
+"http://www.indeed.com/" -> "https://www.google.com/ads/user-lists/1049100955/?label=GXkhCM2YtwMQm4Wg9AM&fmt=1&num=1&cv=8&frm=0&url=http%3A//www.indeed.com/&random=1397526231";
+"http://www.indeed.com/" -> "http://www.google-analytics.com/collect?v=1&_v=j38&a=1832688792&t=pageview&_s=1&dl=http%3A%2F%2Fwww.indeed.com%2F&ul=en-us&de=UTF-8&dt=Job%20Search%20%7C%20one%20search.%20all%20jobs.%20Indeed.com&sd=24-bit&sr=800x600&vp=799x500&je=1&fl=18.0%20r0&_u=CGAAiEIhB~&jid=234573480&cid=1298543845.1442011887&tid=UA-90780-1&z=296889215";
+"http://www.indeed.com/" -> "https://stats.g.doubleclick.net/r/collect?t=dc&aip=1&_r=3&v=1&_v=j38&tid=UA-90780-1&cid=1298543845.1442011887&jid=234573480&_u=CGAAiEIhB~&z=1105697597";
+"http://www.indeed.com/" -> "http://b.scorecardresearch.com/b2?c1=2&c2=6486505&c4=www.indeed.com%2F&c15=19usjj6ad53u4cq8&ns__t=1441921662146&ns_c=UTF-8&c8=Job%20Search%20%7C%20one%20search.%20all%20jobs.%20Indeed.com&c7=http%3A%2F%2Fwww.indeed.com%2F&c9=";
+"http://www.indeed.com/" -> "https://www.google.com/ads/ga-audiences?v=1&aip=1&t=sr&_r=4&tid=UA-90780-1&cid=1972310130.1441921662&jid=671386349&_v=j38&z=1877524111";
+"http://www.indeed.com/" -> "http://www.indeed.com/precache.html";
+}

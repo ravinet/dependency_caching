@@ -1,0 +1,4 @@
+strict digraph G {
+ratio=compress;
+"https://thepiratebay.la" -> "https://thepiratebay.la/";
+}

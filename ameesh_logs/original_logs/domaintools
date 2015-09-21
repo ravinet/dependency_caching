@@ -1,0 +1,34 @@
+strict digraph G {
+ratio=compress;
+"http://www.domaintools.com" -> "http://www.domaintools.com/";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/styles/styles.css";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/images/dt_gear_logo_g.png";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/icons/icon_ns_circle.png";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/icons/icon_ns_threat_intelligence.png";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/icons/icon_ns_cyber_forensics.png";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/icons/icon_ns_reputation_scoring.png";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/icons/icon_ns_brand_protection.png";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/icons/icon_ns_domain_research.png";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/icons/icon_ns_compliance.png";
+"http://www.domaintools.com/" -> "http://app-abd.marketo.com/js/forms2/js/forms2.min.js";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/scripts/scripts.js";
+"http://www.domaintools.com/" -> "http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic";
+"http://www.domaintools.com/" -> "http://fonts.googleapis.com/css?family=Oswald:400,300,700";
+"http://www.domaintools.com/" -> "http://fonts.gstatic.com/s/lato/v11/H2DMvhDLycM56KNuAtbJYA.woff2";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/fonts/fontawesome-webfont.woff2?v=4.3.0";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/images/home_banner_1.jpg";
+"http://www.domaintools.com/" -> "http://fonts.gstatic.com/s/oswald/v10/pEobIV_lL25TKBpqVI_a2w.woff2";
+"http://www.domaintools.com/" -> "http://fonts.gstatic.com/s/lato/v11/1YwB1sO8YE1Lyjf12WNiUA.woff2";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/images/home_banner_2.jpg";
+"http://www.domaintools.com/" -> "http://www.domaintools.com/assets/images/home_banner_3.jpg";
+"http://www.domaintools.com/" -> "http://fonts.gstatic.com/s/oswald/v10/HqHm7BVC_nzzTui2lzQTDVtXRa8TVwTICgirnJhmVJw.woff2";
+"http://app-abd.marketo.com/js/forms2/js/forms2.min.js" -> "http://app-abd.marketo.com/index.php/form/getForm?munchkinId=132-OHD-785&form=1065&url=http%3A%2F%2Fwww.domaintools.com%2F&callback=jQuery110202587804924696684_1442014831001&_=1442014831002";
+"http://app-abd.marketo.com/js/forms2/js/forms2.min.js" -> "http://app-abd.marketo.com/index.php/form/getForm?munchkinId=132-OHD-785&form=1083&url=http%3A%2F%2Fwww.domaintools.com%2F&callback=jQuery110202587804924696684_1442014831003&_=1442014831004";
+"http://www.domaintools.com/" -> "http://www.googletagmanager.com/gtm.js?id=GTM-5P2JCN";
+"http://www.googletagmanager.com/gtm.js?id=GTM-5P2JCN" -> "http://www.google-analytics.com/analytics.js";
+"http://www.domaintools.com/" ->  "http://munchkin.marketo.net/munchkin.js";
+"http://munchkin.marketo.net/munchkin.js" -> "http://munchkin-cdn.marketo.net/150/munchkin.js";
+"http://www.domaintools.com/" -> "http://www.google-analytics.com/r/collect?v=1&_v=j38&a=1683160909&t=pageview&_s=1&dl=http%3A%2F%2Fwww.domaintools.com%2F&ul=en-us&de=UTF-8&dt=Home%20%7C%20DomainTools&sd=24-bit&sr=800x600&vp=784x500&je=1&fl=18.0%20r0&_u=QEAAAAABI~&jid=981505893&cid=943283753.1442014831&tid=UA-296450-1&_r=1&gtm=GTM-5P2JCN&z=1238099501";
+"http://munchkin-cdn.marketo.net/150/munchkin.js" -> "http://132-ohd-785.mktoresp.com/webevents/visitWebPage?_mchNc=1442014831134&_mchCn=&_mchId=132-OHD-785&_mchTk=_mch-domaintools.com-1442014831133-78776&_mchHo=www.domaintools.com&_mchPo=&_mchRu=%2F&_mchPc=http%3A&_mchVr=150&_mchHa=&_mchRe=&_mchQp=";
+"http://www.domaintools.com/" -> "https://stats.g.doubleclick.net/r/collect?v=1&aip=1&t=dc&_r=3&tid=UA-296450-1&cid=1029778505.1441974580&jid=244691565&_v=j38&z=1935081164";
+}

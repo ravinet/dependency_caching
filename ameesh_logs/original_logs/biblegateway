@@ -1,0 +1,4 @@
+strict digraph G {
+ratio=compress;
+"https://www.biblegateway.com" -> "https://www.biblegateway.com/";
+}

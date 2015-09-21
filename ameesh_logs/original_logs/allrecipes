@@ -1,0 +1,25 @@
+strict digraph G {
+ratio=compress;
+"http://www.allrecipes.com" -> "http://www.allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+"http://www.allrecipes.com" -> "http://allrecipes.com/";
+}

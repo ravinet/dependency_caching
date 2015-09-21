@@ -1,0 +1,7 @@
+strict digraph G {
+ratio=compress;
+"http://www.weibo.com" -> "http://www.weibo.com/";
+"http://www.weibo.com" -> "http://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&ua=php-sso_sdk_client-0.6.14&_rand=1441923255.4374";
+"http://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&ua=php-sso_sdk_client-0.6.14&_rand=1441923255.4374" -> "http://passport.weibo.com/js/visitor/mini.js";
+"http://passport.weibo.com/js/visitor/mini.js" -> "http://sjs.sinajs.cn/blog7swf/fonts.swf";
+}

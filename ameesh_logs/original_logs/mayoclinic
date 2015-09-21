@@ -1,0 +1,34 @@
+strict digraph G {
+ratio=compress;
+"http://www.mayoclinic.org" -> "http://www.mayoclinic.org/";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/styles/css/gbs/mayocombinded_6CB2086E4128EC68A388511390223FFD.css";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/Web/GBS/Shared/CSS/appointmentpromo.css";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/styles/js/gbs/mayoheaderjscombined_4F31312F37CD67561DBFA9DB1143D780.js";
+"http://www.mayoclinic.org/" -> "https://www.google.com/adsense/search/ads.js";
+"http://www.mayoclinic.org/" -> "http://nexus.ensighten.com/mayo_clinic/clinicprod/Bootstrap.js";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/WebResource.axd?d=ybqrVgJggCTQ5424A98G-0IIuo2HP6QzhZz_JM9C6FvKgfPgyuvX_UToX6z4BPjUAbie_EvMN0-KXiz0udCRo1R4x5s1&t=635586452020000000";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/styles/css/gbs/mobile.css";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/images/mayologo.png";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/styles/img/gbs/logo-mayoclinic-mobile.png";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/kcms/gbs/research/images/2013/05/02/10/56/globalnav-patientcare.jpg";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/kcms/gbs/research/images/2013/05/02/10/56/globalnav-docsdepts.jpg";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/kcms/gbs/research/images/2013/05/02/10/56/globalnav-research.jpg";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/kcms/gbs/research/images/2013/05/02/10/56/globalnav-meded.jpg";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/kcms/gbs/research/images/2013/05/02/10/56/globalnav-medprofs.jpg";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/kcms/gbs/research/images/2014/04/29/12/35/globalnav-you-are-blue.jpg";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/styles/js/GBS/brightcovevideo.js";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/kcms/gbs/patient%20consumer/images/2014/07/14/15/44/hospital-ranking-badge.jpg";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/kcms/gbs/patient%20consumer/images/2014/05/05/06/22/mayo-banner-plain-12col.jpg";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/~/media/kcms/gbs/patient%20consumer/images/2014/05/05/06/22/you-are-banner-plain-12col.jpg";
+"http://www.mayoclinic.org/" -> "http://www.mayoclinic.org/styles/js/gbs/mayofooterjscombined_392D7EBEDD2D533EB9DB49C1D09C3DBD.js";
+"http://www.mayoclinic.org/" -> "http://oascentral.mayoclinic.org/RealMedia/ads/adstream_mjx.ads/www.mayoclinic.org/d0cbeea4-9dd5-475c-93aa-1b87c9e02a6e/134778825@Frame1?&ct=PC_Organization_Web_Landing_Page&i=d0cbeea4-9dd5-475c-93aa-1b87c9e02a6e&_RM_HTML_DCRANDNUM_=34778825";
+"http://www.mayoclinic.org/styles/js/gbs/mayoheaderjscombined_4F31312F37CD67561DBFA9DB1143D780.js" -> "http://www.mayoclinic.org/UniversalNav/Styles/img/bg_input_text.png";
+"http://www.mayoclinic.org/styles/js/gbs/mayoheaderjscombined_4F31312F37CD67561DBFA9DB1143D780.js" -> "http://www.mayoclinic.org/UniversalNav/Styles/img/icon-search.png";
+"http://www.mayoclinic.org/styles/js/gbs/mayoheaderjscombined_4F31312F37CD67561DBFA9DB1143D780.js" -> "http://www.mayoclinic.org/UniversalNav/Styles/img/bg-nav-arrow-down.png";
+"http://www.mayoclinic.org/styles/js/gbs/mayoheaderjscombined_4F31312F37CD67561DBFA9DB1143D780.js" -> "http://www.mayoclinic.org/UniversalNav/Styles/img/sprite-globalnav.png";
+"http://www.mayoclinic.org/styles/js/gbs/mayoheaderjscombined_4F31312F37CD67561DBFA9DB1143D780.js" -> "http://www.mayoclinic.org/UniversalNav/Styles/img/sprite-globalnavarrows.png";
+"http://www.mayoclinic.org/styles/js/gbs/mayoheaderjscombined_4F31312F37CD67561DBFA9DB1143D780.js" -> "http://www.mayoclinic.org/styles/img/gbs/patient/bg-patienttheme-appointments.png";
+"http://www.mayoclinic.org/styles/js/gbs/mayoheaderjscombined_4F31312F37CD67561DBFA9DB1143D780.js" -> "http://www.mayoclinic.org/~/media/Web/GBS/Shared/Images/bg-givenow.png";
+"http://www.mayoclinic.org/styles/js/gbs/mayoheaderjscombined_4F31312F37CD67561DBFA9DB1143D780.js" -> "http://www.mayoclinic.org/~/media/7FDA5EF55762400DB6B34C0929DC5A7C.png";
+"http://www.mayoclinic.org/styles/js/gbs/mayoheaderjscombined_4F31312F37CD67561DBFA9DB1143D780.js" -> "http://www.mayoclinic.org/styles/css/gbs/images/ui-bg_flat_75_ffffff_40x100.png";
+}

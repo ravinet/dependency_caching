@@ -1,0 +1,38 @@
+strict digraph G {
+ratio=compress;
+"http://www.priceline.com" -> "http://www.priceline.com/";
+"http://www.priceline.com/" -> "http://www.priceline.com/base-css/v3/css-starter-min.css";
+"http://www.priceline.com/" -> "http://www.priceline.com/base-css/header-footer/v3/global-header-footer-min.css";
+"http://www.priceline.com/" -> "http://www.priceline.com/fonts/v11/style.css";
+"http://www.priceline.com/" -> "http://www.priceline.com/home/public/styles/app-41beb26d.css";
+"http://www.priceline.com/" -> "http://www.priceline.com/home/public/assets/images/homepage/promo/pcln-TOD-HmpgTile-june2015-v4a.jpg";
+"http://www.priceline.com/" -> "http://www.priceline.com/home/public/scripts/vendor-63874354.js";
+"http://www.priceline.com/" -> "http://www.priceline.com/home/public/scripts/app-aa63e3fc.js";
+"http://www.priceline.com/home/public/scripts/vendor-63874354.js" -> "http://www.priceline.com/fonts/v11/fonts/priceline.woff?-cvsnln";
+"http://www.priceline.com/home/public/scripts/vendor-63874354.js" -> "http://www.priceline.com/home/public/assets/images/homepage/shatner-pointing.jpg";
+"http://www.priceline.com/home/public/scripts/vendor-63874354.js" -> "http://www.priceline.com/home/public/assets/images/homepage/kaley-cuoco-negotiator.jpg";
+"http://www.priceline.com/home/public/scripts/vendor-63874354.js" -> "http://mobileimg.priceline.com/pink/pcln-card.jpg";
+"http://www.priceline.com/home/public/scripts/vendor-63874354.js" -> "http://mobileimg.priceline.com/pink/group-logos.png";
+"http://www.priceline.com/" -> "http://www.google-analytics.com/analytics.js";
+"http://www.priceline.com/home/public/scripts/vendor-63874354.js" -> "http://p.smartertravel.com/ext/lib/priceline.min.js";
+"http://www.priceline.com/" -> "http://www.priceline.com/svcs/mkt/tag/pclntms.js";
+"http://www.priceline.com/" -> "http://www.priceline.com/home/public/assets/images/homepage/epcot-and-donald-duck.jpg";
+"http://www.priceline.com/" -> "http://www.priceline.com/home/public/assets/images/homepage/universal-small.jpg";
+"http://www.priceline.com/" -> "http://www.priceline.com/home/public/assets/images/homepage/ajax-loader.gif";
+"http://www.priceline.com/" -> "http://www.priceline.com/home/public/assets/images/homepage/bpg_logo.png";
+"http://www.priceline.com/" -> "http://www.google-analytics.com/r/collect?v=1&_v=j38&a=2057606258&t=pageview&_s=1&dl=http%3A%2F%2Fwww.priceline.com%2F&dp=%2F&ul=en-us&de=UTF-8&dt=index.html&sd=24-bit&sr=800x600&vp=784x485&je=1&fl=18.0%20r0&_u=AEAAAEABI~&jid=1341915966&cid=1991572955.1442012106&tid=UA-2975581-1&_r=1&z=1113608661";
+"http://www.priceline.com/" -> "http://www.google-analytics.com/collect?v=1&_v=j38&a=2057606258&t=event&_s=2&dl=http%3A%2F%2Fwww.priceline.com%2F&ul=en-us&de=UTF-8&dt=Priceline.com%20-%20The%20Best%20Deals%20on%20Hotels%2C%20Flights%20and%20Rental%20Cars.&sd=24-bit&sr=800x600&vp=784x485&je=1&fl=18.0%20r0&ec=NS_Homepage&ea=Air_Popunder&el=SMARTER_TRAVEL_POP_UNDER&_u=AEAAAEABI~&jid=&cid=1991572955.1442012106&tid=UA-2975581-1&z=511402756";
+"http://www.priceline.com/svcs/mkt/tag/pclntms.js" -> "http://www.priceline.com/svcs/ep/services/locale/v0/geoinfostring?callback=pclntms.updateEP&ipAddr=128.30.77.148";
+"http://www.priceline.com/svcs/mkt/tag/pclntms.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js";
+"http://p.smartertravel.com/ext/lib/priceline.min.js" -> "http://p.smartertravel.com/ext/pcmn/ads/syndicated/leavebehind/?callback=jQuery111208126774281263351_1442012105835&api_key=35Ta011sQNOUXmeRN5MrEg&placement=C3n-DiVXQdq3HG8_GHVaLQ&suppression_period_active=false&page_view_uuid=8a0de13c-33ed-4f09-99b1-9e1302756587&_=1442012105836";
+"http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.252.js?utv=ut4.34.201509101934";
+"http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.107.js?utv=ut4.34.201509101934";
+"http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.235.js?utv=ut4.34.201509101934";
+"http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.247.js?utv=ut4.34.201509101934";
+"http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.250.js?utv=ut4.34.201509101934";
+"http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.365.js?utv=ut4.34.201509101934";
+"http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.372.js?utv=ut4.34.201509101934";
+"http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.387.js?utv=ut4.34.201509101934";
+"http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.405.js?utv=ut4.34.201509101934";
+"http://tags.tiqcdn.com/utag/pcln/main/prod/utag.js" -> "http://tags.tiqcdn.com/utag/pcln/main/prod/utag.418.js?utv=ut4.34.201509101934";
+}

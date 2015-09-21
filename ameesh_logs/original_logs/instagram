@@ -1,0 +1,20 @@
+strict digraph G {
+ratio=compress;
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/scripts/webfont.js";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/cache/styles/public/public-main.css";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/cache/bundles/en_US_SplashPage.js";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/images/homepage/screenshot1.jpg";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/images/homepage/screenshot2.jpg";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/images/homepage/screenshot3.jpg";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/images/homepage/screenshot4.jpg";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/images/homepage/screenshot5.jpg";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/images/appstore-install-badges/badge_ios_english-en.png";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/images/appstore-install-badges/english_get.png";
+"http://www.instagram.com/" -> "http://connect.facebook.net/en_US/fbevents.js";
+"http://www.instagram.com/" -> "https://connect.facebook.net/en_US/fbevents.js";
+"http://www.instagram.com/" -> "https://www.facebook.com/tr/?id=1425767024389221&ev=PageView&dl=http%3A%2F%2Fwww.instagram.com%2F&rl=&if=false&ts=1441994878197&v=2.0";
+"http://www.instagram.com/" -> "https://www.facebook.com/tr/?id=1425767024389221&ev=ViewContent&dl=http%3A%2F%2Fwww.instagram.com%2F&rl=&if=false&ts=1441994878198&v=2.0";
+"http://www.instagram.com/" -> "https://www.facebook.com/tr/?ev=6021483937929&dl=http%3A%2F%2Fwww.instagram.com%2F&rl=&if=false&ts=1441994878198&cd[value]=0.00&cd[currency]=USD&v=2.0";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/images/ico/favicon.ico";
+"http://www.instagram.com/" -> "http://instagramstatic-a.akamaihd.net/bluebar/355fca9/images/ico/favicon.svg";
+}

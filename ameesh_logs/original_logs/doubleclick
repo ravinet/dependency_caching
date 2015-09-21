@@ -1,0 +1,4 @@
+strict digraph G {
+ratio=compress;
+"https://www.doubleclickbygoogle.com" -> "https://www.doubleclickbygoogle.com/";
+}

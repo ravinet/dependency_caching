@@ -1,0 +1,37 @@
+strict digraph G {
+ratio=compress;
+"https://www.elance.com" -> "https://www.elance.com/";
+"https://www.elance.com/" -> "https://www.elance.com/styles/foundation/css/foundation.min.css,landing/mm-compressed-rebranded.css?ver=c0b96273";
+"https://www.elance.com/" -> "https://www.elance.com/scripts/landing/mm-compressed.js,foundation/js/vendor/modernizr.js?ver=c0b96273";
+"https://www.elance.com/" -> "https://www.elance.com/scripts/util/cobranding.js?ver=c0b96273";
+"https://www.elance.com/" -> "https://www.elance.com/scripts/util/elogger.js";
+"https://www.elance.com/" -> "https://cdn.optimizely.com/js/1124800006.js";
+"https://www.elance.com/" -> "https://fonts.googleapis.com/css?family=Open+Sans:700,600,300";
+"https://www.elance.com/" -> "https://www.elance.com/media/images/4.0/landing/15-7-24/homescreen.png";
+"https://www.elance.com/" -> "https://www.elance.com/media/images/4.0/landing/15-7-24/OpportunityIcon.svg";
+"https://www.elance.com/" -> "https://www.elance.com/media/images/4.0/landing/15-7-24/SecurityIcon.svg";
+"https://www.elance.com/" -> "https://www.elance.com/media/images/4.0/landing/15-7-24/ReputationIcon.svg";
+"https://www.elance.com/" -> "https://ssl.google-analytics.com/ga.js";
+"https://www.elance.com/" -> "https://www.googletagmanager.com/gtm.js?id=GTM-VH58";
+"https://www.elance.com/" -> "https://www.google-analytics.com/analytics.js";
+"https://www.elance.com/" -> "https://www.elance.com/media/images/4.0/nav/elance-upwork-logo.png?v=c0b96273";
+"https://www.elance.com/" -> "https://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.woff2";
+"https://www.elance.com/" -> "https://fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTegdm0LZdjqr5-oayXSOefg.woff2";
+"https://www.elance.com/" -> "https://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.woff2";
+"https://www.google-analytics.com/analytics.js" -> "https://www.elance.com/media/images/4.0/nav/elance-upwork-logo-footer.png?v=c0b96273";
+"https://www.google-analytics.com/analytics.js" -> "https://www.elance.com/media/images/4.0/nav/navsprite-icons.png?v=c0b96273";
+"https://www.elance.com/" -> "https://www.google-analytics.com/r/collect?v=1&_v=j38&a=1082016299&t=pageview&_s=1&dl=https%3A%2F%2Fwww.elance.com%2F&ul=en-us&de=windows-1252&dt=Hire%20freelancers%20and%20find%20freelance%20jobs%20instantly%20%7C%20Elance&sd=24-bit&sr=800x600&vp=784x485&je=1&fl=18.0%20r0&_u=AEAAAEABI~&jid=1201446846&cid=1875522368.1442015288&tid=UA-66099324-1&_r=1&z=1215772004";
+"https://www.elance.com/" -> "https://clicktale.pantherssl.com/WRb6.js";
+"https://www.googletagmanager.com/gtm.js?id=GTM-VH58" -> "https://www.googleadservices.com/pagead/conversion_async.js";
+"https://www.elance.com/" ->  "https://secure.quantserve.com/aquant.js?a=p-UK1AjjBBLRAbA";
+"https://www.elance.com/" ->  "https://sjs.bizographics.com/insight.min.js";
+"https://www.elance.com/" -> "https://ssl.google-analytics.com/r/__utm.gif?utmwv=5.6.6&utms=1&utmn=2103956297&utmhn=www.elance.com&utme=8(P_USER_TYPE)9(Visitor)&utmcs=windows-1252&utmsr=800x600&utmvp=784x485&utmsc=24-bit&utmul=en-us&utmje=1&utmfl=18.0%20r0&utmdt=Hire%20freelancers%20and%20find%20freelance%20jobs%20instantly%20%7C%20Elance&utmhid=1082016299&utmr=-&utmp=%2F&utmht=1442015287958&utmac=UA-876020-1&utmcc=__utma%3D94180290.1875522368.1442015288.1442015288.1442015288.1%3B%2B__utmz%3D94180290.1442015288.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=397338681&utmredir=1&utmu=qRAAAAAAAAAAAAAAAAABAAAE~";
+"https://www.elance.com/" -> "https://ws.elance.com/php/marketing/main/emc.php?request=https%3A//www.elance.com/&referrer=";
+"https://www.elance.com/" -> "https://stats.g.doubleclick.net/r/collect?v=1&aip=1&t=dc&_r=3&tid=UA-876020-1&cid=643951055.1441975324&jid=1219816760&_v=5.6.6&z=952838006";
+"https://www.elance.com/" -> "https://pixel.quantserve.com/pixel;r=195827365;a=p-UK1AjjBBLRAbA;orderid=;revenue=;labels=_fp.event.Homepage;fpan=1;fpa=P0-563481009-1442015287984;ns=0;ce=1;cm=;je=1;sr=800x600x24;enc=n;dst=1;et=1442015287983;tzo=240;ref=;url=https%3A%2F%2Fwww.elance.com%2F;ogl=url.https%3A%2F%2Fwww%252Eelance%252Ecom";
+"https://www.elance.com/" -> "https://js-agent.newrelic.com/nr-632.min.js";
+"https://sjs.bizographics.com/insight.min.js" -> "https://dc.ads.linkedin.com/collect/?time=1442015288000&pid=7798&url=https%3A%2F%2Fwww.elance.com%2F&pageUrl=https%3A%2F%2Fwww.elance.com%2F&ref=&fmt=js&s=1";
+"https://www.elance.com/scripts/landing/mm-compressed.js,foundation/js/vendor/modernizr.js?ver=c0b96273" -> "https://www.elance.com/scripts/util/elogger.js"[color=red];
+"https://www.elance.com/scripts/landing/mm-compressed.js,foundation/js/vendor/modernizr.js?ver=c0b96273" -> "https://www.elance.com/"[color=red];
+"https://www.google-analytics.com/analytics.js" -> "https://www.elance.com/"[color=red];
+}

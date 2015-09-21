@@ -1,0 +1,4 @@
+strict digraph G {
+ratio=compress;
+"http://www.breitbart.com" -> "http://www.breitbart.com/";
+}

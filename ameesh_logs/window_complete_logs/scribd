@@ -1,0 +1,20 @@
+strict digraph G {
+ratio=compress;
+"https://www.scribd.com" -> "https://www.scribd.com/";
+"https://www.scribd.com/" -> "https://cdn.optimizely.com/js/653710485.js";
+"https://www.scribd.com/" -> "https://s2-f.scribdassets.com/aggregated/css_img/chrome.css?1442005965";
+"https://www.scribd.com/" -> "https://s2-f.scribdassets.com/aggregated/css_img/home_landing.css?1442005895";
+"https://www.scribd.com/" -> "https://s1-f.scribdassets.com/images/landing/home2_landing/scribd_logo.svg?1442005965";
+"https://www.scribd.com/" -> "https://s2-f.scribdassets.com/images/landing/home2_landing/scribd_logo_blue.svg?1442005965";
+"https://www.scribd.com/" -> "https://s1-f.scribdassets.com/images/reflow/AppstoreBtn_135x47.png?1442005965";
+"https://www.scribd.com/" -> "https://developer.android.com/images/brand/en_app_rgb_wo_45.png";
+"https://www.scribd.com/" -> "https://www.scribd.com/options/exposed_to_client.js?1442063400=";
+"https://www.scribd.com/" -> "https://s1-f.scribdassets.com/aggregated/javascript/chrome.js?1442005965";
+"https://www.scribd.com/" -> "https://s2-f.scribdassets.com/aggregated/javascript/home_landing.js?1442005965";
+"https://www.scribd.com/" -> "https://ssl.google-analytics.com/ga.js";
+"https://www.scribd.com/" -> "https://www.google-analytics.com/analytics.js";
+"https://www.scribd.com/" -> "https://ssl.google-analytics.com/r/__utm.gif?utmwv=5.6.6&utms=1&utmn=1451122904&utmhn=www.scribd.com&utme=8(logged_in*3!domain)9(false*3!www.scribd.com)11(1)&utmcs=UTF-8&utmsr=800x600&utmvp=784x500&utmsc=24-bit&utmul=en-us&utmje=1&utmfl=18.0%20r0&utmdt=Scribd%20-%20Read%20Unlimited%20Books&utmhid=1090282161&utmr=-&utmp=%2F&utmht=1442072507693&utmac=UA-443684-2&utmcc=__utma%3D137936306.257466845.1442072508.1442072508.1442072508.1%3B%2B__utmz%3D137936306.1442072508.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=1518560519&utmredir=1&utmu=qQAAAAAAAAAAAAAAAAABAAAE~";
+"https://www.google-analytics.com/analytics.js" -> "https://ssl.google-analytics.com/ga.js"[color=red];
+"https://www.google-analytics.com/analytics.js" -> "https://www.scribd.com/"[color=red];
+"https://ssl.google-analytics.com/ga.js" -> "https://www.scribd.com/"[color=red];
+}

@@ -1,0 +1,4 @@
+strict digraph G {
+ratio=compress;
+"http://www.edmunds.com" -> "http://www.edmunds.com/";
+}

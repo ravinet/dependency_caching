@@ -1,0 +1,20 @@
+strict digraph G {
+ratio=compress;
+"http://www.bhphotovideo.com" -> "http://www.bhphotovideo.com/";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/find/stylesheet.jsp?currPage=homePage15&fonts=OpenSans,600,normal&loadon=top&lang=en&site=reg&min=Y&v=20150911g";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/find/stylesheet.jsp?files=&fonts=OpenSans,600,normal&min=Y&v=20150911g";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/otohphnbszvubqqzwbqcdfuqxr.js";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/__ssobj/core.js";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/__ssobj/ard.png?6193617495883104359_1-333-1442063948&n=1";
+"http://www.bhphotovideo.com/" -> "http://static.bhphoto.com/images/logo_m.jpg";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/find/stylesheet.jsp?files=&min=Y&v=20150911g";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/images/loading.gif";
+"http://www.bhphotovideo.com/" -> "http://static.bhphoto.com/FrameWork/fonts/OpenSans/OpenSans-600-normal.woff";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/FrameWork/fonts/OpenSans/OpenSans-400-normal.woff";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/FrameWork/fonts/OpenSans/OpenSans-700-normal.woff";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/FrameWork/fonts/OpenSans/OpenSans-300-normal.woff";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/images/homepage15/categoryCollage.jpg";
+"http://www.bhphotovideo.com/otohphnbszvubqqzwbqcdfuqxr.js" -> "http://www.bhphotovideo.com/otohphnbeueyztcfvfvyytr.js?PID=BD9E1747-99DF-3DE1-AF48-65E96064EC7E";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/find/stylesheet.jsp?currPage=homePage15&loadon=bottom&lang=en&site=reg&min=Y&v=20150911g";
+"http://www.bhphotovideo.com/" -> "http://www.bhphotovideo.com/find/javascripts.jsp?currPage=homePage15&lang=en&loadon=lazy&min=Y&v=&v=20150911g";
+}

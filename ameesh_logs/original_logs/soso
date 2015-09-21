@@ -1,0 +1,18 @@
+strict digraph G {
+ratio=compress;
+"http://www.soso.com" -> "http://www.soso.com/";
+"http://www.soso.com" -> "http://www.sogou.com/?rfrom=soso";
+"http://www.sogou.com/?rfrom=soso" -> "http://img01.sogoucdn.com/app/a/100520122/f58cddda_index_soso.jpg";
+"http://www.sogou.com/?rfrom=soso" -> "http://www.sogou.com/js/sugg_new.v.51.js";
+"http://www.sogou.com/?rfrom=soso" -> "http://www.sogou.com/js/pb_v.1.9.2.min.js";
+"http://www.sogou.com/?rfrom=soso" -> "http://www.sogou.com/js/jquery-1.11.0.min.js";
+"http://www.sogou.com/?rfrom=soso" -> "http://www.sogou.com/js/common/widget/login.js?v=1";
+"http://www.sogou.com/?rfrom=soso" -> "http://www.sogou.com/web/js/taspeed.min.v.0.0.1.js";
+"http://www.sogou.com/?rfrom=soso" -> "http://www.sogou.com/images/index/spy_h.png";
+"http://www.sogou.com/?rfrom=soso" -> "http://www.sogou.com/images/logo/new/search400x150.png";
+"http://www.sogou.com/js/sugg_new.v.51.js" -> "http://www.sogou.com/sug/css/m3.v.27.css";
+"http://www.sogou.com/?rfrom=soso" -> "http://pb.sogou.com/pv.gif?uigs_productid=webapp&uigs_t=1442015619520268&uigs_cookie=SUID%3D944D1E806914920A0000000055F2D15E&uigs_uuid=1442015619519873&type=webindex&scrnwi=800&scrnhi=600&uigs_pbtag=A&uigs_version=v1.1&uigs_refer=";
+"http://www.sogou.com/?rfrom=soso" -> "http://pb.sogou.com/pv.gif?uigs_productid=web&uigs_t=1442015619547375&uigs_refer=";
+"http://www.sogou.com/?rfrom=soso" -> "http://pb.sogou.com/pv.gif?uigs_productid=webapp&type=logo&sitetype=sosoIndex&uniqueid=1442015619546422&uigs_refer=";
+"http://www.sogou.com/?rfrom=soso" -> "http://pb.sogou.com/pv.gif?uigs_productid=webapp&type=logo&sitetype=soso_indexBanner&uniqueid=1442015619546422&uigs_refer=";
+}

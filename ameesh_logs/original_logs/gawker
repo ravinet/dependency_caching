@@ -1,0 +1,29 @@
+strict digraph G {
+ratio=compress;
+"http://www.gawker.com" -> "http://www.gawker.com/";
+"http://www.gawker.com/" -> "http://kinja.com/api/profile/assets/javascripts/sso.js";
+"http://www.gawker.com/" -> "http://x.kinja-static.com/assets/stylesheets/blog-800a5da75726083c06cc781c4cabc124.css";
+"http://www.gawker.com/" -> "https://i.kinja-img.com/gawker-media/image/upload/s--jsjWb7dt--/c_fit,fl_progressive,q_80,w_600/wfu6ejdpribzmusjgflo.png";
+"http://www.gawker.com/" -> "https://i.kinja-img.com/gawker-media/image/upload/s--bfCznB27--/c_fill,fl_progressive,g_north,h_358,q_80,w_636/1424827551033993542.jpg";
+"http://www.gawker.com/" -> "https://i.kinja-img.com/gawker-media/image/upload/s--O6fFcz9Y--/c_scale,fl_progressive,q_80,w_800/1424828009134354728.jpg";
+"http://www.gawker.com/" -> "https://i.kinja-img.com/gawker-media/image/upload/s--6bqjAV1D--/c_scale,fl_progressive,q_80,w_800/1424767472411734444.png";
+"http://www.gawker.com/" -> "https://i.kinja-img.com/gawker-media/image/upload/s--EAo8oGUv--/c_fill,fl_progressive,g_north,h_358,q_80,w_636/1424800677815047746.png";
+"http://www.gawker.com/" -> "https://i.kinja-img.com/gawker-media/image/upload/s--SyyQUCL---/c_fill,fl_progressive,g_north,h_358,q_80,w_636/1424816447726894225.jpg";
+"http://www.gawker.com/" -> "http://x.kinja-static.com/assets/javascripts-min/module/AdModule-en-US-1c4f2f623d1827158cfeadf1a3e4e5c9.js";
+"http://www.gawker.com/" -> "http://www.googletagservices.com/tag/js/gpt.js";
+"http://www.gawker.com/" -> "http://c.amazon-adsystem.com/aax2/amzn_ads.js";
+"http://www.gawker.com/" -> "http://x.kinja-static.com/assets/javascripts/lib/require.js?2";
+"http://www.gawker.com/" -> "http://www.gawker.com/ajax/readOnlyMode?cb=24033534";
+"http://www.gawker.com/" -> "http://x.kinja-static.com/assets/fonts/proxima/proxima_nova_cond_sbold-webfont.woff2?08252015";
+"http://www.gawker.com/" -> "http://x.kinja-static.com/assets/fonts/proxima/proxima_nova_cond_reg-webfont.woff2?08252015";
+"http://www.gawker.com/" -> "http://x.kinja-static.com/assets/fonts/elizabeth-serif/elizabeth-serif-light-webfont.woff2?08252015";
+"http://www.gawker.com/" -> "http://x.kinja-static.com/assets/fonts/proxima/proxima_nova_cond_reg_it-webfont.woff2?08252015";
+"http://www.gawker.com/" -> "http://x.kinja-static.com/assets/fonts/elizabeth-serif/elizabeth-serif-lightitalic-webfont.woff2?08252015";
+"http://www.gawker.com/" -> "http://x.kinja-static.com/assets/fonts/proxima/proxima_nova_cond_sbold_it-webfont.woff2?08252015";
+"http://x.kinja-static.com/assets/javascripts/lib/require.js?2" -> "http://x.kinja-static.com/assets/javascripts-min/layer/Main-en-US-024095c7e743c0973f15728e1ebe8bea.js";
+"http://x.kinja-static.com/assets/javascripts/lib/require.js?2" -> "http://x.kinja-static.com/assets/javascripts-min/layer/FrontPageApp-en-US-7a86d8427b5c431951c499010fb671e5.js";
+"http://x.kinja-static.com/assets/javascripts/lib/require.js?2" -> "http://x.kinja-static.com/assets/javascripts-min/module/Raven-en-US-3467f3aed7fecb0be39f14c0d7095e44.js";
+"http://www.googletagservices.com/tag/js/gpt.js" -> "http://partner.googleadservices.com/gpt/pubads_impl_72.js";
+"http://partner.googleadservices.com/gpt/pubads_impl_72.js" -> "http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html";
+"http://www.gawker.com/" -> "http://js-agent.newrelic.com/nr-686.min.js";
+}

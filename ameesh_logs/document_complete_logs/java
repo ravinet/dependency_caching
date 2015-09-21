@@ -1,0 +1,26 @@
+strict digraph G {
+ratio=compress;
+"http://www.java.com" -> "http://www.java.com/";
+"http://www.java.com" -> "http://www.java.com/en/";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/l/t/Ren-gYK31E_VQ.css";
+"http://www.java.com/en/" -> "http://www.java.com/ga/images/jv0_search_btn.gif";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/9/F/Vn7TczAMA.jpg";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/v/b/ruaaI1IXc.jpg";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/Y/y/_NRQkwv-I.jpg";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/_/w/yfhPKkfCc.jpg";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/v/a/-yxtYfzx8.jpg";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/r/j/vTSc0BF5g.jpg";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/7/L/Ren-9H8trur1k.js";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/W/r/Ren-_x07hG6iY.js";
+"http://www.java.com/en/" -> "http://www.java.com/ga/js/metrics_group1.js";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/i/T/bAAqUZvZg.jpg";
+"http://www.java.com/en/" -> "http://www.java.com/ga/images/photos/java_home_photo5.jpg";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/0/6/UChOQIQYA.png";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/5/x/LH3cJMfQQ.png";
+"http://www.java.com/en/" -> "http://oracle.112.2o7.net/b/ss/sunjava/1/H.19.4/s07405432646628?AQB=1&ndh=1&t=11/8/2015%2020%3A1%3A17%205%20240&ce=UTF-8&ns=oracle&pageName=javac%3AHomepage&g=http%3A//www.java.com/en/&ch=javac%3AHome&server=www.java.com&h1=javac%3Ajavac%3AHome&c2=javac%3A&c19=en_javac%3AHomepage&c20=Home_Pages&c21=180X150-728X90&c33=Version06032013&v35=http%3A//www.java.com/en/&c43=New&c44=00%3A01%3A17&v44=New&c50=javac%3A&s=800x600&c=24&j=1.6&v=Y&k=Y&bw=799&bh=500&p=Chrome%20PDF%20Viewer%3BShockwave%20Flash%3BChrome%20Remote%20Desktop%20Viewer%3BWidevine%20Content%20Decryption%20Module%3BNative%20Client%3B&AQE=1";
+"http://www.java.com/en/" -> "http://www.java.com/feo-cdn/1/c/Ren-mE1AZrcXM.css";
+"http://www.java.com/en/---0:30" -> "http://www.java.com/en/---31:end"[color=red];
+"http://www.java.com/en/---0:30" -> "/feo-cdn/l/t/Ren-gYK31E_VQ.css"[color=red];
+"/feo-cdn/l/t/Ren-gYK31E_VQ.css" -> "http://www.java.com/en/"[color=red];
+"/feo-cdn/l/t/Ren-gYK31E_VQ.css" -> "http://www.java.com/en/---31:end"[color=red];
+}

@@ -1,0 +1,19 @@
+strict digraph G {
+ratio=compress;
+"https://www.quora.com" -> "https://www.quora.com/";
+"https://www.quora.com/" -> "https://www.quora.com/instartlogic/nv/ii/week-172-5/loader/instart.js";
+"https://www.quora.com/" -> "https://qsc.is.quoracdn.net/-e401caa88f464592.js";
+"https://www.quora.com/" -> "https://qsf.is.quoracdn.net/-24b280cb3f0a234e.gif";
+"https://www.quora.com/" -> "https://qsf.is.quoracdn.net/-3f97e9658610fd24.gif";
+"https://www.quora.com/" -> "https://qsf.is.quoracdn.net/-717943ea2ab806b1.png";
+"https://www.quora.com/" -> "https://qsf.is.quoracdn.net/-0221ae28fc359ca7.png";
+"https://www.quora.com/" -> "https://www.quora.com/_/42b86fc6dc28caa4d15447a65b7003a8.gif?hash=d6fc5f0b-a981-4880-b341-e35e5b22be85";
+"https://www.quora.com/instartlogic/nv/ii/week-172-5/loader/instart.js" -> "https://www.quora.com/instartlogic/nv/ii/week-172-5/html_streaming.monitor/instart.js";
+"https://www.quora.com/instartlogic/nv/ii/week-172-5/html_streaming.monitor/instart.js" -> "https://assets.insnw.net/instart/ct.gif";
+"https://www.quora.com/" -> "https://qsf.is.quoracdn.net/-2f32a993187981f4.png";
+"https://www.quora.com/" -> "https://qsf.is.quoracdn.net/-6b3c63e23a5ee226.svg";
+"https://www.quora.com/" -> "https://qsf.is.quoracdn.net/-75abb1df6d5abeb2.png";
+"https://www.quora.com/" -> "https://qsf.is.quoracdn.net/-d153e4281adcbeb2.png";
+"https://www.quora.com/" -> "https://qsf.is.quoracdn.net/-308260078d6960b7.png";
+"https://www.quora.com/instartlogic/nv/ii/week-172-5/html_streaming.monitor/instart.js" -> "https://qsc.is.quoracdn.net/-33bb7cd3aa2b5e9d.css";
+}

@@ -1,0 +1,11 @@
+strict digraph G {
+ratio=compress;
+"http://boston.craigslist.org" -> "http://boston.craigslist.org/";
+"http://boston.craigslist.org/" -> "http://www.craigslist.org/styles/cl.css?v=2bec78f72593501b19c5bdd0d7ae0ad6";
+"http://boston.craigslist.org/" -> "http://www.craigslist.org/styles/homepage.css?v=f988676441556e21ca17f0ab12a9aeef";
+"http://boston.craigslist.org/" -> "http://www.craigslist.org/styles/jquery-ui-1.9.2.custom.css?v=86db72e37d2cf63cab3c63485c71becb";
+"http://boston.craigslist.org/" -> "http://www.craigslist.org/js/tocs-concat.min.js?v=8591df533f2ca21371086a3c3f35c155";
+"http://boston.craigslist.org/" -> "http://www.craigslist.org/js/general-concat.min.js?v=ad546780cdb7ff5e8bc5a0b2bf12d63d";
+"http://boston.craigslist.org/" -> "http://www.craigslist.org/js/homepage-concat.min.js?v=f175c918cb4153e323fa82c704e45f48";
+"http://boston.craigslist.org/" -> "http://www.craigslist.org/static/localstorage.html?v=51a29e41f8e978141e4085ed4a77d170";
+}

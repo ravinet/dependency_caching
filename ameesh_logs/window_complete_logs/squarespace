@@ -1,0 +1,30 @@
+strict digraph G {
+ratio=compress;
+"http://www.squarespace.com" -> "http://www.squarespace.com/";
+"http://www.squarespace.com/" -> "http://static.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/1441924261584/scripts/vanilla.min.js";
+"http://www.squarespace.com/" -> "http://static.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/1441924261584/assets/styles/home.min.css";
+"http://www.squarespace.com/" -> "http://stats.g.doubleclick.net/dc.js";
+"http://www.squarespace.com/" -> "http://www.googletagmanager.com/gtm.js?id=GTM-BCCP";
+"http://www.squarespace.com/" -> "https://stats.g.doubleclick.net/dc.js";
+"http://www.squarespace.com/" ->  "http://pixel.quantserve.com/aquant.js?a=p-b4TrbJN1IAU9M";
+"http://www.squarespace.com/" -> "http://googleads.g.doubleclick.net/pagead/viewthroughconversion/1071557535/?value=0&label=X7YJCKqMuQIQn9f6_gM&guid=ON&script=0&gtmcb=188159128";
+"http://www.squarespace.com/" -> "http://www.facebook.com/tr?ev=6019362077146&cd[value]=0.00&cd[currency]=USD&noscript=1&gtmcb=1858307141";
+"http://www.squarespace.com/" -> "http://analytics.twitter.com/i/adsct?txn_id=l4fy7&p_id=Twitter&gtmcb=269921364";
+"http://www.squarespace.com/" -> "https://secure.adnxs.com/seg?add=2681599&t=1&gtmcb=790917341";
+"http://www.squarespace.com/" -> "https://getrockerbox.com/pixel.gif?source=squarespace&type=imp&an_seg=3154278&gtmcb=501560230";
+"http://www.squarespace.com/" -> "http://insight.adsrvr.org/track/conv/?adv=lf5g1vr&ct=0:2j7i3h1d&fmt=3&gtmcb=56512192";
+"http://www.squarespace.com/" -> "https://www.facebook.com/tr?ev=6019362077146&cd[value]=0.00&cd[currency]=USD&noscript=1&gtmcb=1858307141";
+"http://www.squarespace.com/" -> "https://analytics.twitter.com/i/adsct?txn_id=l4fy7&p_id=Twitter&gtmcb=269921364";
+"http://www.squarespace.com/" -> "http://www.google.com/ads/user-lists/1071557535/?label=X7YJCKqMuQIQn9f6_gM&script=0&random=2733688337";
+"http://www.squarespace.com/" -> "http://www.facebook.com/fr/u.php?p=493123744038507&m=57398cfd-3376-4e22-b897-b81aada03010";
+"http://www.squarespace.com/" -> "https://secure.adnxs.com/bounce?%2Fseg%3Fadd%3D2681599%26t%3D1%26gtmcb%3D1375528865";
+"http://www.squarespace.com/" -> "https://secure.adnxs.com/getuid?%2Fseg%3Fadd%3D3154278%26redir%3Dhttps%253A%252F%252Fgetrockerbox.com%252Fpixel.gif%253Fadnxs_uid%253D$UID%2526source%253Dsquarespace%2526type%253Dimp%2526an_seg%253D3154278%2526gtmcb%253D1368512665";
+"http://www.squarespace.com/" -> "http://pixel.quantserve.com/pixel;r=782086679;a=p-b4TrbJN1IAU9M;orderid=;revenue=;labels=_fp.event.Homepage;fpan=1;fpa=P0-429533147-1442016419259;ns=0;ce=1;cm=;je=1;sr=800x600x24;enc=n;dst=1;et=1442016419257;tzo=240;ref=;url=http%3A%2F%2Fwww.squarespace.com%2F;ogl=site_name.Squarespace%2Ctitle.Build%20a%20Website%2Curl.http%3A%2F%2Fwww%252Esquarespace%252Ecom%2Ctype.article";
+"http://www.squarespace.com/" -> "https://www.facebook.com/fr/u.php?p=493123744038507&m=57398cfd-3376-4e22-b897-b81aada03010";
+"http://www.squarespace.com/" -> "https://secure.adnxs.com/bounce?%2Fgetuid%3F%252Fseg%253Fadd%253D3154278%2526redir%253Dhttps%25253A%25252F%25252Fgetrockerbox.com%25252Fpixel.gif%25253Fadnxs_uid%25253D%24UID%252526source%25253Dsquarespace%252526type%25253Dimp%252526an_seg%25253D3154278%252526gtmcb%25253D1368512665";
+"http://www.squarespace.com/" -> "https://secure.adnxs.com/seg?add=3154278&redir=https%3A%2F%2Fgetrockerbox.com%2Fpixel.gif%3Fadnxs_uid%3D1302058014206770090%26source%3Dsquarespace%26type%3Dimp%26an_seg%3D3154278%26gtmcb%3D1368512665";
+"http://www.squarespace.com/" -> "https://getrockerbox.com/pixel.gif?adnxs_uid=1302058014206770090&source=squarespace&type=imp&an_seg=3154278&gtmcb=1368512665";
+"http://www.googletagmanager.com/gtm.js?id=GTM-BCCP" -> "http://www.squarespace.com/"[color=red];
+"http://www.squarespace.com/" -> "http://pixel.quantserve.com/aquant.js?a=p-b4TrbJN1IAU9M"[color=red];
+"http://stats.g.doubleclick.net/dc.js" -> "http://www.squarespace.com/"[color=red];
+}

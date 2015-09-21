@@ -1,0 +1,14 @@
+strict digraph G {
+ratio=compress;
+"http://www.neobux.com" -> "http://www.neobux.com/";
+"http://www.neobux.com/" -> "http://img.neobux.com/css/principal_118.css";
+"http://www.neobux.com/" -> "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js";
+"http://www.neobux.com/" -> "http://img.neobux.com/js/principal28.js";
+"http://www.neobux.com/" -> "http://images.scanalert.com/meter/www.neobux.com/55.gif";
+"http://www.neobux.com/" ->  "http://img.neobux.com/imagens/bg2.jpg";
+"http://www.neobux.com/" -> "http://img.neobux.com/imagens/flags_lang.png";
+"http://www.neobux.com/" ->  "http://img.neobux.com/imagens/n/pb/5.jpg";
+"https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" -> "http://img.neobux.com/imagens/logos_f2.png";
+"https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" -> "http://www.neobux.com/"[color=red];
+"https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" -> "http://img.neobux.com/js/principal28.js"[color=red];
+}

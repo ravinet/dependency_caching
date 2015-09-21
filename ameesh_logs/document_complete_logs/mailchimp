@@ -1,0 +1,25 @@
+strict digraph G {
+ratio=compress;
+"http://mailchimp.com" -> "http://mailchimp.com/";
+"http://mailchimp.com/" -> "http://mailchimp.com/assets/css/site.1442010729.css";
+"http://mailchimp.com/" -> "http://mailchimp.com/assets/css/pages/root.1442010729.css";
+"http://mailchimp.com/" -> "http://mailchimp.com/assets/scripts/init.1442010729.js";
+"http://mailchimp.com/" -> "http://mailchimp.com/assets/scripts/site.1442010729.js";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/animation/animation-fallback.jpg";
+"http://mailchimp.com/" -> "http://www.google-analytics.com/analytics.js";
+"http://mailchimp.com/assets/scripts/init.1442010729.js" -> "http://static.mailchimp.com/web/assets/fonts/open-sans/opensans-regular-webfont.woff";
+"http://mailchimp.com/" -> "http://mailchimp.com/assets/images/freddie.1442010729.svg";
+"http://mailchimp.com/" -> "http://mailchimp.com/assets/fonts/freddicons.1442010729.woff";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/desk-white-bg.jpg";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/desk-white.jpg";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/animation/linkCursor.png";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/animation/text-image-block.svg";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/animation/social-block.svg";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/animation/image-block.svg";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/animation/text-block.svg";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/animation/app-chrome.svg";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/animation/flour-campaign-top.jpg";
+"http://mailchimp.com/" -> "http://static.mailchimp.com/web/home/animation/flour-small-image.jpg";
+"http://mailchimp.com/" -> "http://mailchimp.com/assets/images/logo-dark.1442010729.svg";
+"http://mailchimp.com/assets/scripts/init.1442010729.js" -> "http://mailchimp.com/assets/scripts/pages/root.1442010729.js";
+}

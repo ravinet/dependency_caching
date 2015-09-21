@@ -1,0 +1,24 @@
+strict digraph G {
+ratio=compress;
+"https://att.yahoo.com" -> "https://att.yahoo.com/";
+"https://att.yahoo.com/---0:130" -> "https://att.yahoo.com/---131:131"[color=red];
+"https://att.yahoo.com/---131:131" -> "https://att.yahoo.com/---132:132"[color=red];
+"https://att.yahoo.com/---132:132" -> "https://att.yahoo.com/---133:5666"[color=red];
+"https://att.yahoo.com/---133:5666" -> "https://att.yahoo.com/---5667:end"[color=red];
+"https://att.yahoo.com/---133:5666" -> "https://att.yahoo.com/"[color=red];
+"https://att.yahoo.com/---0:130" -> "https://s.yimg.com/zz/combo?kx/yucs/uh3s/atomic/63/css/atomic-min.css&kx/yucs/uh_common/meta/3/css/meta-min.css&kx/yucs/uh3s/top-bar/45/css/home_menu-min.css&kx/yucs/uh3s/top-bar/161/css/att_top_bar-min.css&kx/yucs/uh3/css-partner-overrides/116/css/att_desktop_search_tall_orange-min.css&kx/yucs/uhc/skip-links/4/css/skip-min.css&kx/yucs/uh3s/mail-link/90/css/att_mail_link-min.css"[color=red];
+"https://s.yimg.com/zz/combo?kx/yucs/uh3s/atomic/63/css/atomic-min.css&kx/yucs/uh_common/meta/3/css/meta-min.css&kx/yucs/uh3s/top-bar/45/css/home_menu-min.css&kx/yucs/uh3s/top-bar/161/css/att_top_bar-min.css&kx/yucs/uh3/css-partner-overrides/116/css/att_desktop_search_tall_orange-min.css&kx/yucs/uhc/skip-links/4/css/skip-min.css&kx/yucs/uh3s/mail-link/90/css/att_mail_link-min.css" -> "https://att.yahoo.com/"[color=red];
+"https://att.yahoo.com/---131:131" -> "https://s.yimg.com/kx/yucs/uh3s/atomic/63/css/atomic-min.css"[color=red];
+"https://s.yimg.com/kx/yucs/uh3s/atomic/63/css/atomic-min.css" -> "https://att.yahoo.com/"[color=red];
+"https://att.yahoo.com/---132:132" -> "https://s.yimg.com/zz/combo?nn/lib/metro/g/theme/yglyphs-legacy_0.0.4.css&nn/lib/metro/g/myy/fp_0.0.56.css&nn/lib/metro/g/theme/partner_att_0.0.57.css&nn/lib/metro/g/sda/fp_sda_0.0.2.css"[color=red];
+"https://s.yimg.com/zz/combo?nn/lib/metro/g/theme/yglyphs-legacy_0.0.4.css&nn/lib/metro/g/myy/fp_0.0.56.css&nn/lib/metro/g/theme/partner_att_0.0.57.css&nn/lib/metro/g/sda/fp_sda_0.0.2.css" -> "https://att.yahoo.com/"[color=red];
+"https://s.yimg.com/zz/combo?kx/yucs/uh3s/atomic/63/css/atomic-min.css&kx/yucs/uh_common/meta/3/css/meta-min.css&kx/yucs/uh3s/top-bar/45/css/home_menu-min.css&kx/yucs/uh3s/top-bar/161/css/att_top_bar-min.css&kx/yucs/uh3/css-partner-overrides/116/css/att_desktop_search_tall_orange-min.css&kx/yucs/uhc/skip-links/4/css/skip-min.css&kx/yucs/uh3s/mail-link/90/css/att_mail_link-min.css" -> "https://att.yahoo.com/---131:131"[color=red];
+"https://s.yimg.com/zz/combo?kx/yucs/uh3s/atomic/63/css/atomic-min.css&kx/yucs/uh_common/meta/3/css/meta-min.css&kx/yucs/uh3s/top-bar/45/css/home_menu-min.css&kx/yucs/uh3s/top-bar/161/css/att_top_bar-min.css&kx/yucs/uh3/css-partner-overrides/116/css/att_desktop_search_tall_orange-min.css&kx/yucs/uhc/skip-links/4/css/skip-min.css&kx/yucs/uh3s/mail-link/90/css/att_mail_link-min.css" -> "https://att.yahoo.com/---131:131"[color=red];
+"https://s.yimg.com/zz/combo?kx/yucs/uh3s/atomic/63/css/atomic-min.css&kx/yucs/uh_common/meta/3/css/meta-min.css&kx/yucs/uh3s/top-bar/45/css/home_menu-min.css&kx/yucs/uh3s/top-bar/161/css/att_top_bar-min.css&kx/yucs/uh3/css-partner-overrides/116/css/att_desktop_search_tall_orange-min.css&kx/yucs/uhc/skip-links/4/css/skip-min.css&kx/yucs/uh3s/mail-link/90/css/att_mail_link-min.css" -> "https://att.yahoo.com/---131:131"[color=red];
+"https://s.yimg.com/kx/yucs/uh3s/atomic/63/css/atomic-min.css" -> "https://att.yahoo.com/---132:132"[color=red];
+"https://s.yimg.com/kx/yucs/uh3s/atomic/63/css/atomic-min.css" -> "https://att.yahoo.com/---132:132"[color=red];
+"https://s.yimg.com/kx/yucs/uh3s/atomic/63/css/atomic-min.css" -> "https://att.yahoo.com/---132:132"[color=red];
+"https://s.yimg.com/zz/combo?nn/lib/metro/g/theme/yglyphs-legacy_0.0.4.css&nn/lib/metro/g/myy/fp_0.0.56.css&nn/lib/metro/g/theme/partner_att_0.0.57.css&nn/lib/metro/g/sda/fp_sda_0.0.2.css" -> "https://att.yahoo.com/---133:5666"[color=red];
+"https://s.yimg.com/zz/combo?nn/lib/metro/g/theme/yglyphs-legacy_0.0.4.css&nn/lib/metro/g/myy/fp_0.0.56.css&nn/lib/metro/g/theme/partner_att_0.0.57.css&nn/lib/metro/g/sda/fp_sda_0.0.2.css" -> "https://att.yahoo.com/---133:5666"[color=red];
+"https://s.yimg.com/zz/combo?nn/lib/metro/g/theme/yglyphs-legacy_0.0.4.css&nn/lib/metro/g/myy/fp_0.0.56.css&nn/lib/metro/g/theme/partner_att_0.0.57.css&nn/lib/metro/g/sda/fp_sda_0.0.2.css" -> "https://att.yahoo.com/---133:5666"[color=red];
+}

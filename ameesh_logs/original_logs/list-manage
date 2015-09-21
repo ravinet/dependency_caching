@@ -1,0 +1,14 @@
+strict digraph G {
+ratio=compress;
+"http://www.list-manage.com" -> "http://www.list-manage.com/";
+"http://www.list-manage.com" -> "http://mailchimp.com/about/mcsv/";
+"http://mailchimp.com/about/mcsv/" -> "http://mailchimp.com/assets/css/site.1441912764.css";
+"http://mailchimp.com/about/mcsv/" -> "http://mailchimp.com/assets/scripts/init.1441912764.js";
+"http://mailchimp.com/about/mcsv/" -> "http://mailchimp.com/assets/scripts/site.1441912764.js";
+"http://mailchimp.com/about/mcsv/" -> "http://www.google-analytics.com/analytics.js";
+"http://mailchimp.com/assets/scripts/init.1441912764.js" -> "http://static.mailchimp.com/web/assets/fonts/open-sans/opensans-regular-webfont.woff";
+"http://mailchimp.com/about/mcsv/" -> "http://mailchimp.com/assets/images/freddie.1441912764.svg";
+"http://mailchimp.com/about/mcsv/" -> "http://mailchimp.com/assets/fonts/freddicons.1441912764.woff";
+"http://mailchimp.com/about/mcsv/" -> "http://mailchimp.com/assets/images/logo-dark.1441912764.svg";
+"http://mailchimp.com/about/mcsv/" -> "http://www.google-analytics.com/r/collect?v=1&_v=j38&a=1120486055&t=pageview&_s=1&dl=http%3A%2F%2Fmailchimp.com%2Fabout%2Fmcsv%2F&ul=en-us&de=UTF-8&dt=MCSV%20%7C%20MailChimp&sd=24-bit&sr=800x600&vp=784x500&je=1&fl=18.0%20r0&_u=AGAACEABJ~&jid=956175662&cid=811832267.1442012554&tid=UA-329148-81&_r=1&z=606858718";
+}

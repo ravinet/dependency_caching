@@ -1,0 +1,31 @@
+strict digraph G {
+ratio=compress;
+"http://www.w3schools.com" -> "http://www.w3schools.com/";
+"http://www.w3schools.com/" -> "http://www.w3schools.com/lib/w3.css";
+"http://www.w3schools.com/" -> "https://fonts.googleapis.com/icon?family=Material+Icons";
+"http://www.w3schools.com/" -> "http://www.w3schools.com/images/w3schools.png";
+"http://www.w3schools.com/" -> "http://www.w3schools.com/images/colorpicker.png";
+"http://www.w3schools.com/" -> "http://www.w3schools.com/lib/w3codecolors.js";
+"http://www.w3schools.com/" -> "http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+"http://www.w3schools.com/" -> "http://www.google.com/cse/cse.js?cx=012971019331610648934:m2tou3_miwy";
+"http://www.w3schools.com/" -> "http://www.google-analytics.com/analytics.js";
+"http://www.w3schools.com/" -> "https://fonts.gstatic.com/s/materialicons/v7/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2";
+"http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" -> "https://translate.googleapis.com/translate_static/css/translateelement.css";
+"http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" -> "https://translate.googleapis.com/translate_static/js/element/main.js";
+"http://www.google.com/cse/cse.js?cx=012971019331610648934:m2tou3_miwy" -> "http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22search%22%2C%22version%22%3A%221.0%22%2C%22callback%22%3A%22__gcse.scb%22%2C%22style%22%3A%22http%3A%2F%2Fwww.google.com%2Fcse%2Fstyle%2Flook%2Fv2%2Fdefault.css%22%2C%22language%22%3A%22en%22%7D%5D%7D";
+"http://www.w3schools.com/" -> "http://www.google-analytics.com/collect?v=1&_v=j38&a=1621394665&t=pageview&_s=1&dl=http%3A%2F%2Fwww.w3schools.com%2F&ul=en-us&de=UTF-8&dt=W3Schools%20Online%20Web%20Tutorials&sd=24-bit&sr=800x600&vp=784x500&je=1&fl=18.0%20r0&_u=AGAAgEAB~&jid=456893957&cid=1589468417.1442012125&tid=UA-3855518-1&z=2034384937";
+"http://www.w3schools.com/" -> "https://stats.g.doubleclick.net/r/collect?t=dc&aip=1&_r=3&v=1&_v=j38&tid=UA-3855518-1&cid=1589468417.1442012125&jid=456893957&_u=AGAAgEAB~&z=321368839";
+"http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22search%22%2C%22version%22%3A%221.0%22%2C%22callback%22%3A%22__gcse.scb%22%2C%22style%22%3A%22http%3A%2F%2Fwww.google.com%2Fcse%2Fstyle%2Flook%2Fv2%2Fdefault.css%22%2C%22language%22%3A%22en%22%7D%5D%7D" -> "http://www.google.com/uds/api/search/1.0/56f70d816baa48bdfe9284ebc883ad41/default+en.css";
+"http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22search%22%2C%22version%22%3A%221.0%22%2C%22callback%22%3A%22__gcse.scb%22%2C%22style%22%3A%22http%3A%2F%2Fwww.google.com%2Fcse%2Fstyle%2Flook%2Fv2%2Fdefault.css%22%2C%22language%22%3A%22en%22%7D%5D%7D" -> "http://www.google.com/cse/style/look/v2/default.css";
+"http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22search%22%2C%22version%22%3A%221.0%22%2C%22callback%22%3A%22__gcse.scb%22%2C%22style%22%3A%22http%3A%2F%2Fwww.google.com%2Fcse%2Fstyle%2Flook%2Fv2%2Fdefault.css%22%2C%22language%22%3A%22en%22%7D%5D%7D" -> "http://www.google.com/uds/api/search/1.0/56f70d816baa48bdfe9284ebc883ad41/default+en.I.js";
+"https://translate.googleapis.com/translate_static/js/element/main.js" -> "https://translate.googleapis.com/translate_static/js/element/27/element_main.js";
+"http://www.w3schools.com/" -> "https://www.googleapis.com/generate_204";
+"http://www.google.com/uds/api/search/1.0/56f70d816baa48bdfe9284ebc883ad41/default+en.I.js" -> "http://cse.google.com/adsense/search/async-ads.js";
+"http://www.google.com/uds/api/search/1.0/56f70d816baa48bdfe9284ebc883ad41/default+en.I.js" -> "http://www.google.com/cse/static/en/google_custom_search_watermark.gif";
+"http://www.w3schools.com/" -> "http://www.google.com/uds/css/small-logo.png";
+"http://www.w3schools.com/" -> "http://clients1.google.com/generate_204";
+"https://translate.googleapis.com/translate_static/js/element/27/element_main.js" -> "https://translate.googleapis.com/translate_a/l?client=te&alpha=true&hl=en&cb=_callbacks_._0ieg8scvi";
+"https://translate.googleapis.com/translate_static/js/element/27/element_main.js" -> "https://translate.googleapis.com/translate_static/css/translateelement.css";
+"http://www.w3schools.com/" -> "https://www.gstatic.com/images/branding/product/1x/translate_24dp.png";
+"http://www.w3schools.com/" -> "https://www.google.com/images/cleardot.gif";
+}

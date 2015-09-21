@@ -1,0 +1,32 @@
+strict digraph G {
+ratio=compress;
+"https://www.schwab.com" -> "https://www.schwab.com/";
+"https://www.schwab.com/" -> "https://www.schwabcdn.com/secure/asset/short?cmsid=P-6067666,P-6068013,P-7250718,P-7393158&pgformat=js&persjs=y";
+"https://www.schwab.com/" -> "https://www.schwabcdn.com/secure/asset?cmsid=PS-HOME-MBOX&filename=hbx.js";
+"https://www.schwab.com/" -> "https://www.schwabcdn.com/secure/file/short?cmsid=PROSPECT-HOMEPAGE-CSS&filename=phome.css";
+"https://www.schwab.com/" -> "https://www.schwabcdn.com/system/asset?cmsid=PS-TAG-HEADER&filename=hbx.js";
+"https://www.schwab.com/" -> "https://www.schwab.com/secure/file/short/P-6068929/CS21138-06.jpg";
+"https://www.schwab.com/" -> "https://www.schwabcdn.com/secure/file/short?cmsid=P-6068700&filename=sprite-global.png";
+"https://www.schwab.com/" -> "https://www.schwab.com/system/asset/short/?cmsid=P-6077568&filename=hbx.js";
+"https://www.schwab.com/" -> "https://www.schwab.com/system/asset?cmsid=PS-TAG-FOOTER&filename=hbx.js";
+"https://www.schwab.com/" -> "https://www.schwab.com/public/asset?cmsid=ABR-1";
+"https://www.schwab.com/" -> "https://client.schwab.com/Scripts/jQuery.SuggestionBox.min.js";
+"https://www.schwabcdn.com/secure/asset?cmsid=PS-HOME-MBOX&filename=hbx.js" -> "https://cdn.tt.omtrdc.net/cdn/target.js";
+"https://www.schwabcdn.com/secure/asset?cmsid=PS-HOME-MBOX&filename=hbx.js" -> "https://schwab.tt.omtrdc.net/m2/schwab/mbox/standard?mboxHost=www.schwab.com&mboxPage=1442016098765-196669&screenHeight=600&screenWidth=800&browserWidth=799&browserHeight=500&browserTimeOffset=-240&colorDepth=24&mboxSession=1442016098765-196669&mboxCount=1&mboxTime=1442001698795&version=20130612&mbox=prospect_phome&mboxId=0&mboxURL=https%3A%2F%2Fwww.schwab.com%2F&mboxReferrer=&mboxVersion=56";
+"https://www.schwabcdn.com/secure/asset?cmsid=PS-HOME-MBOX&filename=hbx.js" -> "https://schwab.tt.omtrdc.net/m2/schwab/mbox/standard?mboxHost=www.schwab.com&mboxPage=1442016098765-196669&screenHeight=600&screenWidth=800&browserWidth=799&browserHeight=500&browserTimeOffset=-240&colorDepth=24&mboxSession=1442016098765-196669&mboxCount=2&mboxTime=1442001698797&mbox=SchwabMB&mboxId=0&mboxURL=https%3A%2F%2Fwww.schwab.com%2F&mboxReferrer=&mboxVersion=56";
+"https://www.schwab.com/" -> "https://www.schwabcdn.com/secure/file/short/P-6068929/CS21138-06.jpg";
+"https://www.schwab.com/system/asset/short/?cmsid=P-6077568&filename=hbx.js" -> "https://client.schwab.com/public/quickquote/psmarketindices.ashx?callback=jQuery1710887710933573544_1442016098888&_=1442016098895";
+"https://www.schwab.com/system/asset/short/?cmsid=P-6077568&filename=hbx.js" -> "https://tracker.marinsm.com/tracker/async/xpxe4op6q0.js";
+"https://www.schwab.com/" -> "https://www.schwabcdn.com/secure/file/short?cmsid=P-6068929&filename=investing-rep.jpg";
+"https://www.schwab.com/system/asset?cmsid=PS-TAG-FOOTER&filename=hbx.js" -> "https://2530996.fls.doubleclick.net/activityi;src=2530996;type=schwab;cat=phome;u1=G4p/vPbmtB+O49JgfiDs+Uc7mUsfhInB6x7XLqhctvts=;u2=;u3=-;ord=1;num=4482199046760.798?";
+"https://www.schwab.com/" -> "https://smetric.schwab.com/b/ss/cschwabschwabprod/1/H.25.3/s09844893461558?AQB=1&ndh=1&t=11%2F8%2F2015%2020%3A1%3A38%205%20240&fid=288E5D9292962D84-38BA590A506E6FF6&ce=UTF-8&ns=charlesschwab&cdp=2&pageName=%2Fprospects%2Fpublic%2Fschwab%2Finvesting&g=https%3A%2F%2Fwww.schwab.com%2F&cc=USD&ch=%2Fprospects&c1=%2Fprospects%2Fpublic%2Fschwab%2F&v1=D%3Dc1&c2=%2Fprospects%2Fpublic%2Fschwab%2F&v2=D%3Dc2&c3=%2Fprospects%2Fpublic%2Fschwab%2F&v3=D%3Dc3&c4=Investing%2C%20Retirement%20and%20Financial%20Advice%20%7C%20Charles%20Schwab&v4=D%3Dc4&c5=D%3Dg&v5=D%3Dg&c7=1&v7=1&c11=H.25.4_20130417&v11=1&c14=en-US&c15=Friday&v15=Friday&c16=8%3A00PM&v16=8%3A00PM&v17=1441977375215-199785.28_17&v18=D%3DpageName&v22=false&v26=false&v36=%2B1&v39=%2B1&c40=not%20supported&v40=%2B1&v46=false&v52=%2B1&v56=A4sno5c87L8e6zq1%2Fp9%2F0mcZRKDzJUbnaU90lM%2FPRojo%3D&c60=Schwab%20Brokerage&c61=Accounts%20and%20Products&c62=Brokerage%20Accounts&c63=Brokerage&v67=Mozilla%2F5.0%20%28X11%3B%20Linux%20x86_64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F43.0.2357.125%20Safari%2F537.36&c68=Page&h1=D%3Dc3&s=800x600&c=24&j=1.6&v=Y&k=Y&bw=799&bh=500&p=Chrome%20PDF%20Viewer%3BShockwave%20Flash%3BChrome%20Remote%20Desktop%20Viewer%3BWidevine%20Content%20Decryption%20Module%3BNative%20Client%3B&AQE=1";
+"https://www.schwab.com/public/asset?cmsid=ABR-1" -> "https://www.schwab.com/public/asset?cmsid=ABR-2";
+"https://www.schwab.com/" -> "https://www.schwab.com/secure/file/short/P-6068929/JD-award_center-hero.png";
+"https://www.schwab.com/" -> "https://www.schwab.com/secure/file/short/P-6068929/CC00171534-bg.jpg";
+"https://www.schwab.com/" -> "https://www.schwab.com/secure/file/short/P-6068929/nav-dropdown-bg.png";
+"https://www.schwab.com/" -> "https://client.schwab.com/public/quickquote/psqqset.ashx?symbol=&callback=QQ.Set&tx=1442016098962";
+"https://www.schwab.com/system/asset/short/?cmsid=P-6077568&filename=hbx.js" -> "https://www.schwabcdn.com/system/file?cmsid=prospect-sprite-images&filename=ps_buttons.png";
+"https://www.schwab.com/system/asset/short/?cmsid=P-6077568&filename=hbx.js" -> "https://client.schwab.com/public/search/css/jquery.ui.autocomplete.css";
+"https://www.schwab.com/system/asset/short/?cmsid=P-6077568&filename=hbx.js" -> "https://client.schwab.com/scripts/jquery/ui/jquery-ui.widgets.min.js";
+"https://www.schwab.com/" -> "https://tracker.marinsm.com/tp?act=1&cid=xpxe4op6q0&tz=4&ref=&page=https%3A%2F%2Fwww.schwab.com%2F&uuid=57E2890F-691E-455D-BFF4-F77ACC640BAF&rnd=1529319321";
+}

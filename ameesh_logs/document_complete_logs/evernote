@@ -1,0 +1,36 @@
+strict digraph G {
+ratio=compress;
+"https://evernote.com" -> "https://evernote.com/";
+"https://evernote.com/" -> "https://www.google-analytics.com/analytics.js";
+"https://evernote.com/" -> "https://evernote.com/media/css/homepage-pc-en.css?v1.7.0";
+"https://evernote.com/" -> "https://evernote.com/media/css/fonts-english.css";
+"https://evernote.com/" -> "https://cdn1.evernote.com/media/img/en-logo.min.svg";
+"https://evernote.com/" -> "https://cdn1.evernote.com/media/js/lib/jquery-1.9.1.min.js";
+"https://evernote.com/" -> "https://evernote.com/media/js/build/home.js";
+"https://evernote.com/" -> "https://evernote.com/media/js/build/global-min.js";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/header-sprite.png";
+"https://www.google-analytics.com/analytics.js" -> "https://cdn1.evernote.com/media/img/home/tablet/hero-new/tw-en.jpg";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/css/fonts_english_only/caecilialtstd-light.woff";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/home/desktop/icon-write-pc.png";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/business-v2/desktop/icon/icons.png";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/home/desktop/collect-bg.jpg";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/home/desktop/icon-collect-pc.png";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/home/desktop/MKT15019_Lifestyle_Phone_IOS_APac_MT_v1-blur-vig_TJM.jpg";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/workchat/desktop/WEB_WorkChat-Profiles_AA.png";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/workchat/desktop/graph.jpg";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/css/fonts_english_only/caecilialtstd-roman.woff";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/home/desktop/bg-present-repeater.jpg";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/home/desktop/bg-present-items.png";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/home/desktop/icon-present-pc.png";
+"https://www.google-analytics.com/analytics.js" -> "https://cdn1.evernote.com/evernote.com/img/upgrade/desktop/sync_everywhere.jpg";
+"https://www.google-analytics.com/analytics.js" -> "https://evernote.com/media/img/footer_redesign/arrow.png";
+"https://evernote.com/" -> "https://www.google-analytics.com/collect?v=1&_v=j38&a=143737338&t=pageview&_s=1&dl=https%3A%2F%2Fevernote.com%2F&ul=en-us&de=UTF-8&dt=The%20workspace%20for%20your%20life%E2%80%99s%20work%20%7C%20Evernote&sd=24-bit&sr=800x600&vp=784x500&je=1&fl=18.0%20r0&_u=AGAAgAAB~&jid=1667300407&cid=883612016.1442072945&tid=UA-285778-5&z=1760695380";
+"https://evernote.com/" -> "https://stats.g.doubleclick.net/r/collect?t=dc&aip=1&_r=3&v=1&_v=j38&tid=UA-285778-5&cid=883612016.1442072945&jid=1667300407&_u=AGAAgAAB~&z=416436219";
+"https://cdn1.evernote.com/media/js/lib/jquery-1.9.1.min.js" -> "https://evernote.com/content/error-messages.json";
+"https://cdn1.evernote.com/media/js/lib/jquery-1.9.1.min.js" -> "https://www.evernote.com/commerce/catalog?sku=premium-1year&sku=plus-1year&callback=callbackName&_=1442072945347";
+"https://cdn1.evernote.com/media/js/lib/jquery-1.9.1.min.js" -> "https://www.evernote.com/CorpSiteUserVerification.action";
+"https://evernote.com/" -> "https://www.googletagmanager.com/gtm.js?id=GTM-WZJ64J";
+"https://www.googletagmanager.com/gtm.js?id=GTM-WZJ64J" -> "https://www.googleadservices.com/pagead/conversion_async.js";
+"https://evernote.com/---0:1008" -> "https://evernote.com/---1009:end"[color=red];
+"https://evernote.com/---0:1008" -> "https://evernote.com/"[color=red];
+}

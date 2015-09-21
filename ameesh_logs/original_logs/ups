@@ -1,0 +1,14 @@
+strict digraph G {
+ratio=compress;
+"http://www.ups.com/" -> "http://www.ups.com/javascript/global_entry.js?V=0715";
+"http://www.ups.com/" -> "http://www.ups.com/javascript/webtrends.load.js?V=0715";
+"http://www.ups.com/" -> "http://www.ups.com/img/ups_logo.gif";
+"http://www.ups.com/" -> "http://www.ups.com/img/ups_tag_line.gif";
+"http://www.ups.com/" -> "http://www.ups.com/img/1.gif";
+"http://www.ups.com/" -> "http://www.ups.com/img/icp.gif";
+"http://www.ups.com/javascript/global_entry.js?V=0715" -> "http://www.ups.com/stylesheets/globalhomepage.css";
+"http://www.ups.com/javascript/webtrends.load.js?V=0715" -> "http://www.ups.com/javascript/webtrends.js";
+"http://www.ups.com/" -> "http://www.ups.com/img/icn_cmp_linkblue.gif";
+"http://www.ups.com/" -> "http://ssdcwebtrends.ups.com/dcslnrz6vne3g9s37bjvj8khc_2v8x/dcs.gif?x=1&dcsdat=1441995409034&dcssip=www.ups.com&dcsuri=/&WT.tz=-4&WT.bh=14&WT.ul=en-US&WT.cd=24&WT.sr=1920x1200&WT.jo=Yes&WT.ti=Shipping,%20Freight,%20Logistics%20and%20Supply%20Chain%20Management%20from%20UPS&WT.js=Yes&WT.jv=1.5&WT.ct=unknown&WT.bs=1855x1040&WT.fv=18.0&WT.slv=Not%20enabled&WT.tv=10.4.1&WT.dl=0&WT.ssl=0&WT.es=www.ups.com/&WT.ce=2&WT.vt_f_tlh=1441995395&WT.vtvs=1441995395566&WT.vtid=128.30.77.148-2899303744.30469136&WT.co_f=128.30.77.148-2899303744.30469136&pgf_site=Global%20Home&pcc=US&pll=en&psa=Global%20Entry%20Point&psu=Global%20Entry&ppid=homepage/ent.html&pps=0&pcs=Unknown&pss=4400,C3&pjsv=0715&pcv=0715&pli=1&WBPM_ac=0&WBPM_ver=1.0.12";
+"http://www.ups.com/" -> "http://ssdcwebtrends.ups.com/dcslnrz6vne3g9s37bjvj8khc_2v8x/dcs.gif?dcsredirect=1&x=1&dcsdat=1441921013741&dcssip=www.ups.com&dcsuri=/&WT.tz=-4&WT.bh=17&WT.ul=en-US&WT.cd=24&WT.sr=800x600&WT.jo=Yes&WT.ti=Shipping,%20Freight,%20Logistics%20and%20Supply%20Chain%20Management%20from%20UPS&WT.js=Yes&WT.jv=1.5&WT.ct=unknown&WT.bs=780x481&WT.fv=18.0&WT.slv=Not%20enabled&WT.tv=10.4.1&WT.dl=0&WT.ssl=0&WT.es=www.ups.com/&WT.ce=2&WT.vt_f_tlv=0&WT.vt_f_tlh=0&WT.vt_f_d=1&WT.vt_f_s=1&WT.vt_f_a=1&WT.vt_f=1&WT.vtvs=1441921013743&WT.vtid=128.30.77.148-2899303744.30469136&WT.co_f=128.30.77.148-2899303744.30469136&pgf_site=Global%20Home&pcc=US&pll=en&psa=Global%20Entry%20Point&psu=Global%20Entry&ppid=homepage/ent.html&pps=0&pcs=Unknown&pss=4400,C3&pjsv=0715&pcv=0715&pli=1&WBPM_ac=0&WBPM_ver=1.0.12";
+}

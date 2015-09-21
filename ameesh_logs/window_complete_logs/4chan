@@ -1,0 +1,19 @@
+strict digraph G {
+ratio=compress;
+"http://www.4chan.org" -> "http://www.4chan.org/";
+"http://www.4chan.org/" -> "http://s.4cdn.org/css/yui.8.css";
+"http://www.4chan.org/" -> "http://s.4cdn.org/css/global.30.css";
+"http://www.4chan.org/" -> "http://i.4cdn.org/vp/1441977105302s.jpg";
+"http://www.4chan.org/" -> "http://i.4cdn.org/3/1441960224339s.jpg";
+"http://www.4chan.org/" -> "http://i.4cdn.org/mu/1441976996829s.jpg";
+"http://www.4chan.org/" -> "http://s.4cdn.org/js/fp-combined-compiled.18.js";
+"http://www.4chan.org/" -> "http://www.google-analytics.com/analytics.js";
+"http://www.4chan.org/" -> "http://s.4cdn.org/image/fp/fade.png";
+"http://www.4chan.org/" -> "http://s.4cdn.org/image/fp/logo.png";
+"http://www.4chan.org/" -> "http://s.4cdn.org/image/fp/icon-close-red.png";
+"http://www.4chan.org/" -> "http://s.4cdn.org/image/fp/icon-down-peach.png";
+"http://www.google-analytics.com/analytics.js" -> "http://s.4cdn.org/image/fp/icon-down-teal.png";
+"http://www.4chan.org/" -> "http://s.4cdn.org/image/fp/yui/menuitem_checkbox.png";
+"http://s.4cdn.org/js/fp-combined-compiled.18.js" -> "http://www.4chan.org/"[color=red];
+"http://www.google-analytics.com/analytics.js" -> "http://www.4chan.org/"[color=red];
+}

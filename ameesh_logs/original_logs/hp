@@ -1,0 +1,37 @@
+strict digraph G {
+ratio=compress;
+"http://www.hp.com" -> "http://www.hp.com/";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/abc.js";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/system/styles/hps-fontface-core.css";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/system/styles/caas-hf-v3.1/R45/hf-v3.1.css";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/system/styles/homepage.css";
+"http://www.hp.com/" -> "http://www8.hp.com/us/en/system/include/getnewsxml_file.jsp";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/images/i/header-footer/caas-hf-v3/hp-logo.gif";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/images/i/header-footer/caas-hf-v3/hp-logo-pr.gif";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/images/i/s.gif";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/scripts/framework/mootools/v-1-4/mootools-core-compat.js";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/scripts/framework/mootools/v-1-4/mootools-more-compat.js";
+"http://www.hp.com/" -> "http://www8.hp.com/h10000/cma/ng/lib/abmvt/abmvt2.js";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/scripts/caas-hf-v3.1/R45/hf-v3.1-m.js";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/scripts/caas-hf-v3.1/R45/autocomplete-loader-v3.1-m.js";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/scripts/caas-hf-v3.1/R45/autocomplete-loader-store-m.js";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/scripts/caas-hf-v3.1/R45/hf-init-v3.1-m.js";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/scripts/caas-hf-v3.1/R45/caas-privacy-cookie-3.1.js";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/scripts/homepage/home-init-hpe.js";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/scripts/hpweb_geolocation.js";
+"http://www.hp.com/" -> "http://nexus.ensighten.com/hp/hpcom_prod/Bootstrap.js";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/images/i/header-footer/caas-hf-v3/hp-logo-pr.gif";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/images/i/s.gif";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/images/i/header-footer/caas-hf-v3/hp-logo-pr.gif";
+"http://www.hp.com/" -> "http://www8.hp.com/us/en/images/fonts/hp-icons-ttf.ttf";
+"http://www.hp.com/" -> "http://www8.hp.com/us/en/images/fonts/hps/latin-e-regular-ttf.ttf";
+"http://www.hp.com/" -> "http://www8.hp.com/h10180/hp-fonts/v2-0/hps-euro-w01-bold-woff.woff";
+"http://www.hp.com/" -> "http://welcome.hp-ww.com/country/us/en/cs/images/i/s.gif";
+"http://welcome.hp-ww.com/country/us/en/cs/scripts/framework/mootools/v-1-4/mootools-core-compat.js" -> "http://www8.hp.com/us/en/images/fonts/hp-icons-woff.woff";
+"http://welcome.hp-ww.com/country/us/en/cs/scripts/framework/mootools/v-1-4/mootools-core-compat.js" -> "http://www8.hp.com/h10180/hp-fonts/v2-0/hps-euro-w01-bold-ttf.ttf";
+"http://welcome.hp-ww.com/country/us/en/cs/scripts/framework/mootools/v-1-4/mootools-core-compat.js" -> "http://welcome.hp-ww.com/country/us/en/cs/images/i/footer/flag.png";
+"http://welcome.hp-ww.com/country/us/en/cs/scripts/framework/mootools/v-1-4/mootools-core-compat.js" -> "http://welcome.hp-ww.com/country/us/en/cs/images/i/common/s-social-hpe.png";
+"http://welcome.hp-ww.com/country/us/en/cs/scripts/framework/mootools/v-1-4/mootools-core-compat.js" -> "http://www8.hp.com/h10180/hp-fonts/v2-0/hps-euro-w01-regular-woff.woff";
+"http://welcome.hp-ww.com/country/us/en/cs/scripts/caas-hf-v3.1/R45/caas-privacy-cookie-3.1.js" -> "http://www8.hp.com/ww/en/system/include/privacy_cookie.JS";
+"http://www.hp.com/" -> "http://www8.hp.com/h10180/hp-fonts/v2-0/hps-euro-w01-regular-ttf.ttf";
+}

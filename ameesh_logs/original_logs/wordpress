@@ -1,0 +1,19 @@
+strict digraph G {
+ratio=compress;
+"https://wordpress.com" -> "https://wordpress.com/";
+"https://wordpress.com/" -> "https://fonts.googleapis.com/css?family=Open+Sans:300,400";
+"https://wordpress.com/" -> "https://s1.wp.com/home.logged-out/css/homepage-one-field-long.css?20150909";
+"https://wordpress.com/" -> "https://s1.wp.com/i/noticons/noticons.css?20130416";
+"https://wordpress.com/" -> "https://s1.wp.com/home.logged-out/js/modernizr.js?v=2";
+"https://wordpress.com/" -> "https://s1.wp.com/home.logged-out/js/wp-no-form.js?20150528";
+"https://wordpress.com/" -> "https://s1.wp.com/wp-content/js/boomerang-a8c.min.js?v=0.4";
+"https://s1.wp.com/home.logged-out/js/modernizr.js?v=2" -> "https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2";
+"https://s1.wp.com/home.logged-out/js/modernizr.js?v=2" -> "https://s1.wp.com/home.logged-out/images/pic-crowd.jpg";
+"https://wordpress.com/" -> "https://fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTegdm0LZdjqr5-oayXSOefg.woff2";
+"https://wordpress.com" -> "https://pixel.wp.com/b.gif?subd=wordpress.com&host=wordpress.com&blog=1&v=wpcom&user_id=0&tz=0&x_home-page-views-by-locale=en&x_home-page-views-by-country=US&rand=0.014191877329722047";
+"https://s1.wp.com/home.logged-out/js/wp-no-form.js?20150528" -> "https://stats.wp.com/w.js?48";
+"https://s1.wp.com/home.logged-out/js/wp-no-form.js?20150528" -> "https://s1.wp.com/wp-content/lib/locale-guesser-switcher/switcher-widget/locale-switcher.js";
+"https://s1.wp.com/home.logged-out/js/wp-no-form.js?20150528" -> "https://s1.wp.com/wp-content/lib/locale-guesser-switcher/switcher-widget/translations.js";
+"https://s1.wp.com/home.logged-out/js/wp-no-form.js?20150528" -> "https://google-analytics.com/ga.js";
+"https://s1.wp.com/home.logged-out/js/wp-no-form.js?20150528" -> "https://s1.wp.com/wp-content/lib/locale-guesser-switcher/switcher-widget/locale-switcher.css?v=3";
+}
