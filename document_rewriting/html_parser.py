@@ -7,7 +7,7 @@ html_name = sys.argv[2]
 
 soup = BeautifulSoup(open(html_doc))
 new_script = soup.new_tag('script')
-new_script.string = 'var logs_html = _getAttribute.call(document.currentScript, "htmllogs").split("\\n");for ( j = 0; j < logs_html.length; j++ ) {window.js_rewriting_logs.push(logs_html[j]);}_removeChild.call(document.currentScript.parentNode, document.currentScript);'
+new_script.string = 'var logs_html = _getAttribute.call(document.currentScript, "htmllogs").split("---");for ( j = 0; j < logs_html.length; j++ ) {window.js_rewriting_logs.push(logs_html[j]);}_removeChild.call(document.currentScript.parentNode, document.currentScript);'
 soup.body.append(new_script)
 
 log = []
@@ -47,7 +47,7 @@ def func(head, parent_path=[]):
   for child in head.children:
     if isinstance(child, element.Tag):
       if child.name == "script":
-        child['htmllogs'] = '\n'.join(log)
+        child['htmllogs'] = '---'.join(log)
         del log[:]
       child_path = [index] + parent_path
 
