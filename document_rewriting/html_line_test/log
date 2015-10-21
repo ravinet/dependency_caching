@@ -1,0 +1,19 @@
+{"OpType": "WRITE", "name": "script", "PropName": "$$dom.1.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 14, "method": "null", "child_path": [1, 1, 0], "NodeProp": "null"}
+{"OpType": "WRITE", "name": "script", "PropName": "$$dom.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 10, "method": "null", "child_path": [1, 0], "NodeProp": "childNodes"}
+{"OpType": "WRITE", "name": "script", "PropName": "$$dom.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 10, "method": "null", "child_path": [1, 0], "NodeProp": "lastChild"}
+{"OpType": "WRITE", "name": "script", "PropName": "$$dom.0.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 11, "method": "null", "child_path": [0, 1, 0], "NodeProp": "nextSibling"}
+{"OpType":"READ","method":"getElementById","PropName":"$$dom.0.1.0","NodeProp":"null","id":0,"child_path":"0,1,0","script":"http://nyc.csail.mit.edu/1.js","OrigLine":"3518"}
+{"OpType":"WRITE","method":"createTextNode","PropName":"$$dom.","NodeProp":"null","id":1,"child_path":"","script":"http://nyc.csail.mit.edu/1.js","OrigLine":"3519"}
+{"OpType":"READ","method":"appendChild","PropName":"$$dom.0.1.0","NodeProp":"null","id":1,"child_path":"0,1,0","script":"http://nyc.csail.mit.edu/1.js","OrigLine":"3520"}
+{"OpType":"WRITE","method":"appendChild","PropName":"$$dom.0.1.0","NodeProp":"childNodes","id":1,"child_path":"0,1,0","script":"http://nyc.csail.mit.edu/1.js","OrigLine":"3520"}
+{"OpType":"WRITE","method":"appendChild","PropName":"$$dom.0.1.0","NodeProp":"lastChild","id":1,"child_path":"0,1,0","script":"http://nyc.csail.mit.edu/1.js","OrigLine":"3520"}
+{"OpType":"WRITE","method":"appendChild","PropName":"$$dom.0.1.0","NodeProp":"nextSibling","id":"null","child_path":"0,1,0","script":"http://nyc.csail.mit.edu/1.js","OrigLine":"3520"}
+{"OpType": "WRITE", "name": "script", "PropName": "$$dom.2.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 20, "method": "null", "child_path": [2, 1, 0], "NodeProp": "null"}
+{"OpType": "WRITE", "name": "script", "PropName": "$$dom.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 10, "method": "null", "child_path": [1, 0], "NodeProp": "childNodes"}
+{"OpType": "WRITE", "name": "script", "PropName": "$$dom.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 10, "method": "null", "child_path": [1, 0], "NodeProp": "lastChild"}
+{"OpType": "WRITE", "name": "script", "PropName": "$$dom.1.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 14, "method": "null", "child_path": [1, 1, 0], "NodeProp": "nextSibling"}
+{"OpType": "WRITE", "name": "img", "PropName": "$$dom.3.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 25, "method": "null", "child_path": [3, 1, 0], "NodeProp": "null"}
+{"OpType": "WRITE", "name": "img", "PropName": "$$dom.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 10, "method": "null", "child_path": [1, 0], "NodeProp": "childNodes"}
+{"OpType": "WRITE", "name": "img", "PropName": "$$dom.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 10, "method": "null", "child_path": [1, 0], "NodeProp": "lastChild"}
+{"OpType": "WRITE", "name": "img", "PropName": "$$dom.2.1.0", "script": "http://nyc.csail.mit.edu/", "id": "null", "line": 20, "method": "null", "child_path": [2, 1, 0], "NodeProp": "nextSibling"}
+
