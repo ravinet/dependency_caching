@@ -95,9 +95,8 @@ def getTiming(queue):
       while len(queue) and not isHttps(queue[0]):
         queue.pop(0)
         count += 1
-      if count > 0:
-        cloud_origin += count
-        client_cloud += 1
+      cloud_origin += count
+      client_cloud += min(1, count)
       https = True
   return (client_origin, client_cloud, cloud_origin)
 
@@ -113,6 +112,31 @@ def getMaxPLT(queues):
       max_leaf = queue[-1]
   return (max_plt, max_leaf)
 
+recursive_branches = []
+def getPLTRecursive(children, node, client_origin = 0, client_cloud = 0, cloud_origin = 0, https = True, count = 0):
+  if https and not isHttps(node):
+    client_origin += count
+    count = 1
+    https = False
+  elif not https and isHttps(node):
+    client_cloud += min(1, count)
+    cloud_origin += count
+    count = 1
+    https = True
+  else: # continue looking down branch for more of same https/http nodes
+    count += 1
+
+  if len(children[node]) == 0:
+    # need to account for pending count if this node is a leaf
+    if https and isHttps(node):
+      client_origin += count
+    elif not https and not isHttps(node):
+      client_cloud += 1
+      cloud_origin += count
+    recursive_branches.append((node, (client_origin, client_cloud, cloud_origin)))
+    return RTTtoPLT((client_origin, client_cloud, cloud_origin))
+
+  return max([getPLTRecursive(children, child, client_origin, client_cloud, cloud_origin, https, count) for child in children[node]])
 
 print "Branches:"
 print queues
@@ -121,3 +145,6 @@ print "RTTs in format --> leaf_node: (client_origin, client_cloud, cloud_origin)
 print [str(queue[-1]) + ": " + str(getTiming(queue)) for queue in queues]
 print
 print "Total PLT:", getMaxPLT(queues)[0], "for leaf", getMaxPLT(queues)[1]
+print "-----Recursive Algo-------"
+print "Total PLT:", getPLTRecursive(children, root)
+print recursive_branches
