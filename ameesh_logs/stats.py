@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import csv
+from urlparse import urlparse
 
 DOM = 'document_complete_logs'
 window = 'window_complete_logs'
@@ -13,17 +14,23 @@ stats = {}
 def get_dep_counts(dot): 
   num_normal = 0
   num_red = 0
+  js_leaf = []
   with open(dot) as f:
     for line in f:
       curr = line.strip("\n")
       if "digraph G {" not in curr and curr != "ratio=compress;" and curr != "concentrate=true;" and curr != "}":
         parent = curr.split(" ")[0]
         child = curr.split("> ")[1].strip(";")
+        if is_js(parent) and parent not in js_leaf:
+          
         if child.endswith("[color=red]"):
           num_red += 1
         else:
           num_normal += 1
   return (num_normal, num_red)
+
+def is_js(path):
+  return urlparse(path).path.endswith(".js")
 
 for root, dirs, filenames in os.walk("."):
   for f in filenames:

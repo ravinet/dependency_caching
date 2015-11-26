@@ -1,5 +1,6 @@
 strict digraph G {
 ratio=compress;
+node[label=""];
 "http://cdn.optimizely.com/js/177031030.js" -> "http://www.weather.com/---226:277";
 "http://www.weather.com/sites/acquia-prod/files/advagg_js/js__9MbgYh_eU83wGTi6_3K11QEKiUPK1cMaZq_AJgRPc8w__EyHAh1hUCsNRzYMjZHT1L2rBCxPpAPAHT3UBJ191S-I__PZB1IfU4sb6SipDrbCSKW0ivtyz3wMQLlR9HRfudjrU.js" -> "http://www.weather.com/---226:277";
 "http://www.weather.com/sites/acquia-prod/files/advagg_js/js__6Polpvu7ZTuiMOYsOJh4Ea7KW5pF_Rd2vFeky-zFYEk__kp35UCuTcyqrzHl-wNQhmA-o6OhcXRMLaR-PqHhZpO4__PZB1IfU4sb6SipDrbCSKW0ivtyz3wMQLlR9HRfudjrU.js" -> "http://www.weather.com/---226:277";

@@ -41,5 +41,5 @@ def depth(mappings, node):
   return max([depth(mappings, child) for child in mappings[node]]) + 1
   
 depths = {node: depth(child_deps, node) for node in child_deps}
-print json.dumps(parents)
-print json.dumps(depths)
+print (parents)
+print (depths)
