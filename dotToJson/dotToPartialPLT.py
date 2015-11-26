@@ -118,6 +118,6 @@ print "Branches:"
 print queues
 print
 print "RTTs in format --> leaf_node: (client_origin, client_cloud, cloud_origin)"
-print {queue[-1]:getTiming(queue) for queue in queues}
+print [str(queue[-1]) + ": " + str(getTiming(queue)) for queue in queues]
 print
 print "Total PLT:", getMaxPLT(queues)[0], "for leaf", getMaxPLT(queues)[1]
