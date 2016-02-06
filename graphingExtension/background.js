@@ -7,7 +7,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
       onAttach.bind(null, tab.id));
 });
 
-var version = "1.0";
+var version = "1.1";
 
 function onAttach(tabId) {
   if (chrome.runtime.lastError) {
