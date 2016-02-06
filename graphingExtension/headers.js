@@ -13,11 +13,11 @@ headerDiv.textContent = "TIMELINE:\n"
 document.getElementById("timeline").appendChild(headerDiv);
 
 window.addEventListener("load", function() {
+  chrome.debugger.sendCommand({tabId:tabId}, "Page.enable");
+  chrome.debugger.sendCommand({tabId:tabId}, "Tracing.start");
   chrome.debugger.sendCommand({tabId:tabId}, "Network.enable");
   chrome.debugger.sendCommand({tabId:tabId}, "Network.setCacheDisabled", {"cacheDisabled": true});
   chrome.debugger.onEvent.addListener(onNetworkEvent);
-  chrome.debugger.sendCommand({tabId:tabId}, "Page.enable");
-  chrome.debugger.sendCommand({tabId:tabId}, "Tracing.start");
   chrome.debugger.onEvent.addListener(onTimelineEvent);
 });
 
@@ -55,7 +55,7 @@ function onNetworkEvent(debuggeeId, message, params) {
       initiator = undefinedURL;
     }
     var initiatorLine = document.createElement("div");
-    initiatorLine.textContent = params.requestId + "\"" + initiator + "\" -> \"" + params.request.url  + "\";\n";
+    initiatorLine.textContent = "\"" + initiator + "\" -> \"" + params.request.url  + "\";\nRequest Sent: " + params.timestamp; 
     requestDiv.appendChild(initiatorLine);
 
     document.getElementById("container").appendChild(requestDiv);
@@ -68,12 +68,15 @@ function onNetworkEvent(debuggeeId, message, params) {
   } else if (message == "Network.responseReceived") {
     var requestDiv = requests[params.requestId];
     var timingLine = document.createElement("div");
-    timingLine.textContent = params.requestId + " " +JSON.stringify(params.response.timing) + "\n\n";
-    if (requestDiv) {
-      requestDiv.appendChild(timingLine);
-      document.getElementById("container").appendChild(requestDiv);
-    }
-    delete requests[params.requestId];
+    timingLine.textContent = JSON.stringify(params.response.timing);
+    requestDiv.appendChild(timingLine);
+    document.getElementById("container").appendChild(requestDiv);
+  } else if (message == "Network.loadingFinished") {
+    var requestDiv = requests[params.requestId];
+    var timingLine = document.createElement("div");
+    timingLine.textContent = "Loading Finished: " + params.timestamp + "\n\n";
+    requestDiv.appendChild(timingLine);
+    document.getElementById("container").appendChild(requestDiv);
   }
 }
 
